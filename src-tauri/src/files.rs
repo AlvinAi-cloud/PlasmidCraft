@@ -131,7 +131,13 @@ mod tests {
                 cmd: "save_file_atomic".into(),
                 callback: tauri::ipc::CallbackFn(0),
                 error: tauri::ipc::CallbackFn(1),
-                url: "tauri://localhost".parse().unwrap(),
+                url: if cfg!(windows) {
+                    "http://tauri.localhost"
+                } else {
+                    "tauri://localhost"
+                }
+                .parse()
+                .unwrap(),
                 body: tauri::ipc::InvokeBody::Raw(b"complete project".to_vec()),
                 headers,
                 invoke_key: tauri::test::INVOKE_KEY.into(),

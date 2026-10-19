@@ -1,3 +1,9 @@
+# Keep source and generated catalogs consistent across operating systems.
+* text=auto eol=lf
+
+# Provenance hashes cover these exact downloaded bytes.
+data/common-features/source-records/*.gb -text
+
 # Keep Bash scripts runnable in Linux and WSL after a Windows checkout.
 *.sh text eol=lf
 *.command text eol=lf

@@ -4,11 +4,11 @@
   "files": [
     {
       "path": ".gitattributes",
-      "sha256": "c76cbb28c2c9d3f12b7b9d320bdde45eada01ef254cdf8c55c08d84a6d2b69e8"
+      "sha256": "098c3a6fa937ebe43baa2b2e1dc155b78930f0a38a961469842684a6fc8feead"
     },
     {
       "path": ".github/workflows/desktop.yml",
-      "sha256": "c21f133473f2b35187a3ddffb1507f36efc97567c45762288f23a3320939f2a3"
+      "sha256": "8db431bdafd684a3b44a8c6f2ac1dbb9ce6abf81586a499641e097959f4757aa"
     },
     {
       "path": ".gitignore",
@@ -129,10 +129,6 @@
     {
       "path": "docs/PROTEIN_ANALYSIS_AND_BLAST.md",
       "sha256": "cb86de0d6cda3b53691528c55bc1eb08fb8aa8d67baa6459907b91740a9ed6d5"
-    },
-    {
-      "path": "docs/RELEASE.md",
-      "sha256": "4a45e29f547d45a8bdc440f7e3677b6ed6374f5cfa9f5df759e223d0b7df59b3"
     },
     {
       "path": "docs/screenshots/0.3/all-library-matching.png",
@@ -280,7 +276,7 @@
     },
     {
       "path": "src-tauri/build.rs",
-      "sha256": "6aeeab41bc35efde4e3c2b644a6248f7fc06d24ae30b75c0d33491cbb0c1fa31"
+      "sha256": "e392b8e75442ce6ea91a1ca4d24c225c867371d56867ff6ed07ed165f04755ac"
     },
     {
       "path": "src-tauri/capabilities/main.json",
@@ -363,16 +359,16 @@
       "sha256": "32f4bac4f89f27bf821b8a236174fb0a57bdc7a07f6ed8afba74d2e01ecf0f20"
     },
     {
+      "path": "src-tauri/src/ai.rs",
+      "sha256": "26c4d806ea254ebe3d0d940d9504e72eddd504ce824c0e78663643e1b4796cee"
+    },
+    {
       "path": "src-tauri/src/ai_models.rs",
       "sha256": "c6e581ef39a0f327156cac98964e3012bee04a4cd8730cc7913b11d078fe87e1"
     },
     {
       "path": "src-tauri/src/ai_vault.rs",
       "sha256": "43a27056a2c73fd4188e71aacf6c99ea7145295b7d300ae27e9718a90caf6d5a"
-    },
-    {
-      "path": "src-tauri/src/ai.rs",
-      "sha256": "26c4d806ea254ebe3d0d940d9504e72eddd504ce824c0e78663643e1b4796cee"
     },
     {
       "path": "src-tauri/src/blast.rs",
@@ -384,7 +380,7 @@
     },
     {
       "path": "src-tauri/src/files.rs",
-      "sha256": "9916297ec7304ec86393c0563d191f9914fbc68d2bbd212c9a6cafc01bf26370"
+      "sha256": "ae8cc95454ede0fa8623a1f91bd04e4ec2485a3f3b0514b4875ed24a36058c41"
     },
     {
       "path": "src-tauri/src/lib.rs",
@@ -409,6 +405,10 @@
     {
       "path": "src-tauri/tests/fixtures/README.md",
       "sha256": "ce6892fb3d9da56f53e1ad6bc2cc57580b7cc2f6eb8ad0d674ffce57fa0da481"
+    },
+    {
+      "path": "src-tauri/windows-app-manifest.xml",
+      "sha256": "4636f3ba46080315ac3277d473d433b79c00863c9cdca1c93c0c83554c6a3d43"
     },
     {
       "path": "tests/advanced-ui-smoke.mjs",
