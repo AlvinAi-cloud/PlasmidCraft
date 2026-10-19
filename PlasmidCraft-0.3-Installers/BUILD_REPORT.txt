@@ -1,0 +1,61 @@
+PlasmidCraft 0.3.0 — reviewed test release
+Prepared 18 October 2026.
+Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex.
+Contact: huiwang.ai@virginia.edu
+
+AUTOMATED EXAMINATION
+- 254 JavaScript unit tests pass, also repeated in the clean exported source.
+- 323 renderer/simulated-native checks per engine across
+  25 suites pass in Chromium and WebKit.
+- 27 native Rust tests pass on Intel macOS; one opt-in real Keychain test is
+  ignored by the normal run. No real credentials were used.
+- 56 module syntax checks, Rust formatting and launcher syntax pass.
+- Eight pinned public import fixtures pass parsing/preservation/round-trip checks.
+- Clean exported source installs offline using the frozen lockfile; seven
+  representative renderer suites pass (83 checks).
+- Public feature/enzyme catalogs regenerate byte-for-byte in the clean source.
+- 220 curated source files match workspace and SHA-256 inventory.
+  Source ZIP contents/CRC, executable launcher permission, documentation links,
+  current versions, absence of developer paths/private data and delivery hashes
+  are verified. The only private-key-shaped file is an explicitly public,
+  synthetic cryptographic fixture required by offline account-verification tests.
+
+REVIEW COVERAGE
+File import/export, document saves and unsaved-change guards, undo/redo,
+circular/linear/tight maps, enzyme filters, continuous/windowed sequence tracks,
+linked DNA/protein selection and copy options, CDS translations, feature libraries
+and auto-annotation, primer editing/indels, PCR and mutagenesis, Sanger and whole-
+plasmid alignment, protein/codon analysis, Gibson/HiFi and Golden Gate workflows,
+AI accounts/model discovery, direct tool operations, conversation history,
+external proposals, cancellation, compact windows and offline BLAST handling.
+
+Release fixes: resetting operation status when changing to a document without
+AI history; honoring disabled conversation sharing in every tool round. Regression
+checks verify both. Release documentation and AI/mutagenesis screenshots updated.
+
+PACKAGES
+Optimized Mac Intel x86_64 and Apple Silicon arm64 apps: version 0.3.0,
+identifier org.plasmidcraft.desktop, configured minimum macOS 12.3. Both ad-hoc
+signatures pass strict verification. DMGs pass integrity checks and read-only
+mount verification of app payload, version, signatures, notices and Applications
+shortcut. Alternative Mac ZIPs pass CRC checks.
+Windows x64 MSVC cross-build and NSIS archive pass. Extracted app is AMD64;
+NSIS loader is i386. File versions 0.3.0.0. Payload matches the built app except
+Tauri's expected UNK -> NSS bundle marker. License texts and updated menus match.
+Mac apps are not Developer ID signed/notarized. Windows packages are unsigned.
+
+ATTRIBUTION AND LOCAL FEATURE IMPORT
+The app, source and install notes credit Huiwang Ai at the University of Virginia
+with ChatGPT Codex, huiwang.ai@virginia.edu. Feature-list import instructions are
+in docs/FEATURE_CATALOG_AND_EXCHANGE.md. Proprietary installed feature databases
+and imported patterns are excluded from these packages.
+
+LIMITS / TARGET-DEVICE ACCEPTANCE
+Apple Silicon and Windows are cross-built on Intel. Installation/execution on
+those targets remains pending. Renderer checks simulate native dialogs and provider
+services; live paid AI requests, ChatGPT eligibility, real NCBI submissions and
+fresh-download trust prompts were not tested in this review. Hosted GitHub CI
+has not run. Native acceptance checklist: docs/VALIDATION.md.
+Mac API keys support Keychain persistence; Windows keys remain session-only.
+No autosave/crash recovery. Sequence calculations do not establish experimental
+yield. No GitHub upload or publication was performed.
