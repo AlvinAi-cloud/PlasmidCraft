@@ -147,12 +147,12 @@ export function readingFrameTracks(
     };
   });
 }
-function rowsFor(segments, n) {
+function rowsFor(segments, n, rowBases) {
   const rows = new Set();
   for (const s of segments)
     for (
-      let r = Math.max(0, Math.floor(s.start / 60));
-      r <= Math.min(n - 1, Math.floor((s.end - 1) / 60));
+      let r = Math.max(0, Math.floor(s.start / rowBases));
+      r <= Math.min(n - 1, Math.floor((s.end - 1) / rowBases));
       r++
     )
       rows.add(r);
@@ -203,9 +203,10 @@ export function sequenceDisplayOffsets(
     frames = [],
     complement = true,
     editing = false,
+    rowBases = 60,
   } = {},
 ) {
-  const n = Math.ceil(length / 60),
+  const n = Math.ceil(length / rowBases),
     heights = new Float64Array(n).fill(
       24 + (complement ? 24 : 0) + 18 + 22 + frames.length * 42,
     );
@@ -214,11 +215,11 @@ export function sequenceDisplayOffsets(
     const pieces = new Map();
     for (const f of features.filter((f) => (f.strand === -1) === negative))
       for (const s of f.segments)
-        for (const r of rowsFor([s], n)) {
+        for (const r of rowsFor([s], n, rowBases)) {
           if (!pieces.has(r)) pieces.set(r, []);
           pieces.get(r).push({
-            start: Math.max(s.start, r * 60),
-            end: Math.min(s.end, (r + 1) * 60),
+            start: Math.max(s.start, r * rowBases),
+            end: Math.min(s.end, (r + 1) * rowBases),
           });
         }
     for (const [r, segments] of pieces) {
@@ -233,16 +234,16 @@ export function sequenceDisplayOffsets(
     }
   }
   for (const p of primers)
-    for (const r of rowsFor(p.segments, n))
+    for (const r of rowsFor(p.segments, n, rowBases))
       heights[r] += p.insertions?.length ? 68 : 54;
   for (let r = 0; r < n; r++)
     for (const negative of [false, true])
       heights[r] +=
         packSequenceLanes(
           cds.filter((f) => (f.strand === -1) === negative),
-          r * 60,
-          Math.min(60, length - r * 60),
-        ).length * 42;
+          r * rowBases,
+          Math.min(rowBases, length - r * rowBases),
+        ).length * 56;
   if (editing && n) heights[n - 1] += 22;
   const offsets = new Float64Array(n + 1);
   for (let r = 0; r < n; r++) offsets[r + 1] = offsets[r] + heights[r];
@@ -324,7 +325,17 @@ export function renderSequenceProteins(
           );
         })
         .join("");
-      return `<div class="${frames ? "sequence-frame-track" : "sequence-protein-track"} ${t.strand === -1 ? "reverse" : "forward"}" ${frames ? `data-frame="${t.frame}" aria-label="Reading frame ${t.name}"` : `aria-label="Inline CDS ${e(t.name)}"`} style="--coding-color:${color(t.color)}"><div class="sequence-track-caption" style="${!frames ? `left:calc(${Math.max(0, Math.min(...visible.flatMap((r) => r.codon)) - offset)} * var(--base-width));max-width:calc(${Math.max(1, Math.max(...visible.flatMap((r) => r.codon)) - Math.max(offset, Math.min(...visible.flatMap((r) => r.codon))) + 1)} * var(--base-width))` : ""}"><strong>${frames ? "Frame " : ""}${e(t.name)}</strong> <span>${t.strand === -1 ? "←" : "→"}${!frames && labels.length ? ` · aa ${labels[0].residue}–${labels.at(-1).residue}` : ""}${frames ? ` · NCBI ${t.code}` : ""}</span></div><div class="sequence-codon-cells">${boxes}${labels.map((r) => `<span class="protein-residue ${r.codon.some(isSelected) ? "linked-selected" : ""} ${format === "three" ? "three-letter" : ""} ${r.aminoAcid === "*" ? "stop" : ""}" role="button" tabindex="0" data-protein-track="${e(t.id || t.name)}" data-residue="${r.residue}" data-amino-acid="${r.aminoAcid}" data-codon-bases="${r.codon.join(",")}" style="${posStyle(r.position - offset, group)}" title="${e(t.name)} · ${aminoAcidLabel(r.aminoAcid, "three")} (${r.aminoAcid}) · residue ${r.residue} · NCBI ${t.code} · codon bases ${r.codon.map((p) => p + 1).join(", ")}">${aminoAcidLabel(r.aminoAcid, format)}</span>`).join("")}</div></div>`;
+      return `<div class="${frames ? "sequence-frame-track" : "sequence-protein-track"} ${t.strand === -1 ? "reverse" : "forward"}" ${frames ? `data-frame="${t.frame}" aria-label="Reading frame ${t.name}"` : `aria-label="Inline CDS ${e(t.name)}"`} style="--coding-color:${color(t.color)}"><div class="sequence-track-caption" style="${!frames ? `left:calc(${Math.max(0, Math.min(...visible.flatMap((r) => r.codon)) - offset)} * var(--base-width));max-width:calc(${Math.max(1, Math.max(...visible.flatMap((r) => r.codon)) - Math.max(offset, Math.min(...visible.flatMap((r) => r.codon))) + 1)} * var(--base-width))` : ""}"><strong>${frames ? "Frame " : ""}${e(t.name)}</strong> <span>${t.strand === -1 ? "←" : "→"}${!frames && labels.length ? ` · aa ${labels[0].residue}–${labels.at(-1).residue}` : ""}${frames ? ` · NCBI ${t.code}` : ""}</span></div><div class="sequence-codon-cells">${boxes}${labels.map((r) => `<span class="protein-residue ${r.codon.some(isSelected) ? "linked-selected" : ""} ${format === "three" ? "three-letter" : ""} ${r.aminoAcid === "*" ? "stop" : ""}" role="button" tabindex="0" data-protein-track="${e(t.id || t.name)}" data-residue="${r.residue}" data-amino-acid="${r.aminoAcid}" data-codon-bases="${r.codon.join(",")}" style="${posStyle(r.position - offset, group)}" title="${e(t.name)} · ${aminoAcidLabel(r.aminoAcid, "three")} (${r.aminoAcid}) · residue ${r.residue} · NCBI ${t.code} · codon bases ${r.codon.map((p) => p + 1).join(", ")}">${aminoAcidLabel(r.aminoAcid, format)}</span>`).join("")}</div>${
+        frames
+          ? ""
+          : `<div class="sequence-residue-ruler" aria-label="CDS amino acid numbers">${labels
+              .filter((r) => (r.residue - 1) % 5 === 0)
+              .map(
+                (r) =>
+                  `<span data-residue-number="${r.residue}" style="${posStyle(r.position - offset, group)}" title="${e(t.name)} · amino acid ${r.residue}">${r.residue}</span>`,
+              )
+              .join("")}</div>`
+      }</div>`;
     });
   if (frames) return shown.join("");
   const present = tracks.filter((t) =>

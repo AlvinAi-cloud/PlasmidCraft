@@ -1,3 +1,4 @@
+import { documentNotes } from "./document-notes.mjs";
 /** Independent basic DNA writer from published packet/XML descriptions.
  * https://incenp.org/dvlpt/docs/binary-sequence-formats/binary-sequence-formats.pdf
  * No vendor software code, resources or feature database is used.
@@ -134,8 +135,15 @@ export function snapgeneExport(source) {
   dna[0] = 2 | (record.topology === "circular" ? 1 : 0);
   dna.set(utf8.encode(record.sequence), 1);
   const comments = [
-    record.description,
-    ...(record.comments || []),
+    ...documentNotes(record).provenance.filter(
+      (note) =>
+        !note.startsWith(
+          "Exported by PlasmidCraft independent basic DNA exporter.",
+        ) &&
+        !note.startsWith(
+          "PlasmidCraft edit history and Undo/Redo are not exported.",
+        ),
+    ),
     "Exported by PlasmidCraft independent basic DNA exporter. " +
       notes.join(" "),
   ]
@@ -146,7 +154,7 @@ export function snapgeneExport(source) {
     packet(0, dna),
     packet(
       6,
-      `<Notes><Type>Synthetic</Type><CustomMapLabel>${xml(record.name)}</CustomMapLabel><Description>${xml(comments)}</Description><Comments>${xml(comments)}</Comments></Notes>`,
+      `<Notes><Type>Synthetic</Type><CustomMapLabel>${xml(record.name)}</CustomMapLabel><Description>${xml(documentNotes(record).description || record.name)}</Description><Comments>${xml(comments)}</Comments></Notes>`,
     ),
     packet(10, `<Features>${featureXml}</Features>`),
     packet(5, `<Primers>${primersXml}</Primers>`),

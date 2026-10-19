@@ -1,13 +1,15 @@
 // Interaction checks for the compact desktop editor. Requires the browser preview.
 import assert from "node:assert/strict";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [];
 page.on("pageerror", (error) => errors.push(error.message));
 let checks = 0;
@@ -178,7 +180,10 @@ try {
   await page
     .getByRole("button", { name: "Show sequence complement", exact: true })
     .click();
-  assert.equal(await page.locator(".complement-track").count(), 81);
+  assert.equal(
+    await page.locator(".complement-track").count(),
+    await page.locator(".reference-track").count(),
+  );
   checks++;
   await page.locator('[aria-controls="app-edit-menu"]').click();
   await page

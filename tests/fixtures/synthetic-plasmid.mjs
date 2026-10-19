@@ -1,5 +1,6 @@
-import { reverseComplement, featureColor } from "./core.mjs";
-export function demoRecord() {
+// Artificial sequences for deterministic software tests only; never loaded by the application.
+import { reverseComplement, featureColor } from "../../viewer/core.mjs";
+export function syntheticTestRecord() {
   let state = 47291;
   const sequence = Array.from({ length: 4826 }, () => {
     state ^= state << 13;
@@ -43,7 +44,7 @@ export function demoRecord() {
     }),
   );
   return {
-    name: "pCraft-demo",
+    name: "synthetic-test",
     description:
       "Synthetic demonstration plasmid for exploring PlasmidCraft. Illustrative annotations; not an experimentally validated construct.",
     sequence: seq,
@@ -67,6 +68,6 @@ export function demoRecord() {
     ],
     warnings: [],
     sourceFormat: "Example",
-    sourceFile: "pCraft-demo.gb",
+    sourceFile: "synthetic-test.gb",
   };
 }

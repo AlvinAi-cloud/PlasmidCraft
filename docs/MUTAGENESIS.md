@@ -41,7 +41,7 @@ The choice applies to the sites requiring extra oligos in that preview. Changing
 
 ## Review and export
 
-Choose **Preview primer design**. Review the altered DNA span, codon coverage, number of oligo pairs and represented DNA variants, full oligo sequences (always **5′→3′**), exact 3′ annealing arms and their estimated Tm. Select a pool to inspect its pair. Forward oligos differ between pools; the reverse oligo is shared. Mixing ratios require experimental planning: equal oligo amounts do not generally produce equal amino-acid frequencies.
+Choose **Preview primer design**. Review the altered DNA span, codon coverage, number of oligo pairs and represented DNA variants, full oligo sequences (always **5′→3′**), exact 3′ annealing arms and their estimated Tm. Select a pool to inspect its pair. Inspect both oligos for every pool; either oligo can carry the altered sequence in overlap mode. Mixing ratios require experimental planning: equal oligo amounts do not generally produce equal amino-acid frequencies.
 
 **Save selected pair to primer library** stores both oligos, exact annealing arms, separate tails and mapped source sites in one undoable edit. Other pool pairs can be saved separately; shared reverse oligos can be redundant. Mixed-base tails retain their IUPAC letters in the library and exports; the general PCR simulator does not model degenerate tails.
 
@@ -57,9 +57,9 @@ The input must be a known A/C/G/T circular plasmid, at most 1,000,000 bases. Eac
 
 ## Circularization and terminal overlap
 
-Choose **Circularization method**. Overlap mode adds exact upstream homology before the mutation-bearing forward 5′ tail. The reverse oligo and both exact 3′ annealing arms retain their template binding. The linear amplicon carries repeated terminal homology; assembly removes one copy. The tool verifies the collapsed circular sequence against the intended substitution, insertion or deletion, including circular-origin edits and mixed codon pools.
+Choose **Circularization method**. Overlap mode distributes the added sequence across both 5′ tails to favor similar full-oligo lengths. The exact 3′ template-binding arms are selected jointly, penalizing Tm differences as well as deviation from the requested target. The linear amplicon carries repeated terminal homology; assembly removes one copy. The tool verifies the collapsed circular sequence against the intended substitution, insertion or deletion, including circular-origin edits and mixed codon pools.
 
-Set minimum/maximum homology length (15–60 bp; default 20–40) and target overlap Tm. The candidate is selected by overlap Tm proximity with GC and oligo-length considerations; its sequence, GC, Tm, PCR size and final circular size are displayed. The overlap is chosen from unchanged template, so degenerate mutation pools share exact homology. Arm Tm and overlap Tm are separate estimates. Long oligos and complementary sequences require synthesis/dimer review.
+Set minimum/maximum homology length (15–60 bp; default 20–40) and target overlap Tm. The candidate is selected by overlap Tm proximity, GC and the difference between the two full-oligo lengths; its sequence, GC, Tm, PCR size and final circular size are displayed. Homology may span the edited junction and its flanks, but must be identical unambiguous A/C/G/T across all oligo pools. Ambiguous/mixed bases are never used to establish exact homology. A warning explains when these constraints prevent balanced oligo lengths. Arm Tm and overlap Tm are separate estimates. Long oligos and complementary sequences require synthesis/dimer review.
 
 **Create linear PCR product** opens the predicted amplicon, with both terminal overlap regions annotated. **Create selected mutant DNA copy** opens the circular assembled design without duplicated homology. CSV exports include method, homology sequence/length and estimated overlap Tm.
 

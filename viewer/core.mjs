@@ -586,6 +586,12 @@ export function parseSnapgene(input, filename = "sequence.dna") {
           ? description.replace(/<[^>]+>/g, "")
           : description
         : (descendants(xml, "Comments")[0]?.text || "").replace(/<[^>]+>/g, "");
+      const commentText = descendants(xml, "Comments")[0]?.text || "";
+      const comments = /^\s*<(?:html|body)\b/i.test(commentText)
+        ? commentText.replace(/<[^>]+>/g, "")
+        : commentText;
+      if (comments && comments !== entry.description)
+        entry.comments = comments.split(/\r?\n/).filter(Boolean);
       const customName = descendants(xml, "CustomMapLabel")[0]?.text;
       if (customName) entry.name = customName;
     }

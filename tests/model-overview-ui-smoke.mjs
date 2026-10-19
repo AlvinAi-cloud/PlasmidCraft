@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium } from "./ui-browser.mjs";
+import { fixturePage, chromium } from "./ui-browser.mjs";
 import { serializeProject } from "../viewer/project.mjs";
 const browser = await chromium.launch({
   headless: true,
@@ -8,7 +8,9 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [],
   calls = [];
 let modelResult = {

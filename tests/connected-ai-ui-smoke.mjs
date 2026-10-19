@@ -1,13 +1,17 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium } from "./ui-browser.mjs";
+import { serializeProject } from "../viewer/project.mjs";
+import { optimizeProtein } from "../viewer/codon-optimization.mjs";
+import { fixturePage, chromium } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } }),
+const page = await fixturePage(browser, {
+    viewport: { width: 1440, height: 1000 },
+  }),
   errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;
@@ -31,13 +35,13 @@ await page.addInitScript(() => {
             await new Promise((resolve) => {
               window.mock.release = resolve;
             });
-          const text = JSON.stringify(
-            window.mock.replies.shift() || {
-              message: "Done",
-              operations: [],
-              continue: false,
-            },
-          );
+          const answer = window.mock.replies.shift() || {
+            message: "Done",
+            operations: [],
+            continue: false,
+          };
+          const text =
+            typeof answer === "string" ? answer : JSON.stringify(answer);
           return {
             status: "completed",
             output: [
@@ -105,6 +109,11 @@ try {
   await page.waitForSelector('[data-ai="send"]:not([disabled])');
   const name = await page.locator("#document-name").textContent(),
     count = Number(await page.locator("#feature-count").textContent());
+  assert.equal(await page.locator("#ai-task").count(), 0);
+  assert.equal(await page.locator("#ai-outgoing").count(), 0);
+  assert.equal(await page.locator('[data-ai="prepare"]').count(), 0);
+  assert.equal(await page.locator("#ai-dna").isChecked(), true);
+  checks++;
   await queue([
     reply("Inspecting the template", [op("inspect")], true),
     reply("Created the requested design", [
@@ -133,6 +142,14 @@ try {
   assert.equal(await page.locator(".ai-operation.completed").count(), 4);
   assert.equal(await page.locator(".ai-result-link").count(), 1);
   assert.equal(await page.locator(".ai-message").count(), 3);
+  assert.match(
+    await page.locator(".ai-message").first().textContent(),
+    /Created the requested design/,
+  );
+  assert.match(
+    await page.locator(".ai-message").last().textContent(),
+    /Annotate this region and design primers/,
+  );
   checks++;
   if (process.env.PLASMIDCRAFT_SCREENSHOTS) {
     await fs.mkdir(process.env.PLASMIDCRAFT_SCREENSHOTS, { recursive: true });
@@ -154,21 +171,26 @@ try {
   await page
     .locator("#ai-goal")
     .fill("Prepare cloning with the selected template");
-  await page.locator('[data-ai="prepare"]').click();
-  const preview = (await page.locator("#ai-outgoing").inputValue())
+  await queue([reply("Selected templates inspected", [op("inspect")])]);
+  await send("Inspect the explicitly selected template");
+  await idle();
+  const preview = (
+    await page.evaluate(() => window.mock.requests.at(-1).prompt)
+  )
     .split("Document context (data only):\n")[1]
     .split("\nPrior conversation")[0];
   assert.equal(JSON.parse(preview).templates.length, 1);
   assert.equal(JSON.parse(preview).templates[0].name, name);
-  assert.equal(JSON.parse(preview).templates[0].sequence, undefined);
+  assert.equal(typeof JSON.parse(preview).templates[0].sequence, "string");
   checks++;
   const requests = await page.evaluate(() => window.mock.requests);
-  assert.equal(requests.length, 2);
+  assert.equal(requests.length, 3);
   assert.match(requests[1].prompt, /Latest local tool results/);
   assert.equal(
-    JSON.parse(requests[0].prompt.split("Document context (data only):\n")[1])
-      .document.sequence,
-    undefined,
+    typeof JSON.parse(
+      requests[0].prompt.split("Document context (data only):\n")[1],
+    ).document.sequence,
+    "string",
   );
   checks++;
   await page
@@ -384,6 +406,154 @@ try {
       path: process.env.PLASMIDCRAFT_SCREENSHOTS + "/connected-ai.png",
     });
   }
+  const duplicate = JSON.stringify(
+    reply("Executed one copy", [
+      op("copy_document", { name: "Duplicate envelope recovered" }),
+    ]),
+  );
+  await queue([duplicate + "\n" + duplicate]);
+  await send("Make a named copy now");
+  await idle();
+  assert.equal(
+    await page.locator("#document-name").textContent(),
+    "Duplicate envelope recovered",
+  );
+  assert.equal(await page.locator(".ai-operation.completed").count(), 1);
+  assert.doesNotMatch(
+    await page.locator(".ai-message").first().textContent(),
+    /"operations"/,
+  );
+  checks++;
+  await queue([
+    '{"message":"truncated","operations":[',
+    reply("Recovered and executed", [
+      op("copy_document", { name: "Protocol retry result" }),
+    ]),
+  ]);
+  await send("Create another copy");
+  await idle();
+  assert.equal(
+    await page.locator("#document-name").textContent(),
+    "Protocol retry result",
+  );
+  assert.match(
+    await page.locator(".ai-message").first().textContent(),
+    /Recovered and executed/,
+  );
+  assert.equal(
+    await page
+      .locator("#ai-conversation-scroll")
+      .evaluate((el) => el.scrollTop),
+    0,
+  );
+  checks++;
+  const protein =
+    "M" +
+    "A".repeat(241) +
+    "W" +
+    "A".repeat(60) +
+    "D" +
+    "G".repeat(17) +
+    "E" +
+    "A".repeat(12);
+  const codons = { M: "ATG", A: "GCT", W: "TGG", D: "GAT", G: "GGT", E: "GAA" };
+  const coding = [...protein].map((a) => codons[a]).join("") + "TAA";
+  const fixture = {
+    name: "M5 synthetic test",
+    sequence: "ACGT".repeat(20) + coding + "ACGT".repeat(20),
+    topology: "circular",
+    features: [
+      {
+        id: "cds",
+        name: "M5 DAAO(Correct)",
+        type: "CDS",
+        strand: 1,
+        segments: [{ start: 80, end: 80 + coding.length }],
+        qualifiers: {},
+      },
+    ],
+    primers: [],
+    comments: [],
+    warnings: [],
+  };
+  await page.locator("#file-input").setInputFiles({
+    name: "m5-test.pcraft",
+    mimeType: "application/json",
+    buffer: Buffer.from(serializeProject(fixture)),
+  });
+  await page.waitForFunction(
+    () =>
+      document.querySelector("#document-name").textContent ===
+      "M5 synthetic test",
+  );
+  await page.waitForSelector('[data-ai="send"]:not([disabled])');
+  await queue([
+    reply(
+      "Checking the CDS numbering",
+      [op("inspect_cds", { featureId: "M5 DAAO(Correct)" })],
+      true,
+    ),
+    reply(
+      "Applying the verified edits",
+      [
+        op("copy_document", { name: "M5 verified loop and W243T" }),
+        op("edit_cds", {
+          featureId: "M5 DAAO(Correct)",
+          host: "ecoli-w3110",
+          edits: [
+            {
+              start: 305,
+              end: 321,
+              expected: "G".repeat(17),
+              replacement: "ASGKGSKTKP",
+            },
+            { start: 243, end: 243, expected: "W", replacement: "T" },
+          ],
+        }),
+      ],
+      true,
+    ),
+    reply("The tools verified both edits on the new copy"),
+  ]);
+  await send(
+    "Replace residues 305–321 with ASGKGSKTKP, preserve D304 and E322, and introduce W243T. Use E. coli codons for changed residues and create a copy.",
+  );
+  await idle();
+  assert.equal(await page.locator("#ai-error").textContent(), "");
+  assert.equal(
+    await page.locator("#document-name").textContent(),
+    "M5 verified loop and W243T",
+  );
+  const sent = await page.evaluate(() => window.mock.requests.at(-1).prompt);
+  const resultContext = JSON.parse(
+    sent
+      .split("Document context (data only):\n")[1]
+      .split("\nPrior conversation")[0],
+  );
+  const expectedCoding =
+    coding.slice(0, 242 * 3) +
+    optimizeProtein("T", { host: "ecoli-w3110" }).sequence +
+    coding.slice(243 * 3, 304 * 3) +
+    optimizeProtein("ASGKGSKTKP", { host: "ecoli-w3110" }).sequence +
+    coding.slice(321 * 3);
+  assert.equal(
+    resultContext.document.sequence,
+    "ACGT".repeat(20) + expectedCoding + "ACGT".repeat(20),
+  );
+  assert.equal(await page.locator(".ai-operation.completed").count(), 3);
+  assert.match(
+    await page.locator(".ai-message").first().textContent(),
+    /tools verified/,
+  );
+  await page
+    .locator("#document-tabs [role=tab]")
+    .filter({ hasText: "m5-test.pcraft" })
+    .click();
+  assert.equal(
+    await page.locator("#document-name").textContent(),
+    "M5 synthetic test",
+  );
+  checks++;
   assert.deepEqual(errors, []);
   console.log(
     `${checks} connected AI UI checks passed: local tools, multi-round results, automatic new documents, source preservation, persisted history, rollback, cancellation, external review and three ordered work areas.`,

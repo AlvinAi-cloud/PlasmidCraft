@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { demoRecord } from "../viewer/demo.mjs";
+import { syntheticTestRecord } from "./fixtures/synthetic-plasmid.mjs";
 import { parseProject, serializeProject } from "../viewer/project.mjs";
 
 test("PlasmidCraft documents retain sequence, multi-part annotations, and complete primers", () => {
-  const source = demoRecord();
+  const source = syntheticTestRecord();
   source.features[0].segments = [
     { start: 4700, end: 4826 },
     { start: 0, end: 40 },
@@ -24,7 +24,7 @@ test("PlasmidCraft documents retain sequence, multi-part annotations, and comple
 });
 test("project files retain signed Sanger channels, peak locations, and qualities", () => {
   const source = {
-    ...demoRecord(),
+    ...syntheticTestRecord(),
     sequence: "ACGTN",
     features: [],
     primers: [],
@@ -43,7 +43,7 @@ test("project files retain signed Sanger channels, peak locations, and qualities
 });
 test("project persistence excludes absolute file paths, native capabilities, and transient history", () => {
   const source = {
-    ...demoRecord(),
+    ...syntheticTestRecord(),
     id: "document-1",
     projectPath: "/private/home/secret.pcraft",
     undo: [{ secret: "old state" }],
@@ -60,7 +60,7 @@ test("project persistence excludes absolute file paths, native capabilities, and
   assert.equal(JSON.parse(json).version, 3);
 });
 test("unknown document versions and malformed JSON are rejected", () => {
-  const source = JSON.parse(serializeProject(demoRecord()));
+  const source = JSON.parse(serializeProject(syntheticTestRecord()));
   source.version = 999;
   assert.throws(
     () => parseProject(JSON.stringify(source)),
@@ -96,13 +96,13 @@ test("invalid coordinates and duplicate identifiers cannot enter the document mo
       record.sequence = "AC GT";
     },
   ]) {
-    const source = JSON.parse(serializeProject(demoRecord()));
+    const source = JSON.parse(serializeProject(syntheticTestRecord()));
     mutate(source.record);
     assert.throws(() => parseProject(JSON.stringify(source)));
   }
 });
 test("unmapped source locations remain available for export and inspection", () => {
-  const source = demoRecord();
+  const source = syntheticTestRecord();
   source.features[0].segments = [];
   source.features[0].originalLocation = "OTHER_ACCESSION:10..30";
   const result = parseProject(serializeProject(source));
@@ -113,7 +113,7 @@ test("unmapped source locations remain available for export and inspection", () 
   assert.deepEqual(result.features[0].segments, []);
 });
 test("malformed trace arrays and nested qualifier objects fail validation", () => {
-  const source = JSON.parse(serializeProject(demoRecord()));
+  const source = JSON.parse(serializeProject(syntheticTestRecord()));
   source.record.trace = {
     channels: { A: ["not a number"] },
     peaks: [],

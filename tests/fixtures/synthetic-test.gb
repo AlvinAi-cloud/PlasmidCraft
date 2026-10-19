@@ -1,4 +1,4 @@
-LOCUS       pCraft-demo             4826 bp    DNA     circular SYN 17-OCT-2026
+LOCUS       synthetic-test             4826 bp    DNA     circular SYN 17-OCT-2026
 DEFINITION  Synthetic demonstration plasmid for exploring PlasmidCraft. Illustrative annotations; not an experimentally validated construct.
 COMMENT     Exported with PlasmidCraft. Original sequence preserved.
 FEATURES             Location/Qualifiers

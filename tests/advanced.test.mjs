@@ -2,6 +2,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   globalAlign,
+  annotatedQueryCopy,
+  alignmentDifferenceFeatures,
+  comparisonReferenceColumn,
   comparePlasmids,
   cleanComparison,
   comparisonColumns,
@@ -604,4 +607,160 @@ test("protein notation covers standard, ambiguous and termination symbols", () =
     [...one].map((aa) => aminoAcidLabel(aa, "three")).join(" "),
     "Ala Arg Asn Asp Cys Gln Glu Gly His Ile Leu Lys Met Phe Pro Ser Thr Trp Tyr Val Asx Glx Xle Xaa Sec Pyl Ter",
   );
+});
+
+test("adaptive whole-plasmid alignment handles a large insertion and transfers reference annotations", () => {
+  const sequence = dna(1600),
+    added = dna(400);
+  const reference = {
+    ...rec(sequence, "circular"),
+    features: [
+      {
+        id: "f",
+        name: "Reference marker",
+        type: "misc_feature",
+        strand: 1,
+        segments: [{ start: 1100, end: 1300 }],
+        qualifiers: {},
+      },
+    ],
+    primers: [],
+    comments: [],
+    warnings: [],
+    description: "Reference vector.",
+  };
+  const expected = sequence.slice(0, 800) + added + sequence.slice(800);
+  const reversed = reverseComplement(expected),
+    query = rec(reversed.slice(421) + reversed.slice(0, 421), "circular");
+  const before = structuredClone(reference);
+  const report = comparePlasmids(reference, query, { adaptiveBand: true });
+  assert.equal(report.result.strand, -1);
+  assert.equal(report.result.matches, 1600);
+  assert.equal(report.result.inserted, 400);
+  assert.equal(report.result.deleted, 0);
+  assert.equal(report.result.touchedBand, false);
+  const copy = annotatedQueryCopy(reference, report);
+  const oriented = orientedPlasmidCopy(query, report);
+  assert.equal(copy.sequence, oriented.sequence);
+  assert.deepEqual(copy.features[0].segments, [{ start: 1500, end: 1700 }]);
+  assert.equal(copy.description, reference.description);
+  assert.deepEqual(reference, before);
+  const at = comparisonReferenceColumn(report, 1200);
+  assert.equal(comparisonColumns(report, at, 1)[0].referenceIndex, 1199);
+  assert.throws(
+    () =>
+      annotatedQueryCopy(
+        { ...reference, sequence: reference.sequence + "A" },
+        report,
+      ),
+    /reference changed/,
+  );
+});
+test("annotated query copies remap deletions, substitutions and terminal insertions without changing source", () => {
+  const reference = {
+    ...rec(dna(300), "linear"),
+    features: [
+      {
+        id: "f",
+        name: "marker",
+        type: "misc_feature",
+        strand: 1,
+        segments: [{ start: 100, end: 200 }],
+        qualifiers: {},
+      },
+    ],
+    primers: [],
+    comments: [],
+    warnings: [],
+  };
+  const query = rec(
+    "AAA" +
+      reference.sequence.slice(0, 60) +
+      reference.sequence.slice(71, 160) +
+      "GG" +
+      reference.sequence.slice(162) +
+      "CCC",
+    "linear",
+  );
+  const report = comparePlasmids(reference, query, { circular: false });
+  assert.equal(annotatedQueryCopy(reference, report).sequence, query.sequence);
+  assert.throws(() => comparisonReferenceColumn(report, 0), /within/);
+});
+
+test("aligned query copies label actual copy coordinates and preserve reference alleles", () => {
+  const reference = {
+    ...rec("ACGTACCGTN", "linear", "Reference"),
+    features: [feature(0, 10, { id: "alignment-difference-1" })],
+  };
+  const report = cleanComparison({
+    format: "PlasmidCraftWholeAlignment",
+    version: 1,
+    reference,
+    query: rec("ACTAATAGTN", "linear", "Observed"),
+    options: { circular: false },
+    result: { strand: 1, offset: 0, cigar: "2=1X2I2=2D2=1N", band: 16 },
+  });
+  const before = structuredClone(reference),
+    copy = annotatedQueryCopy(reference, report);
+  const variants = copy.features.filter(
+    (f) => f.qualifiers.alignment_operation,
+  );
+  assert.equal(variants.length, 4);
+  assert.deepEqual(
+    variants.map((f) => f.qualifiers.alignment_operation[0]),
+    ["X", "I", "D", "N"],
+  );
+  assert.deepEqual(
+    variants.map((f) => f.segments),
+    [
+      [{ start: 2, end: 3 }],
+      [{ start: 3, end: 5 }],
+      [{ start: 7, end: 8 }],
+      [{ start: 9, end: 10 }],
+    ],
+  );
+  assert.equal(variants[0].qualifiers.reference_sequence[0], "G");
+  assert.equal(variants[0].qualifiers.alternate_sequence[0], "T");
+  assert.equal(variants[1].qualifiers.alternate_sequence[0], "AA");
+  assert.equal(variants[2].qualifiers.reference_sequence[0], "CC");
+  assert.equal(
+    variants[2].qualifiers.query_copy_location[0],
+    "before copy base 8",
+  );
+  assert.match(
+    variants[2].qualifiers.note.join(" "),
+    /marked base itself is not a substitution/,
+  );
+  assert.match(variants[3].name, /Uncertain/);
+  assert.equal(
+    new Set(copy.features.map((f) => f.id)).size,
+    copy.features.length,
+  );
+  assert.deepEqual(
+    parseProject(serializeProject(copy)).features,
+    copy.features,
+  );
+  assert.deepEqual(reference, before);
+});
+test("deletion markers identify linear end and circular-origin junctions without inventing deleted bases", () => {
+  for (const [ref, cigar, topology, expected, location] of [
+    ["TTACGT", "2D4=", "linear", { start: 0, end: 1 }, "before copy base 1"],
+    ["ACGTTT", "4=2D", "linear", { start: 3, end: 4 }, "after copy base 4"],
+    ["ACGTTT", "4=2D", "circular", { start: 0, end: 1 }, "before copy base 1"],
+  ]) {
+    const report = cleanComparison({
+      format: "PlasmidCraftWholeAlignment",
+      version: 1,
+      reference: rec(ref, topology),
+      query: rec("ACGT", topology),
+      options: { circular: topology === "circular" },
+      result: { strand: 1, offset: 0, cigar, band: 16 },
+    });
+    const [marker] = alignmentDifferenceFeatures(report);
+    assert.deepEqual(marker.segments, [expected]);
+    assert.equal(marker.qualifiers.query_copy_location[0], location);
+    assert.equal(marker.qualifiers.alternate_sequence[0], "");
+  }
+  const exact = comparePlasmids(rec("ACGT"), rec("ACGT"));
+  assert.deepEqual(alignmentDifferenceFeatures(exact), []);
 });

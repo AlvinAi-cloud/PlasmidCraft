@@ -10,7 +10,6 @@ The **Common enzymes** group contains **23 common cloning enzymes**, matching th
 
 The group is a convenient routine-cloning preset; supplier prices, pack sizes and local availability vary. Group/vendor/search/**Single cutters only** filters affect table rows without changing map or digest selections. The preset also includes enzymes with multiple sites; a zero-cutter adds no mark. The same map selection applies to circular, linear, tight and exported maps. Up to 40 sites are displayed, with a notice when more are selected. Tight mode still hides enzyme markings when activated; explicitly turn **Enzymes** on to show the selected set. Clearing **Selected enzymes only** uses an automatic display of up to 10 single cutters.
 
-![Common enzyme selection with separate map and digest controls](screenshots/0.3/common-enzyme-selection.png)
 
 **Export → SVG** preserves the tight, square vector layout with embedded text paths and full labels, at the full map extent regardless of screen zoom. For dense maps, hide unwanted annotation classes or export at a larger physical size to retain readable text. The standard callout layout remains available by turning Tight map off.
 
@@ -65,3 +64,16 @@ Use **Edit → Copy Selected Sequence…** (or Copy Sequence) to choose referenc
 The shared **Sequence overview** stays at the bottom of Map and Sequence views. Click an annotation bar to select its full annotated region and inspect it; overlapping annotations occupy separate lanes, and joined/circular-origin features retain their separate pieces. Buttons include names and coordinates in tooltips and support keyboard selection. Dense lane stacks scroll within the compact overview.
 
 In Sequence view, selecting an annotation from the overview, sequence tracks or inspector brings its start near the vertical center of the sequence viewport. The same behavior applies when switching from a selected map feature into Sequence, including long sequences using windowed rendering. Starts near the document ends are limited by available scroll space. Base editing and ordinary caret navigation retain their existing behavior.
+
+
+## Whole-plasmid alignment
+
+Use **Tools → Align Whole Plasmids**. Choose the reference and an open query, use **Import and align DNA files…**, or expand **Align a pasted sequence**. GenBank, FASTA, SnapGene DNA, plain DNA and `.pcraft` files are supported. Up to ten imported queries are compared sequentially to the same reference. Use the Sanger workflow for traces or partial reads; this workflow aligns complete molecules.
+
+The default searches both orientations and circular origin shifts, adjusting its band for length differences within the computation budget. The overview highlights disagreements and ambiguous regions. Click an overview segment, use Previous/Next difference, or enter a reference base. Both original query and reference coordinates are shown above aligned rows. Hover reference bases for overlapping feature names. **Show this region in Sequence** selects the corresponding reference DNA for annotation/protein inspection.
+
+**Create query copy with features + changes** opens a new document containing the aligned query sequence with reference annotations remapped through substitutions, insertions and deletions. Colored `variation` annotations mark substitutions (red), insertions (gold), deletion junctions (purple), and uncertain DNA (gray). They appear on Map and Sequence views and retain reference positions and alleles in their notes. Deletions use a one-base junction marker because the deleted bases are absent; that marker does not mean its neighboring base changed. The copy opens on Map with its first difference selected. Changed/clipped annotations and invalidated primer sites require review; this does not mark a clone as experimentally confirmed. **Create oriented query copy** instead preserves the query's own available annotations. Source DNA remains unchanged. Reports, source snapshots and orientation are saved in the reference `.pcraft` document. Advanced controls expose manual strand, origin and search band. Heuristic placement, repeat ambiguity and search-boundary warnings remain visible; highly rearranged or weakly related molecules may need a different representation or manual alignment.
+
+## Descriptions and provenance
+
+The document Inspector shows its short biological description separately from collapsible **Provenance and edit notes**. Older combined AI/export descriptions are separated for display without changing the original document text. SnapGene-format export writes the readable description and provenance in separate metadata fields; importing that export preserves both.

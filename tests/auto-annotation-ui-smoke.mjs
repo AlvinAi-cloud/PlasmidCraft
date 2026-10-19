@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium } from "./ui-browser.mjs";
+import { fixturePage, chromium } from "./ui-browser.mjs";
 import { serializeProject } from "../viewer/project.mjs";
 const browser = await chromium.launch({
   headless: true,
@@ -8,7 +8,9 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [];
 page.on("pageerror", (err) => errors.push(err.message));
 let checks = 0;
@@ -139,6 +141,7 @@ try {
   assert.equal(await page.locator("#library-select option").count(), 4);
   checks++;
   await page.locator("#ai-assistant-button").click();
+  await page.locator('[data-ai="navigate-external"]').click();
   await page.locator("#ai-task").selectOption({ label: "Design plasmid" });
   assert.match(await page.locator("#ai-goal").inputValue(), /host organism/);
   await page.locator("#ai-task").selectOption({ label: "Other tasks" });

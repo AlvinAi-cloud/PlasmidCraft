@@ -197,6 +197,7 @@
             <button role="menuitem" data-command="auto-annotation">
               Auto Annotation…
             </button>
+            <hr role="separator" />
             <button role="menuitem" data-command="design-primers">
               Primer Design…
             </button>
@@ -209,23 +210,19 @@
             <button role="menuitem" data-command="simulate-pcr">
               Simulate PCR…
             </button>
+            <hr role="separator" />
             <button role="menuitem" data-command="align-reads">
               Align Sanger / DNA Reads…
-            </button>
-            <button role="menuitem" data-command="protein-documents">
-              Protein Documents / Protein → DNA…
-            </button>
-            <button role="menuitem" data-command="optimize-codons">
-              Optimize Selected CDS Codons…
             </button>
             <button role="menuitem" data-command="compare-plasmids">
               Align Whole Plasmids…
             </button>
             <button role="menuitem" data-command="read-consensus">
-              Read Assembly &amp; Consensus…
+              Read Assembly and Consensus…
             </button>
+            <hr role="separator" />
             <button role="menuitem" data-command="assembly-workbench">
-              Cloning &amp; Assembly…
+              Cloning and Assembly…
             </button>
             <button role="menuitem" data-command="design-gibson">
               Design Gibson Cloning…
@@ -233,25 +230,31 @@
             <button role="menuitem" data-command="design-golden">
               Design Golden Gate Cloning…
             </button>
-            <hr />
-            <button role="menuitem" data-command="view-enzymes">
-              Restriction Analysis…
+            <hr role="separator" />
+            <button role="menuitem" data-command="protein-documents">
+              Protein Documents / Protein to DNA…
             </button>
-            <button role="menuitem" data-command="view-translation">
-              Six-frame Translation…
+            <button role="menuitem" data-command="optimize-codons">
+              Optimize Selected CDS Codons…
             </button>
+            <button role="menuitem" data-command="protein-analysis">
+              Protein Analysis…
+            </button>
+            <button role="menuitem" data-command="blast">NCBI BLAST…</button>
             <button role="menuitem" data-command="coding-proteins">
               Coding Feature Proteins…
             </button>
             <button role="menuitem" data-command="find-orfs">
               Find Open Reading Frames…
             </button>
-            <button role="menuitem" data-command="go-to">Go to Bases…</button>
-            <hr />
-            <button role="menuitem" data-command="protein-analysis">
-              Protein Analysis…
+            <button role="menuitem" data-command="view-translation">
+              Six-frame Translation…
             </button>
-            <button role="menuitem" data-command="blast">NCBI BLAST…</button>
+            <hr role="separator" />
+            <button role="menuitem" data-command="view-enzymes">
+              Restriction Analysis…
+            </button>
+            <button role="menuitem" data-command="go-to">Go to Bases…</button>
           </div>
         </div>
         <div class="app-menu">
@@ -291,7 +294,7 @@
               Load Workflow Examples
             </button>
             <button role="menuitem" data-command="example">
-              Open Example Plasmid
+              Open pET-21b(+) Example
             </button>
             <button role="menuitem" data-command="about">
               About PlasmidCraft
@@ -299,7 +302,7 @@
           </div>
         </div>
       </nav>
-      <span class="version-label" id="version-label">0.3.0</span>
+      <span class="version-label" id="version-label">0.31.0</span>
       <button
         class="icon-button"
         id="about-button"
@@ -593,7 +596,7 @@
           </button>
           <div class="file-panel-footer">
             <button class="side-action" id="load-example">
-              <span data-icon="flask"></span>Example plasmid</button
+              <span data-icon="flask"></span>pET-21b(+) example</button
             ><button class="side-action" id="help-button">
               <span data-icon="help"></span>Getting started
             </button>

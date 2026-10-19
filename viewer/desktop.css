@@ -19,7 +19,7 @@
 body {
   flex-direction: column;
   background: #fff;
-  font-size: 13px;
+  font-size: 16px;
   font-family:
     system-ui,
     -apple-system,
@@ -56,7 +56,7 @@ button:disabled {
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: 14.8px;
   letter-spacing: -0.2px;
 }
 .app-brand img {
@@ -81,7 +81,7 @@ button:disabled {
   background: transparent;
   border-radius: 5px;
   padding: 0 8px;
-  font-size: 12px;
+  font-size: 14.8px;
 }
 .app-menu-trigger:hover,
 .app-menu-trigger[aria-expanded="true"] {
@@ -116,7 +116,7 @@ button:disabled {
   border-radius: 2px;
   text-align: left;
   padding: 6px 12px;
-  font-size: 12px;
+  font-size: 14.8px;
   min-height: 28px;
 }
 .app-menu-popup button:hover,
@@ -127,7 +127,7 @@ button:disabled {
 .app-menu-popup kbd {
   margin-left: auto;
   color: var(--muted);
-  font: 11px inherit;
+  font: 13.5px inherit;
 }
 .app-menu-popup hr {
   border: 0;
@@ -146,7 +146,7 @@ button:disabled {
 }
 .application-bar > .version-label {
   margin-left: auto;
-  font-size: 10px;
+  font-size: 12.3px;
   border: 0;
   background: none;
   white-space: nowrap;
@@ -193,7 +193,7 @@ body[data-runtime="desktop"] .application-menus {
   color: var(--ink);
   padding: 3px 7px;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 13.5px;
   line-height: 1.2;
 }
 .toolbar-button:hover:not(:disabled),
@@ -231,7 +231,7 @@ body[data-runtime="desktop"] .application-menus {
   display: flex;
 }
 .commandbar .tools-button {
-  font-size: 10px;
+  font-size: 12.3px;
   gap: 3px;
 }
 .commandbar .dropdown {
@@ -243,12 +243,12 @@ body[data-runtime="desktop"] .application-menus {
   box-shadow: 0 5px 16px #1b273c25;
 }
 .commandbar .dropdown button {
-  font-size: 12px;
+  font-size: 14.8px;
   padding: 9px 12px;
 }
 .commandbar .dropdown small {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .document-tabs {
   height: 30px;
@@ -263,7 +263,7 @@ body[data-runtime="desktop"] .application-menus {
   padding: 0 11px;
   border-right: 1px solid var(--line);
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14.8px;
 }
 .file-tab.active {
   color: var(--ink);
@@ -277,7 +277,7 @@ body[data-runtime="desktop"] .application-menus {
   max-width: 200px;
 }
 .close-tab {
-  font-size: 17px;
+  font-size: 20.9px;
   color: var(--muted);
 }
 .document-header {
@@ -302,7 +302,7 @@ body[data-runtime="desktop"] .application-menus {
   height: 16px;
 }
 .document-header h1 {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0;
   max-width: 350px;
@@ -310,7 +310,7 @@ body[data-runtime="desktop"] .application-menus {
 }
 .document-header p {
   margin: 0;
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
   white-space: nowrap;
 }
@@ -321,7 +321,7 @@ body[data-runtime="desktop"] .application-menus {
 .badge {
   padding: 1px 4px;
   border-radius: 2px;
-  font-size: 9px;
+  font-size: 11.1px;
   color: var(--text-secondary);
   border-color: var(--line);
 }
@@ -365,7 +365,7 @@ body[data-runtime="desktop"] .application-menus {
   height: 20px;
 }
 .display-rail button small {
-  font-size: 8px;
+  font-size: 9.8px;
 }
 .display-rail button:hover {
   background: #e3ece7;
@@ -397,7 +397,7 @@ body[data-runtime="desktop"] .application-menus {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 11px;
+  font-size: 13.5px;
   font-weight: 600;
   border-bottom: 1px solid var(--line);
   padding: 5px 7px;
@@ -405,7 +405,7 @@ body[data-runtime="desktop"] .application-menus {
   color: var(--text-secondary);
 }
 .file-panel-heading > span {
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--muted);
   font-weight: 400;
 }
@@ -417,7 +417,7 @@ body[data-runtime="desktop"] .application-menus {
   border-radius: 0;
   margin: 0;
   color: var(--text-secondary);
-  font-size: 11px;
+  font-size: 13.5px;
 }
 .file-sidebar .doc-link.active {
   background: var(--accent-soft);
@@ -430,7 +430,7 @@ body[data-runtime="desktop"] .application-menus {
   display: block;
 }
 .file-sidebar .side-action {
-  font-size: 11px;
+  font-size: 13.5px;
   border-radius: 0;
   padding: 9px;
   color: var(--text-secondary);
@@ -459,20 +459,20 @@ body[data-runtime="desktop"] .application-menus {
   min-width: 100px;
 }
 .search-input input {
-  font-size: 11px;
+  font-size: 13.5px;
   height: 25px;
   color: var(--text-secondary);
 }
 .search-input kbd {
   display: block;
-  font-size: 9px;
+  font-size: 11.1px;
   background: #fff;
 }
 .searchbar .icon-button {
   padding: 3px;
 }
 .search-status {
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--text-secondary);
   white-space: nowrap;
 }
@@ -480,7 +480,7 @@ body[data-runtime="desktop"] .application-menus {
   flex: 1;
 }
 .text-button {
-  font-size: 11px;
+  font-size: 13.5px;
   gap: 4px;
   color: var(--accent-strong);
 }
@@ -510,15 +510,15 @@ body.inspector-hidden .inspector {
 }
 .panel-heading {
   margin-bottom: 12px;
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
 }
 .inspector-name {
-  font-size: 14px;
+  font-size: 17.2px;
   color: var(--ink);
 }
 .info-row {
-  font-size: 11px;
+  font-size: 13.5px;
   margin: 8px 0;
 }
 .info-row > span:first-child {
@@ -528,7 +528,7 @@ body.inspector-hidden .inspector {
   color: var(--text-secondary);
 }
 .inspector-note {
-  font-size: 11px;
+  font-size: 13.5px;
   line-height: 1.6;
   color: var(--muted);
 }
@@ -554,7 +554,7 @@ body.inspector-hidden .inspector {
 }
 .annotation-row {
   border-radius: 2px;
-  font-size: 11px;
+  font-size: 13.5px;
   padding: 5px;
   color: var(--ink);
 }
@@ -563,7 +563,7 @@ body.inspector-hidden .inspector {
   background: var(--accent-soft);
 }
 .annotation-row .annotation-length {
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--muted);
 }
 .viewbar {
@@ -585,7 +585,7 @@ body.inspector-hidden .inspector {
 .view-tabs button {
   padding: 0 15px;
   gap: 5px;
-  font-size: 12px;
+  font-size: 14.8px;
   color: var(--text-secondary);
   border: 1px solid transparent;
   border-top: 0;
@@ -610,7 +610,7 @@ body.inspector-hidden .inspector {
   display: none;
 }
 .view-tabs .count {
-  font-size: 9px;
+  font-size: 11.1px;
   background: #e3ece7;
   color: var(--muted);
   border-radius: 2px;
@@ -622,7 +622,7 @@ body.inspector-hidden .inspector {
   background: var(--chrome);
   border-color: var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .statusbar .status-separator {
   color: #8d99a7;
@@ -637,7 +637,7 @@ body.inspector-hidden .inspector {
 }
 .button {
   border-radius: 5px;
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
   border-color: var(--line);
   box-shadow: 0 1px 1px #25364c08;
@@ -676,7 +676,7 @@ body.inspector-hidden .inspector {
 }
 .segmented button {
   padding: 3px 9px;
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--text-secondary);
 }
 .segmented button.active {
@@ -687,7 +687,7 @@ body.inspector-hidden .inspector {
 .map-visibility {
   display: flex;
   gap: 12px;
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
 }
 .map-canvas {
@@ -712,7 +712,7 @@ body.inspector-hidden .inspector {
   border-top: 1px solid #edf0f4;
 }
 .map-legend {
-  font-size: 9px;
+  font-size: 11.1px;
   color: var(--text-secondary);
 }
 .zoom-controls {
@@ -735,7 +735,7 @@ body.inspector-hidden .inspector {
   background: var(--surface-soft);
 }
 .selection-overview-header {
-  font-size: 9px;
+  font-size: 11.1px;
   margin-bottom: 5px;
   color: var(--muted);
 }
@@ -752,12 +752,12 @@ body.inspector-hidden .inspector {
   margin: 0 0 10px;
 }
 .view-title h2 {
-  font-size: 14px;
+  font-size: 17.2px;
   color: var(--ink);
   letter-spacing: 0;
 }
 .view-title p {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--muted);
   margin-top: 4px;
 }
@@ -775,12 +775,12 @@ body.inspector-hidden .inspector {
   box-shadow: none;
 }
 .data-table {
-  font-size: 12px;
+  font-size: 14.8px;
   color: var(--ink);
 }
 .data-table th {
   background: var(--surface-soft);
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -797,17 +797,17 @@ body.inspector-hidden .inspector {
   background: var(--accent-soft);
 }
 .table-filter {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
   margin-bottom: 10px;
 }
 .inline-input {
   border-radius: 5px;
-  font-size: 11px;
+  font-size: 13.5px;
   border-color: var(--line);
 }
 .analysis-note {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--muted);
 }
 .digest-card {
@@ -816,7 +816,7 @@ body.inspector-hidden .inspector {
   padding: 12px;
 }
 .digest-card h3 {
-  font-size: 12px;
+  font-size: 14.8px;
   color: var(--text-secondary);
 }
 .fragment-chip {
@@ -825,7 +825,7 @@ body.inspector-hidden .inspector {
 }
 .sequence-controls {
   margin-bottom: 10px;
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
 }
 .sequence-card {
@@ -833,11 +833,11 @@ body.inspector-hidden .inspector {
 }
 .sequence-row {
   margin-bottom: 12px;
-  font-size: 12px;
+  font-size: 14.8px;
 }
 .row-coordinate {
   color: var(--text-secondary);
-  font-size: 10px;
+  font-size: 12.3px;
   width: 45px;
 }
 .sequence-track {
@@ -845,7 +845,7 @@ body.inspector-hidden .inspector {
 }
 .base {
   width: 10px;
-  font-size: 12px;
+  font-size: 14.8px;
   color: var(--ink);
 }
 .base:nth-child(10n) {
@@ -865,11 +865,11 @@ body.inspector-hidden .inspector {
 }
 .sequence-tag {
   border-radius: 1px;
-  font-size: 9px;
+  font-size: 11.1px;
   color: var(--text-secondary);
 }
 .pagination {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
 }
 .trace-card {
@@ -900,7 +900,7 @@ body.inspector-hidden .inspector {
 }
 .modal-header h2 {
   color: var(--text-secondary);
-  font-size: 17px;
+  font-size: 20.9px;
 }
 .modal-body {
   color: var(--text-secondary);
@@ -962,7 +962,7 @@ body.inspector-hidden .inspector {
     display: none;
   }
   .app-menu-trigger {
-    font-size: 11px;
+    font-size: 13.5px;
     padding: 0 6px;
   }
   .application-bar > .icon-button {
@@ -977,7 +977,7 @@ body.inspector-hidden .inspector {
     padding-right: 4px;
   }
   .toolbar-button {
-    font-size: 9px;
+    font-size: 11.1px;
     min-width: 35px;
     padding: 2px 4px;
   }
@@ -986,7 +986,7 @@ body.inspector-hidden .inspector {
     height: 19px;
   }
   .commandbar .tools-button {
-    font-size: 9px;
+    font-size: 11.1px;
   }
   .inspector-tool > span:last-child {
     display: none;
@@ -997,10 +997,10 @@ body.inspector-hidden .inspector {
   }
   .document-header h1 {
     max-width: 230px;
-    font-size: 12px;
+    font-size: 14.8px;
   }
   .document-header p {
-    font-size: 10px;
+    font-size: 12.3px;
   }
   .display-rail {
     width: 42px;
@@ -1010,7 +1010,7 @@ body.inspector-hidden .inspector {
     min-height: 38px;
   }
   .display-rail button small {
-    font-size: 7px;
+    font-size: 8.6px;
   }
   .inspector {
     display: none;
@@ -1046,7 +1046,7 @@ body.inspector-hidden .inspector {
     padding: 0;
   }
   .view-tabs button {
-    font-size: 11px;
+    font-size: 13.5px;
     padding: 0 10px;
   }
   .search-input {
@@ -1069,10 +1069,10 @@ body.inspector-hidden .inspector {
   }
   .base {
     width: 9px;
-    font-size: 11px;
+    font-size: 13.5px;
   }
   .text-button {
-    font-size: 11px;
+    font-size: 13.5px;
     gap: 4px;
   }
   .title-line .badge.annotation-dirty {
@@ -1090,7 +1090,7 @@ body.inspector-hidden .inspector {
     height: 17px;
   }
   .app-menu-trigger {
-    font-size: 10px;
+    font-size: 12.3px;
     padding: 0 4px;
   }
   .application-bar > .icon-button {
@@ -1128,7 +1128,7 @@ body.inspector-hidden .inspector {
   }
   .file-tab {
     min-width: 145px;
-    font-size: 11px;
+    font-size: 13.5px;
   }
   .document-header {
     align-items: flex-start;
@@ -1137,7 +1137,7 @@ body.inspector-hidden .inspector {
     padding: 5px 7px;
   }
   .document-header p {
-    font-size: 10px;
+    font-size: 12.3px;
   }
   .document-header h1 {
     max-width: 180px;
@@ -1146,7 +1146,7 @@ body.inspector-hidden .inspector {
     margin: 0 3px;
   }
   .title-line .badge {
-    font-size: 8px;
+    font-size: 9.8px;
   }
   .display-rail {
     width: 36px;
@@ -1175,12 +1175,12 @@ body.inspector-hidden .inspector {
     max-width: none;
   }
   .search-input input {
-    font-size: 10px;
+    font-size: 12.3px;
     padding-right: 0;
   }
   .search-status {
     max-width: 70px;
-    font-size: 9px;
+    font-size: 11.1px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -1212,7 +1212,7 @@ body.inspector-hidden .inspector {
   }
   .map-legend {
     gap: 7px;
-    font-size: 8px;
+    font-size: 9.8px;
   }
   .zoom-controls {
     gap: 3px;
@@ -1221,7 +1221,7 @@ body.inspector-hidden .inspector {
     padding: 6px 8px;
   }
   .statusbar {
-    font-size: 9px;
+    font-size: 11.1px;
     padding: 0 7px;
   }
   .statusbar > span:first-child {
@@ -1234,10 +1234,10 @@ body.inspector-hidden .inspector {
     padding: 0;
   }
   .view-title h2 {
-    font-size: 13px;
+    font-size: 16px;
   }
   .view-title p {
-    font-size: 10px;
+    font-size: 12.3px;
   }
   .view-actions {
     flex-direction: row;
@@ -1248,7 +1248,7 @@ body.inspector-hidden .inspector {
   }
   .toast {
     width: calc(100% - 30px);
-    font-size: 11px;
+    font-size: 13.5px;
   }
 }
 
@@ -1295,7 +1295,7 @@ body.inspector-hidden .inspector {
   border-bottom: 2px solid var(--track-color);
   color: var(--text-secondary);
   font:
-    10px/14px -apple-system,
+    12.3px/14px -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
@@ -1342,10 +1342,10 @@ body.inspector-hidden .inspector {
   border: 0;
   background: transparent;
   color: var(--accent-strong);
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .operation-help {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--muted);
 }
 .sequence-tool-form textarea {
@@ -1368,15 +1368,15 @@ body.inspector-hidden .inspector {
 .operation-counts span {
   display: flex;
   flex-direction: column;
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .operation-counts strong {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--accent-strong);
 }
 .operation-sequence {
-  font: 11px/1.8 var(--mono);
+  font: 13.5px/1.8 var(--mono);
   padding: 8px;
   background: var(--surface-soft);
   border: 1px solid var(--line);
@@ -1384,7 +1384,7 @@ body.inspector-hidden .inspector {
 }
 .operation-warning {
   color: #865d25;
-  font-size: 11px;
+  font-size: 13.5px;
 }
 .analysis-tabs {
   display: flex;
@@ -1402,7 +1402,7 @@ body.inspector-hidden .inspector {
   border-radius: 4px;
   background: transparent;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 14.8px;
 }
 .analysis-tabs button[aria-pressed="true"] {
   color: var(--accent-strong);
@@ -1421,7 +1421,7 @@ body.inspector-hidden .inspector {
   background: var(--surface-soft);
 }
 .orf-controls label {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--text-secondary);
 }
 .orf-controls input:not([type="checkbox"]),
@@ -1454,7 +1454,7 @@ body.inspector-hidden .inspector {
   gap: 5px;
 }
 .orf-row-actions .button {
-  font-size: 10px;
+  font-size: 12.3px;
   padding: 4px 7px;
   white-space: nowrap;
 }
@@ -1464,7 +1464,7 @@ body.inspector-hidden .inspector {
 .orf-origin {
   display: block;
   color: var(--accent-strong);
-  font-size: 10px;
+  font-size: 12.3px;
   margin-top: 3px;
 }
 .coding-protein-card {
@@ -1510,7 +1510,7 @@ body.inspector-hidden .inspector {
 .wf-pane label {
   display: block;
   color: var(--text-secondary);
-  font-size: 11px;
+  font-size: 13.5px;
   min-width: 0;
 }
 .wf-controls > label {
@@ -1549,7 +1549,7 @@ body.inspector-hidden .inspector {
 }
 .wf-editor summary {
   cursor: pointer;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-secondary);
 }
@@ -1565,7 +1565,7 @@ body.inspector-hidden .inspector {
 }
 .wf-pane .data-table .button {
   padding: 4px 7px;
-  font-size: 10px;
+  font-size: 12.3px;
   margin: 0 3px 3px 0;
   white-space: nowrap;
 }
@@ -1598,7 +1598,7 @@ body.inspector-hidden .inspector {
   left: 0;
   top: 13px;
   line-height: 9px;
-  font-size: 8px;
+  font-size: 9.8px;
   max-width: 160px;
   overflow: hidden;
   white-space: nowrap;
@@ -1611,12 +1611,12 @@ body.inspector-hidden .inspector {
   width: var(--base-width);
   text-align: center;
   color: #3f6c9c;
-  font: 11px var(--mono);
+  font: 13.5px var(--mono);
 }
 .protein-residue.three-letter {
   width: calc(3 * var(--base-width));
   margin-left: calc(-1 * var(--base-width));
-  font-size: 10px;
+  font-size: 12.3px;
   white-space: nowrap;
 }
 .history-graph {
@@ -1642,7 +1642,7 @@ body.inspector-hidden .inspector {
 .wf-summary {
   margin: 16px 0;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 14.8px;
 }
 .alignment-display {
   padding: 14px;
@@ -1654,7 +1654,7 @@ body.inspector-hidden .inspector {
   width: max-content;
 }
 .alignment-coordinates {
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--muted);
   margin-bottom: 7px;
 }
@@ -1667,7 +1667,7 @@ body.inspector-hidden .inspector {
 .alignment-label {
   display: inline-block;
   width: 65px;
-  font: 10px var(--font);
+  font: 12.3px var(--font);
   color: var(--muted);
 }
 .alignment-base {
@@ -1681,7 +1681,7 @@ body.inspector-hidden .inspector {
   height: 22px;
   background: transparent;
   color: var(--text-secondary);
-  font: 12px var(--mono);
+  font: 14.8px var(--mono);
 }
 button.alignment-base:disabled {
   opacity: 1;
@@ -1713,7 +1713,7 @@ button.alignment-base:disabled {
 }
 .wf-order-row strong {
   flex: 1 1 180px;
-  font-size: 12px;
+  font-size: 14.8px;
   font-weight: 500;
   color: var(--text-secondary);
 }
@@ -1734,11 +1734,11 @@ button.alignment-base:disabled {
 }
 .coding-protein-card h3 {
   margin: 0 0 6px;
-  font-size: 14px;
+  font-size: 17.2px;
   color: var(--text-secondary);
 }
 .protein-card-heading p {
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--muted);
   margin: 0;
 }
@@ -1772,7 +1772,7 @@ button.alignment-base:disabled {
 }
 #codon-workspace textarea {
   font-family: monospace;
-  font-size: 12px;
+  font-size: 14.8px;
   min-height: 90px;
   overflow-wrap: anywhere;
 }
@@ -1870,7 +1870,7 @@ button.alignment-base:disabled {
   border-radius: 4px;
   background: #f5ecdc;
   color: #73511e;
-  font-size: 11px;
+  font-size: 13.5px;
   font-weight: 600;
 }
 .ai-connection-badge.configured {
@@ -2028,17 +2028,17 @@ button.alignment-base:disabled {
 }
 #sequence-editor .row-coordinate {
   width: var(--coordinate-width);
-  font: 11px var(--mono);
+  font: 13.5px var(--mono);
 }
 #sequence-editor .row-coordinate small {
-  font-size: 9px;
+  font-size: 11.1px;
   color: var(--muted);
 }
 #sequence-editor .base {
   width: var(--base-width);
   height: 24px;
   line-height: 24px;
-  font-size: 13px;
+  font-size: 16px;
   flex-shrink: 0;
 }
 #sequence-editor .base:nth-child(10n) {
@@ -2053,17 +2053,20 @@ button.alignment-base:disabled {
 }
 .strand-end {
   color: var(--muted);
-  font: 10px var(--mono);
+  font: 12.3px var(--mono);
 }
 #sequence-editor .sequence-annotations {
   height: calc(var(--lanes) * 22px);
   margin-top: 4px;
-  width: calc(60 * var(--base-width) + var(--row-groups) * var(--base-gap));
+  width: calc(
+    var(--row-bases, 60) * var(--base-width) + var(--row-groups) *
+      var(--base-gap)
+  );
 }
 #sequence-editor .sequence-annotation {
   top: calc(var(--lane) * 22px);
   height: 19px;
-  font-size: 11px;
+  font-size: 13.5px;
   line-height: 17px;
 }
 .sequence-primer-track,
@@ -2071,7 +2074,10 @@ button.alignment-base:disabled {
 .sequence-frame-track {
   position: relative;
   margin: 0 0 0 calc(var(--coordinate-width) + var(--track-gap));
-  width: calc(60 * var(--base-width) + var(--row-groups) * var(--base-gap));
+  width: calc(
+    var(--row-bases, 60) * var(--base-width) + var(--row-groups) *
+      var(--base-gap)
+  );
   height: 42px;
   border: 0;
 }
@@ -2089,7 +2095,7 @@ button.alignment-base:disabled {
 .sequence-track-caption {
   height: 16px;
   line-height: 16px;
-  font: 10px/16px
+  font: 12.3px/16px
     var(--sans, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2119,7 +2125,7 @@ button.alignment-base:disabled {
   width: var(--base-width);
   height: 24px;
   text-align: center;
-  font: 13px/24px var(--mono);
+  font: 16px/24px var(--mono);
   color: var(--primer-color);
 }
 .primer-aligned-base.mismatch {
@@ -2199,14 +2205,14 @@ button.alignment-base:disabled {
   top: 1px;
   height: 22px;
   line-height: 22px;
-  font-size: 12px;
+  font-size: 14.8px;
   color: #285d4c;
 }
 #sequence-editor .sequence-frame-track .protein-residue {
   color: #566b82;
 }
 #sequence-editor .protein-residue.three-letter {
-  font-size: 10px;
+  font-size: 12.3px;
 }
 #sequence-editor .protein-residue.stop {
   color: #b33a41;
@@ -2217,7 +2223,7 @@ button.alignment-base:disabled {
   height: 18px;
   margin-left: calc(var(--coordinate-width) + var(--track-gap));
   color: #8b989f;
-  font: 9px/18px var(--mono);
+  font: 11.1px/18px var(--mono);
 }
 .sequence-ruler span {
   position: absolute;
@@ -2244,7 +2250,7 @@ button.alignment-base:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--muted);
   margin: -2px 0 8px;
 }
@@ -2283,7 +2289,7 @@ button.alignment-base:disabled {
   margin: 12px 0 18px;
 }
 #mutagenesis-workspace .table-sequence {
-  font-size: 12px;
+  font-size: 14.8px;
   line-height: 1.65;
 }
 #mutagenesis-pair th:first-child {
@@ -2307,7 +2313,7 @@ button.alignment-base:disabled {
   flex-wrap: wrap;
 }
 .map-tight-control {
-  font-size: 11px;
+  font-size: 13.5px;
   white-space: nowrap;
 }
 .compact-feature-label {
@@ -2341,7 +2347,7 @@ button.alignment-base:disabled {
   text-overflow: ellipsis;
   background: #dfeaff;
   color: #245d99;
-  font: 9px/13px var(--mono);
+  font: 11.1px/13px var(--mono);
   border-radius: 2px;
   padding: 0 3px;
 }
@@ -2370,7 +2376,7 @@ button.alignment-base:disabled {
   flex-shrink: 0;
 }
 .ai-panel-header h2 {
-  font-size: 13px;
+  font-size: 16px;
   margin: 0;
 }
 .ai-panel-header .icon-button {
@@ -2394,7 +2400,7 @@ button.alignment-base:disabled {
 .ai-panel .ai-section-nav .button {
   flex: 1 1 95px;
   padding: 5px;
-  font-size: 10px;
+  font-size: 12.3px;
   white-space: normal;
 }
 .ai-panel .ai-connection-banner {
@@ -2402,18 +2408,18 @@ button.alignment-base:disabled {
   flex-wrap: wrap;
   gap: 5px;
   padding: 8px;
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .ai-panel p {
-  font-size: 11px;
+  font-size: 13.5px;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
 .ai-panel .analysis-note {
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .ai-panel #ai-workspace label {
-  font-size: 11px;
+  font-size: 13.5px;
 }
 .ai-panel #ai-workspace input:not([type="checkbox"]),
 .ai-panel #ai-workspace select {
@@ -2423,7 +2429,7 @@ button.alignment-base:disabled {
 .ai-panel #ai-workspace textarea {
   min-width: 0;
   resize: vertical;
-  font-size: 11px;
+  font-size: 13.5px;
 }
 .ai-panel #ai-goal {
   height: calc(58px * 2.2);
@@ -2434,7 +2440,7 @@ button.alignment-base:disabled {
 .ai-panel .wf-actions .button {
   white-space: normal;
   text-align: left;
-  font-size: 10px;
+  font-size: 12.3px;
 }
 .ai-panel #ai-connection-details,
 .ai-panel #ai-external-details,
@@ -2445,7 +2451,7 @@ button.alignment-base:disabled {
   border-left: 3px solid #82b19b;
   padding: 7px 9px;
   background: #edf4ef;
-  font-size: 11px;
+  font-size: 13.5px;
 }
 .ai-live-context p {
   margin: 4px 0;
@@ -2469,22 +2475,25 @@ button.alignment-base:disabled {
 }
 
 .map-selected-enzyme-control {
-  font-size: 11px;
+  font-size: 13.5px;
   white-space: nowrap;
 }
 .map-enzyme-notice {
   margin: 0;
   padding: 5px 12px;
-  font-size: 10px;
+  font-size: 12.3px;
   color: var(--text-secondary);
   border-bottom: 1px solid var(--line);
 }
 
 .sequence-protein-lane {
   position: relative;
-  height: 42px;
+  height: 56px;
   margin-left: calc(var(--coordinate-width) + var(--track-gap));
-  width: calc(60 * var(--base-width) + var(--row-groups) * var(--base-gap));
+  width: calc(
+    var(--row-bases, 60) * var(--base-width) + var(--row-groups) *
+      var(--base-gap)
+  );
 }
 #sequence-editor .sequence-protein-lane .sequence-protein-track {
   position: absolute;
@@ -2634,7 +2643,7 @@ button.alignment-base:disabled {
   flex-direction: column;
   flex: 0 1 auto;
   min-height: 180px;
-  max-height: 55%;
+  max-height: 45%;
   padding-bottom: 8px;
 }
 .ai-composer-fields {
@@ -2665,7 +2674,7 @@ button.alignment-base:disabled {
 }
 #ai-workspace[data-connected] h3 {
   margin: 4px 0 6px;
-  font-size: 12px;
+  font-size: 14.8px;
   flex-shrink: 0;
 }
 .ai-connected-scroll {
@@ -2730,4 +2739,152 @@ button.alignment-base:disabled {
   .ai-panel .ai-connected-composer label {
     margin: 3px 0;
   }
+}
+
+/* 0.31: readable controls, width-aware sequence rows and movable tool windows. */
+.app-menu-popup [role="separator"] {
+  border-top: 1px solid var(--line);
+  margin: 5px 7px;
+}
+#sequence-editor .sequence-row {
+  --base-width: 14px;
+  --base-gap: 8px;
+  --coordinate-width: 76px;
+  --track-gap: 10px;
+}
+.sequence-virtual-space {
+  min-width: 0;
+}
+.sequence-controls {
+  flex-wrap: wrap;
+}
+.sequence-controls > label {
+  white-space: nowrap;
+}
+.view-title {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.view-actions {
+  flex-wrap: wrap;
+}
+.app-menu-popup {
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+.floating-dialog[open] {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  z-index: 120;
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+}
+.floating-dialog .modal-header {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  border-bottom: 1px solid var(--line);
+  background: var(--chrome);
+  padding: 15px 20px;
+  gap: 12px;
+}
+.floating-dialog .dialog-move-hint {
+  margin-right: auto;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.floating-dialog.dialog-dragging .modal-header {
+  cursor: grabbing;
+}
+.floating-dialog .modal-header button {
+  cursor: pointer;
+}
+#modal.floating-dialog:not(.sequence-tool-dialog):not(.codon-dialog):not(
+    .selected-primer-dialog
+  ):not(.mutagenesis-dialog) {
+  width: 560px;
+}
+
+/* CDS residue numbers follow the codon centers and biological CDS numbering. */
+#sequence-editor .sequence-protein-track {
+  height: 56px;
+}
+.sequence-residue-ruler {
+  position: relative;
+  height: 14px;
+  color: #526b61;
+  font: 11.5px/14px var(--mono);
+}
+.sequence-residue-ruler span {
+  position: absolute;
+  left: calc(var(--pos) * var(--base-width) + var(--groups) * var(--base-gap));
+  width: calc(5 * var(--base-width));
+  margin-left: calc(-2 * var(--base-width));
+  text-align: center;
+  white-space: nowrap;
+}
+
+.inspector-provenance {
+  margin: 12px 0;
+  font-size: 13.5px;
+  overflow-wrap: anywhere;
+}
+.inspector-provenance summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.inspector-provenance ul {
+  padding-left: 18px;
+}
+.inspector-provenance li {
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+.inspector-note {
+  white-space: pre-wrap;
+}
+
+#whole-advanced,
+.whole-paste {
+  margin: 10px 0;
+}
+#whole-advanced > summary,
+.whole-paste > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.whole-overview {
+  display: flex;
+  height: 26px;
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.whole-overview .button {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #bcd9cc;
+  min-height: 24px;
+}
+.whole-overview [data-op="X"] {
+  background: #d98269;
+}
+.whole-overview [data-op="I"],
+.whole-overview [data-op="D"] {
+  background: #d8b14e;
+}
+.whole-overview [data-op="N"] {
+  background: #acb3bd;
+}
+.whole-overview .button:hover {
+  filter: brightness(0.8);
+}
+.whole-current-difference {
+  outline: 2px solid #a45b18;
+  outline-offset: -2px;
 }

@@ -4,10 +4,10 @@ import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { parseProject } from "../viewer/project.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const fixture = [
-  ...(await fs.readFile(path.join(root, "examples/pCraft-demo.gb"))),
+  ...(await fs.readFile(path.join(root, "tests/fixtures/synthetic-test.gb"))),
 ];
 const browser = await chromium.launch({
   headless: true,
@@ -15,7 +15,9 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [],
   requests = [];
 page.on("pageerror", (error) => errors.push(error.message));

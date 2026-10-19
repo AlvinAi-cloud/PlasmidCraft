@@ -1,6 +1,6 @@
 {
   "product": "PlasmidCraft",
-  "version": "0.3.0",
+  "version": "0.31.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -8,7 +8,7 @@
     },
     {
       "path": ".github/workflows/desktop.yml",
-      "sha256": "8db431bdafd684a3b44a8c6f2ac1dbb9ce6abf81586a499641e097959f4757aa"
+      "sha256": "11b3b0346f409155d3ee7685adfae12aaf331d751aa906d9c4a375a86d47529b"
     },
     {
       "path": ".gitignore",
@@ -104,7 +104,7 @@
     },
     {
       "path": "docs/AI_ASSISTANT.md",
-      "sha256": "2903f13102c008ca568f8cad9350feeb1202dae05deb738a0e06211240d49362"
+      "sha256": "d5c9f62f78661ec653c456d1b742e01467ce6c31251ab9a777e4c4b0ac0e86db"
     },
     {
       "path": "docs/CLONING_DESIGN.md",
@@ -116,95 +116,51 @@
     },
     {
       "path": "docs/DESKTOP.md",
-      "sha256": "9002063132c38b69c6596dd7c7513f55c67d93999f491c8e9cfff50df306bc96"
+      "sha256": "123d4bb05bb020fa6156dbd47a9c2f4a61d749be4f4eee2a308e5e4f21b8eeb4"
     },
     {
       "path": "docs/FEATURE_CATALOG_AND_EXCHANGE.md",
-      "sha256": "753f6dd4ae20e91014129ea30f5d4e431ef125e5bd02afc2ad3890954f3faf2a"
+      "sha256": "66f980f217994fe431d39fe57ca3b61b70187ef49cd979ae1a716aa8f7f30e92"
     },
     {
       "path": "docs/MUTAGENESIS.md",
-      "sha256": "3b2b41269e5726be46db4070fcdc421f86d41bdaa53ea9c4e67fe0e6a3015dfb"
+      "sha256": "e5e579531d4a0657b4e9ce3feef608d37f80cdfdb1935d163ca8653eb5a5c4ca"
     },
     {
       "path": "docs/PROTEIN_ANALYSIS_AND_BLAST.md",
       "sha256": "cb86de0d6cda3b53691528c55bc1eb08fb8aa8d67baa6459907b91740a9ed6d5"
     },
     {
-      "path": "docs/screenshots/0.3/all-library-matching.png",
-      "sha256": "74c75e7242bb5c065dbffc4ce20c4dce4372e040f05ace729bc9db5e2f36f02a"
+      "path": "docs/RELEASE.md",
+      "sha256": "6e7131910233e30506a3fc745a707c002252a93329c562502c5bfad0b2858ce0"
     },
     {
-      "path": "docs/screenshots/0.3/api-model-picker.png",
-      "sha256": "fa11407570909f43aa0be16c2d4eeed23d915c41e1f209ffba8e9b9237b361d7"
+      "path": "docs/screenshots/0.31/internal-ai-operations.png",
+      "sha256": "a1a57f4bd4dbf56518b03e49be900784e1dd48585d3d79b20b6a86962f426405"
     },
     {
-      "path": "docs/screenshots/0.3/auto-annotation.png",
-      "sha256": "27a698b8fc62d53d2af2f68971c8be408ae6d4f4d0238dabc7212396f0a3fb10"
-    },
-    {
-      "path": "docs/screenshots/0.3/common-enzyme-selection.png",
-      "sha256": "3f6e96e49222a35076e872ec1afd2fc06aa2b156779ea5b994f03dd0f6ba7e8d"
-    },
-    {
-      "path": "docs/screenshots/0.3/external-ai.png",
-      "sha256": "9f90f71bf68b9386323795b47d6e6e2310dab4d57b2fc11f69b7ba01c936dbe0"
-    },
-    {
-      "path": "docs/screenshots/0.3/golden-gate-workspace.png",
-      "sha256": "d05c9b8dda9ce128c4f991532e4c6bf0399f7b55e48de12dba2c473b5628e70d"
-    },
-    {
-      "path": "docs/screenshots/0.3/internal-ai-operations.png",
-      "sha256": "f895f038e4a922df10bc00037c124210d64b6e8bd3a9d1a3ac4a8c522d3cd499"
-    },
-    {
-      "path": "docs/screenshots/0.3/linked-protein-selection.png",
-      "sha256": "2da83d4549f188207ff237f11ca6b54a7296ca01607e6a77410939e79099a12e"
-    },
-    {
-      "path": "docs/screenshots/0.3/map.png",
-      "sha256": "c1c4691db60548968cb82f5ebd9dda3bc3e08b12800adfef65c2c26f27ce3847"
-    },
-    {
-      "path": "docs/screenshots/0.3/mutagenic-primer-design.png",
-      "sha256": "8611ce02c27eb46c48cb93f5cf375cab82500d752e85f3129606fe7b5a7f0ef7"
-    },
-    {
-      "path": "docs/screenshots/0.3/sequence-overview-center.png",
-      "sha256": "8b8a188b93f40ae89e818d7284ca35a2ee393a06b275c073e24cb03c3a3141ce"
-    },
-    {
-      "path": "docs/screenshots/0.3/sequence-primers-codons.png",
-      "sha256": "2ceb7405d6e02ee7c8b9a0bddf242cb4b12d043568ed97daf54f259b1a8da4c3"
-    },
-    {
-      "path": "docs/screenshots/0.3/tight-plasmid-map.png",
-      "sha256": "498b64d7ce3977772791fc55659f71ac0dda1422e8c0694e2a38d8c208c0033d"
+      "path": "docs/screenshots/0.31/map.png",
+      "sha256": "04e6b7a4257cdf955edefff1132dbfdc6b14eab6e9bb56b3eb519046fda65d41"
     },
     {
       "path": "docs/SEQUENCE_VERIFICATION.md",
-      "sha256": "a81526009ca7da0c4c8fff2becd88315f6bcc398a49be494ae17cdf16ba2990b"
+      "sha256": "79bd504769fcedf406ee91557eb8a5c5e444ce2bc97fec7f422d0373e6a0ff80"
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "25de2509dac8526991572dc71ef5cdc18a73d7104edf9acb32e3ae63638ced2a"
+      "sha256": "bfe4f0145ad04e489c740258cb49cd1a8e1cb4d4f26c784b735eca468b7dc407"
     },
     {
       "path": "docs/WORKFLOWS.md",
       "sha256": "4a8b65bbbd171381836063c81d71ca1b2f787760323618710945ec02ec34b6b2"
     },
     {
-      "path": "examples/pCraft-demo.fasta",
-      "sha256": "886e06ba68bb06bde4595675d896cf3925f661f1ffead8fa5fd38807ca742926"
-    },
-    {
-      "path": "examples/pCraft-demo.gb",
-      "sha256": "47f60ad364237766ddfe5e6a26c3033452a806dc9cc8ba4c3c06fa081349b6f0"
+      "path": "examples/pET-21b(+).dna",
+      "sha256": "e0e9390523560c31d18a61c824e8a9882832391d76c775b0c1fe72caa5a03a3c"
     },
     {
       "path": "Launch PlasmidCraft.command",
-      "sha256": "9e29d64a1608104351dc250254f5e22c6abbad0aca961b1fef3b8642eb0bf276"
+      "sha256": "1106d77ef3eaf7598b263db3de3347b4c0de6ab1d181e216c0d7e33525cddb38"
     },
     {
       "path": "LICENSE",
@@ -212,7 +168,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "c111b51755e30854a05d29ab3d3be9cdbb99de886b68a8abc7875b9fa764a52a"
+      "sha256": "00b56d1a72086dbb2da617a3ed92c93a8d8e2593fa0333c1c16c2b7232385997"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -220,15 +176,15 @@
     },
     {
       "path": "PRIVACY.md",
-      "sha256": "9eae0424c563e71dc993a72c25278b7b21bd979a7878fbaeb514962a6ed84f8f"
+      "sha256": "b0b8ad066eabaeef0fd828c27ed29d55e5e7126443799ec3cbcbd7d883ccbc99"
     },
     {
       "path": "README.md",
-      "sha256": "c14d79bd1379e0c5287f84823c96f5683a921bad92e03d76fd697d0d02c42d85"
+      "sha256": "86e1ae73d40f1e0f78d7cda500cf302f1207fced054864ffa83325a14da94fa0"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "sha256": "bda7be43d000a1dae6ab9e7d4cb24a78bbe38dc370581119684373cb43d38e3a"
+      "sha256": "69a942332a186df2d07633d80cc34ba4f668ef971c0b1dd4ce5680d61ed78088"
     },
     {
       "path": "scripts/build-common-features.mjs",
@@ -256,7 +212,7 @@
     },
     {
       "path": "scripts/prepare-release.mjs",
-      "sha256": "ac9d5c607d11597c842690e0a7ba786249321924e74ce69284bfd5162b8eb25b"
+      "sha256": "9d3c463d2042cbad17fe4bf5fd1050a5d98672e6d69761ee4af0661b9b0de416"
     },
     {
       "path": "scripts/serve.mjs",
@@ -268,11 +224,15 @@
     },
     {
       "path": "scripts/third-party-notices.py",
-      "sha256": "d49006e728b9d0f0b37fa43e7f2bafe47d2496e99ada82a05113956b88e798cf"
+      "sha256": "90977613e57d19d3a947ed38d64d481476cfe5ba8212deb5e732157aa94f68f9"
+    },
+    {
+      "path": "scripts/update-default-example.mjs",
+      "sha256": "127774cfcec39a726ead7d477cfd338283ce17ce595b3f131c7c3914ece98d2e"
     },
     {
       "path": "SECURITY.md",
-      "sha256": "424efb187be04f1106557b8d9ef355163cdaa98cb5062dd0aa26e1afb5b4f35c"
+      "sha256": "90c60a64a050f0ba1cd4f3d21b4dd6085a11266f5e45790fa00b50b55474d776"
     },
     {
       "path": "src-tauri/build.rs",
@@ -284,11 +244,11 @@
     },
     {
       "path": "src-tauri/Cargo.lock",
-      "sha256": "ed22645abb48a7f23b7ef5c3580f0ab79dc0c6f733087b7d9478c169ae767149"
+      "sha256": "4b9334aac83475a3de9ed6925ef0fc005b281263e51f24bc36d0249c63b44c7f"
     },
     {
       "path": "src-tauri/Cargo.toml",
-      "sha256": "735c8798180c4abdea9c85ce799ea46df9c3ab80854af94528fe62c9312e1f18"
+      "sha256": "f031411298512202b80334f647c25abe49179f2b74c8f06ed286ede5d357f763"
     },
     {
       "path": "src-tauri/icons/128x128.png",
@@ -359,16 +319,16 @@
       "sha256": "32f4bac4f89f27bf821b8a236174fb0a57bdc7a07f6ed8afba74d2e01ecf0f20"
     },
     {
-      "path": "src-tauri/src/ai.rs",
-      "sha256": "26c4d806ea254ebe3d0d940d9504e72eddd504ce824c0e78663643e1b4796cee"
-    },
-    {
       "path": "src-tauri/src/ai_models.rs",
       "sha256": "c6e581ef39a0f327156cac98964e3012bee04a4cd8730cc7913b11d078fe87e1"
     },
     {
       "path": "src-tauri/src/ai_vault.rs",
       "sha256": "43a27056a2c73fd4188e71aacf6c99ea7145295b7d300ae27e9718a90caf6d5a"
+    },
+    {
+      "path": "src-tauri/src/ai.rs",
+      "sha256": "26c4d806ea254ebe3d0d940d9504e72eddd504ce824c0e78663643e1b4796cee"
     },
     {
       "path": "src-tauri/src/blast.rs",
@@ -384,7 +344,7 @@
     },
     {
       "path": "src-tauri/src/lib.rs",
-      "sha256": "006d90da50ee28d7a70858b1d6e19407d29d018df4c4b647aee22436cc8696e7"
+      "sha256": "0e534eb35d6993896395e82a045284791f86e3e8da5953be478adb419000b042"
     },
     {
       "path": "src-tauri/src/main.rs",
@@ -392,7 +352,7 @@
     },
     {
       "path": "src-tauri/tauri.conf.json",
-      "sha256": "e7fd638d1dcd887fecc6e51ec3db8e007812b00d92d5c9589e527dfbfd77fea5"
+      "sha256": "b017d6816437d0b5ca17ce7fbe20ecee400cd19cebcc38066a59915d94f4476f"
     },
     {
       "path": "src-tauri/tests/fixtures/chatgpt-test-only-jwks.json",
@@ -412,23 +372,23 @@
     },
     {
       "path": "tests/advanced-ui-smoke.mjs",
-      "sha256": "c9d6a6fd12a063e2f7be25465e4991c69844a8f53b2953efd05fd880dfe74f5a"
+      "sha256": "01ae6201797c6951944d0b6de45a746a46297001551ac3ac04209b1f1e388d89"
     },
     {
       "path": "tests/advanced.test.mjs",
-      "sha256": "5bdba298ac59fde02fc4bde9847e9050f33235bb288379a6f0b2f5c1793b7578"
+      "sha256": "74d221cf9a785044b75dc21f9935353b355b74bd6ba6c1071efb7928d9dfeace"
     },
     {
       "path": "tests/ai-device-ui-smoke.mjs",
-      "sha256": "d166d79eca6b82986bf2b1ec5759118ccb206bfdf99c2f1151d50016d01a4ac6"
+      "sha256": "d7571e55531d18bf2eefbd496f7b71b059ee8b3a9b9b0e2dc15cbdbea259787f"
     },
     {
       "path": "tests/ai-tools.test.mjs",
-      "sha256": "54cd45b1261b650aed1b9ea47216535c7bd78c17651065af1f721dc258ffe520"
+      "sha256": "7f9d3aa055551bddb44c0211c4152f8e00286c86b97de99f0ee92b0ad820354d"
     },
     {
       "path": "tests/ai-ui-smoke.mjs",
-      "sha256": "b1af0ed8f1d4c740e264ea53bdcd1c57e6aee584a3ea4c076777094d0114f84a"
+      "sha256": "ff1ad3c5b7fd7248a536292034ae0ed639e4b6a5392c5eaac73cadf27ab21338"
     },
     {
       "path": "tests/ai.test.mjs",
@@ -436,11 +396,11 @@
     },
     {
       "path": "tests/assembly-map-primer-ui-smoke.mjs",
-      "sha256": "8304ac539ef5546389418fcb27cafdfd8c0500a8576926a5bb39e356a5366821"
+      "sha256": "2f6766828068aed6a1d7dc1c469772569416ee5f830377670fc14db673346703"
     },
     {
       "path": "tests/auto-annotation-ui-smoke.mjs",
-      "sha256": "7bfb9f02d870c313ea57013bf129a5bc88d0bb3ebbf5458d32a226ef66d4a8a8"
+      "sha256": "2218baaea86c361d5a735ef527d0c32eea210fa67ee6d2004ae461d01602b54a"
     },
     {
       "path": "tests/biopython-codon.py",
@@ -464,27 +424,27 @@
     },
     {
       "path": "tests/browser-smoke.mjs",
-      "sha256": "2c2cc12967f75bbcf7f2e20014888b184cb7daf7971f906a6a68cea0ef3b32ec"
+      "sha256": "7c1f208fa5af68886b368034c8a4ddcd69bb9dc33343e663cc9fc0daed95900b"
     },
     {
       "path": "tests/catalog-export-ui-smoke.mjs",
-      "sha256": "8ea7eb35f1b8671249e691ffab4a71992cad946c2319521930da5eb9a29450fa"
+      "sha256": "43a7b49da0eb7423f9c4894b87911553f85538ff4aa94f3200fb5895b1438675"
     },
     {
       "path": "tests/catalog-export.test.mjs",
-      "sha256": "6ca4884fa23b52271742a1ee0aae017323a897120ae90b838966bdba640dd664"
+      "sha256": "7df4cf789fcc3fef12e91f8c3e4aa1b9098fc0f0207d9745cb4ef38fc04b6721"
     },
     {
       "path": "tests/cds-translation-ui-smoke.mjs",
-      "sha256": "8ea509893ebd926a828599c1b9211ecf4ca13db312eca2bde386045c4dfafbba"
+      "sha256": "4f14150937b67ad2fc2883bcc064207ed9f251b87e81625c2f6ff1100aac529b"
     },
     {
       "path": "tests/chatgpt-ui-smoke.mjs",
-      "sha256": "d828de3c13544378a6b6331beaeb5e28202fd36d3cd840b79e5266082cfdbae9"
+      "sha256": "018813511147368177e9751c4469c3f19b0af4353945e094fcb0c9833057b502"
     },
     {
       "path": "tests/cloning-design-ui-smoke.mjs",
-      "sha256": "e8cde6a7fb2e69cd398b271d930b7ad6b20655e7ba1220b62c45f3b9ffe9f1cf"
+      "sha256": "1b201dc4355eceabfd49b8b86df6fc3a23a57bfb7fd85e431370d6611b3e4559"
     },
     {
       "path": "tests/cloning-design.test.mjs",
@@ -496,7 +456,7 @@
     },
     {
       "path": "tests/codon-ui-smoke.mjs",
-      "sha256": "e1f7d1d8480b5b7ba55034e57fb359ff9e1a04b398f0fcc417147bc4825ae237"
+      "sha256": "7706bf2bf8a0d6200c9e15e80474a196b65567d8aad28603b4be1a66cfe062c6"
     },
     {
       "path": "tests/codon.test.mjs",
@@ -508,27 +468,39 @@
     },
     {
       "path": "tests/connected-ai-ui-smoke.mjs",
-      "sha256": "759c8596d0e4e2d1bc458373108d93954672a92245259d88f1cb7b2297cb0d3b"
+      "sha256": "88c4524c1a38138a4d7b5514390da7798a3a2f491d41f8bebd9681ef831dd85b"
     },
     {
       "path": "tests/continuous-sequence-ui-smoke.mjs",
-      "sha256": "054ba17a4823c5e8c6752884fb26f12bf260de2db36c7281bae32b2c03cd52ca"
+      "sha256": "1e53adb0e39cc8b241646835c90857a3096ebe3426c1501f33064eed9da358a6"
     },
     {
       "path": "tests/core.test.mjs",
-      "sha256": "f7ae3e5e6f10992e5fcb225319fdd4ab5a9cf926373d5e1e98eadbf65dfdc3e7"
+      "sha256": "67ff81a0e52d3e7aad2d3519b04afc48a1bf85086c7f12fee56d594bf1f5be22"
+    },
+    {
+      "path": "tests/default-example-ui-smoke.mjs",
+      "sha256": "a21f1e68895f3f581351183c0a7986e3c2e420a62f8a05cb81e14239bb28b896"
+    },
+    {
+      "path": "tests/default-example.test.mjs",
+      "sha256": "bd0b1734554efff3cc34ef683184adc4d8e758dc88ed88fb519f008613bc891e"
     },
     {
       "path": "tests/desktop-bridge-smoke.mjs",
-      "sha256": "54a517773e471b1136012bbf2760a78132fc84bf8fe72c73a9183e4811b8d5ca"
+      "sha256": "ce33e6ecff085a45a9e759823c26831c3707643f885b841f40f90bd385af180e"
     },
     {
       "path": "tests/desktop-launcher.test.mjs",
       "sha256": "7f6702b80c674f0cc3f6809a23b83edf314ae52a81bbbb24073d69a692545048"
     },
     {
+      "path": "tests/document-notes.test.mjs",
+      "sha256": "dae628963ec2e8c9f20b102032e0298499cf6fd8dee617b29ed191613731dee4"
+    },
+    {
       "path": "tests/editor-ui-smoke.mjs",
-      "sha256": "8e83c93261322e98693ac50c4cf07f2e7d902134c121c7f93fa88872a1d2893c"
+      "sha256": "d5e5a75edcb5cadc214d34c130cec644c8167bfd52e3ec62c54d082f82749e29"
     },
     {
       "path": "tests/enzyme-catalog.test.mjs",
@@ -536,7 +508,7 @@
     },
     {
       "path": "tests/enzyme-ui-smoke.mjs",
-      "sha256": "60adf1d2c9942bbfb580f25940b2e2175abfd94fd473575ca75ef2fa363bcfdf"
+      "sha256": "26df6bed120dda19d5cf715760dfbfa935a1f62dc248d8a183a5c7ef1c022f50"
     },
     {
       "path": "tests/fixtures/enzyme-reference.json",
@@ -551,6 +523,14 @@
       "sha256": "058bc63a9a9141699395b3efc43d13cc372f930d2d50bcb844239c583b8dcadf"
     },
     {
+      "path": "tests/fixtures/synthetic-plasmid.mjs",
+      "sha256": "acaf24638aa0b0587609aadc38f0782096a77c091b0d3987ad3cde91534481aa"
+    },
+    {
+      "path": "tests/fixtures/synthetic-test.gb",
+      "sha256": "631311f727b3be210fc42804f01e2227aa75adfc0bab2ef29218dcc7a2fe0042"
+    },
+    {
       "path": "tests/library-all.test.mjs",
       "sha256": "9fe8b4ed67add7122491bed58e62489ac113a16ae23329e014186821241a56cb"
     },
@@ -560,15 +540,15 @@
     },
     {
       "path": "tests/model-overview-ui-smoke.mjs",
-      "sha256": "e3c69970c856ac0599f97fc15727c0067ded379806b970d189398f7b44d9489c"
+      "sha256": "b9966a3e08dafd8b27b536a13b95ccb62ac641f0cbfb6e115bcc4f6b7a754294"
     },
     {
       "path": "tests/mutagenesis-ui-smoke.mjs",
-      "sha256": "c147edd15687ba04bd08838c01c736880db9e18478ab39b696e4548a2ce08600"
+      "sha256": "8c4e8a2ff15511c7d2633930757778f5529654f1acdd811f1076e43407f7780e"
     },
     {
       "path": "tests/mutagenesis.test.mjs",
-      "sha256": "c37e2408d2bc851b4964771a9eaa3bcc058e7838ce24da648a7c1968a05f52a0"
+      "sha256": "a0952b587142e9e7802d1748f1795d1d5e8512e6cc0fed67ec25ea2534665c5a"
     },
     {
       "path": "tests/plasmid-reference.mjs",
@@ -579,12 +559,16 @@
       "sha256": "e92e86ad730fd8090b11e02d35596b396e69d07137a4cfc201f44bbdb0fb5aa1"
     },
     {
+      "path": "tests/preview-031-ui-smoke.mjs",
+      "sha256": "a3b725c4237459781cf5a31d1a9ac9592a4564cd7ddb0576253af55f25a1be91"
+    },
+    {
       "path": "tests/primer-extension.test.mjs",
       "sha256": "8737dc70cec81136cb5fd2e49bd41336eb3b9610d602c59f39e901b2fe1be6db"
     },
     {
       "path": "tests/project.test.mjs",
-      "sha256": "f01898cf2fdc26df8716612985f7fc7a184d0de657ab2dafa388ba442b40d4bf"
+      "sha256": "a4ba318942325ca7ebf027edf0d4616fd61175734f0d10b84adb0f0e55ec72af"
     },
     {
       "path": "tests/protein-analysis.test.mjs",
@@ -592,7 +576,7 @@
     },
     {
       "path": "tests/protein-blast-ui-smoke.mjs",
-      "sha256": "b7ef1db5e565a8a66b8714d5479b08a2c96f0de00497d10c749169ef074f2793"
+      "sha256": "8455e4c5451a774d17c0c8fa1a253274170ceedfecd76529d85fe9867d459e65"
     },
     {
       "path": "tests/protein-reference.mjs",
@@ -600,7 +584,7 @@
     },
     {
       "path": "tests/protein-ui-smoke.mjs",
-      "sha256": "3a28200c167d1b8b1ee8968e6931d79f7cb48fc6db12014c58df93223c8c64de"
+      "sha256": "d6264d2a3d7b9e24c81cab633f5030ba36c0b9d57c3f2d020f80a69fa8758b8f"
     },
     {
       "path": "tests/protein.test.mjs",
@@ -616,11 +600,15 @@
     },
     {
       "path": "tests/refinement-ui-smoke.mjs",
-      "sha256": "dbc766bde2b8ca0c5fba2b83939ea9beba820eefb86765604649d16867af590a"
+      "sha256": "c9d633b021971576720954f1a2e440409c834ec3265de531d44ef7d99aa702f9"
+    },
+    {
+      "path": "tests/review-improvements-ui-smoke.mjs",
+      "sha256": "d6bd8ace943468c2689c0d977f67b28f324ea8e35be64bcb5a4553536c57467c"
     },
     {
       "path": "tests/selected-primer-ui-smoke.mjs",
-      "sha256": "b847f7d10e1de0f378a34050d999a1eae8f9c8e7d75f64f7510f36e56c4a7cec"
+      "sha256": "5025bca05f87c775b4b593a03851812f315141ab3ab955127359fd515c7f21c3"
     },
     {
       "path": "tests/selected-primer.test.mjs",
@@ -628,15 +616,15 @@
     },
     {
       "path": "tests/sequence-display.test.mjs",
-      "sha256": "8fefa1bba215bbf91d285225eadf2d27c4ee6477dbbb4ebcbb69500a7d5b92b0"
+      "sha256": "e4e72b6fdf6eb91f4839f6dc4d02f15d4e453cb626b880042a2c4fac6ab579e3"
     },
     {
       "path": "tests/sequence-selection.test.mjs",
-      "sha256": "3b2573c3311bd2ccbacc98ce8ca54e03fc216b3461ab26e0bdc66026c1982b74"
+      "sha256": "88a346b8ceb38491c4529095005ee8924f365fcb78141def7c2951e7f3e40d6d"
     },
     {
       "path": "tests/sequence-tools-ui-smoke.mjs",
-      "sha256": "e9a81118530d075ce2de68644ef9c455024eaa6d535f8cda3f5587cf5e6bc0dd"
+      "sha256": "1d5d4f979df4f7377c68cfb82dc5acbc27e60c88933815e0bcd9d2a4c9d9b7c6"
     },
     {
       "path": "tests/sequence-tools.test.mjs",
@@ -644,7 +632,7 @@
     },
     {
       "path": "tests/sequence-tracks-ui-smoke.mjs",
-      "sha256": "273204dd95add93355454ad5eea6d69bf0afc68cef2c4c6002f7d17ba305a7ef"
+      "sha256": "282b6ddba864865ca683725f46cf028de6937b73d42705589f403d069523a40d"
     },
     {
       "path": "tests/snapgene-reference.mjs",
@@ -652,7 +640,7 @@
     },
     {
       "path": "tests/ui-browser.mjs",
-      "sha256": "c6bf51c361ed682dd4a89350de4750d71e1ce2d8f193068b603f30d25106e64f"
+      "sha256": "6d497c00ad94b8c97324a9e5b20ab131b260085b8ea8f49b596ed31e3107e57c"
     },
     {
       "path": "tests/workflow-reference.mjs",
@@ -660,7 +648,7 @@
     },
     {
       "path": "tests/workflows-ui-smoke.mjs",
-      "sha256": "a880c3dfb499729fd8f7d064ae098620ae2a3d2d471bc29ad1d29a8729dd4b1f"
+      "sha256": "f61bd224e9a072f2476f1c23807b350b5ffcef9ef569c43ce175b776367f8263"
     },
     {
       "path": "tests/workflows.test.mjs",
@@ -668,15 +656,15 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.txt",
-      "sha256": "bf822b14c2f5bcc303a48c98e130af32aea15b3ae9665d02d722f0f206b08045"
+      "sha256": "43063df91192c61ced5ef21d53ecf4db53e340a56b06fc4bf1773607997bde3a"
     },
     {
       "path": "viewer/ai-tools.mjs",
-      "sha256": "41161b139d10243a0618b6bc763b4e36c25d0c70cc65db9c1d5970cb09f9cd81"
+      "sha256": "090f71dece904104111caac7ffda26caba0bf14d0ffd71fd87f2089ba37e1f1d"
     },
     {
       "path": "viewer/ai-ui.mjs",
-      "sha256": "9230d5d37ca0f76e9d5409335c3331273fdb7e62a0fb99316540a5a66c840227"
+      "sha256": "114a6642f19204f69689d320da401e1324c92f0987fa2d6881ca671c146a1cea"
     },
     {
       "path": "viewer/ai.mjs",
@@ -692,7 +680,7 @@
     },
     {
       "path": "viewer/app.mjs",
-      "sha256": "9f178dec379af30cab312b314bc0bdf6150a3d859ebe50c1754eaf3ad6d60203"
+      "sha256": "c6848d083ceeb59ec18c302389b4a255c3706e7d890294e3ed640ef75b859d57"
     },
     {
       "path": "viewer/assembly.mjs",
@@ -732,19 +720,23 @@
     },
     {
       "path": "viewer/core.mjs",
-      "sha256": "d0466424e0e6398a6acad13a551c5f102cd5125416926885081455ab69c28069"
+      "sha256": "289a4dd9a9ab775d985c0c11e663376964035a638ebd7d15933d92e54b94ea75"
     },
     {
-      "path": "viewer/demo.mjs",
-      "sha256": "a37857d90ed9427e07b3b8c0c4fc642dfa42aa02e3bc14d703f306ac6e66c2ee"
+      "path": "viewer/default-example.mjs",
+      "sha256": "570df5d601e29cd72001645ff3c986c016bcab2167194d0e81f6e91d6522471c"
     },
     {
       "path": "viewer/desktop.css",
-      "sha256": "0db13b613d8c4513fe691fc25771e2915a14f6ff4a5737d949211428e1fa0ce9"
+      "sha256": "c295656d9e162f8720057f26abc877e7035a7c2e7e5c2ee368e66248754cbe2e"
     },
     {
       "path": "viewer/dna-ends.mjs",
       "sha256": "1ed4b4e0b32530e22cbe193717f9ffe952111f45da817109eace2af8baf40393"
+    },
+    {
+      "path": "viewer/document-notes.mjs",
+      "sha256": "40e23b1d3a649c56146a428e5567688697ad46aca2e08a9b6959d965cd7fef67"
     },
     {
       "path": "viewer/domestication.mjs",
@@ -763,8 +755,12 @@
       "sha256": "7a95777da82d9745e90a30b58f311e5c80398b70bd1e0b3d6eef77119e613071"
     },
     {
+      "path": "viewer/floating-dialog.mjs",
+      "sha256": "ccc7842420ed17334039c1dda7a91a41520a68aa0f40e63c11ce520ad54d9350"
+    },
+    {
       "path": "viewer/index.html",
-      "sha256": "be963d9c43dc40ac07195b4ef7f825f6ffea5f7ea96b7bad396223aea15beb65"
+      "sha256": "b3f73cbe709faeb1cb28bbbf415507ded11410a1b559136b0d67267239c2dfd6"
     },
     {
       "path": "viewer/library.mjs",
@@ -780,15 +776,15 @@
     },
     {
       "path": "viewer/mutagenesis-ui.mjs",
-      "sha256": "0970cfe2a0da748b71e7da66086d306cfb0d25ccec7fc094cd91ff32d6afdb94"
+      "sha256": "947c6b2adcffe48f2f3acf4700168aba07771b990c3c930500171e0584902f75"
     },
     {
       "path": "viewer/mutagenesis.mjs",
-      "sha256": "25f22470d565d8cbca02ebec28d75bedefbd59c180fd10bdf01936b8df374c23"
+      "sha256": "7371792a152ba69af4f04c966d3e76eed5bb4d58b84b74dfac292fabe3b61253"
     },
     {
       "path": "viewer/plasmid-alignment.mjs",
-      "sha256": "a56f8c3ea9c95a25dd177e671a45c36c5747cccbb824c4ebd9eed93673073789"
+      "sha256": "5f4212a803836bd9cda7a2dd2473debf395a9dd8eb4205484547926d73e7d1ec"
     },
     {
       "path": "viewer/platform.mjs",
@@ -840,7 +836,7 @@
     },
     {
       "path": "viewer/sequence-display.mjs",
-      "sha256": "e9d047d1cac39d9140fb572c704e93186021ea1575305d04bb854b2d54370d66"
+      "sha256": "73cf0f459f337aa48ec286c1af6a7d87b414bcbac30a89d13403547563335942"
     },
     {
       "path": "viewer/sequence-editing.mjs",
@@ -848,7 +844,7 @@
     },
     {
       "path": "viewer/sequence-scroll.mjs",
-      "sha256": "76cff310f5b11ce0e960e1a3fc193e4462d93eee2f76c8da21c1e49b60d1925f"
+      "sha256": "6e0a40735363a9dfbb0f16beaf70d2e2801dea14573855d4e5329781a41c2c5b"
     },
     {
       "path": "viewer/sequence-selection.mjs",
@@ -860,19 +856,19 @@
     },
     {
       "path": "viewer/snapgene-export.mjs",
-      "sha256": "7e257e8336e77103b3eedefbf94712e13f5ae00daeb802ea5c43dedbeb4bc500"
+      "sha256": "3593c0a3ccb1040175fcd00c0ff53bd32db4220e5ff74b2ebd662436bfdcaf8b"
     },
     {
       "path": "viewer/style.css",
-      "sha256": "8b1f8c1efd2fd04b7d1144c662c6f93d3dad06be911963fabd683c7b3bc77c91"
+      "sha256": "51cf5d8eb22b94549d08255fe5e58c5230eef3f8e0e7e3441ba4537d32d6b332"
     },
     {
       "path": "viewer/whole-alignment-ui.mjs",
-      "sha256": "79fe7c2cdcb429ccfcb1197eb1606518752ec24b0d231dcde737ce3056c42317"
+      "sha256": "0a0ee3fb6b7b6f66100263027ef00a3d3924285cd3b0ae5617dbd37ef5fed7c0"
     },
     {
       "path": "viewer/workbench-ui.mjs",
-      "sha256": "4bafa1c6ce4f7304edb9545f53afc606cbeda1c892b11728cca6b11fcf973f11"
+      "sha256": "96467169862a8fcb0cf7ecb5d563f38a19744e04b763a81448eb6a364f48d108"
     },
     {
       "path": "viewer/workflow-common.mjs",

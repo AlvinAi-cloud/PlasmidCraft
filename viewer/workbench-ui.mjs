@@ -553,7 +553,7 @@ class Workbench {
       : doc.alignments?.[0] || null;
   }
   renderAlignment(doc) {
-    const modes = `<nav class="analysis-tabs" aria-label="Alignment workflows">${button("Sanger reads", "alignment-mode-reads")}${button("Whole plasmids", "alignment-mode-plasmids")}${button("Read assembly / consensus", "alignment-mode-consensus")}</nav>`;
+    const modes = `<nav class="analysis-tabs" aria-label="Alignment workflows">${button("Sanger reads", "alignment-mode-reads", `aria-pressed="${this.alignmentMode === "reads"}"`)}${button("Whole plasmids", "alignment-mode-plasmids", `aria-pressed="${this.alignmentMode === "plasmids"}"`)}${button("Read assembly / consensus", "alignment-mode-consensus", `aria-pressed="${this.alignmentMode === "consensus"}"`)}</nav>`;
     if (this.alignmentMode === "plasmids")
       return modes + this.whole.render(doc);
     if (this.alignmentMode === "consensus")
@@ -1133,6 +1133,12 @@ class Workbench {
             this.refresh();
           })
           .catch((error) => this.fail(error));
+      return true;
+    }
+    if (target.id === "whole-query-files") {
+      this.whole
+        .importQueries([...target.files])
+        .catch((error) => this.fail(error));
       return true;
     }
     if (target.id === "whole-alignment-file") {

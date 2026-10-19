@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium } from "./ui-browser.mjs";
+import { fixturePage, chromium } from "./ui-browser.mjs";
 import { serializeProject } from "../viewer/project.mjs";
 import { reverseComplement } from "../viewer/core.mjs";
 const browser = await chromium.launch({
@@ -9,7 +9,9 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1050 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1050 },
+});
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 const coding = "ATG" + "GCTGGTTACGAAGGCAAG".repeat(3) + "TAA";
@@ -90,13 +92,11 @@ async function aligned() {
 }
 try {
   await page.goto(process.env.PLASMIDCRAFT_URL || "http://127.0.0.1:4317");
-  await page
-    .locator("#file-input")
-    .setInputFiles({
-      name: "tracks.pcraft",
-      mimeType: "application/json",
-      buffer: Buffer.from(serializeProject(rec)),
-    });
+  await page.locator("#file-input").setInputFiles({
+    name: "tracks.pcraft",
+    mimeType: "application/json",
+    buffer: Buffer.from(serializeProject(rec)),
+  });
   await page.waitForFunction(
     () =>
       document.querySelector("#document-name").textContent ===
@@ -136,6 +136,54 @@ try {
   );
   await page.locator("#sequence-group").selectOption("3");
   await aligned();
+  checks++;
+  for (const name of ["Reporter CDS", "Reverse CDS"]) {
+    const tracks = page.locator(`[aria-label="Inline CDS ${name}"]`);
+    const numbers = await tracks
+      .locator("[data-residue-number]")
+      .evaluateAll((nodes) => nodes.map((n) => +n.dataset.residueNumber));
+    assert.deepEqual(
+      numbers.sort((a, b) => a - b),
+      [1, 6, 11, 16],
+    );
+    const alignedNumbers = await tracks.evaluateAll((nodes) =>
+      nodes.flatMap((track) =>
+        [...track.querySelectorAll("[data-residue-number]")].map((number) => {
+          const letter = track.querySelector(
+            `[data-residue="${number.dataset.residueNumber}"]`,
+          );
+          const a = number.getBoundingClientRect(),
+            b = letter.getBoundingClientRect();
+          return (
+            Math.abs(a.x + a.width / 2 - b.x - b.width / 2) < 1 &&
+            a.y >= b.bottom
+          );
+        }),
+      ),
+    );
+    assert.ok(
+      alignedNumbers.every(Boolean),
+      "CDS numbers align below their amino acids on both strands",
+    );
+  }
+  const proteinAlignment = await page
+    .locator(".sequence-protein-track .protein-residue")
+    .evaluateAll((nodes) =>
+      nodes.map((letter) => {
+        const middle = letter.dataset.codonBases.split(",")[1];
+        const base = document.querySelector(`[data-position="${middle}"]`);
+        const a = letter.getBoundingClientRect(),
+          b = base.getBoundingClientRect();
+        return {
+          residue: letter.dataset.residue,
+          delta: Math.abs(a.x + a.width / 2 - b.x - b.width / 2),
+        };
+      }),
+    );
+  assert.ok(
+    proteinAlignment.every((p) => p.delta < 1),
+    JSON.stringify(proteinAlignment),
+  );
   checks++;
   await screenshot("sequence-primers-codons");
   await page.locator("#sequence-frames").selectOption("six");

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { parseProject, serializeProject } from "../viewer/project.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const source = {
   name: "Protein-tools-test",
   description: "Synthetic circular protein fixture",
@@ -51,7 +51,7 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({
+const page = await fixturePage(browser, {
   viewport: { width: 1440, height: 1000 },
   acceptDownloads: true,
 });

@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import { parseProject, serializeProject } from "../viewer/project.mjs";
 import { parseLibrary } from "../viewer/library.mjs";
 import { reverseComplement } from "../viewer/core.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const rec = (name, sequence, topology = "linear") => ({
   name,
   description: "Synthetic workflow UI fixture",
@@ -50,7 +50,7 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({
+const page = await fixturePage(browser, {
   viewport: { width: 1440, height: 1000 },
   acceptDownloads: true,
 });
@@ -402,7 +402,7 @@ try {
   );
   await page.unroute("**/workflow-worker.mjs");
   checks++;
-  const storagePage = await browser.newPage({
+  const storagePage = await fixturePage(browser, {
     viewport: { width: 1440, height: 1000 },
     acceptDownloads: true,
   });

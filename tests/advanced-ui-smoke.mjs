@@ -4,14 +4,14 @@ import { serializeProject, parseProject } from "../viewer/project.mjs";
 import { reverseComplement } from "../viewer/core.mjs";
 import { workflowDemoRecords } from "../viewer/workflow-demo.mjs";
 import { alignmentReport } from "../viewer/alignment.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({
+const page = await fixturePage(browser, {
   viewport: { width: 1440, height: 1000 },
   acceptDownloads: true,
 });
@@ -106,6 +106,7 @@ try {
   assert.equal(aligned.comparisons[0].result.strand, -1);
   assert.equal(aligned.comparisons[0].result.matches, 720);
   checks++;
+  await page.locator("#whole-advanced > summary").click();
   await click("whole-flip");
   assert.equal(await page.locator("#whole-strand").inputValue(), "1");
   await click("whole-settings");

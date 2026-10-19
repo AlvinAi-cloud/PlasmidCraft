@@ -4,14 +4,14 @@ import { COMMON_FEATURE_LIBRARY as catalog } from "../viewer/common-features.mjs
 import { serializeProject, parseProject } from "../viewer/project.mjs";
 import { snapgeneExport } from "../viewer/snapgene-export.mjs";
 import { parseSnapgene } from "../viewer/core.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({
+const page = await fixturePage(browser, {
   viewport: { width: 1440, height: 1000 },
   acceptDownloads: true,
 });

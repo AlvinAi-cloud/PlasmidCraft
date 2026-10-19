@@ -1,9 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { ConnectedWorkspace, connectedReply } from "../viewer/ai-tools.mjs";
-import { demoRecord } from "../viewer/demo.mjs";
+import { reverseComplement, featureSequence } from "../viewer/core.mjs";
+import { optimizeProtein } from "../viewer/codon-optimization.mjs";
+import { syntheticTestRecord } from "./fixtures/synthetic-plasmid.mjs";
 import { translateCds } from "../viewer/protein.mjs";
-const source = () => ({ ...demoRecord(), id: "original" });
+const source = () => ({ ...syntheticTestRecord(), id: "original" });
 test("connected local operations create a named copy without modifying source", () => {
   const r = source(),
     before = structuredClone(r),
@@ -185,4 +187,128 @@ test("multiple explicitly created DNA results retain their names", () => {
     w.finish().map((r) => r.name),
     ["First", "Second"],
   );
+});
+
+test("connected envelopes recover prose, fences and identical duplicates without replaying operations", () => {
+  const reply = {
+    message: "Creating the copy",
+    operations: [{ tool: "copy_document", arguments: { name: "Copy" } }],
+    continue: false,
+  };
+  const json = JSON.stringify(reply);
+  for (const text of [
+    json,
+    `\`\`\`json\n${json}\n\`\`\``,
+    `${json}\n${json}`,
+    `I will apply this:\n${json}`,
+  ]) {
+    assert.deepEqual(connectedReply(text), reply);
+  }
+  assert.throws(
+    () =>
+      connectedReply(json + JSON.stringify({ ...reply, message: "Different" })),
+    /Invalid connected/,
+  );
+  assert.throws(() => connectedReply(json.slice(0, -1)), /Invalid connected/);
+  assert.throws(
+    () => connectedReply('{"message":"x","operations":['),
+    /Invalid connected/,
+  );
+});
+
+test("CDS edits verify original residue numbering, host codons and final translation on both strands", () => {
+  // Synthetic fixture for a W243T substitution plus a 17-to-10-residue loop replacement.
+  const protein =
+    "M" +
+    "A".repeat(241) +
+    "W" +
+    "A".repeat(60) +
+    "D" +
+    "G".repeat(17) +
+    "E" +
+    "A".repeat(12);
+  const codons = { M: "ATG", A: "GCT", W: "TGG", D: "GAT", G: "GGT", E: "GAA" };
+  const coding = [...protein].map((a) => codons[a]).join("") + "TAA";
+  for (const strand of [1, -1]) {
+    const r = {
+      name: "DAAO test",
+      sequence:
+        "ACGT".repeat(20) +
+        (strand === 1 ? coding : reverseComplement(coding)) +
+        "ACGT".repeat(20),
+      topology: "circular",
+      features: [
+        {
+          id: "cds",
+          name: "M5 DAAO(Correct)",
+          type: "CDS",
+          strand,
+          segments: [{ start: 80, end: 80 + coding.length }],
+          qualifiers: {},
+        },
+      ],
+      primers: [],
+      comments: [],
+      warnings: [],
+    };
+    const original = structuredClone(r),
+      w = new ConnectedWorkspace(r, { includeDna: true });
+    const inspected = w.run("inspect_cds", { featureId: "M5 DAAO(Correct)" });
+    assert.equal(inspected.protein, protein);
+    assert.equal(inspected.protein[242], "W");
+    assert.equal(inspected.protein[303], "D");
+    assert.equal(inspected.protein[321], "E");
+    assert.equal(
+      new ConnectedWorkspace(r).run("inspect_cds", { featureId: "cds" })
+        .protein,
+      undefined,
+    );
+    const edits = [
+      {
+        start: 305,
+        end: 321,
+        expected: "G".repeat(17),
+        replacement: "ASGKGSKTKP",
+      },
+      { start: 243, end: 243, expected: "W", replacement: "T" },
+    ];
+    assert.throws(
+      () =>
+        w.run("edit_cds", {
+          featureId: "cds",
+          host: "ecoli-w3110",
+          edits: [{ ...edits[1], expected: "A" }],
+        }),
+      /expected amino/,
+    );
+    w.run("copy_document", { name: "DAAO edited" });
+    const result = w.run("edit_cds", {
+      featureId: "cds",
+      host: "ecoli-w3110",
+      edits,
+    });
+    const edited = w.finish()[0];
+    const expected =
+      protein.slice(0, 242) +
+      "T" +
+      protein.slice(243, 304) +
+      "ASGKGSKTKP" +
+      protein.slice(321);
+    assert.equal(result.verified, true);
+    assert.equal(translateCds(edited, edited.features[0]).protein, expected);
+    assert.equal(edited.sequence.length, r.sequence.length - 21);
+    const dna = featureSequence(edited, edited.features[0]);
+    assert.equal(
+      dna.slice(242 * 3, 243 * 3),
+      optimizeProtein("T", { host: "ecoli-w3110" }).sequence,
+    );
+    assert.equal(
+      dna.slice(304 * 3, 314 * 3),
+      optimizeProtein("ASGKGSKTKP", { host: "ecoli-w3110" }).sequence,
+    );
+    assert.equal(dna.slice(0, 242 * 3), coding.slice(0, 242 * 3));
+    assert.equal(dna.slice(243 * 3, 304 * 3), coding.slice(243 * 3, 304 * 3));
+    assert.equal(dna.slice(314 * 3), coding.slice(321 * 3));
+    assert.deepEqual(r, original);
+  }
 });

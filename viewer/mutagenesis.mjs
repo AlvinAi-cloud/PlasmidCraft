@@ -161,15 +161,23 @@ function chooseArm(
   { armMin, armMax, targetTm, conditions },
 ) {
   let best;
+  const matches = [];
   for (let length = armMin; length <= armMax; length++) {
     const dna = circularSlice(source, reverse ? at - length : at, length);
     const sequence = reverse ? reverseComplement(dna) : dna;
+    if (/[^ACGT]/.test(sequence)) continue;
     const tm = meltingTemperature(sequence, conditions);
     const score = Math.abs(tm - targetTm);
+    matches.push({ sequence, length, tm, score });
     if (!best || score < best.score) best = { sequence, length, tm, score };
   }
+  if (!best)
+    throw new Error(
+      `${reverse ? "Reverse" : "Forward"} primer binding region near base ${mod(at, source.length) + 1} contains unknown or mixed bases. Confirm those bases, reduce the minimum annealing length, or choose a different edit position. Unknown bases elsewhere in the plasmid are allowed.`,
+    );
   return {
     ...best,
+    candidates: matches,
     ...primerProperties({ sequence: best.sequence }, conditions),
   };
 }
@@ -217,9 +225,13 @@ function designInverseMutagenesis(
     throw new Error(
       "Use a circular plasmid DNA document. Extract a DNA copy before editing Sanger reads.",
     );
-  if (!/^[ACGT]+$/.test(source.sequence) || source.sequence.length > 1_000_000)
+  if (!/^[ACGTRYSWKMBDHVN]+$/.test(source.sequence))
     throw new Error(
-      "Use a known A/C/G/T plasmid sequence of at most 1,000,000 bases.",
+      "The plasmid must contain IUPAC DNA letters (A/C/G/T, N or mixed-base symbols). Open a DNA document before designing primers.",
+    );
+  if (source.sequence.length > 1_000_000)
+    throw new Error(
+      "Mutagenic primer design supports plasmids up to 1,000,000 bases.",
     );
   if (
     !["dna", "amino", "codon"].includes(mode) ||
@@ -951,6 +963,13 @@ export function designMutagenesis(source, options = {}) {
   if (!["inverse", "overlap"].includes(mode))
     throw new Error("Choose overlap assembly or non-overlapping inverse PCR.");
   const plan = designInverseMutagenesis(source, options);
+  const ambiguous = [...source.sequence].filter(
+    (base) => !"ACGT".includes(base),
+  ).length;
+  if (ambiguous)
+    plan.warnings.push(
+      `The template contains ${ambiguous} unknown or mixed bases. They are preserved in retained DNA; primer annealing arms and assembly overlaps use only confirmed A/C/G/T bases.`,
+    );
   plan.circularization = mode;
   if (mode === "inverse") return plan;
   const min = options.overlapMin ?? 20,
@@ -968,51 +987,184 @@ export function designMutagenesis(source, options = {}) {
     throw new Error(
       "Use overlap lengths of 15–60 bases and an overlap Tm target of 35–80 °C.",
     );
-  const retained = source.sequence.length - plan.span.length;
-  const candidates = [];
-  for (let length = min; length <= Math.min(max, retained); length++) {
-    const sequence = circularSlice(
-      source.sequence,
-      plan.span.start - length,
-      length,
+  const armSettings = {
+    armMin: options.armMin ?? 18,
+    armMax: options.armMax ?? 35,
+    targetTm: options.targetTm ?? 60,
+    conditions: plan.conditions,
+  };
+  const forwardArms = chooseArm(
+    source.sequence,
+    mod(plan.span.start + plan.span.length, source.sequence.length),
+    false,
+    armSettings,
+  ).candidates;
+  const reverseArms = chooseArm(
+    source.sequence,
+    plan.span.start,
+    true,
+    armSettings,
+  ).candidates;
+  const pairs = forwardArms
+    .flatMap((f) =>
+      reverseArms.map((r) => ({
+        f,
+        r,
+        score: f.score + r.score + 2 * Math.abs(f.tm - r.tm),
+      })),
+    )
+    .sort((a, b) => a.score - b.score);
+  for (const v of plan.variants)
+    for (const [direction, arm] of [
+      ["forward", pairs[0].f],
+      ["reverse", pairs[0].r],
+    ]) {
+      v[direction].annealing = arm.sequence;
+      v[direction].tm = arm.tm;
+    }
+  plan.warnings = plan.warnings.filter(
+    (w) =>
+      !/Annealing-arm Tm difference exceeds|annealing arm has multiple|Annealing arms have potential|Forward arm:|Reverse arm:/.test(
+        w,
+      ),
+  );
+  plan.warnings.push(...annealingWarnings(source, pairs[0].f, pairs[0].r));
+  if (Math.abs(pairs[0].f.tm - pairs[0].r.tm) > 5)
+    plan.warnings.push(
+      "Annealing-arm Tm difference exceeds 5 °C; extend the arm-length range or adjust the target Tm.",
     );
-    const tm = meltingTemperature(sequence, plan.conditions);
-    const gc =
-      ([...sequence].filter((c) => c === "G" || c === "C").length / length) *
-      100;
-    candidates.push({
-      sequence,
-      length,
-      tm,
-      gc,
-      score:
-        Math.abs(tm - target) + (gc < 25 || gc > 75 ? 5 : 0) + length * 0.01,
-    });
+  const retained = source.sequence.length - plan.span.length;
+  const replacementLength = plan.variants[0].replacement.length;
+  const candidates = [];
+  // An overlap can straddle the edited sequence. Its start is relative to
+  // the replacement: negative values use upstream DNA, and its end may use
+  // downstream DNA. Both primers keep their exact original 3′ binding sites.
+  for (let length = min; length <= Math.min(max, retained); length++) {
+    for (let start = -length; start <= replacementLength; start++) {
+      const end = start + length;
+      if (end < 0 || end > replacementLength + length) continue;
+      const upstream = Math.max(0, -start),
+        downstream = Math.max(0, end - replacementLength);
+      if (upstream + downstream > retained) continue;
+      const tails = plan.variants.map((v) => {
+        const left = circularSlice(
+          source.sequence,
+          plan.span.start - upstream,
+          upstream,
+        );
+        const right = circularSlice(
+          source.sequence,
+          plan.span.start + plan.span.length,
+          downstream,
+        );
+        const forward = left + v.replacement.slice(Math.max(0, start));
+        const reverseForward =
+          v.replacement.slice(0, Math.min(end, replacementLength)) + right;
+        const junction = left + v.replacement + right;
+        return {
+          forward,
+          reverse: reverseComplement(reverseForward),
+          homology: junction.slice(
+            Math.max(0, start),
+            Math.max(0, start) + length,
+          ),
+        };
+      });
+      const sequence = tails[0].homology;
+      if (
+        sequence.length !== length ||
+        /[^ACGT]/.test(sequence) ||
+        tails.some((t) => t.homology !== sequence)
+      )
+        continue;
+      const tm = meltingTemperature(sequence, plan.conditions);
+      const gc =
+        ([...sequence].filter((c) => c === "G" || c === "C").length / length) *
+        100;
+      const imbalance = Math.max(
+        ...tails.map((t, i) =>
+          Math.abs(
+            t.forward.length +
+              plan.variants[i].forward.annealing.length -
+              t.reverse.length -
+              plan.variants[i].reverse.annealing.length,
+          ),
+        ),
+      );
+      candidates.push({
+        sequence,
+        length,
+        tm,
+        gc,
+        startInReplacement: start,
+        endInReplacement: end,
+        tails,
+        score:
+          Math.abs(tm - target) +
+          imbalance * 0.65 +
+          (gc < 25 || gc > 75 ? 5 : 0) +
+          length * 0.01,
+      });
+    }
   }
   if (!candidates.length)
     throw new Error(
-      "Not enough retained template for the requested overlap. Reduce the overlap length.",
+      "No confirmed A/C/G/T assembly overlap fits around the edit. Confirm unknown bases near that junction, reduce the overlap length, or choose non-overlapping inverse PCR with ligation / KLD.",
     );
   candidates.sort((a, b) => a.score - b.score);
-  const { score, ...overlap } = candidates[0];
+  const { score, tails, ...overlap } = candidates[0];
   plan.overlap = overlap;
-  for (const v of plan.variants) {
-    v.forward.tail = overlap.sequence + v.forward.tail;
-    v.forward.sequence = v.forward.tail + v.forward.annealing;
-  }
+  plan.variants.forEach((v, i) => {
+    v.forward.tail = tails[i].forward;
+    v.reverse.tail = tails[i].reverse;
+    for (const direction of ["forward", "reverse"])
+      v[direction].sequence = v[direction].tail + v[direction].annealing;
+  });
   plan.pcrProductLength =
     (plan.productLength ?? source.sequence.length) + overlap.length;
-  plan.method = `Overlap inverse PCR followed by Gibson/HiFi circularization. The forward 5′ tail adds ${overlap.length} bp of exact upstream homology plus the edited span. The PCR product has repeated terminal homology; assembly removes one overlap copy. Exact 3′ annealing-arm Tm and overlap Tm are calculated separately. Template removal and reaction conditions follow the selected assembly protocol.`;
+  plan.warnings = plan.warnings.filter(
+    (w) => !/A forward oligo exceeds/.test(w),
+  );
+  plan.method = `Overlap inverse PCR followed by Gibson/HiFi circularization. Added sequence is distributed between both 5′ tails to balance full oligo lengths, with ${overlap.length} bp of exact terminal homology. Assembly removes one overlap copy. PCR annealing-arm Tm is calculated separately from overlap Tm; equal oligo length does not imply equal PCR annealing temperature.`;
   plan.references = [
     "https://www.neb.com/en-us/tools-and-resources/usage-guidelines/optimization-tips-for-nebuilder-hifi-dna-assembly-and-neb-gibson-assembly",
   ];
+  if (
+    plan.variants.some(
+      (v) =>
+        Math.abs(v.forward.sequence.length - v.reverse.sequence.length) > 10,
+    )
+  )
+    plan.warnings.push(
+      "Full oligo lengths differ by more than 10 nt: the required exact overlap or mixed-base design prevents a well-balanced pair. Consider separate edit rounds or a different overlap range.",
+    );
+  for (const [name, arm] of [
+    ["Forward", pairs[0].f],
+    ["Reverse", pairs[0].r],
+  ]) {
+    plan.warnings.push(
+      ...primerProperties(
+        { sequence: arm.sequence },
+        plan.conditions,
+      ).warnings.map((w) => `${name} arm: ${w}`),
+    );
+    if (Math.abs(arm.tm - armSettings.targetTm) > 5)
+      plan.warnings.push(
+        `${name} annealing Tm differs from its target by more than 5 °C.`,
+      );
+  }
   if (Math.abs(overlap.tm - target) > 5)
     plan.warnings.push(
       "The best overlap Tm differs from its target by more than 5 °C; review the homology range.",
     );
-  if (plan.variants.some((v) => v.forward.sequence.length > 80))
+  if (
+    plan.variants.some(
+      (v) =>
+        Math.max(v.forward.sequence.length, v.reverse.sequence.length) > 80,
+    )
+  )
     plan.warnings.push(
-      "A complete forward oligo exceeds 80 nt after adding homology; review synthesis and consider a staged design.",
+      "A complete oligo exceeds 80 nt after adding homology; review synthesis and consider a staged design.",
     );
   plan.warnings.push(
     "Overlap primers require a homology-assembly workflow, rather than the non-overlapping Q5/KLD workflow. Complementary overlap sequences may form primer dimers; review full-oligo interactions and protocol conditions.",
@@ -1020,28 +1172,33 @@ export function designMutagenesis(source, options = {}) {
   return plan;
 }
 function overlapProduct(source, design, variant) {
-  const product =
-    variant.replacement +
-    circularSlice(
-      source.sequence,
-      design.span.start + design.span.length,
-      source.sequence.length - design.span.length,
-    );
-  if (!design.overlap) return product;
+  const retained = circularSlice(
+    source.sequence,
+    design.span.start + design.span.length,
+    source.sequence.length - design.span.length,
+  );
+  if (!design.overlap) return variant.replacement + retained;
   const h = design.overlap.sequence;
+  const product =
+    variant.forward.tail + retained + reverseComplement(variant.reverse.tail);
   if (
     design.overlap.length !== h.length ||
+    !product.startsWith(h) ||
     !product.endsWith(h) ||
-    variant.forward.tail !== h + variant.replacement ||
+    product.length !==
+      retained.length + variant.replacement.length + h.length ||
     variant.forward.sequence !==
       variant.forward.tail + variant.forward.annealing ||
     variant.reverse.sequence !==
-      variant.reverse.tail + variant.reverse.annealing
+      variant.reverse.tail + variant.reverse.annealing ||
+    !(variant.replacement + retained)
+      .repeat(2)
+      .includes(product.slice(h.length))
   )
     throw new Error(
       "The primer overlap no longer reconstructs the designed amplicon. Preview again.",
     );
-  return h + product;
+  return product;
 }
 export function mutagenesisRecord(source, design, index = 0) {
   const record = buildMutagenesisRecord(source, design, index);

@@ -1,31 +1,30 @@
-# PlasmidCraft 0.3
+# PlasmidCraft 0.31
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
-First public test release. Source and installer packages are versioned **0.3.0**.
+Desktop test release. Source and installer packages are versioned **0.31.0**.
 
 An independent desktop workspace for plasmid viewing, sequence editing, protein analysis and cloning design. Built with JavaScript, Rust and Tauri 2. The application embeds its interface and works without Node.js, Python or a local web server.
 
-![PlasmidCraft map](docs/screenshots/0.3/map.png)
+![PlasmidCraft map](docs/screenshots/0.31/map.png)
 
 ## Install
 
 Use the package matching your computer from the release assets:
-https://github.com/AlvinAi-cloud/PlasmidCraft-0.3/releases/tag/v0.3.0
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
-| Mac Apple Silicon | `PlasmidCraft-0.3.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
-| Mac Intel | `PlasmidCraft-0.3.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
-| Windows | `PlasmidCraft-0.3.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
+| Mac Apple Silicon | `PlasmidCraft-0.31.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
+| Mac Intel | `PlasmidCraft-0.31.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
+| Windows | `PlasmidCraft-0.31.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
 
-Mac: open the disk image and drag **PlasmidCraft 0.3** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
+Mac: open the disk image and drag **PlasmidCraft 0.31** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
 
-**0.3 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
+**0.31 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
 
 ## Features
 
-- Circular/linear maps with an optional tight curved-label publication layout that hides enzyme markings when activated, a Common enzymes group with optional custom Map selections, a continuous scrolling Sequence view with strand-specific primer letters, mismatch highlights, separate 5′ tails, codon blocks and optional reading frames in one-letter or three-letter notation, a clickable annotation overview pinned below Map and Sequence, centered annotation navigation, packed non-overlapping CDS lanes, linked DNA/protein selection with copy/FASTA choices, feature/primer lists, restriction sites, six-frame translation, ORFs, direct sequence editing and branching undo history.
+- Circular/linear maps with an optional tight curved-label publication layout that hides enzyme markings when activated, a Common enzymes group with optional custom Map selections, a width-adaptive continuous scrolling Sequence view with CDS residue numbering every five residues with strand-specific primer letters, mismatch highlights, separate 5′ tails, codon blocks and optional reading frames in one-letter or three-letter notation, a clickable annotation overview pinned below Map and Sequence, centered annotation navigation, packed non-overlapping CDS lanes, linked DNA/protein selection with copy/FASTA choices, feature/primer lists, restriction sites, six-frame translation, ORFs, direct sequence editing and branching undo history.
 - GenBank, DNA FASTA/text, SnapGene `.dna`, Sanger `.ab1`, native `.pcraft` documents and protein FASTA/text/`.pcprotein` import. Protein-only imports are available under File → New from Pasted Protein and Tools → Protein Documents.
 - Public feature catalog with 68 entries and per-entry sources, editable user libraries, and reviewed annotation matching.
 - 407 enzyme entries from checked NEB and Thermo Fisher tables; 377 modeled double-strand cleavage patterns and 18 Golden Gate sequence-design choices. The Common enzymes group matches the map priority list; select the common set explicitly or clear custom map selections independently of digest prediction. No enzymes are preselected; the default map uses an automatic single-cutter display. Special enzymes remain recognition-only where cleavage is not modeled.
@@ -35,12 +34,14 @@ Mac: open the disk image and drag **PlasmidCraft 0.3** to Applications. Windows:
 - Gibson and Golden Gate design, primer tails, prepared backbones/modules, junction previews, sequence validation and saved design drafts.
 - Single/dual-host codon optimization, protein-to-DNA conversion, and local protein molecular weight, pI, residue composition and A280 estimates.
 - Feature matching can search all libraries at once and merge equivalent hits while retaining source names and aliases.
-- Optional NCBI BLAST submission and a docked AI assistant beside the inspector, with Internal AI Operations and External AI modes. Connected AI runs validated local tools on copies and opens new unsaved designs, with operation summaries and locally saved conversation history; External AI retains prompt copying and explicit JSON proposal review. Configure accounts through AI → Accounts and Models…; provider/model preferences are remembered locally, and API-key entry loads a provider model picker automatically. Review outgoing data before sending. The Mac app can remember API keys in Keychain and reconnect on startup; ChatGPT account integration depends on provider eligibility and has not been validated against a live account for this release.
+- Optional NCBI BLAST submission and a docked AI assistant beside the inspector, with Internal AI Operations and External AI modes. Connected AI accepts direct requests, displays newest conversation messages first, and runs validated local tools on copies and opens new unsaved designs, with operation summaries and locally saved conversation history; External AI retains prompt copying and explicit JSON proposal review. Configure accounts through AI → Accounts and Models…; provider/model preferences are remembered locally, and API-key entry loads a provider model picker automatically. Review outgoing data before sending. The Mac app can remember API keys in Keychain and reconnect on startup; ChatGPT account integration depends on provider eligibility and has not been validated against a live account for this release.
 - `.pcraft` saves preserve full supported document state. GenBank/FASTA/SVG and a basic, independently implemented SnapGene-compatible `.dna` exporter provide exchange formats. The `.dna` exporter has explicit limitations; it is not vendor certified.
 
 Native saves use a temporary file and atomic replacement, restricted to destinations chosen through system dialogs. Unsaved-change warnings protect normal document/window closing. There is no automatic recovery of unsaved work after a crash: save documents and library backups regularly.
 
 ## Start designing
+
+The app opens the supplied **pET-21b(+)** plasmid (5,442 bp) by default. Its source file is in `examples/pET-21b(+).dna`.
 
 Open a sequence using **File → Open Sequence**. Use **View** for panels/lists, **Edit** for annotation and DNA changes, and **Tools** for analysis and design. To compare plasmids, open both and choose **Tools → Align Whole Plasmids**. Right-click a CDS for protein analysis, codon optimization or protein BLAST. Load synthetic workflow examples from Help to try PCR, Gibson and Golden Gate.
 

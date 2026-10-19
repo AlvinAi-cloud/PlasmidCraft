@@ -1,14 +1,16 @@
 // Simulated native OAuth UI: no real account, credential or inference request.
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;
@@ -234,6 +236,8 @@ try {
   assert.equal(await page.locator("#ai-model").inputValue(), "");
   await page.locator("#ai-model").selectOption("model-oaiapp_first");
   checks++;
+  await click("navigate-design");
+  await page.locator("#ai-goal").fill("Review the current plasmid");
   await click("send");
   await page.waitForFunction(
     () =>

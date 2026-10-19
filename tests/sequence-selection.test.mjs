@@ -24,13 +24,13 @@ test("non-overlapping CDSs share a lane and overlapping CDSs use another, separa
   const base = sequenceDisplayOffsets(60)[1];
   assert.equal(
     sequenceDisplayOffsets(60, { cds: features.slice(0, 2) })[1],
-    base + 42,
+    base + 56,
   );
   assert.equal(
     sequenceDisplayOffsets(60, {
       cds: [...features.slice(0, 2), track("r", 40, 58, -1)],
     })[1],
-    base + 84,
+    base + 112,
   );
 });
 test("joined CDS lanes use actual exon spans instead of occupying the intron", () => {

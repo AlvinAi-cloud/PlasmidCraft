@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import {
   designMutagenesis,
   mutagenesisRecord,
+  mutagenesisPcrRecord,
+  mutagenesisPrimers,
   aminoAcidCodonPool,
   expandedAminoAcidCodon,
   expandCodon,
@@ -297,7 +299,7 @@ test("invalid inputs, overlapping sites, unsupported CDSs and excessive design s
     /exception/,
   );
 });
-test("limits reject invalid thermodynamics, unknown template bases and unbounded pools", () => {
+test("limits reject invalid thermodynamics, unresolved primer-binding bases and unbounded pools", () => {
   const r = record(),
     edits = [{ position: 10, replacement: "T" }];
   assert.throws(() => designMutagenesis(r, { edits, armMin: 10 }), /15–45/);
@@ -308,7 +310,7 @@ test("limits reject invalid thermodynamics, unknown template bases and unbounded
         { ...r, sequence: "N" + r.sequence.slice(1) },
         { edits },
       ),
-    /known A\/C\/G\/T/,
+    /primer binding region.*unknown or mixed bases/,
   );
   const c = coding({
     segments: [{ start: 150, end: 183 }],
@@ -591,7 +593,11 @@ test("overlap assembly reconstructs substitutions, insertions and deletions with
           pcr.sequence.slice(h.length),
         ),
       );
-      assert.equal(primers[0].tailSequence, h + d.variants[0].replacement);
+      assert.equal(primers[0].tailSequence, d.variants[0].forward.tail);
+      assert.equal(primers[1].tailSequence, d.variants[0].reverse.tail);
+      assert.ok(
+        Math.abs(primers[0].sequence.length - primers[1].sequence.length) <= 4,
+      );
       const simulated = pcrProducts(r, primers[0], primers[1]);
       assert.ok(
         simulated.products.some(
@@ -626,5 +632,100 @@ test("overlap mutagenesis supports degenerate variants and guards tampered homol
         overlapMin: 10,
       }),
     /15–60/,
+  );
+});
+
+test("unknown template bases outside mutagenic arms are retained in inverse and overlap products", () => {
+  const r = record();
+  r.sequence = r.sequence.slice(0, 450) + "NNRY" + r.sequence.slice(454);
+  const replacement = r.sequence[199] === "A" ? "T" : "A";
+  for (const circularization of ["inverse", "overlap"]) {
+    const before = structuredClone(r);
+    const plan = designMutagenesis(r, {
+      circularization,
+      edits: [{ position: 200, replacement }],
+    });
+    assert.match(plan.warnings.join(" "), /4 unknown or mixed bases/);
+    for (const arm of [
+      plan.variants[0].forward.annealing,
+      plan.variants[0].reverse.annealing,
+    ])
+      assert.match(arm, /^[ACGT]+$/);
+    const result = mutagenesisRecord(r, plan);
+    assert.equal(
+      result.sequence,
+      r.sequence.slice(0, 199) + replacement + r.sequence.slice(200),
+    );
+    assert.deepEqual(r, before);
+  }
+});
+test("uncertain primer arms and assembly overlaps explain their local blocking positions", () => {
+  const r = record();
+  const replacement = r.sequence[199] === "A" ? "T" : "A";
+  const uncertain = (at) => ({
+    ...r,
+    sequence: r.sequence.slice(0, at) + "N" + r.sequence.slice(at + 1),
+  });
+  assert.throws(
+    () =>
+      designMutagenesis(uncertain(202), {
+        edits: [{ position: 200, replacement }],
+      }),
+    /Forward primer binding region near base 201/,
+  );
+  assert.throws(
+    () =>
+      designMutagenesis(
+        {
+          ...r,
+          sequence:
+            r.sequence.slice(0, 175) +
+            "N" +
+            r.sequence.slice(176, 224) +
+            "N" +
+            r.sequence.slice(225),
+        },
+        {
+          edits: [{ position: 200, replacement }],
+          armMin: 18,
+          armMax: 20,
+          circularization: "overlap",
+          overlapMin: 60,
+          overlapMax: 60,
+        },
+      ),
+    /No confirmed A\/C\/G\/T assembly overlap/,
+  );
+});
+
+test("balanced overlap primers distribute a long insertion and preserve PCR reconstruction", () => {
+  const r = record(),
+    insertion = "GCTGGTAAATCTACCGCTGGTAAATCTACCGC";
+  const d = designMutagenesis(r, {
+    operation: "insert",
+    edits: [{ position: 220, replacement: insertion }],
+    circularization: "overlap",
+  });
+  const v = d.variants[0];
+  assert.ok(v.forward.tail.length > 0 && v.reverse.tail.length > 0);
+  assert.ok(
+    Math.abs(v.forward.sequence.length - v.reverse.sequence.length) <= 3,
+  );
+  assert.ok(Math.abs(v.forward.tm - v.reverse.tm) <= 5);
+  const pcr = mutagenesisPcrRecord(r, d),
+    mutant = mutagenesisRecord(r, d);
+  assert.ok(pcr.sequence.startsWith(d.overlap.sequence));
+  assert.ok(pcr.sequence.endsWith(d.overlap.sequence));
+  assert.ok(
+    (mutant.sequence + mutant.sequence).includes(
+      pcr.sequence.slice(d.overlap.length),
+    ),
+  );
+  const primers = mutagenesisPrimers(r, d);
+  const products = pcrProducts(r, ...primers);
+  assert.ok(
+    products.products.some(
+      (p) => makePcrProduct(r, ...primers, p).sequence === pcr.sequence,
+    ),
   );
 });

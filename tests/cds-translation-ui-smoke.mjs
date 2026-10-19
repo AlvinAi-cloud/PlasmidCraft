@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium } from "./ui-browser.mjs";
+import { fixturePage, chromium } from "./ui-browser.mjs";
 import { serializeProject } from "../viewer/project.mjs";
 import { reverseComplement } from "../viewer/core.mjs";
 
@@ -10,7 +10,9 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [];
 page.on("pageerror", (error) => errors.push(error.message));
 const bases = Array(300).fill("C");
@@ -65,13 +67,11 @@ const residues = (name) =>
 let checks = 0;
 try {
   await page.goto(process.env.PLASMIDCRAFT_URL || "http://127.0.0.1:4317");
-  await page
-    .locator("#file-input")
-    .setInputFiles({
-      name: "cds.pcraft",
-      mimeType: "application/json",
-      buffer: Buffer.from(serializeProject(record)),
-    });
+  await page.locator("#file-input").setInputFiles({
+    name: "cds.pcraft",
+    mimeType: "application/json",
+    buffer: Buffer.from(serializeProject(record)),
+  });
   await page.waitForFunction(
     () =>
       document.querySelector("#document-name").textContent ===

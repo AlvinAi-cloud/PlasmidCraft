@@ -23,7 +23,7 @@ import {
   ENZYMES,
   featureLength,
 } from "../viewer/core.mjs";
-import { demoRecord } from "../viewer/demo.mjs";
+import { syntheticTestRecord } from "./fixtures/synthetic-plasmid.mjs";
 
 const bytes = (text) => new TextEncoder().encode(text);
 function concat(parts) {
@@ -151,7 +151,7 @@ test("multi-record FASTA preserves ambiguity and each description", () => {
   assert.throws(() => parseFasta(">empty\n"));
 });
 test("synthetic GenBank export round-trips sequence, locations, colors, primers", () => {
-  const demo = demoRecord(),
+  const demo = syntheticTestRecord(),
     text = exportGenbank(demo),
     parsed = parseGenbank(text)[0];
   assert.equal(parsed.sequence, demo.sequence);
@@ -173,12 +173,12 @@ test("GenBank validates declared length instead of accepting missing bases", () 
   );
 });
 test("multi-record GenBank opens all records", () => {
-  const text = exportGenbank(demoRecord());
+  const text = exportGenbank(syntheticTestRecord());
   assert.equal(parseGenbank(text + text).length, 2);
 });
 test("GenBank preserves quoted qualifiers and compound locations on export", () => {
   const data = {
-    ...demoRecord(),
+    ...syntheticTestRecord(),
     features: [
       {
         id: "x",
@@ -209,7 +209,7 @@ test("GenBank preserves quoted qualifiers and compound locations on export", () 
   assert.equal(featureLength(parsed.features[0]), 146);
 });
 test("FASTA exports all bases, including N, with a valid header", () => {
-  const entry = demoRecord(),
+  const entry = syntheticTestRecord(),
     parsed = parseFasta(exportFasta(entry))[0];
   assert.equal(parsed.sequence, entry.sequence);
 });
@@ -297,7 +297,7 @@ test("file dispatch recognizes FASTA, GenBank, SnapGene, AB1 and raw DNA", () =>
     "FASTA",
   );
   assert.equal(
-    parseFile(bytes(exportGenbank(demoRecord())), "a.gb")[0].sourceFormat,
+    parseFile(bytes(exportGenbank(syntheticTestRecord())), "a.gb")[0].sourceFormat,
     "GenBank",
   );
   assert.equal(parseFile(dnaFile("ACGT"), "a.dna")[0].sourceFormat, "SnapGene");

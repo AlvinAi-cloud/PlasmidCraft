@@ -189,7 +189,11 @@ test("basic .dna export preserves sequence, topology, reverse joins, primers and
   assert.equal(out.topology, r.topology);
   assert.equal(out.name, r.name);
   assert.ok(out.description.includes(r.description));
-  assert.ok(out.description.includes("First note"));
+  assert.equal(out.description, r.description);
+  assert.ok(out.comments.includes("First note"));
+  assert.ok(
+    out.comments.some((s) => s.includes("independent basic DNA exporter")),
+  );
   for (let i = 0; i < r.features.length; i++) {
     assert.deepEqual(out.features[i].segments, r.features[i].segments);
     assert.equal(out.features[i].strand, r.features[i].strand);

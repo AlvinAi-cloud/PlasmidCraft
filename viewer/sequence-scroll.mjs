@@ -2,6 +2,17 @@
 export const SEQUENCE_ROW_BASES = 60;
 export const VIRTUAL_SEQUENCE_THRESHOLD = 12000;
 
+export function sequenceLineLength(
+  width,
+  { group = 10, baseWidth = 14, baseGap = 8, reserved = 150 } = {},
+) {
+  const available = Math.max(0, width - reserved);
+  return Math.max(
+    group,
+    Math.floor((available + baseGap) / (group * baseWidth + baseGap)) * group,
+  );
+}
+
 export function mountSequenceScroll(
   element,
   {
@@ -11,6 +22,7 @@ export function mountSequenceScroll(
     scrollTop = 0,
     target = null,
     targetAlign = "nearest",
+    rowBases = SEQUENCE_ROW_BASES,
   },
 ) {
   let frame = 0;
@@ -56,8 +68,8 @@ export function mountSequenceScroll(
     const window = element.querySelector(".sequence-window");
     window.style.top = `${offsets[first] - element.scrollTop * (scale() - 1)}px`;
     window.innerHTML = renderRows(
-      first * 60,
-      Math.min(length, last * 60),
+      first * rowBases,
+      Math.min(length, last * rowBases),
       offsets,
     );
   }
@@ -78,9 +90,17 @@ export function mountSequenceScroll(
   if (virtual) draw();
   if (target !== null) {
     const position = Math.max(0, Math.min(length - 1, target));
-    if (targetAlign === "center") {
+    if (targetAlign === "start") {
       if (virtual) {
-        const row = Math.floor(position / 60);
+        element.scrollTop = offsets[Math.floor(position / rowBases)] / scale();
+        draw();
+      } else
+        element
+          .querySelector(`[data-position="${position}"]`)
+          ?.scrollIntoView({ block: "start", inline: "nearest" });
+    } else if (targetAlign === "center") {
+      if (virtual) {
+        const row = Math.floor(position / rowBases);
         element.scrollTop = Math.max(
           0,
           (offsets[row] - element.clientHeight / 2) / scale(),
@@ -105,7 +125,7 @@ export function mountSequenceScroll(
       }
       if (virtual) draw();
     } else if (virtual) {
-      const row = Math.floor(position / 60);
+      const row = Math.floor(position / rowBases);
       if (
         offsets[row] < element.scrollTop * scale() ||
         offsets[row + 1] >
@@ -119,6 +139,12 @@ export function mountSequenceScroll(
         ?.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
   return {
+    anchor() {
+      return (
+        Math.max(0, rowAt(element.scrollTop * (virtual ? scale() : 1))) *
+        rowBases
+      );
+    },
     destroy() {
       cancelAnimationFrame(frame);
       resize?.disconnect();

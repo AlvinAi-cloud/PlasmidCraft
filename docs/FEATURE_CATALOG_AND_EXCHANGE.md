@@ -10,7 +10,6 @@ Choose **Find annotation matches**, review the locations/strands, then **Apply s
 
 Choose **Tools → Auto Annotation…**, or **Auto annotation…** from the Features page or Add Feature/Add annotation dialog, to select one library or all libraries. Preview the matches and choose **Apply selected annotations**. The workflow searches the full plasmid on both strands, including circular-origin spans, independently of prior search/category filters. Matching names are compared without case; duplicate identifications at the same segment and strand are merged, and matching existing annotations are retained. Apply supports one-step Undo.
 
-![Auto annotation preview with merged library evidence](screenshots/0.3/auto-annotation.png)
 
 ## Import a feature library
 

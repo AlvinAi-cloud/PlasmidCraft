@@ -1,16 +1,15 @@
-# AI design assistant — desktop 0.3
+# AI design assistant — desktop 0.31
 
 The **AI Assistant** toolbar button toggles a docked panel beside the sequence inspector. It leaves map/sequence editing available. On narrow windows it tiles below the editor. Close with the panel's × button; response and request text remain in the current session. Opening or closing other tool dialogs does not cancel AI work. Closing the AI panel itself cancels pending sign-in/inference and suppresses late responses.
 
-The current-context box follows active documents and selected DNA/features without sending data. **Preview outgoing prompt** and **Send** capture the current selection explicitly. Existing responses/proposals remain tied to their original source; changing source DNA requires preparing a new request before applying a proposal.
+The current-context box follows active documents and selected DNA/features without sending data. **Send** captures current internal context; **Preview outgoing prompt** is available in External AI. Existing responses/proposals remain tied to their original source; changing source DNA requires preparing a new request before applying a proposal.
 
 Use **AI → Accounts and Models…** for connection setup in a separate dialog. It works with the AI panel closed. Configure a provider and model there, click **Done**, then use **Internal AI Operations…** or the toolbar button. The panel has two options: **Internal AI Operations** and **External AI**. Internal mode has message input at the top, operations and results in the middle, and conversation history at the bottom. Each area can scroll independently. Settings and login controls stay in the menu dialog; closing it preserves the active connection and conversation. Closing settings during sign-in cancels that sign-in, while closing it during an ordinary AI request leaves the request running.
 
 Provider, model and endpoint preferences are remembered on this device. In the Mac app, **Remember on this device** is enabled by default: API keys are saved in macOS Keychain and restored automatically at app startup. Reconnect reads local credentials without contacting the AI service. A dismissed, unconnected key draft is cleared. Saved eligible ChatGPT sessions can be activated through the settings dialog without repeating website sign-in when the provider permits it; storage limitations are described below. The panel shows the provider/model connection status without account controls.
 
-Choose a workflow starting prompt or type a request in the message input at the top. Connected AI uses validated local tools, shows conversation history and an operations summary, and opens changed designs as new unsaved document tabs. **External AI** retains the manual prompt-copy, paste and review workflow. Opening the panel does not submit a request.
+Type a request in the message input at the top; Internal AI does not require a workflow prompt. Connected AI uses validated local tools, shows conversation history and an operations summary, and opens changed designs as new unsaved document tabs. **External AI** retains the manual prompt-copy, paste and review workflow. Opening the panel does not submit a request.
 
-![Internal AI Operations with direct tools and document results](screenshots/0.3/internal-ai-operations.png)
 
 ## Connect a provider
 
@@ -26,6 +25,10 @@ The transport uses OpenAI Responses, Claude Messages, Gemini GenerateContent, or
 
 Official API contracts: [OpenAI authentication](https://developers.openai.com/api/reference/overview), [Claude API](https://platform.claude.com/docs/en/api/overview), [Gemini GenerateContent](https://ai.google.dev/api/generate-content).
 
+![Internal AI Operations](screenshots/0.31/internal-ai-operations.png)
+
+Interface illustration uses a synthetic test document and a mocked provider.
+
 ## Available model picker
 
 The picker queries the configured provider’s current model list rather than shipping a fixed list. Supported routes are [OpenAI Models](https://developers.openai.com/api/reference/resources/models/methods/list), [Claude Models](https://platform.claude.com/docs/en/api/models/list), [Gemini Models](https://ai.google.dev/api/models), and OpenAI-compatible `/models` endpoints. Gemini results are restricted to models advertising `generateContent`; other provider lists may include models unsuitable for this assistant, so choose a text-generation model. Listing a model does not guarantee inference quota or compatibility with the configured generation endpoint; Send/Test reports access errors.
@@ -36,7 +39,7 @@ A selected model is retained when refreshing. For a connected or restored API co
 
 Send a message to the selected API or eligible account connection. Relevant operations run on a private copy of the active DNA document. The original stays unchanged. The assistant can inspect context, annotate from one/all local libraries, edit or extract DNA, design primers, simulate PCR, optimize CDS codons, design mutagenesis with terminal homology, and run Gibson/Golden Gate design using ordered regions of the working copy and explicitly checked additional templates. Select up to two other open DNA templates under Additional DNA templates; unchecked documents are excluded. Missing sequences and design constraints require clarification rather than invented parts.
 
-The application uses a provider-independent JSON tool protocol with existing HTTP transports. Only supported app tools are available; there is no shell, arbitrary code, file-system or network-tool access. Requests are bounded to six rounds and twelve operations, with 40,000-base designs. Tool results are returned to the provider for follow-up when requested. DNA/oligo sequences are omitted from those results unless **Attach document DNA and oligo results** is enabled. Names, feature locations, operation summaries and selected context are included. Recent conversation is included by default; its checkbox can disable it. Earlier messages can contain DNA.
+The application uses a provider-independent JSON tool protocol with existing HTTP transports. Only supported app tools are available; there is no shell, arbitrary code, file-system or network-tool access. Requests are bounded to six rounds and twelve operations, with 40,000-base designs. Tool results are returned to the provider for follow-up when requested. **Share active document DNA with connected AI** is enabled by default; the checkbox can disable it and its state is remembered. DNA/oligo/protein sequences are omitted from context and tool results when disabled. Names, feature locations, operation summaries and selected context are included. Recent conversation is included by default; its checkbox can disable it. Earlier messages can contain DNA.
 
 Each tool result is validated locally. Failed operations or changed source documents discard the uncommitted working copy. **Stop** or closing the panel suppresses late responses and cancels pending inference. The provider may already count usage. A completed run opens new unsaved documents, with **Open document** and **Save .pcraft…** controls. Saving remains a user action. Biological identity and experimental performance require review.
 
@@ -54,7 +57,7 @@ The assistant also supports a manual website handoff: **Copy prompt for external
 
 1. Open **AI → Accounts and Models…**, expand **ChatGPT account login**, and click **Continue with ChatGPT**. Complete the official sign-in/consent page in your system browser. The app receives a loopback callback and returns focus to its window.
 2. Select an account-provided model. Only models returned for that account are listed; PlasmidCraft does not guess which models a plan includes. **Test connection** makes a small request and consumes plan quota. No plasmid DNA is included in this test.
-3. Preview the outgoing prompt, then Send. Requests use the selected account's authorized plan access. Missing consent, ineligible accounts, model restrictions or quota limits are reported; the app never switches automatically to paid API-key billing.
+3. Type a request in Internal AI Operations and choose Send. Requests use the selected account's authorized plan access. Missing consent, ineligible accounts, model restrictions or quota limits are reported; the app never switches automatically to paid API-key billing.
 4. Use the saved-account selector and **Use saved session** to reconnect after restarting. **Sign in again / grant plan access** requests fresh authorization for that registration. **Sign out selected account** attempts server revocation and removes local credentials. If revocation cannot be confirmed, the notice says so; review connected apps in your account as needed.
 
 This implements OpenAI's documented eligible open-source [plan sign-in](https://developers.openai.com/siwc/token-sharing-open-source/sign-in), [account/session handling](https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions), and [streamed inference](https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference). Eligibility is controlled by OpenAI and has not been confirmed for this unpublished local app. A ChatGPT subscription alone does not guarantee access through every third-party application. Identity-only login can succeed while plan inference remains disabled; reauthorize if the account is eligible but has not granted the necessary scopes.
@@ -69,6 +72,8 @@ ChatGPT plan requests use streamed Responses with `store:false` and require a co
 
 The provider adapters, context whitelist and proposal validation have unit checks. The UI is exercised with a simulated native bridge. Native tests cover loopback callbacks, JWT validation, account isolation, storage failures, token replacement, supported request bodies and streamed response handling; API-key HTTP transport also uses a local mock server. No real key, paid request or private plasmid upload was used during development. Live provider/account acceptance and native-window UI acceptance remain pending.
 
-Choose **Design plasmid** for a guided plasmid-design request, or **Other tasks** for an open-ended request, under **Choose a starting point…** in Internal AI Operations. Edit the message before sending. Selecting a starting point does not send a request.
+External AI offers **Design plasmid** for a guided request and **Other tasks** for an open-ended request under **Choose a starting point…**. Edit the message before sending. Selecting a starting point does not send a request.
 
-The workflow list begins with **Review plasmid**, then **Design plasmid**; **Other tasks** is last. The other workflows retain their order. The **Message input** box starts at approximately 128 pixels tall and can be resized vertically.
+The External AI workflow list begins with **Review plasmid**, then **Design plasmid**; **Other tasks** is last. The other workflows retain their order. The **Message input** box starts at approximately 128 pixels tall and can be resized vertically.
+
+Conversation history displays newest messages first. Internal tools include CDS inspection and verified amino-acid range replacement with host-preferred codons only for replaced residues. Duplicate identical JSON operation envelopes execute once; malformed envelopes are retried once without being displayed as chat. Operations are checked locally and changed results open as unsaved documents. The Inspector separates readable descriptions from detailed provenance.

@@ -2,14 +2,16 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { serializeProject } from "../viewer/project.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;

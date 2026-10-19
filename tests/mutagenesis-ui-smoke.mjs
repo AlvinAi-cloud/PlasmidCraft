@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium } from "./ui-browser.mjs";
+import { fixturePage, chromium } from "./ui-browser.mjs";
 import { serializeProject, parseProject } from "../viewer/project.mjs";
 import { reverseComplement } from "../viewer/core.mjs";
 import { csvRows } from "../viewer/workflow-common.mjs";
@@ -10,7 +10,7 @@ const browser = await chromium.launch({
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({
+const page = await fixturePage(browser, {
   viewport: { width: 1440, height: 1000 },
   acceptDownloads: true,
 });
@@ -97,7 +97,9 @@ try {
   await action("csv");
   const csv = csvRows(await fs.readFile(await (await download).path(), "utf8"));
   assert.equal(csv.length, 3);
-  assert.equal(csv[1][4], csv[1][9] + base);
+  assert.ok(Math.abs(csv[1][2].length - csv[2][2].length) <= 3);
+  assert.equal(csv[1][2], csv[1][4] + csv[1][3]);
+  assert.equal(csv[2][2], csv[2][4] + csv[2][3]);
   assert.equal(csv[1][7], "overlap");
   assert.ok(Number(csv[1][8]) >= 20);
   assert.ok(csv[1][2].startsWith(csv[1][4]));
@@ -182,7 +184,12 @@ try {
   await action("save");
   const saved = await save();
   assert.equal(saved.primers.length, 2);
-  assert.ok(saved.primers[0].tailSequence);
+  assert.ok(saved.primers.some((p) => p.tailSequence));
+  assert.ok(
+    saved.primers.some(
+      (p) => p.sequence.includes("NNK") || p.sequence.includes("MNN"),
+    ),
+  );
   checks++;
   await page
     .locator('[data-wf-action="primer-mode"][data-mode="list"]')

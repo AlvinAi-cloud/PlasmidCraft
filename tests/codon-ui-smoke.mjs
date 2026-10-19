@@ -3,14 +3,14 @@ import fs from "node:fs/promises";
 import { serializeProject, parseProject } from "../viewer/project.mjs";
 import { translateCds, translateDna } from "../viewer/protein.mjs";
 import { CODON_USAGE } from "../viewer/codon-usage.mjs";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({
+const page = await fixturePage(browser, {
   viewport: { width: 1440, height: 1000 },
   acceptDownloads: true,
 });

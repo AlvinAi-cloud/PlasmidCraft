@@ -1,3 +1,4 @@
+import { documentNotes } from "./document-notes.mjs";
 import {
   containsBase,
   selectResidues,
@@ -10,6 +11,7 @@ import {
   mapEnzymeSites,
 } from "./map-enzymes.mjs";
 import { compactCircularSvg } from "./compact-map.mjs";
+import { showFloatingDialog } from "./floating-dialog.mjs";
 import {
   FRAME_SETS,
   sequencePrimerTracks,
@@ -23,6 +25,7 @@ import { SelectedPrimerUI } from "./selected-primer-ui.mjs";
 import { MutagenesisUI } from "./mutagenesis-ui.mjs";
 import {
   mountSequenceScroll,
+  sequenceLineLength,
   VIRTUAL_SEQUENCE_THRESHOLD,
 } from "./sequence-scroll.mjs";
 import { ProteinToolsUI } from "./protein-tools-ui.mjs";
@@ -47,7 +50,7 @@ import {
   ENZYMES,
   MAX_FILE_BYTES,
 } from "./core.mjs";
-import { demoRecord } from "./demo.mjs";
+import { defaultExampleRecord } from "./default-example.mjs";
 import { createPlatform } from "./platform.mjs";
 import { parseProject, serializeProject } from "./project.mjs";
 import {
@@ -205,10 +208,19 @@ let nextId = 1,
   dragEnd = null;
 let proteinDrag = null;
 let sequenceToolContext = null;
+let annotationContext = null;
 let snapgeneExportContext = null;
 const workbench = createWorkbench({
   active,
   documents: () => state.documents,
+  activate,
+  showFeature: selectFeature,
+  showSequence: (start, end) => {
+    state.selection = { start, end };
+    state.sequenceTarget = start;
+    state.view = "sequence";
+    render();
+  },
   platform,
   toast,
   snapshot,
@@ -421,7 +433,7 @@ function renderHeader() {
   $("#export-button").disabled = !doc;
   $("#save-project-button").disabled = !doc;
   $("#document-summary").innerHTML = doc
-    ? `${doc.topology === "circular" ? "Circular" : "Linear"} DNA <span>·</span> ${number(doc.sequence.length)} bp <span>·</span> ${stats(doc.sequence).gc.toFixed(1)}% GC${doc.sourceFormat === "Example" ? "<span>·</span> Synthetic example" : ""}`
+    ? `${doc.topology === "circular" ? "Circular" : "Linear"} DNA <span>·</span> ${number(doc.sequence.length)} bp <span>·</span> ${stats(doc.sequence).gc.toFixed(1)}% GC${doc.isDefaultExample ? "<span>·</span> Example plasmid" : ""}`
     : "Open a file to browse maps, sequences, and annotations.";
   $("#feature-count").textContent =
     doc?.features.filter((f) => f.type !== "source").length || 0;
@@ -659,11 +671,27 @@ function mainTitle(title, subtitle, actions = "") {
   return `<div class="view-title"><div><h2>${title}</h2>${subtitle ? `<p>${subtitle}</p>` : ""}</div><div class="view-actions">${actions}</div></div>`;
 }
 const sequenceScrollPositions = new WeakMap();
+const sequenceScrollLayouts = new WeakMap();
 let sequenceScroller = null,
   sequenceScrollerDoc = null,
   sequenceModel = null;
+let sequenceReflow = false;
+function fittedSequenceLineLength() {
+  const panel = $("#main-panel"),
+    style = getComputedStyle(panel);
+  return sequenceLineLength(
+    panel.clientWidth -
+      parseFloat(style.paddingLeft) -
+      parseFloat(style.paddingRight),
+    { group: state.sequenceGroup },
+  );
+}
 function renderMain() {
   if (sequenceScroller) {
+    sequenceScrollLayouts.set(sequenceScrollerDoc, {
+      rowBases: sequenceModel.rowBases,
+      anchor: sequenceScroller.anchor(),
+    });
     sequenceScrollPositions.set(
       sequenceScrollerDoc,
       sequenceScroller.destroy(),
@@ -674,7 +702,7 @@ function renderMain() {
     doc = active();
   panel.dataset.view = state.view;
   if (!doc) {
-    panel.innerHTML = `<div class="welcome-card">${icon("dna")}<h2>A clearer view of your sequences</h2><p>Open a GenBank, FASTA, SnapGene DNA, or AB1 file.<br>Or explore the synthetic example plasmid.</p><button class="button primary" data-action="open">${icon("folder-open")}Open sequence file</button><br><button class="text-button" data-action="example" style="margin:auto">Load example plasmid</button></div>`;
+    panel.innerHTML = `<div class="welcome-card">${icon("dna")}<h2>A clearer view of your sequences</h2><p>Open a GenBank, FASTA, SnapGene DNA, or AB1 file.<br>Or explore the supplied pET-21b(+) example plasmid.</p><button class="button primary" data-action="open">${icon("folder-open")}Open sequence file</button><br><button class="text-button" data-action="example" style="margin:auto">Load example plasmid</button></div>`;
     return;
   }
   switch (state.view) {
@@ -709,14 +737,28 @@ function renderMain() {
       break;
   }
   if (state.view === "sequence") {
+    const previous = sequenceScrollLayouts.get(doc);
+    if (
+      previous &&
+      previous.rowBases !== sequenceModel.rowBases &&
+      state.sequenceTarget === null
+    ) {
+      state.sequenceTarget = previous.anchor;
+      sequenceReflow = true;
+    }
     sequenceScrollerDoc = doc;
     sequenceScroller = mountSequenceScroll($("#sequence-editor"), {
       ...sequenceModel,
-      scrollTop: sequenceScrollPositions.get(doc) || 0,
+      scrollTop: sequenceReflow ? 0 : sequenceScrollPositions.get(doc) || 0,
       target: state.sequenceTarget,
-      targetAlign: state.selection?.featureId ? "center" : "nearest",
+      targetAlign: sequenceReflow
+        ? "start"
+        : state.selection?.featureId
+          ? "center"
+          : "nearest",
     });
     state.sequenceTarget = null;
+    sequenceReflow = false;
   }
   if (state.view === "primers") mutagenesisUI.mount();
   hydrateIcons(panel);
@@ -929,9 +971,25 @@ function currentMapEnzymes(doc) {
 function renderMap(doc) {
   const featureTypes = [
     ...new Set(
-      doc.features.filter((f) => f.type !== "source").map((f) => f.type),
+      doc.features
+        .filter(
+          (f) => f.type !== "source" && !f.qualifiers?.alignment_operation,
+        )
+        .map((f) => f.type),
     ),
   ].slice(0, 4);
+  const differenceLegend = [
+    ...new Map(
+      doc.features
+        .filter((f) => f.qualifiers?.alignment_operation)
+        .map((f) => [f.qualifiers.alignment_operation[0], f]),
+    ).values(),
+  ]
+    .map(
+      (f) =>
+        `<span><i style="background:${safeColor(f.color)}"></i>${e({ X: "Substitution", I: "Insertion", D: "Deletion junction", N: "Uncertain DNA" }[f.qualifiers.alignment_operation[0]] || "Alignment difference")}</span>`,
+    )
+    .join("");
   const enzymeMap = currentMapEnzymes(doc);
   const enzymeNotice =
     state.showEnzymes && state.mapSelectedEnzymesOnly
@@ -952,7 +1010,7 @@ function renderMap(doc) {
     )
     .join(
       "",
-    )}</div><label class="check-label map-selected-enzyme-control" title="Show only enzymes checked in the Map column of the Enzymes table; enables enzyme visibility."><input type="checkbox" id="map-selected-enzymes" ${state.mapSelectedEnzymesOnly ? "checked" : ""}>Selected enzymes only (${state.mapEnzymes.size})</label></div>${enzymeNotice ? `<p class="map-enzyme-notice" role="status">${e(enzymeNotice)}</p>` : ""}<div class="map-canvas">${state.mapLayout === "circular" ? circularSvg(doc) : linearSvg(doc)}</div><div class="map-bottom"><div class="map-legend">${featureTypes.map((type) => `<span><i style="background:${featureColor(type)}"></i>${e({ CDS: "Coding sequence", rep_origin: "Origin", promoter: "Promoter", terminator: "Terminator" }[type] || type)}</span>`).join("")}</div><div class="zoom-controls"><button data-action="zoom-out" aria-label="Zoom out">${icon("minus")}</button><span>${Math.round(state.zoom * 100)}%</span><button data-action="zoom-in" aria-label="Zoom in">${icon("plus")}</button><button data-action="zoom-reset" aria-label="Reset zoom">${icon("target")}</button></div></div></div><div class="canvas-hint">${icon("info")}Select an annotation to inspect its sequence and details.</div>${sequenceOverview(doc)}`;
+    )}</div><label class="check-label map-selected-enzyme-control" title="Show only enzymes checked in the Map column of the Enzymes table; enables enzyme visibility."><input type="checkbox" id="map-selected-enzymes" ${state.mapSelectedEnzymesOnly ? "checked" : ""}>Selected enzymes only (${state.mapEnzymes.size})</label></div>${enzymeNotice ? `<p class="map-enzyme-notice" role="status">${e(enzymeNotice)}</p>` : ""}<div class="map-canvas">${state.mapLayout === "circular" ? circularSvg(doc) : linearSvg(doc)}</div><div class="map-bottom"><div class="map-legend">${featureTypes.map((type) => `<span><i style="background:${featureColor(type)}"></i>${e({ CDS: "Coding sequence", rep_origin: "Origin", promoter: "Promoter", terminator: "Terminator" }[type] || type)}</span>`).join("")}${differenceLegend}</div><div class="zoom-controls"><button data-action="zoom-out" aria-label="Zoom out">${icon("minus")}</button><span>${Math.round(state.zoom * 100)}%</span><button data-action="zoom-in" aria-label="Zoom in">${icon("plus")}</button><button data-action="zoom-reset" aria-label="Reset zoom">${icon("target")}</button></div></div></div><div class="canvas-hint">${icon("info")}Select an annotation to inspect its sequence and details.</div>${sequenceOverview(doc)}`;
 }
 function sequenceOverview(doc) {
   const lanes = packSequenceLanes(
@@ -1019,6 +1077,7 @@ function renderSequence(doc) {
   const primers = state.showPrimers ? sequencePrimerTracks(doc) : [];
   const frames = FRAME_SETS[state.sequenceFrames] || [];
   const group = state.sequenceGroup;
+  const rowBases = fittedSequenceLineLength();
   const options = {
     group,
     format: state.proteinLetterFormat,
@@ -1033,6 +1092,7 @@ function renderSequence(doc) {
     frames,
     complement: state.complement,
     editing: state.editBases,
+    rowBases,
   });
   const renderRows = (start, end) => {
     const inline = state.inlineProteins
@@ -1053,8 +1113,11 @@ function renderSequence(doc) {
       state.sequenceFrameCode,
     );
     let rows = "";
-    for (let offset = start; offset < end; offset += 60) {
-      const sequence = doc.sequence.slice(offset, Math.min(offset + 60, end));
+    for (let offset = start; offset < end; offset += rowBases) {
+      const sequence = doc.sequence.slice(
+        offset,
+        Math.min(offset + rowBases, end),
+      );
       const annotations = features.filter((f) =>
         f.segments.some(
           (s) => s.start < offset + sequence.length && s.end > offset,
@@ -1109,12 +1172,17 @@ function renderSequence(doc) {
           return `<span style="--pos:${pos};--groups:${i}">${number(offset + pos + 1)}</span>`;
         },
       ).join("");
-      rows += `<div class="sequence-row" data-sequence-row="${offset / 60}" data-group="${group}" style="height:${offsets[offset / 60 + 1] - offsets[offset / 60]}px;--row-groups:${60 / group - 1}">${annotation(false)}${protein(false)}${reading(false)}${primer(false)}<div class="sequence-track reference-track"><span class="row-coordinate">${number(offset + 1)} <small>5′</small></span><div class="bases">${dna}</div><span class="strand-end">3′</span></div><div class="sequence-ruler">${ruler}</div>${state.complement ? `<div class="sequence-track complement-track"><span class="row-coordinate">3′</span><div class="bases">${[...complement(sequence)].map((base, i) => `<span data-complement-position="${offset + i}" class="base ${isSelected(offset + i) ? "selected" : ""}">${base}</span>`).join("")}</div><span class="strand-end">5′</span></div>` : ""}${primer(true)}${reading(true)}${protein(true)}${annotation(true)}${state.editBases && offset + sequence.length === doc.sequence.length ? `<span class="sequence-end-caret" aria-label="Cursor at sequence end">${state.caret === doc.sequence.length ? "│" : ""}</span>` : ""}</div>`;
+      rows += `<div class="sequence-row" data-sequence-row="${offset / rowBases}" data-group="${group}" style="height:${offsets[offset / rowBases + 1] - offsets[offset / rowBases]}px;--row-groups:${rowBases / group - 1};--row-bases:${rowBases}">${annotation(false)}${protein(false)}${reading(false)}${primer(false)}<div class="sequence-track reference-track"><span class="row-coordinate">${number(offset + 1)} <small>5′</small></span><div class="bases">${dna}</div><span class="strand-end">3′</span></div><div class="sequence-ruler">${ruler}</div>${state.complement ? `<div class="sequence-track complement-track"><span class="row-coordinate">3′</span><div class="bases">${[...complement(sequence)].map((base, i) => `<span data-complement-position="${offset + i}" class="base ${isSelected(offset + i) ? "selected" : ""}">${base}</span>`).join("")}</div><span class="strand-end">5′</span></div>` : ""}${primer(true)}${reading(true)}${protein(true)}${annotation(true)}${state.editBases && offset + sequence.length === doc.sequence.length ? `<span class="sequence-end-caret" aria-label="Cursor at sequence end">${state.caret === doc.sequence.length ? "│" : ""}</span>` : ""}</div>`;
     }
     return rows;
   };
   const virtual = doc.sequence.length > VIRTUAL_SEQUENCE_THRESHOLD;
-  sequenceModel = { length: doc.sequence.length, offsets, renderRows };
+  sequenceModel = {
+    length: doc.sequence.length,
+    offsets,
+    renderRows,
+    rowBases,
+  };
   const frameOptions = [
     ["none", "Off"],
     ["+1", "+1"],
@@ -1144,7 +1212,7 @@ function renderSequence(doc) {
       )
       .join(
         "",
-      )}</select></label><label>Protein notation<select id="protein-letter-format" ${state.inlineProteins || frames.length ? "" : "disabled"}><option value="one" ${state.proteinLetterFormat === "one" ? "selected" : ""}>1-letter</option><option value="three" ${state.proteinLetterFormat === "three" ? "selected" : ""}>3-letter</option></select></label><label>Group bases<select id="sequence-group"><option value="10" ${group === 10 ? "selected" : ""}>10</option><option value="3" ${group === 3 ? "selected" : ""}>3</option></select></label><label class="check-label"><input type="checkbox" id="direct-base-edit" ${state.editBases ? "checked" : ""} ${doc.trace ? "disabled" : ""}>Edit bases</label></div><div class="sequence-legend"><span><i class="primer-match-key"></i>Primer bases match template</span><span><i class="primer-mismatch-key"></i>Mismatch</span><span><i class="primer-ambiguous-key"></i>Mixed base</span><span>5′ tails are shown separately · arrows point toward primer 3′ ends</span></div><div class="sequence-card" id="sequence-editor" data-virtual="${virtual}" tabindex="0" role="textbox" aria-label="DNA sequence editor" aria-readonly="${!state.editBases}">${virtual ? "" : renderRows(0, doc.sequence.length)}</div><p class="notice" id="sequence-inline-warnings">${[...inlineWarnings].map(e).join(" · ")}</p>${sequenceOverview(doc)}`
+      )}</select></label><label>Protein notation<select id="protein-letter-format" ${state.inlineProteins || frames.length ? "" : "disabled"}><option value="one" ${state.proteinLetterFormat === "one" ? "selected" : ""}>1-letter</option><option value="three" ${state.proteinLetterFormat === "three" ? "selected" : ""}>3-letter</option></select></label><label>Group bases<select id="sequence-group"><option value="10" ${group === 10 ? "selected" : ""}>10</option><option value="3" ${group === 3 ? "selected" : ""}>3</option></select></label><label class="check-label"><input type="checkbox" id="direct-base-edit" ${state.editBases ? "checked" : ""} ${doc.trace ? "disabled" : ""}>Edit bases</label></div><div class="sequence-legend"><span><i class="primer-match-key"></i>Primer bases match template</span><span><i class="primer-mismatch-key"></i>Mismatch</span><span><i class="primer-ambiguous-key"></i>Mixed base</span><span>5′ tails are shown separately · arrows point toward primer 3′ ends</span></div><div class="sequence-card" id="sequence-editor" data-bases-per-line="${rowBases}" data-virtual="${virtual}" tabindex="0" role="textbox" aria-label="DNA sequence editor" aria-readonly="${!state.editBases}">${virtual ? "" : renderRows(0, doc.sequence.length)}</div><p class="notice" id="sequence-inline-warnings">${[...inlineWarnings].map(e).join(" · ")}</p>${sequenceOverview(doc)}`
   );
 }
 function renderEditHistory(doc) {
@@ -1500,7 +1568,15 @@ function renderInspector() {
   } else if (state.selection) {
     html += `<h3 class="inspector-name">Selected bases</h3><div class="info-row"><span>Range</span><span>${number(state.selection.start + 1)}–${number(state.selection.end)}</span></div><div class="info-row"><span>Length</span><span>${number(sequence.length)} bp</span></div><div class="sequence-snippet">${e(sequence)}</div><button class="button full-width" data-action="copy-selection">${icon("copy")}Copy sequence</button><button class="button full-width" data-action="copy-reverse">${icon("primer")}Copy reverse complement</button><button class="button full-width" data-action="annotate">${icon("plus")}Annotate selection</button><button class="button full-width" data-command="create-selection-primer">Create primer from selection…</button><button class="text-button" data-action="clear-selection">Clear selection</button>`;
   } else {
-    html += `<h3 class="inspector-name">${e(doc.name)}</h3><span class="type-pill">${doc.topology === "circular" ? "Circular" : "Linear"} DNA</span><div class="info-row"><span>Length</span><span>${number(summary.length)} bp</span></div><div class="info-row"><span>GC content</span><span>${summary.gc.toFixed(1)}%</span></div><div class="info-row"><span>Features</span><span>${doc.features.filter((f) => f.type !== "source").length}</span></div><div class="info-row"><span>Primers</span><span>${doc.primers.length}</span></div>${summary.ambiguous ? `<div class="info-row"><span>Ambiguous bases</span><span>${number(summary.ambiguous)} · preserved</span></div>` : ""}${doc.dnaEnds ? `<div class="eyebrow">DNA ENDS</div><div class="info-row"><span>Left</span><span>${e(workbench.endLabel(doc.dnaEnds.left))}</span></div><div class="info-row"><span>Right</span><span>${e(workbench.endLabel(doc.dnaEnds.right))}</span></div>` : ""}${doc.alignments?.length ? `<button class="button full-width" data-command="align-reads">View ${doc.alignments.length} saved alignment report(s)</button>` : ""}<p class="inspector-note">${e(doc.description)}</p>${summary.ambiguous ? '<p class="inspector-note">GC percentage uses A, C, G, and T only.</p>' : ""}`;
+    html += `<h3 class="inspector-name">${e(doc.name)}</h3><span class="type-pill">${doc.topology === "circular" ? "Circular" : "Linear"} DNA</span><div class="info-row"><span>Length</span><span>${number(summary.length)} bp</span></div><div class="info-row"><span>GC content</span><span>${summary.gc.toFixed(1)}%</span></div><div class="info-row"><span>Features</span><span>${doc.features.filter((f) => f.type !== "source").length}</span></div><div class="info-row"><span>Primers</span><span>${doc.primers.length}</span></div>${summary.ambiguous ? `<div class="info-row"><span>Ambiguous bases</span><span>${number(summary.ambiguous)} · preserved</span></div>` : ""}${doc.dnaEnds ? `<div class="eyebrow">DNA ENDS</div><div class="info-row"><span>Left</span><span>${e(workbench.endLabel(doc.dnaEnds.left))}</span></div><div class="info-row"><span>Right</span><span>${e(workbench.endLabel(doc.dnaEnds.right))}</span></div>` : ""}${doc.alignments?.length ? `<button class="button full-width" data-command="align-reads">View ${doc.alignments.length} saved alignment report(s)</button>` : ""}<p class="inspector-note">${e(documentNotes(doc).description)}</p>${
+      documentNotes(doc).provenance.length
+        ? `<details class="inspector-provenance"><summary>Provenance and edit notes (${documentNotes(doc).provenance.length})</summary><ul>${documentNotes(
+            doc,
+          )
+            .provenance.map((note) => `<li>${e(note)}</li>`)
+            .join("")}</ul></details>`
+        : ""
+    }${summary.ambiguous ? '<p class="inspector-note">GC percentage uses A, C, G, and T only.</p>' : ""}`;
   }
   html += `<div class="inspector-section"><div class="panel-heading">ANNOTATIONS <small>${doc.features.filter((f) => f.type !== "source").length}</small></div><div class="annotation-list">${
     doc.features
@@ -1747,6 +1823,7 @@ function modal(
   footer = '<button class="button" data-action="close-modal">Done</button>',
 ) {
   sequenceToolContext = null;
+  annotationContext = null;
   const dialog = $("#modal");
   dialog.classList.remove(
     "sequence-tool-dialog",
@@ -1758,7 +1835,8 @@ function modal(
   $("#modal-content").innerHTML =
     `<div class="modal-header"><h2>${e(title)}</h2><button class="icon-button" data-action="close-modal" aria-label="Close dialog">${icon("close")}</button></div><div class="modal-body">${body}</div><div class="modal-footer">${footer}</div>`;
   hydrateIcons(dialog);
-  dialog.showModal();
+  dialog.dataset.documentId = active()?.id || "";
+  showFloatingDialog(dialog);
 }
 function goToModal() {
   const doc = active();
@@ -1789,6 +1867,7 @@ function annotationModal(edit = false) {
     `<p>Annotate this sequence without changing its bases. Save a PlasmidCraft document to keep your work.</p><label for="annotation-name">Name</label><input id="annotation-name" value="${e(feature?.name || "")}" placeholder="e.g. Promoter"><div class="row"><div><label for="annotation-type">Type</label><select id="annotation-type">${["misc_feature", "CDS", "gene", "promoter", "rep_origin", "terminator", "regulatory", "primer_bind"].map((type) => `<option ${type === (feature?.type || "misc_feature") ? "selected" : ""}>${type}</option>`).join("")}</select></div><div><label for="annotation-strand">Direction</label><select id="annotation-strand"><option value="1" ${feature?.strand !== -1 ? "selected" : ""}>Forward →</option><option value="-1" ${feature?.strand === -1 ? "selected" : ""}>Reverse ←</option></select></div></div><div class="row"><div><label for="annotation-start">Start (inclusive)</label><input id="annotation-start" type="number" min="1" max="${doc.sequence.length}" value="${start + 1}"></div><div><label for="annotation-end">End (inclusive)</label><input id="annotation-end" type="number" min="1" max="${doc.sequence.length}" value="${end}"></div><div style="max-width:55px"><label for="annotation-color">Color</label><input id="annotation-color" type="color" value="${safeColor(feature?.color || "#79a995")}" style="width:100%;height:33px;border:1px solid #e2e9e4;border-radius:4px;background:white"></div></div><label for="annotation-note">Note</label><input id="annotation-note" value="${e(feature?.qualifiers?.note?.[0] || "")}"><div id="modal-error" class="modal-error"></div>`,
     `<button class="button" data-action="close-modal">Cancel</button><button class="button primary" data-action="save-annotation" data-edit-feature="${e(feature?.id || "")}">${edit ? "Save annotation" : "Add annotation"}</button>`,
   );
+  annotationContext = { id: doc.id, revision: doc.annotationChanges };
   if (!edit) {
     const option = document.createElement("button");
     option.className = "button";
@@ -1958,6 +2037,14 @@ function synchronizePrimerAnnotations(doc, changedId = null) {
 function saveAnnotation(editId) {
   const doc = active();
   try {
+    if (
+      !annotationContext ||
+      doc?.id !== annotationContext.id ||
+      doc.annotationChanges !== annotationContext.revision
+    )
+      throw new Error(
+        "The source document changed. Reopen the annotation editor before applying changes.",
+      );
     const start = Number($("#annotation-start").value) - 1,
       end = Number($("#annotation-end").value);
     rangeSequence(doc.sequence, start, end, doc.topology === "circular");
@@ -2323,7 +2410,10 @@ function runCommand(action) {
   } else if (action === "view-translation") {
     state.translationMode = "frames";
     setView("translation");
-  } else if (action === "find" && !$("#modal").open) {
+  } else if (
+    action === "find" &&
+    !document.activeElement?.closest("dialog[open]")
+  ) {
     $("#sequence-search").focus();
     $("#sequence-search").select();
   } else if (action === "copy-sequence") copySelectionDialog();
@@ -3159,7 +3249,7 @@ for (const kind of ["copy", "cut"])
       state.view === "sequence" &&
       state.selection &&
       !document.activeElement?.matches("input,textarea,[contenteditable]") &&
-      !$("#modal").open
+      !document.activeElement?.closest("dialog[open]")
     ) {
       event.preventDefault();
       copySelectionDialog();
@@ -3190,10 +3280,10 @@ document.addEventListener("keydown", (event) => {
       moves = {
         ArrowLeft: -1,
         ArrowRight: 1,
-        ArrowUp: -60,
-        ArrowDown: 60,
-        PageUp: -600,
-        PageDown: 600,
+        ArrowUp: -(sequenceModel?.rowBases || 60),
+        ArrowDown: sequenceModel?.rowBases || 60,
+        PageUp: -(sequenceModel?.rowBases || 60) * 10,
+        PageDown: (sequenceModel?.rowBases || 60) * 10,
       };
     if (event.key in moves || event.key === "Home" || event.key === "End") {
       event.preventDefault();
@@ -3307,7 +3397,7 @@ document.addEventListener("keydown", (event) => {
     (event.metaKey || event.ctrlKey) &&
     !platform.desktop &&
     event.key.toLowerCase() === "f" &&
-    !$("#modal").open
+    !document.activeElement?.closest("dialog[open]")
   ) {
     event.preventDefault();
     $("#sequence-search").focus();
@@ -3317,7 +3407,7 @@ document.addEventListener("keydown", (event) => {
     (event.metaKey || event.ctrlKey) &&
     event.key.toLowerCase() === "z" &&
     !editable &&
-    !$("#modal").open
+    !document.activeElement?.closest("dialog[open]")
   ) {
     event.preventDefault();
     undo(event.shiftKey);
@@ -3356,9 +3446,9 @@ $("#tools-button").addEventListener("click", () => {
   $("#export-menu").hidden = true;
 });
 function loadExample() {
-  const existing = state.documents.find((d) => d.sourceFormat === "Example");
+  const existing = state.documents.find((d) => d.isDefaultExample);
   if (existing) activate(existing.id);
-  else addRecords([demoRecord()]);
+  else addRecords([{ ...defaultExampleRecord(), isDefaultExample: true }]);
 }
 $("#load-example").addEventListener("click", loadExample);
 $("#paste-sequence").addEventListener("click", () =>
@@ -3377,7 +3467,7 @@ $("#help-button").addEventListener("click", help);
 $("#about-button").addEventListener("click", () =>
   modal(
     "PlasmidCraft",
-    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.3.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The example plasmid is synthetic and intended for demonstrating the interface.</p>`,
+    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.31.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
   ),
 );
 let dragDepth = 0;
@@ -3416,12 +3506,52 @@ $("#modal").addEventListener("close", () => {
   codonUI.cancel();
   snapgeneExportContext = null;
   sequenceToolContext = null;
+  annotationContext = null;
 });
+$("#modal").addEventListener(
+  "click",
+  (event) => {
+    const dialog = $("#modal"),
+      button = event.target.closest("button");
+    if (
+      !button ||
+      button.dataset.action === "close-modal" ||
+      !dialog.dataset.documentId ||
+      dialog.dataset.documentId === active()?.id
+    )
+      return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const message =
+      "The source document changed. Return to the source document tab to use this tool, or close it and reopen for the current document.";
+    const error = $("#modal-error");
+    if (error) error.textContent = message;
+    else toast(message, true);
+  },
+  true,
+);
+let sequenceResizeFrame = 0;
+new ResizeObserver(() => {
+  cancelAnimationFrame(sequenceResizeFrame);
+  sequenceResizeFrame = requestAnimationFrame(() => {
+    if (
+      state.view !== "sequence" ||
+      !sequenceScroller ||
+      sequenceModel?.rowBases === fittedSequenceLineLength()
+    )
+      return;
+    const focused = document.activeElement?.id === "sequence-editor";
+    state.sequenceTarget = sequenceScroller.anchor();
+    sequenceReflow = true;
+    renderMain();
+    if (focused) $("#sequence-editor")?.focus({ preventScroll: true });
+  });
+}).observe($("#main-panel"));
 hydrateIcons();
 loadExample();
 if (platform.desktop) {
   $("#runtime-label").textContent = "Desktop app";
-  $("#version-label").textContent = "Desktop 0.3.0";
+  $("#version-label").textContent = "Desktop 0.31.0";
 }
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
   for (const label of document.querySelectorAll("[data-shortcut]"))

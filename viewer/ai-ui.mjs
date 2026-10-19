@@ -1,4 +1,8 @@
 import {
+  showFloatingDialog,
+  prepareFloatingDialogHeader,
+} from "./floating-dialog.mjs";
+import {
   AI_PROVIDERS,
   AI_WORKFLOWS,
   AI_SYSTEM,
@@ -94,6 +98,7 @@ export class AiUI {
     this.historyEpoch = 0;
     this.includeHistory = false;
     this.connectedHistory = true;
+    this.connectedIncludeDna = true;
     this.provider = "openai";
     this.endpoint = AI_PROVIDERS[0].endpoint;
     this.model = "";
@@ -102,13 +107,14 @@ export class AiUI {
         localStorage.getItem("plasmidcraft.ai.preferences") || "null",
       );
       if (saved && AI_PROVIDERS.some((p) => p.id === saved.provider)) {
+        this.connectedIncludeDna = saved.connectedIncludeDna !== false;
         this.provider = saved.provider;
         this.endpoint = preferenceEndpoint(this.provider, saved.endpoint);
         this.model =
           typeof saved.model === "string" ? saved.model.slice(0, 256) : "";
       }
     } catch {}
-    this.goal = tasks.review;
+    this.goal = "";
     this.includeDna = false;
     this.response = "";
     this.prompt = "";
@@ -131,13 +137,25 @@ export class AiUI {
     this.chatNotice = "";
     this.accountOpen = false;
     this.task = "";
+    document.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (event.target.closest('#ai-settings-dialog [data-ai="connect"]')) {
+          // A model-list response must not move Connect between press and release.
+          clearTimeout(this.modelTimer);
+          this.modelEpoch++;
+          this.modelLoading = false;
+        }
+      },
+      true,
+    );
     document.addEventListener("input", (event) => {
       if (!event.target.closest("#ai-workspace, #ai-settings-dialog")) return;
       this.read();
       if (event.target.id === "ai-response") this.proposal = null;
       if (["ai-key", "ai-endpoint"].includes(event.target.id)) {
         this.invalidateApiModels();
-        if ($("#ai-key")?.value.trim())
+        if (!this.modelManual && $("#ai-key")?.value.trim())
           this.modelTimer = setTimeout(() => this.loadApiModels(), 900);
       }
     });
@@ -150,10 +168,11 @@ export class AiUI {
         clearTimeout(this.modelTimer);
         if (
           event.target.value.trim() &&
+          !this.modelManual &&
           !this.apiModels.length &&
           !this.modelError
         )
-          this.loadApiModels();
+          this.modelTimer = setTimeout(() => this.loadApiModels(), 900);
       } else if (event.target.id === "ai-chatgpt-account") {
         this.read();
         this.accountId = event.target.value;
@@ -183,7 +202,11 @@ export class AiUI {
     for (const key of ["model", "endpoint", "goal", "response"])
       if ($("#ai-" + key)) this[key] = $("#ai-" + key).value;
     if ($("#ai-remember")) this.remember = $("#ai-remember").checked;
-    if ($("#ai-dna")) this.includeDna = $("#ai-dna").checked;
+    if ($("#ai-dna")) {
+      if ($("#ai-workspace")?.dataset.connected)
+        this.connectedIncludeDna = $("#ai-dna").checked;
+      else this.includeDna = $("#ai-dna").checked;
+    }
     if ($("#ai-history")) {
       if ($("#ai-workspace")?.dataset.connected)
         this.connectedHistory = $("#ai-history").checked;
@@ -204,6 +227,7 @@ export class AiUI {
           provider: this.provider,
           endpoint: preferenceEndpoint(this.provider, this.endpoint),
           model: this.model,
+          connectedIncludeDna: this.connectedIncludeDna,
         }),
       );
     } catch {}
@@ -284,7 +308,7 @@ export class AiUI {
       document.body.append(dialog);
     }
     this.renderSettings();
-    if (!dialog.open) dialog.showModal();
+    if (!dialog.open) showFloatingDialog(dialog);
     this.loadAccountStatus();
     if (
       this.connection &&
@@ -305,6 +329,7 @@ export class AiUI {
     $("#ai-settings-dialog").innerHTML =
       `<div class="modal-header"><h2 id="ai-settings-title">AI accounts and models</h2>${button("Done", "settings-close")}</div><div class="modal-body"><details id="ai-connection-details" open><summary>Connection and model</summary><p>Configure this once, then use Internal AI Operations for conversations and direct app operations. Provider, model and endpoint preferences are remembered on this device. Remembered API keys are stored in macOS Keychain and reconnect automatically when the app starts. No prompt or DNA is sent during reconnect.</p><p class="analysis-note">API keys use the provider’s API billing. ChatGPT login uses eligible account access; other website accounts use copy/paste.</p><details id="ai-account-details" ${this.accountOpen || this.provider === "chatgpt" ? "open" : ""}><summary>ChatGPT account login</summary>${this.chatGPTPanel()}</details><div class="ai-controls"><label>Provider<select id="ai-provider" ${locked ? "disabled" : ""}>${AI_PROVIDERS.map((p) => `<option value="${p.id}" ${p.id === this.provider ? "selected" : ""}>${e(p.name)}</option>`).join("")}</select></label><label>API base URL<input id="ai-endpoint" value="${e(this.endpoint)}" ${this.provider !== "compatible" || locked ? "disabled" : ""}></label>${this.provider === "chatgpt" ? this.chatGPTModelControl(disabled) : this.apiModelControl(disabled)}${!this.connection && this.provider !== "chatgpt" ? `<label>API key<input id="ai-key" type="password" autocomplete="off" spellcheck="false" ${!this.api.platform.desktop ? "disabled" : ""}></label>` : ""}</div>${!this.connection && this.provider !== "chatgpt" ? `<label class="check-label"><input id="ai-remember" type="checkbox" ${this.remember ? "checked" : ""} ${disabled}>Remember on this device (macOS Keychain)</label>` : ""}<div class="wf-actions">${button(this.remember ? "Connect and remember" : "Connect for this session", "connect", this.api.platform.desktop && !locked && this.provider !== "chatgpt" ? "" : "disabled")}${button(this.provider === "chatgpt" ? "Disconnect assistant (keep saved session)" : "Disconnect for now", "disconnect", this.connection && !disabled ? "" : "disabled")}${button(this.provider === "chatgpt" ? "Test model (uses plan quota)" : "Test connection (small API request)", "test", this.connection && !disabled && (this.provider !== "chatgpt" || this.connection.planEnabled) ? "" : "disabled")}${this.savedConnection ? button("Forget saved connection", "forget", disabled) : ""}${provider.dashboard ? button("Open provider API-key page", "dashboard") : ""}</div><p id="ai-connection-status">${this.connection ? `${this.provider === "chatgpt" ? `ChatGPT account: ${e(this.accounts.find((a) => a.id === this.connection.accountId)?.label || this.connection.accountId)} · ${this.connection.planEnabled ? "Plan permission granted. Choose a model." : "Plan permission missing; reauthorize before use."}` : `Configured: ${e(this.connection.provider)} at ${e(this.connection.endpoint)}. ${this.connection.remembered ? " Saved in macOS Keychain." : " Session only."} Sending a request verifies credentials/model access.`}` : this.api.platform.desktop ? (this.savedConnection ? "Disconnected for now. The saved API connection will reconnect at next app launch; use Forget saved connection to remove it." : "Disconnected. Enable Remember on this device to save the API connection securely in macOS Keychain.") : "Development UI preview. Open the packaged desktop app to connect a provider."}</p></details><p class="analysis-note">${e(this.connectionNotice)}</p><p role="status">${this.restoring ? "Restoring saved API connection…" : this.pending ? "Waiting for provider…" : ""}</p><p class="modal-error" role="alert">${e(this.error)}</p>${this.authBusy || this.pending ? button("Cancel sign-in / request", "cancel") : ""}</div>`;
     if ($("#ai-key")) $("#ai-key").value = key;
+    prepareFloatingDialogHeader($("#ai-settings-dialog"));
   }
   refreshContext() {
     if (!this.open) return;
@@ -687,16 +712,6 @@ export class AiUI {
       this.model &&
       !locked &&
       (this.provider !== "chatgpt" || this.connection.planEnabled);
-    const labels = {
-      review: "Review plasmid",
-      design: "Design plasmid",
-      gibson: "Gibson cloning",
-      golden: "Golden Gate cloning",
-      primers: "PCR primers",
-      annotation: "Feature annotation",
-      codons: "Codon optimization",
-      other: "Other tasks",
-    };
     const templates = (this.api.documents?.() || [])
       .filter((d) => d.id !== this.api.active()?.id && !d.trace)
       .map(
@@ -711,21 +726,24 @@ export class AiUI {
       openDetails = [
         ...panel.querySelectorAll(".ai-connected-composer details[open]"),
       ].map((el) => el.id || el.className);
-    panel.innerHTML = `<div id="ai-workspace" data-connected="true" data-ai-view="conversation"><div class="ai-connection-banner"><span class="ai-connection-badge ${this.connection ? "configured" : ""}">${this.connection ? "Connected" : "Not connected"}</span><span id="ai-summary-detail">${e(this.connectionSummary())}</span></div><nav class="ai-section-nav" aria-label="AI assistant sections">${button("Internal AI Operations", "navigate-design")}${button("External AI", "navigate-external")}</nav><section class="ai-connected-composer" aria-labelledby="ai-input-heading"><h3 id="ai-input-heading">Message input</h3><div class="ai-composer-fields"><textarea id="ai-goal" aria-labelledby="ai-input-heading" placeholder="Describe your design or ask a question…" rows="4" ${disabled}>${e(this.goal)}</textarea><label>Workflow prompt<select id="ai-task" ${disabled}><option value="">Choose a starting point…</option>${Object.keys(
-      tasks,
-    )
-      .map(
-        (t) =>
-          `<option value="${t}" ${this.task === t ? "selected" : ""}>${e(labels[t])}</option>`,
-      )
-      .join(
-        "",
-      )}</select></label><label class="check-label"><input id="ai-dna" type="checkbox" ${this.includeDna ? "checked" : ""} ${disabled}>Attach document DNA and oligo results</label><details class="ai-context-details"><summary>Document context and templates</summary><div class="ai-live-context"><strong>Current editor context</strong><p id="ai-live-context"></p><p id="ai-context-note" class="analysis-note"></p></div>${templates ? `<details class="ai-template-picker"><summary>Additional DNA templates</summary><p class="analysis-note">Select up to two open templates for cloning. Only checked templates are included in the request; the DNA attachment checkbox also applies to them.</p>${templates}</details>` : ""}</details><details id="ai-prompt-details"><summary>Exact outgoing prompt</summary><textarea id="ai-outgoing" rows="6" readonly>${e(this.prompt)}</textarea></details></div><div class="wf-actions">${button("Send", "send", canSend ? "" : "disabled")}${button("Stop", "cancel", this.pending ? "" : "disabled")}${button("Preview outgoing prompt", "prepare", disabled)}</div></section><section id="ai-operations" class="ai-internal-section" tabindex="-1" aria-labelledby="ai-operations-heading"><h3 id="ai-operations-heading">Operations and results</h3><div class="ai-connected-scroll" id="ai-operations-scroll"><p role="status">${this.pending ? "Working on a separate copy…" : e(this.operationStatus || "No operations yet.")}</p><ol>${this.operations.map((o) => `<li class="ai-operation ${e(o.status)}"><strong>${e(String(o.tool || "Operation").replaceAll("_", " "))}</strong> · ${e(o.status)}<p>${e(o.detail)}</p></li>`).join("")}</ol>${this.resultDocuments.map((d, i) => `<div class="ai-result-link"><strong>${e(d.name)}</strong> · ${d.sequence.length.toLocaleString()} bp ${button("Open document", "result-" + i)}${button("Save .pcraft…", "save-result-" + i)}</div>`).join("")}${this.toolOutputs.map((o) => `<details><summary>${e(o.name)}</summary>${o.primers.map((p) => `<p>${e(p.name)}<br><code class="table-sequence">${e(p.sequence)}</code></p>`).join("")}</details>`).join("")}<p id="ai-error" class="modal-error" role="alert">${e(this.error)}</p></div></section><section id="ai-history-section" class="ai-internal-section" aria-labelledby="ai-history-heading"><h3 id="ai-history-heading">Conversation history</h3><div class="ai-connected-scroll" id="ai-conversation-scroll"><section class="ai-conversation-log" aria-label="Conversation history">${this.messages.map((m) => `<article class="ai-message ${m.role}"><strong>${m.role === "user" ? "You" : "AI"}</strong><p>${e(m.text)}</p></article>`).join("") || "<p>Describe your design goal. The assistant can use local tools and open the result as a new plasmid document.</p>"}</section><details><summary>History and sharing settings</summary><label class="check-label"><input type="checkbox" id="ai-history" ${this.connectedHistory ? "checked" : ""} ${disabled}>Include recent conversation in the next request</label><p class="analysis-note">History can contain earlier DNA. Local tools can use the active document and explicitly checked additional templates. Document DNA and tool-generated oligos are attached only when enabled above; names, feature locations and tool summaries are included. Messages and selected history are sent as written and can contain pasted DNA. Send authorizes relevant local operations on a copy. Results open as unsaved documents.</p><p class="analysis-note">${e(this.historyNotice || "Conversation history is stored locally per document.")}</p>${button("New conversation", "new-chat", disabled)}${button("Export conversation", "export-conversation", disabled)}</details></div></section></div>`;
+    panel.innerHTML = `<div id="ai-workspace" data-connected="true" data-ai-view="conversation"><div class="ai-connection-banner"><span class="ai-connection-badge ${this.connection ? "configured" : ""}">${this.connection ? "Connected" : "Not connected"}</span><span id="ai-summary-detail">${e(this.connectionSummary())}</span></div><nav class="ai-section-nav" aria-label="AI assistant sections">${button("Internal AI Operations", "navigate-design")}${button("External AI", "navigate-external")}</nav><section class="ai-connected-composer" aria-labelledby="ai-input-heading"><h3 id="ai-input-heading">Message input</h3><div class="ai-composer-fields"><textarea id="ai-goal" aria-labelledby="ai-input-heading" placeholder="Describe your design or ask a question…" rows="4" ${disabled}>${e(this.goal)}</textarea><label class="check-label"><input id="ai-dna" type="checkbox" ${this.connectedIncludeDna ? "checked" : ""} ${disabled}>Share active document DNA with connected AI</label><p class="analysis-note">Send lets AI inspect the attached sequence and run local tools on a new copy. Your original stays unchanged. No file is saved automatically.</p><details class="ai-context-details"><summary>Document context and templates</summary><div class="ai-live-context"><strong>Current editor context</strong><p id="ai-live-context"></p><p id="ai-context-note" class="analysis-note"></p></div>${templates ? `<details class="ai-template-picker"><summary>Additional DNA templates</summary><p class="analysis-note">Select up to two open templates for cloning. Only checked templates are included in the request; the DNA attachment checkbox also applies to them.</p>${templates}</details>` : ""}</details></div><div class="wf-actions">${button("Send", "send", canSend ? "" : "disabled")}${button("Stop", "cancel", this.pending ? "" : "disabled")}</div></section><section id="ai-operations" class="ai-internal-section" tabindex="-1" aria-labelledby="ai-operations-heading"><h3 id="ai-operations-heading">Operations and results</h3><div class="ai-connected-scroll" id="ai-operations-scroll"><p role="status">${this.pending ? "Working on a separate copy…" : e(this.operationStatus || "No operations yet.")}</p><ol>${this.operations.map((o) => `<li class="ai-operation ${e(o.status)}"><strong>${e(String(o.tool || "Operation").replaceAll("_", " "))}</strong> · ${e(o.status)}<p>${e(o.detail)}</p></li>`).join("")}</ol>${this.resultDocuments.map((d, i) => `<div class="ai-result-link"><strong>${e(d.name)}</strong> · ${d.sequence.length.toLocaleString()} bp ${button("Open document", "result-" + i)}${button("Save .pcraft…", "save-result-" + i)}</div>`).join("")}${this.toolOutputs.map((o) => `<details><summary>${e(o.name)}</summary>${o.primers.map((p) => `<p>${e(p.name)}<br><code class="table-sequence">${e(p.sequence)}</code></p>`).join("")}</details>`).join("")}<p id="ai-error" class="modal-error" role="alert">${e(this.error)}</p></div></section><section id="ai-history-section" class="ai-internal-section" aria-labelledby="ai-history-heading"><h3 id="ai-history-heading">Conversation history</h3><div class="ai-connected-scroll" id="ai-conversation-scroll"><section class="ai-conversation-log" aria-label="Conversation history">${
+      [...this.messages]
+        .reverse()
+        .map(
+          (m) =>
+            `<article class="ai-message ${m.role}"><strong>${m.role === "user" ? "You" : "AI"}</strong><p>${e(m.text)}</p></article>`,
+        )
+        .join("") ||
+      "<p>Describe your design goal. The assistant can use local tools and open the result as a new plasmid document.</p>"
+    }</section><details><summary>History and sharing settings</summary><label class="check-label"><input type="checkbox" id="ai-history" ${this.connectedHistory ? "checked" : ""} ${disabled}>Include recent conversation in the next request</label><p class="analysis-note">History can contain earlier DNA. Local tools can use the active document and explicitly checked additional templates. Document DNA and tool-generated oligos are attached only when enabled above; names, feature locations and tool summaries are included. Messages and selected history are sent as written and can contain pasted DNA. Send authorizes relevant local operations on a copy. Results open as unsaved documents.</p><p class="analysis-note">${e(this.historyNotice || "Conversation history is stored locally per document.")}</p>${button("New conversation", "new-chat", disabled)}${button("Export conversation", "export-conversation", disabled)}</details></div></section></div>`;
     $("#ai-panel").hidden = false;
     document.body.classList.add("ai-panel-open");
     $("#ai-assistant-button")?.setAttribute("aria-expanded", "true");
     this.refreshContext();
-    if (scroll !== undefined) $("#ai-conversation-scroll").scrollTop = scroll;
+    if (scroll !== undefined)
+      $("#ai-conversation-scroll").scrollTop =
+        this.renderedMessageCount === this.messages.length ? scroll : 0;
+    this.renderedMessageCount = this.messages.length;
     if (operationScroll !== undefined)
       $("#ai-operations-scroll").scrollTop = operationScroll;
     for (const el of panel.querySelectorAll(".ai-connected-composer details"))
@@ -745,7 +763,7 @@ export class AiUI {
       key = this.historyKey;
     const workspace = new ConnectedWorkspace(source, {
       libraries: this.api.libraries?.() || [],
-      includeDna: this.includeDna,
+      includeDna: this.connectedIncludeDna,
       hosts: CODON_USAGE.map(({ id, label }) => ({ id, label })),
       selection: this.context.selection,
       templates: (this.api.documents?.() || []).filter(
@@ -764,6 +782,7 @@ export class AiUI {
     const epoch = ++this.epoch,
       provider = this.connection.provider,
       model = this.model.trim();
+    let formatRetries = 0;
     let transcript =
       aiPrompt(goal, workspace.context()) +
       (history.length
@@ -782,7 +801,17 @@ export class AiUI {
         });
         if (epoch !== this.epoch) return;
         this.checkSource();
-        const reply = connectedReply(aiResponseText(provider, response));
+        let reply;
+        try {
+          reply = connectedReply(aiResponseText(provider, response));
+        } catch (error) {
+          if (formatRetries++ || round === 5) throw error;
+          transcript +=
+            "\nProtocol correction: Your last response was not one valid operation envelope. Return ONLY one JSON object with message, operations and continue. No operations from that response were executed. Do not place JSON in message or repeat the envelope.";
+          this.operationStatus =
+            "Retrying an unreadable tool response; no operations from it were executed.";
+          continue;
+        }
         if (reply.message)
           this.messages.push({ role: "assistant", text: reply.message });
         const results = [];
@@ -819,7 +848,9 @@ export class AiUI {
           }));
           this.operationStatus = records.length
             ? `Created ${records.length} new document. Save .pcraft to keep the design.`
-            : "Analysis completed; no new document was required.";
+            : workspace.operations.length
+              ? "Local analysis completed; no document changes were made."
+              : "AI replied without running local tools. No document changes were made.";
           this.goal = "";
           this.historyDocId = this.api.active()?.id || "empty";
           const outputKey = await this.conversationKey(this.api.active());
@@ -917,7 +948,7 @@ export class AiUI {
     else {
       const workspace = new ConnectedWorkspace(this.context.source, {
         libraries: this.api.libraries?.() || [],
-        includeDna: this.includeDna,
+        includeDna: this.connectedIncludeDna,
         selection: this.context.selection,
         templates: (this.api.documents?.() || []).filter(
           (d) => d.id !== this.context.id && this.attachedIds.has(d.id),
@@ -1154,7 +1185,6 @@ export class AiUI {
         this.prompt = "";
         this.goal = "";
         this.task = "";
-        this.includeDna = false;
         this.proposal = null;
         this.context = null;
         this.operations = [];

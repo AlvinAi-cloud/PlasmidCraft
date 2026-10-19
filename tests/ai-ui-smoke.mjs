@@ -1,14 +1,16 @@
 // Runs the real UI with a simulated native transport; no paid API calls or real credentials.
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { chromium, testOutput } from "./ui-browser.mjs";
+import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const browser = await chromium.launch({
   headless: true,
   ...(process.env.PLASMIDCRAFT_CHROME
     ? { executablePath: process.env.PLASMIDCRAFT_CHROME }
     : {}),
 });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const page = await fixturePage(browser, {
+  viewport: { width: 1440, height: 1000 },
+});
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 let checks = 0;
@@ -134,7 +136,7 @@ try {
   }
   await page.locator("#ai-assistant-button").click();
   assert.equal(await page.locator("#ai-workspace #ai-key").count(), 0);
-  assert.equal(await page.locator("#ai-dna").isChecked(), false);
+  assert.equal(await page.locator("#ai-dna").isChecked(), true);
   assert.equal(await page.locator("#ai-key").isVisible(), false);
   await click("navigate-connection");
   assert.equal(
@@ -193,6 +195,7 @@ try {
   );
   checks++;
   await page.evaluate(() => window.__aiMock.menu("ai-workflow"));
+  await click("navigate-external");
   await page.locator("#ai-task").selectOption("golden");
   assert.match(await page.locator("#ai-goal").inputValue(), /Golden Gate/);
   checks++;
@@ -206,6 +209,7 @@ try {
   await click("prepare");
   assert.match(await page.locator("#ai-outgoing").inputValue(), /"sequence"/);
   checks++;
+  await click("navigate-design");
   await page.evaluate(() => {
     window.__aiMock.response = JSON.stringify({
       message: "Created by local tools",

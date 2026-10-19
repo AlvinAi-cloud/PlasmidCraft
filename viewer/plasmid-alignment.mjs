@@ -1,6 +1,6 @@
 /** Full-molecule comparison: global affine gaps, circular query origin, both strands. */
 import { normalizeSequence, reverseComplement } from "./core.mjs";
-import { extractDna, rotateDna } from "./sequence-tools.mjs";
+import { editDna, extractDna, rotateDna } from "./sequence-tools.mjs";
 import { mod } from "./workflow-common.mjs";
 const NEG = -1_000_000_000;
 const LIMIT = 200_000;
@@ -196,6 +196,7 @@ export function comparePlasmids(
     offset = 0,
     circular = queryRecord.topology === "circular",
     band = 128,
+    adaptiveBand = false,
   } = {},
 ) {
   const reference = dnaRecord(referenceRecord),
@@ -212,6 +213,22 @@ export function comparePlasmids(
     );
   if (!Number.isInteger(band) || band < 8 || band > 4096)
     throw new Error("Use an alignment band from 8 to 4,096 bases.");
+  if (automatic && adaptiveBand) {
+    const affordable = Math.min(
+      4096,
+      Math.floor((32_000_000 / (query.sequence.length + 1) - 1) / 2),
+    );
+    band = Math.max(
+      8,
+      Math.min(
+        affordable,
+        Math.max(
+          128,
+          Math.abs(reference.sequence.length - query.sequence.length) + 64,
+        ),
+      ),
+    );
+  }
   const options = {
     automatic: Boolean(automatic),
     circular: Boolean(circular),
@@ -503,4 +520,198 @@ export function orientedPlasmidCopy(source, report) {
     `Whole-plasmid alignment: ${report.result.strand === -1 ? "reverse complement" : "forward"}; oriented origin offset ${report.result.offset}; reference ${report.reference.name}. Sources unchanged.`,
   );
   return record;
+}
+
+/** Produce an independent query-sequence document with reference annotations remapped through edits. */
+export function annotatedQueryCopy(source, report) {
+  report = cleanComparison(report);
+  if (
+    source.sequence !== report.reference.sequence ||
+    source.topology !== report.reference.topology
+  )
+    throw new Error(
+      "The reference changed. Re-align before transferring annotations.",
+    );
+  const query = orient(
+    report.query.sequence,
+    report.result.strand,
+    report.result.offset,
+  );
+  let ri = 0,
+    qi = 0,
+    pending = null;
+  const edits = [];
+  for (const run of cigarRuns(report.result.cigar)) {
+    if (run.op === "=") {
+      if (pending) {
+        edits.push(pending);
+        pending = null;
+      }
+      ri += run.length;
+      qi += run.length;
+    } else {
+      pending ||= { start: ri, end: ri, insert: "" };
+      if (run.op !== "D") {
+        pending.insert += query.slice(qi, qi + run.length);
+        qi += run.length;
+      }
+      if (run.op !== "I") {
+        ri += run.length;
+        pending.end = ri;
+      }
+    }
+  }
+  if (pending) edits.push(pending);
+  if (edits.length > 1000)
+    throw new Error(
+      "Too many difference groups for annotation transfer. Create an oriented query copy instead.",
+    );
+  let record = {
+    name: source.name,
+    description: source.description || "",
+    sequence: source.sequence,
+    topology: source.topology,
+    features: structuredClone(source.features || []),
+    primers: structuredClone(source.primers || []),
+    comments: [...(source.comments || [])],
+    warnings: [...(source.warnings || [])],
+  };
+  for (const edit of edits.reverse())
+    if (source.sequence.slice(edit.start, edit.end) !== edit.insert)
+      record = editDna(record, edit).record;
+  if (record.sequence !== query)
+    throw new Error(
+      "Annotation transfer did not reconstruct the aligned query.",
+    );
+  const markers = alignmentDifferenceFeatures(report, record.features);
+  record.features.push(...markers);
+  record.name = `${report.query.name}_annotated`;
+  record.sourceFormat = "Derived DNA";
+  record.sourceFile = `${record.name}.pcraft`;
+  record.comments.push(
+    `Aligned query copy annotated from ${source.name}; ${edits.length} grouped differences remapped; ${markers.length} difference/uncertainty markers added. Sources preserved.`,
+  );
+  if (markers.some((f) => f.qualifiers.alignment_operation[0] === "D"))
+    record.comments.push(
+      "Deletion labels are one-base junction markers; deleted reference bases are absent from this query copy.",
+    );
+  record.warnings.push(
+    "Annotations were transferred from the reference through the alignment; review features crossing differences. This does not confirm the clone experimentally.",
+  );
+  return record;
+}
+/** Coordinates belong to the oriented query copy, with original reference alleles retained. */
+export function alignmentDifferenceFeatures(raw, existingFeatures = []) {
+  const report = cleanComparison(raw);
+  const query = orient(
+    report.query.sequence,
+    report.result.strand,
+    report.result.offset,
+  );
+  const runs = cigarRuns(report.result.cigar);
+  if (runs.filter((r) => r.op !== "=").length > 1000)
+    throw new Error(
+      "More than 1,000 difference regions require an oriented query copy and inspection in the alignment report.",
+    );
+  const used = new Set(existingFeatures.map((f) => f.id));
+  const features = [];
+  let ri = 0,
+    qi = 0;
+  for (const run of runs) {
+    const ref =
+      run.op === "I"
+        ? ""
+        : report.reference.sequence.slice(ri, ri + run.length);
+    const alt = run.op === "D" ? "" : query.slice(qi, qi + run.length);
+    if (run.op !== "=") {
+      const referenceLocation =
+        run.op === "I"
+          ? ri === 0
+            ? "before reference base 1"
+            : ri === report.reference.sequence.length
+              ? `after reference base ${ri}`
+              : `between reference bases ${ri} and ${ri + 1}`
+          : `${ri + 1}–${ri + run.length}`;
+      const anchor =
+        qi === query.length && report.reference.topology === "circular"
+          ? 0
+          : Math.min(qi, query.length - 1);
+      const start = run.op === "D" ? anchor : qi,
+        end = run.op === "D" ? anchor + 1 : qi + run.length;
+      const junction =
+        run.op === "D"
+          ? qi === query.length && report.reference.topology !== "circular"
+            ? `after copy base ${query.length}`
+            : `before copy base ${anchor + 1}`
+          : "";
+      const name =
+        run.op === "X"
+          ? run.length <= 8
+            ? `Substitution ${ref}→${alt} (ref ${ri + 1})`
+            : `Substitution ${run.length} bp (ref ${referenceLocation})`
+          : run.op === "I"
+            ? `Insertion +${run.length} bp`
+            : run.op === "D"
+              ? `Deletion −${run.length} bp (junction)`
+              : `Uncertain DNA ${run.length} bp`;
+      const kind = {
+        X: "Substitution",
+        I: "Insertion",
+        D: "Deletion",
+        N: "Uncertain DNA (not a confirmed mutation)",
+      }[run.op];
+      let id = `alignment-difference-${features.length + 1}`;
+      while (used.has(id)) id += "-new";
+      used.add(id);
+      features.push({
+        id,
+        name,
+        type: "variation",
+        strand: 0,
+        segments: [{ start, end }],
+        color: { X: "#ce6464", I: "#d4a33f", D: "#9465b5", N: "#8b949e" }[
+          run.op
+        ],
+        qualifiers: {
+          note: [
+            `${kind} relative to ${report.reference.name}; reference ${referenceLocation}.`,
+            run.op === "D"
+              ? `Deleted bases are absent. This one-base annotation marks the junction ${junction}; the marked base itself is not a substitution.`
+              : `Query copy bases ${start + 1}–${end}.`,
+            ...(run.op === "N"
+              ? ["Ambiguous bases prevent a definite sequence comparison here."]
+              : []),
+          ],
+          alignment_operation: [run.op],
+          comparison_reference: [report.reference.name],
+          reference_location: [referenceLocation],
+          reference_sequence: [ref],
+          alternate_sequence: [alt],
+          query_copy_location: [
+            run.op === "D" ? junction : `${start + 1}–${end}`,
+          ],
+        },
+      });
+    }
+    if (run.op !== "I") ri += run.length;
+    if (run.op !== "D") qi += run.length;
+  }
+  return features;
+}
+export function comparisonReferenceColumn(report, position) {
+  const index = position - 1;
+  if (
+    !Number.isInteger(index) ||
+    index < 0 ||
+    index >= report.reference.sequence.length
+  )
+    throw new Error("Enter a reference base within the sequence.");
+  let ref = 0,
+    column = 0;
+  for (const run of cigarRuns(report.result.cigar)) {
+    if (run.op !== "I" && index < ref + run.length) return column + index - ref;
+    if (run.op !== "I") ref += run.length;
+    column += run.length;
+  }
+  return 0;
 }

@@ -11,7 +11,7 @@ root = Path(__file__).resolve().parent.parent
 cargo = Path(os.environ.get("CARGO_HOME", Path.home() / ".cargo"))
 registries = list((cargo / "registry/src").glob("*"))
 lock = tomllib.loads((root / "src-tauri/Cargo.lock").read_text())
-parts = ["""PlasmidCraft 0.3 — third-party notices
+parts = ["""PlasmidCraft — third-party notices
 
 PlasmidCraft application code: MIT (see LICENSE).
 Tauri and its Rust dependencies retain their respective licenses below.

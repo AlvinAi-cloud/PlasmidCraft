@@ -124,7 +124,7 @@ test("layout offsets reserve all strand-specific lanes, primer rows, CDS and six
     cds: [f],
     frames: [1, 2, 3, -1, -2, -3],
   });
-  assert.equal(offsets[1], 24 + 24 + 18 + 22 + 2 * (22 + 4) + 54 + 42 + 6 * 42);
+  assert.equal(offsets[1], 24 + 24 + 18 + 22 + 2 * (22 + 4) + 54 + 56 + 6 * 42);
   assert.equal(offsets[2] - offsets[1], 24 + 24 + 18 + 22 + 6 * 42);
 });
 test("saved mutagenic pairs retain exact source binding arms and full tail identities", () => {
@@ -145,4 +145,69 @@ test("saved mutagenic pairs retain exact source binding arms and full tail ident
     assert.equal(featureSequence(r, p.sites[0]), p.annealingSequence);
   }
   assert.equal(sequencePrimerTracks({ ...r, primers: ps })[0].tail, "NNK");
+});
+
+test("variable-width rows retain feature and translation lanes across new row boundaries", () => {
+  const f = { strand: 1, segments: [{ start: 20, end: 75 }] };
+  const small = sequenceDisplayOffsets(180, {
+    rowBases: 30,
+    features: [f],
+    cds: [f],
+  });
+  const wide = sequenceDisplayOffsets(180, {
+    rowBases: 90,
+    features: [f],
+    cds: [f],
+  });
+  assert.equal(small.length, 7);
+  assert.equal(wide.length, 3);
+  assert.ok(small[1] > small[6] - small[5]);
+  assert.ok(wide[1] > wide[2] - wide[1]);
+});
+
+test("CDS rulers number every fifth biological residue across rows, strands and joined codons", () => {
+  for (const strand of [1, -1]) {
+    const residues = Array.from({ length: 30 }, (_, i) => {
+      const position = strand === 1 ? 1 + i * 3 : 88 - i * 3;
+      return {
+        aminoAcid: "A",
+        residue: i + 1,
+        position,
+        codon: [position - 1, position, position + 1],
+      };
+    });
+    // A split codon must receive one number, at its amino acid label.
+    residues[0].codon = strand === 1 ? [0, 1, 8] : [89, 88, 81];
+    const track = { id: "cds", name: "CDS", strand, code: 1, residues };
+    for (const format of ["one", "three"]) {
+      const rows = [0, 40, 80].map((offset) =>
+        renderSequenceProteins([track], offset, 40, { format }),
+      );
+      const numbers = [
+        ...rows.join("").matchAll(/data-residue-number="(\d+)"/g),
+      ].map((m) => +m[1]);
+      assert.deepEqual(
+        numbers.sort((a, b) => a - b),
+        [1, 6, 11, 16, 21, 26],
+      );
+      for (let i = 0; i < rows.length; i++) {
+        for (const r of residues.filter(
+          (r) =>
+            (r.residue - 1) % 5 === 0 &&
+            r.position >= i * 40 &&
+            r.position < (i + 1) * 40,
+        )) {
+          assert.ok(
+            rows[i].includes(
+              `data-residue-number="${r.residue}" style="--pos:${r.position - i * 40};`,
+            ),
+          );
+        }
+      }
+    }
+    assert.doesNotMatch(
+      renderSequenceProteins([track], 0, 90, { frames: true }),
+      /data-residue-number/,
+    );
+  }
 });
