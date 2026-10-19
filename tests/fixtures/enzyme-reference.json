@@ -1,0 +1,2237 @@
+{
+  "source": "Biopython 1.86 / REBASE 404 (2024), independent reference offsets; TspRI expanded-flank equivalence handled in test",
+  "enzymes": [
+    {
+      "name": "AanI",
+      "recognition": "TTATAA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "AarI",
+      "recognition": "CACCTGC",
+      "top": 11,
+      "bottom": 15
+    },
+    {
+      "name": "AasI",
+      "recognition": "GACNNNNNNGTC",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "AatII",
+      "recognition": "GACGTC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "Acc65I",
+      "recognition": "GGTACC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AccI",
+      "recognition": "GTMKAC",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "AciI",
+      "recognition": "CCGC",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "AclI",
+      "recognition": "AACGTT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "AcuI",
+      "recognition": "CTGAAG",
+      "top": 22,
+      "bottom": 20
+    },
+    {
+      "name": "AdeI",
+      "recognition": "CACNNNGTG",
+      "top": 6,
+      "bottom": 3
+    },
+    {
+      "name": "AfeI",
+      "recognition": "AGCGCT",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "AflII",
+      "recognition": "CTTAAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AflIII",
+      "recognition": "ACRYGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AgeI",
+      "recognition": "ACCGGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AhdI",
+      "recognition": "GACNNNNNGTC",
+      "top": 6,
+      "bottom": 5
+    },
+    {
+      "name": "AjiI",
+      "recognition": "CACGTC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "AleI",
+      "recognition": "CACNNNNGTG",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "AluI",
+      "recognition": "AGCT",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "Alw21I",
+      "recognition": "GWGCWC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "Alw26I",
+      "recognition": "GTCTC",
+      "top": 6,
+      "bottom": 10
+    },
+    {
+      "name": "Alw44I",
+      "recognition": "GTGCAC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AlwI",
+      "recognition": "GGATC",
+      "top": 9,
+      "bottom": 10
+    },
+    {
+      "name": "AlwNI",
+      "recognition": "CAGNNNCTG",
+      "top": 6,
+      "bottom": 3
+    },
+    {
+      "name": "ApaI",
+      "recognition": "GGGCCC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "ApaLI",
+      "recognition": "GTGCAC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "ApeKI",
+      "recognition": "GCWGC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "ApoI",
+      "recognition": "RAATTY",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AscI",
+      "recognition": "GGCGCGCC",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "AseI",
+      "recognition": "ATTAAT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "AsiSI",
+      "recognition": "GCGATCGC",
+      "top": 5,
+      "bottom": 3
+    },
+    {
+      "name": "AvaI",
+      "recognition": "CYCGRG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "AvaII",
+      "recognition": "GGWCC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "AvrII",
+      "recognition": "CCTAGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BaeGI",
+      "recognition": "GKGCMC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BamHI",
+      "recognition": "GGATCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BanI",
+      "recognition": "GGYRCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BanII",
+      "recognition": "GRGCYC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BauI",
+      "recognition": "CACGAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BbsI",
+      "recognition": "GAAGAC",
+      "top": 8,
+      "bottom": 12
+    },
+    {
+      "name": "BbvCI",
+      "recognition": "CCTCAGC",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "BbvI",
+      "recognition": "GCAGC",
+      "top": 13,
+      "bottom": 17
+    },
+    {
+      "name": "BccI",
+      "recognition": "CCATC",
+      "top": 9,
+      "bottom": 10
+    },
+    {
+      "name": "BceAI",
+      "recognition": "ACGGC",
+      "top": 17,
+      "bottom": 19
+    },
+    {
+      "name": "BciVI",
+      "recognition": "GTATCC",
+      "top": 12,
+      "bottom": 11
+    },
+    {
+      "name": "BclI",
+      "recognition": "TGATCA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BcnI",
+      "recognition": "CCSGG",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "BcoDI",
+      "recognition": "GTCTC",
+      "top": 6,
+      "bottom": 10
+    },
+    {
+      "name": "BcuI",
+      "recognition": "ACTAGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BfaI",
+      "recognition": "CTAG",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "BfmI",
+      "recognition": "CTRYAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BfoI",
+      "recognition": "RGCGCY",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BfuAI",
+      "recognition": "ACCTGC",
+      "top": 10,
+      "bottom": 14
+    },
+    {
+      "name": "BfuI",
+      "recognition": "GTATCC",
+      "top": 12,
+      "bottom": 11
+    },
+    {
+      "name": "BglI",
+      "recognition": "GCCNNNNNGGC",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "BglII",
+      "recognition": "AGATCT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BlpI",
+      "recognition": "GCTNAGC",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "Bme1390I",
+      "recognition": "CCNGG",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "BmgBI",
+      "recognition": "CACGTC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "BmrI",
+      "recognition": "ACTGGG",
+      "top": 11,
+      "bottom": 10
+    },
+    {
+      "name": "BmsI",
+      "recognition": "GCATC",
+      "top": 10,
+      "bottom": 14
+    },
+    {
+      "name": "BmtI",
+      "recognition": "GCTAGC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BoxI",
+      "recognition": "GACNNNNGTC",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "BpiI",
+      "recognition": "GAAGAC",
+      "top": 8,
+      "bottom": 12
+    },
+    {
+      "name": "BpmI",
+      "recognition": "CTGGAG",
+      "top": 22,
+      "bottom": 20
+    },
+    {
+      "name": "Bpu10I",
+      "recognition": "CCTNAGC",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "Bpu1102I",
+      "recognition": "GCTNAGC",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "BpuEI",
+      "recognition": "CTTGAG",
+      "top": 22,
+      "bottom": 20
+    },
+    {
+      "name": "BsaAI",
+      "recognition": "YACGTR",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "BsaBI",
+      "recognition": "GATNNNNATC",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "BsaHI",
+      "recognition": "GRCGYC",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "BsaI",
+      "recognition": "GGTCTC",
+      "top": 7,
+      "bottom": 11
+    },
+    {
+      "name": "BsaJI",
+      "recognition": "CCNNGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BsaWI",
+      "recognition": "WCCGGW",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BseDI",
+      "recognition": "CCNNGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BseGI",
+      "recognition": "GGATG",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "BseJI",
+      "recognition": "GATNNNNATC",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "BseLI",
+      "recognition": "CCNNNNNNNGG",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "BseMI",
+      "recognition": "GCAATG",
+      "top": 8,
+      "bottom": 6
+    },
+    {
+      "name": "BseMII",
+      "recognition": "CTCAG",
+      "top": 15,
+      "bottom": 13
+    },
+    {
+      "name": "BseNI",
+      "recognition": "ACTGG",
+      "top": 6,
+      "bottom": 4
+    },
+    {
+      "name": "BseRI",
+      "recognition": "GAGGAG",
+      "top": 16,
+      "bottom": 14
+    },
+    {
+      "name": "BseSI",
+      "recognition": "GKGCMC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BseXI",
+      "recognition": "GCAGC",
+      "top": 13,
+      "bottom": 17
+    },
+    {
+      "name": "BseYI",
+      "recognition": "CCCAGC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BsgI",
+      "recognition": "GTGCAG",
+      "top": 22,
+      "bottom": 20
+    },
+    {
+      "name": "Bsh1236I",
+      "recognition": "CGCG",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "Bsh1285I",
+      "recognition": "CGRYCG",
+      "top": 4,
+      "bottom": 2
+    },
+    {
+      "name": "BshNI",
+      "recognition": "GGYRCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BshTI",
+      "recognition": "ACCGGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BsiEI",
+      "recognition": "CGRYCG",
+      "top": 4,
+      "bottom": 2
+    },
+    {
+      "name": "BsiHKAI",
+      "recognition": "GWGCWC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BsiWI",
+      "recognition": "CGTACG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BslI",
+      "recognition": "CCNNNNNNNGG",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "BsmAI",
+      "recognition": "GTCTC",
+      "top": 6,
+      "bottom": 10
+    },
+    {
+      "name": "BsmBI",
+      "recognition": "CGTCTC",
+      "top": 7,
+      "bottom": 11
+    },
+    {
+      "name": "BsmFI",
+      "recognition": "GGGAC",
+      "top": 15,
+      "bottom": 19
+    },
+    {
+      "name": "BsmI",
+      "recognition": "GAATGC",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "BsoBI",
+      "recognition": "CYCGRG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Bsp119I",
+      "recognition": "TTCGAA",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "Bsp120I",
+      "recognition": "GGGCCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Bsp1286I",
+      "recognition": "GDGCHC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "Bsp1407I",
+      "recognition": "TGTACA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Bsp143I",
+      "recognition": "GATC",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "Bsp68I",
+      "recognition": "TCGCGA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "BspCNI",
+      "recognition": "CTCAG",
+      "top": 14,
+      "bottom": 12
+    },
+    {
+      "name": "BspDI",
+      "recognition": "ATCGAT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "BspEI",
+      "recognition": "TCCGGA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BspHI",
+      "recognition": "TCATGA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BspLI",
+      "recognition": "GGNNCC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "BspMI",
+      "recognition": "ACCTGC",
+      "top": 10,
+      "bottom": 14
+    },
+    {
+      "name": "BspOI",
+      "recognition": "GCTAGC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "BspPI",
+      "recognition": "GGATC",
+      "top": 9,
+      "bottom": 10
+    },
+    {
+      "name": "BspQI",
+      "recognition": "GCTCTTC",
+      "top": 8,
+      "bottom": 11
+    },
+    {
+      "name": "BspTI",
+      "recognition": "CTTAAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BsrBI",
+      "recognition": "CCGCTC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "BsrDI",
+      "recognition": "GCAATG",
+      "top": 8,
+      "bottom": 6
+    },
+    {
+      "name": "BsrFI",
+      "recognition": "RCCGGY",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BsrGI",
+      "recognition": "TGTACA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BsrI",
+      "recognition": "ACTGG",
+      "top": 6,
+      "bottom": 4
+    },
+    {
+      "name": "BssHII",
+      "recognition": "GCGCGC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BssSI",
+      "recognition": "CACGAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Bst1107I",
+      "recognition": "GTATAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "BstAPI",
+      "recognition": "GCANNNNNTGC",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "BstBI",
+      "recognition": "TTCGAA",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "BstEII",
+      "recognition": "GGTNACC",
+      "top": 1,
+      "bottom": 6
+    },
+    {
+      "name": "BstNI",
+      "recognition": "CCWGG",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "BstUI",
+      "recognition": "CGCG",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "BstXI",
+      "recognition": "CCANNNNNNTGG",
+      "top": 8,
+      "bottom": 4
+    },
+    {
+      "name": "BstYI",
+      "recognition": "RGATCY",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BstZ17I",
+      "recognition": "GTATAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Bsu15I",
+      "recognition": "ATCGAT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "Bsu36I",
+      "recognition": "CCTNAGG",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "BsuRI",
+      "recognition": "GGCC",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "BtgI",
+      "recognition": "CCRYGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "BtgZI",
+      "recognition": "GCGATG",
+      "top": 16,
+      "bottom": 20
+    },
+    {
+      "name": "BtsCI",
+      "recognition": "GGATG",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "BtsI",
+      "recognition": "GCAGTG",
+      "top": 8,
+      "bottom": 6
+    },
+    {
+      "name": "BtsIMutI",
+      "recognition": "CAGTG",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "BveI",
+      "recognition": "ACCTGC",
+      "top": 10,
+      "bottom": 14
+    },
+    {
+      "name": "Cac8I",
+      "recognition": "GCNNGC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "CaiI",
+      "recognition": "CAGNNNCTG",
+      "top": 6,
+      "bottom": 3
+    },
+    {
+      "name": "Cfr10I",
+      "recognition": "RCCGGY",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Cfr13I",
+      "recognition": "GGNCC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "Cfr42I",
+      "recognition": "CCGCGG",
+      "top": 4,
+      "bottom": 2
+    },
+    {
+      "name": "Cfr9I",
+      "recognition": "CCCGGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "ClaI",
+      "recognition": "ATCGAT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "CpoI",
+      "recognition": "CGGWCCG",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "CseI",
+      "recognition": "GACGC",
+      "top": 10,
+      "bottom": 15
+    },
+    {
+      "name": "CsiI",
+      "recognition": "ACCWGGT",
+      "top": 1,
+      "bottom": 6
+    },
+    {
+      "name": "Csp6I",
+      "recognition": "GTAC",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "CviQI",
+      "recognition": "GTAC",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "DdeI",
+      "recognition": "CTNAG",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "DpnII",
+      "recognition": "GATC",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "DraI",
+      "recognition": "TTTAAA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "DraIII",
+      "recognition": "CACNNNGTG",
+      "top": 6,
+      "bottom": 3
+    },
+    {
+      "name": "DrdI",
+      "recognition": "GACNNNNNNGTC",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "EaeI",
+      "recognition": "YGGCCR",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "EagI",
+      "recognition": "CGGCCG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Eam1104I",
+      "recognition": "CTCTTC",
+      "top": 7,
+      "bottom": 10
+    },
+    {
+      "name": "Eam1105I",
+      "recognition": "GACNNNNNGTC",
+      "top": 6,
+      "bottom": 5
+    },
+    {
+      "name": "EarI",
+      "recognition": "CTCTTC",
+      "top": 7,
+      "bottom": 10
+    },
+    {
+      "name": "EciI",
+      "recognition": "GGCGGA",
+      "top": 17,
+      "bottom": 15
+    },
+    {
+      "name": "Ecl136II",
+      "recognition": "GAGCTC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco105I",
+      "recognition": "TACGTA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco130I",
+      "recognition": "CCWWGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Eco147I",
+      "recognition": "AGGCCT",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco24I",
+      "recognition": "GRGCYC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "Eco31I",
+      "recognition": "GGTCTC",
+      "top": 7,
+      "bottom": 11
+    },
+    {
+      "name": "Eco32I",
+      "recognition": "GATATC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco47I",
+      "recognition": "GGWCC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "Eco47III",
+      "recognition": "AGCGCT",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco52I",
+      "recognition": "CGGCCG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Eco53kI",
+      "recognition": "GAGCTC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco57I",
+      "recognition": "CTGAAG",
+      "top": 22,
+      "bottom": 20
+    },
+    {
+      "name": "Eco72I",
+      "recognition": "CACGTG",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Eco81I",
+      "recognition": "CCTNAGG",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "Eco88I",
+      "recognition": "CYCGRG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Eco91I",
+      "recognition": "GGTNACC",
+      "top": 1,
+      "bottom": 6
+    },
+    {
+      "name": "EcoNI",
+      "recognition": "CCTNNNNNAGG",
+      "top": 5,
+      "bottom": 6
+    },
+    {
+      "name": "EcoO109I",
+      "recognition": "RGGNCCY",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "EcoRI",
+      "recognition": "GAATTC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "EcoRII",
+      "recognition": "CCWGG",
+      "top": 0,
+      "bottom": 5
+    },
+    {
+      "name": "EcoRV",
+      "recognition": "GATATC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "EheI",
+      "recognition": "GGCGCC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Esp3I",
+      "recognition": "CGTCTC",
+      "top": 7,
+      "bottom": 11
+    },
+    {
+      "name": "FaqI",
+      "recognition": "GGGAC",
+      "top": 15,
+      "bottom": 19
+    },
+    {
+      "name": "FatI",
+      "recognition": "CATG",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "FauI",
+      "recognition": "CCCGC",
+      "top": 9,
+      "bottom": 11
+    },
+    {
+      "name": "Fnu4HI",
+      "recognition": "GCNGC",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "FokI",
+      "recognition": "GGATG",
+      "top": 14,
+      "bottom": 18
+    },
+    {
+      "name": "FseI",
+      "recognition": "GGCCGGCC",
+      "top": 6,
+      "bottom": 2
+    },
+    {
+      "name": "FspAI",
+      "recognition": "RTGCGCAY",
+      "top": 4,
+      "bottom": 4
+    },
+    {
+      "name": "FspBI",
+      "recognition": "CTAG",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "FspI",
+      "recognition": "TGCGCA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "GsuI",
+      "recognition": "CTGGAG",
+      "top": 22,
+      "bottom": 20
+    },
+    {
+      "name": "HaeII",
+      "recognition": "RGCGCY",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "HaeIII",
+      "recognition": "GGCC",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "HgaI",
+      "recognition": "GACGC",
+      "top": 10,
+      "bottom": 15
+    },
+    {
+      "name": "HhaI",
+      "recognition": "GCGC",
+      "top": 3,
+      "bottom": 1
+    },
+    {
+      "name": "Hin1I",
+      "recognition": "GRCGYC",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "Hin1II",
+      "recognition": "CATG",
+      "top": 4,
+      "bottom": 0
+    },
+    {
+      "name": "Hin6I",
+      "recognition": "GCGC",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "HincII",
+      "recognition": "GTYRAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "HindIII",
+      "recognition": "AAGCTT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "HinfI",
+      "recognition": "GANTC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "HinP1I",
+      "recognition": "GCGC",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "HpaI",
+      "recognition": "GTTAAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "HpaII",
+      "recognition": "CCGG",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "HphI",
+      "recognition": "GGTGA",
+      "top": 13,
+      "bottom": 12
+    },
+    {
+      "name": "Hpy166II",
+      "recognition": "GTNNAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Hpy188I",
+      "recognition": "TCNGA",
+      "top": 3,
+      "bottom": 2
+    },
+    {
+      "name": "Hpy188III",
+      "recognition": "TCNNGA",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "Hpy8I",
+      "recognition": "GTNNAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Hpy99I",
+      "recognition": "CGWCG",
+      "top": 5,
+      "bottom": 0
+    },
+    {
+      "name": "HpyAV",
+      "recognition": "CCTTC",
+      "top": 11,
+      "bottom": 10
+    },
+    {
+      "name": "HpyCH4III",
+      "recognition": "ACNGT",
+      "top": 3,
+      "bottom": 2
+    },
+    {
+      "name": "HpyCH4IV",
+      "recognition": "ACGT",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "HpyCH4V",
+      "recognition": "TGCA",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "HpyF10VI",
+      "recognition": "GCNNNNNNNGC",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "HpyF3I",
+      "recognition": "CTNAG",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "KasI",
+      "recognition": "GGCGCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "KflI",
+      "recognition": "GGGWCCC",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "Kpn2I",
+      "recognition": "TCCGGA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "KpnI",
+      "recognition": "GGTACC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "KspAI",
+      "recognition": "GTTAAC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "LguI",
+      "recognition": "GCTCTTC",
+      "top": 8,
+      "bottom": 11
+    },
+    {
+      "name": "Lsp1109I",
+      "recognition": "GCAGC",
+      "top": 13,
+      "bottom": 17
+    },
+    {
+      "name": "LweI",
+      "recognition": "GCATC",
+      "top": 10,
+      "bottom": 14
+    },
+    {
+      "name": "MauBI",
+      "recognition": "CGCGCGCG",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "MbiI",
+      "recognition": "CCGCTC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "MboI",
+      "recognition": "GATC",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "MboII",
+      "recognition": "GAAGA",
+      "top": 13,
+      "bottom": 12
+    },
+    {
+      "name": "MfeI",
+      "recognition": "CAATTG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "MlsI",
+      "recognition": "TGGCCA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "MluCI",
+      "recognition": "AATT",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "MluI",
+      "recognition": "ACGCGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "MlyI",
+      "recognition": "GAGTC",
+      "top": 10,
+      "bottom": 10
+    },
+    {
+      "name": "MmeI",
+      "recognition": "TCCRAC",
+      "top": 26,
+      "bottom": 24
+    },
+    {
+      "name": "MnlI",
+      "recognition": "CCTC",
+      "top": 11,
+      "bottom": 10
+    },
+    {
+      "name": "Mph1103I",
+      "recognition": "ATGCAT",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "MreI",
+      "recognition": "CGCCGGCG",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "MscI",
+      "recognition": "TGGCCA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "MseI",
+      "recognition": "TTAA",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "MslI",
+      "recognition": "CAYNNNNRTG",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "MspA1I",
+      "recognition": "CMGCKG",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "MspI",
+      "recognition": "CCGG",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "MssI",
+      "recognition": "GTTTAAAC",
+      "top": 4,
+      "bottom": 4
+    },
+    {
+      "name": "MunI",
+      "recognition": "CAATTG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "Mva1269I",
+      "recognition": "GAATGC",
+      "top": 7,
+      "bottom": 5
+    },
+    {
+      "name": "MvaI",
+      "recognition": "CCWGG",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "MwoI",
+      "recognition": "GCNNNNNNNGC",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "NaeI",
+      "recognition": "GCCGGC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "NarI",
+      "recognition": "GGCGCC",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "NciI",
+      "recognition": "CCSGG",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "NcoI",
+      "recognition": "CCATGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "NdeI",
+      "recognition": "CATATG",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "NgoMIV",
+      "recognition": "GCCGGC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "NheI",
+      "recognition": "GCTAGC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "NlaIII",
+      "recognition": "CATG",
+      "top": 4,
+      "bottom": 0
+    },
+    {
+      "name": "NlaIV",
+      "recognition": "GGNNCC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "NmeAIII",
+      "recognition": "GCCGAG",
+      "top": 27,
+      "bottom": 25
+    },
+    {
+      "name": "NmuCI",
+      "recognition": "GTSAC",
+      "top": 0,
+      "bottom": 5
+    },
+    {
+      "name": "NotI",
+      "recognition": "GCGGCCGC",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "NruI",
+      "recognition": "TCGCGA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "NsbI",
+      "recognition": "TGCGCA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "NsiI",
+      "recognition": "ATGCAT",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "NspI",
+      "recognition": "RCATGY",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "OliI",
+      "recognition": "CACNNNNGTG",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "PacI",
+      "recognition": "TTAATTAA",
+      "top": 5,
+      "bottom": 3
+    },
+    {
+      "name": "PaeI",
+      "recognition": "GCATGC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "PaeR7I",
+      "recognition": "CTCGAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PagI",
+      "recognition": "TCATGA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PaqCI",
+      "recognition": "CACCTGC",
+      "top": 11,
+      "bottom": 15
+    },
+    {
+      "name": "PasI",
+      "recognition": "CCCWGGG",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "PauI",
+      "recognition": "GCGCGC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PciI",
+      "recognition": "ACATGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PdiI",
+      "recognition": "GCCGGC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "PdmI",
+      "recognition": "GAANNNNTTC",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "PfeI",
+      "recognition": "GAWTC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "Pfl23II",
+      "recognition": "CGTACG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PflFI",
+      "recognition": "GACNNNGTC",
+      "top": 4,
+      "bottom": 5
+    },
+    {
+      "name": "PflMI",
+      "recognition": "CCANNNNNTGG",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "PfoI",
+      "recognition": "TCCNGGA",
+      "top": 1,
+      "bottom": 6
+    },
+    {
+      "name": "PleI",
+      "recognition": "GAGTC",
+      "top": 9,
+      "bottom": 10
+    },
+    {
+      "name": "PluTI",
+      "recognition": "GGCGCC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "PmeI",
+      "recognition": "GTTTAAAC",
+      "top": 4,
+      "bottom": 4
+    },
+    {
+      "name": "PmlI",
+      "recognition": "CACGTG",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Ppu21I",
+      "recognition": "YACGTR",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "PpuMI",
+      "recognition": "RGGWCCY",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "PscI",
+      "recognition": "ACATGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PshAI",
+      "recognition": "GACNNNNGTC",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "PsiI",
+      "recognition": "TTATAA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "Psp1406I",
+      "recognition": "AACGTT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "Psp5II",
+      "recognition": "RGGWCCY",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "PspGI",
+      "recognition": "CCWGG",
+      "top": 0,
+      "bottom": 5
+    },
+    {
+      "name": "PspOMI",
+      "recognition": "GGGCCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PspXI",
+      "recognition": "VCTCGAGB",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "PstI",
+      "recognition": "CTGCAG",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "PsuI",
+      "recognition": "RGATCY",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PsyI",
+      "recognition": "GACNNNGTC",
+      "top": 4,
+      "bottom": 5
+    },
+    {
+      "name": "PteI",
+      "recognition": "GCGCGC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "PvuI",
+      "recognition": "CGATCG",
+      "top": 4,
+      "bottom": 2
+    },
+    {
+      "name": "PvuII",
+      "recognition": "CAGCTG",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "RruI",
+      "recognition": "TCGCGA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "RsaI",
+      "recognition": "GTAC",
+      "top": 2,
+      "bottom": 2
+    },
+    {
+      "name": "RseI",
+      "recognition": "CAYNNNNRTG",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "RsrII",
+      "recognition": "CGGWCCG",
+      "top": 2,
+      "bottom": 5
+    },
+    {
+      "name": "SacI",
+      "recognition": "GAGCTC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "SacII",
+      "recognition": "CCGCGG",
+      "top": 4,
+      "bottom": 2
+    },
+    {
+      "name": "SalI",
+      "recognition": "GTCGAC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SapI",
+      "recognition": "GCTCTTC",
+      "top": 8,
+      "bottom": 11
+    },
+    {
+      "name": "SaqAI",
+      "recognition": "TTAA",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "SatI",
+      "recognition": "GCNGC",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "Sau3AI",
+      "recognition": "GATC",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "Sau96I",
+      "recognition": "GGNCC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "SbfI",
+      "recognition": "CCTGCAGG",
+      "top": 6,
+      "bottom": 2
+    },
+    {
+      "name": "ScaI",
+      "recognition": "AGTACT",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "SchI",
+      "recognition": "GAGTC",
+      "top": 10,
+      "bottom": 10
+    },
+    {
+      "name": "ScrFI",
+      "recognition": "CCNGG",
+      "top": 2,
+      "bottom": 3
+    },
+    {
+      "name": "SdaI",
+      "recognition": "CCTGCAGG",
+      "top": 6,
+      "bottom": 2
+    },
+    {
+      "name": "SduI",
+      "recognition": "GDGCHC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "SexAI",
+      "recognition": "ACCWGGT",
+      "top": 1,
+      "bottom": 6
+    },
+    {
+      "name": "SfaAI",
+      "recognition": "GCGATCGC",
+      "top": 5,
+      "bottom": 3
+    },
+    {
+      "name": "SfaNI",
+      "recognition": "GCATC",
+      "top": 10,
+      "bottom": 14
+    },
+    {
+      "name": "SfcI",
+      "recognition": "CTRYAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SfiI",
+      "recognition": "GGCCNNNNNGGCC",
+      "top": 8,
+      "bottom": 5
+    },
+    {
+      "name": "SfoI",
+      "recognition": "GGCGCC",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "SgrAI",
+      "recognition": "CRCCGGYG",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "SgrDI",
+      "recognition": "CGTCGACG",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "SgsI",
+      "recognition": "GGCGCGCC",
+      "top": 2,
+      "bottom": 6
+    },
+    {
+      "name": "SmaI",
+      "recognition": "CCCGGG",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "SmiI",
+      "recognition": "ATTTAAAT",
+      "top": 4,
+      "bottom": 4
+    },
+    {
+      "name": "SmlI",
+      "recognition": "CTYRAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SmoI",
+      "recognition": "CTYRAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SnaBI",
+      "recognition": "TACGTA",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "SpeI",
+      "recognition": "ACTAGT",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SphI",
+      "recognition": "GCATGC",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "SrfI",
+      "recognition": "GCCCGGGC",
+      "top": 4,
+      "bottom": 4
+    },
+    {
+      "name": "SsiI",
+      "recognition": "CCGC",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "SspDI",
+      "recognition": "GGCGCC",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SspI",
+      "recognition": "AATATT",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "StuI",
+      "recognition": "AGGCCT",
+      "top": 3,
+      "bottom": 3
+    },
+    {
+      "name": "StyD4I",
+      "recognition": "CCNGG",
+      "top": 0,
+      "bottom": 5
+    },
+    {
+      "name": "StyI",
+      "recognition": "CCWWGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "SwaI",
+      "recognition": "ATTTAAAT",
+      "top": 4,
+      "bottom": 4
+    },
+    {
+      "name": "TaaI",
+      "recognition": "ACNGT",
+      "top": 3,
+      "bottom": 2
+    },
+    {
+      "name": "TaiI",
+      "recognition": "ACGT",
+      "top": 4,
+      "bottom": 0
+    },
+    {
+      "name": "TaqI",
+      "recognition": "TCGA",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "TasI",
+      "recognition": "AATT",
+      "top": 0,
+      "bottom": 4
+    },
+    {
+      "name": "TatI",
+      "recognition": "WGTACW",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "TauI",
+      "recognition": "GCSGC",
+      "top": 4,
+      "bottom": 1
+    },
+    {
+      "name": "TfiI",
+      "recognition": "GAWTC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "Tru1I",
+      "recognition": "TTAA",
+      "top": 1,
+      "bottom": 3
+    },
+    {
+      "name": "TscAI",
+      "recognition": "CASTG",
+      "top": 7,
+      "bottom": -2
+    },
+    {
+      "name": "TseI",
+      "recognition": "GCWGC",
+      "top": 1,
+      "bottom": 4
+    },
+    {
+      "name": "Tsp45I",
+      "recognition": "GTSAC",
+      "top": 0,
+      "bottom": 5
+    },
+    {
+      "name": "TspMI",
+      "recognition": "CCCGGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "TspRI",
+      "recognition": "CASTG",
+      "top": 7,
+      "bottom": -2
+    },
+    {
+      "name": "Tth111I",
+      "recognition": "GACNNNGTC",
+      "top": 4,
+      "bottom": 5
+    },
+    {
+      "name": "Van91I",
+      "recognition": "CCANNNNNTGG",
+      "top": 7,
+      "bottom": 4
+    },
+    {
+      "name": "VspI",
+      "recognition": "ATTAAT",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "XagI",
+      "recognition": "CCTNNNNNAGG",
+      "top": 5,
+      "bottom": 6
+    },
+    {
+      "name": "XapI",
+      "recognition": "RAATTY",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "XbaI",
+      "recognition": "TCTAGA",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "XceI",
+      "recognition": "RCATGY",
+      "top": 5,
+      "bottom": 1
+    },
+    {
+      "name": "XcmI",
+      "recognition": "CCANNNNNNNNNTGG",
+      "top": 8,
+      "bottom": 7
+    },
+    {
+      "name": "XhoI",
+      "recognition": "CTCGAG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "XmaI",
+      "recognition": "CCCGGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "XmaJI",
+      "recognition": "CCTAGG",
+      "top": 1,
+      "bottom": 5
+    },
+    {
+      "name": "XmiI",
+      "recognition": "GTMKAC",
+      "top": 2,
+      "bottom": 4
+    },
+    {
+      "name": "XmnI",
+      "recognition": "GAANNNNTTC",
+      "top": 5,
+      "bottom": 5
+    },
+    {
+      "name": "ZraI",
+      "recognition": "GACGTC",
+      "top": 3,
+      "bottom": 3
+    }
+  ]
+}

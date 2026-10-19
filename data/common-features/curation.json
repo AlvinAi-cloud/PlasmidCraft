@@ -1,0 +1,647 @@
+{
+  "version": 1,
+  "retrieved": "2026-10-17",
+  "entries": [
+    {
+      "id": "common-001",
+      "name": "araO2 operator",
+      "category": "Promoters",
+      "type": "misc_binding",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "1003..1020",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-002",
+      "name": "araC Pc promoter",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 4,
+      "sourceLocation": "1125..1153",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-003",
+      "name": "araO1 operator",
+      "category": "Promoters",
+      "type": "misc_binding",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 5,
+      "sourceLocation": "1161..1182",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-004",
+      "name": "araI1/I2 operator",
+      "category": "Promoters",
+      "type": "misc_binding",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 7,
+      "sourceLocation": "1213..1251",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-005",
+      "name": "araBAD promoter",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 8,
+      "sourceLocation": "1250..1277",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-006",
+      "name": "pBAD24 cloning site",
+      "category": "Cloning sites",
+      "type": "misc_feature",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 9,
+      "sourceLocation": "1300..1366",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-007",
+      "name": "M13 origin (pBAD24)",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 18,
+      "sourceLocation": "2784..3242",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-008",
+      "name": "pBR322-derived origin (pBAD24)",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "X81837.1",
+      "sourceFeatureIndex": 19,
+      "sourceLocation": "3248..3945",
+      "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "id": "common-009",
+      "name": "TetA tetracycline resistance",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "J01749.1",
+      "sourceFeatureIndex": 10,
+      "sourceLocation": "86..1276",
+      "recordSha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+    },
+    {
+      "id": "common-010",
+      "name": "Rop copy-number regulator",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "J01749.1",
+      "sourceFeatureIndex": 26,
+      "sourceLocation": "1915..2106",
+      "recordSha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+    },
+    {
+      "id": "common-011",
+      "name": "TEM-1 beta-lactamase / AmpR",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "J01749.1",
+      "sourceFeatureIndex": 38,
+      "sourceLocation": "complement(3293..4153)",
+      "recordSha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+    },
+    {
+      "id": "common-012",
+      "name": "p15A origin",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "X06403.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "581..1493",
+      "recordSha256": "b1820e3d45074255957dabf75146c169bbab2c3922371fbdc5655fe990210eaa"
+    },
+    {
+      "id": "common-013",
+      "name": "EGFP",
+      "category": "Reporters",
+      "type": "CDS",
+      "accession": "U55762.1",
+      "sourceFeatureIndex": 2,
+      "sourceLocation": "679..1398",
+      "recordSha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+    },
+    {
+      "id": "common-014",
+      "name": "NeoR / KanR (pEGFP-N1)",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "U55762.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "2629..3423",
+      "recordSha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+    },
+    {
+      "id": "common-015",
+      "name": "mCherry (AY678264 reference)",
+      "category": "Reporters",
+      "type": "CDS",
+      "accession": "AY678264.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "1..711",
+      "recordSha256": "1a0512e1aeb75dd932dd767fd8b7a3ed59c340d7c26d88dd6bb1896d49a7437f"
+    },
+    {
+      "id": "common-016",
+      "name": "pGL3 multiple cloning site",
+      "category": "Cloning sites",
+      "type": "misc_feature",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "1..58",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-017",
+      "name": "Firefly luciferase luc+",
+      "category": "Reporters",
+      "type": "CDS",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "88..1740",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-018",
+      "name": "GLprimer2 site",
+      "category": "Sequencing primers",
+      "type": "primer_bind",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 4,
+      "sourceLocation": "complement(89..111)",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-019",
+      "name": "SV40 late poly(A) (pGL3)",
+      "category": "Terminators and polyA",
+      "type": "polyA_signal",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 5,
+      "sourceLocation": "1772..1993",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-020",
+      "name": "RVprimer4 site",
+      "category": "Sequencing primers",
+      "type": "primer_bind",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 6,
+      "sourceLocation": "complement(2061..2080)",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-021",
+      "name": "f1 origin (pGL3)",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 10,
+      "sourceLocation": "4073..4527",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-022",
+      "name": "Upstream poly(A) region (pGL3)",
+      "category": "Terminators and polyA",
+      "type": "polyA_signal",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 11,
+      "sourceLocation": "4658..4811",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-023",
+      "name": "RVprimer3 site",
+      "category": "Sequencing primers",
+      "type": "primer_bind",
+      "accession": "U47295.1",
+      "sourceFeatureIndex": 12,
+      "sourceLocation": "4760..4779",
+      "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "id": "common-024",
+      "name": "HSV TK promoter",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "AF025846.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "7..759",
+      "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+    },
+    {
+      "id": "common-025",
+      "name": "Chimeric intron (pRL-TK)",
+      "category": "Introns",
+      "type": "intron",
+      "accession": "AF025846.1",
+      "sourceFeatureIndex": 2,
+      "sourceLocation": "826..962",
+      "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+    },
+    {
+      "id": "common-026",
+      "name": "T7 promoter (pRL-TK)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "AF025846.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "1006..1024",
+      "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+    },
+    {
+      "id": "common-027",
+      "name": "Renilla luciferase",
+      "category": "Reporters",
+      "type": "CDS",
+      "accession": "AF025846.1",
+      "sourceFeatureIndex": 6,
+      "sourceLocation": "1034..1969",
+      "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+    },
+    {
+      "id": "common-028",
+      "name": "SV40 late poly(A) (pRL-TK)",
+      "category": "Terminators and polyA",
+      "type": "polyA_signal",
+      "accession": "AF025846.1",
+      "sourceFeatureIndex": 7,
+      "sourceLocation": "2011..2212",
+      "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+    },
+    {
+      "id": "common-029",
+      "name": "Rabbit beta-globin 3\u2032 UTR / poly(A)",
+      "category": "Terminators and polyA",
+      "type": "polyA_signal",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "91..182",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-030",
+      "name": "lac promoter (pCAGGS)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "complement(617..699)",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-031",
+      "name": "SV40 origin",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 4,
+      "sourceLocation": "841..916",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-032",
+      "name": "SV40 poly(A) region (pCAGGS)",
+      "category": "Terminators and polyA",
+      "type": "polyA_signal",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 5,
+      "sourceLocation": "947..1021",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-033",
+      "name": "pMB1 origin (pCAGGS)",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 7,
+      "sourceLocation": "complement(1136..1537)",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-034",
+      "name": "CMV IE enhancer (pCAGGS)",
+      "category": "Promoters",
+      "type": "enhancer",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 9,
+      "sourceLocation": "3074..3451",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-035",
+      "name": "Chicken beta-actin / AG promoter",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 10,
+      "sourceLocation": "3457..4798",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-036",
+      "name": "AG promoter intron",
+      "category": "Introns",
+      "type": "intron",
+      "accession": "LT727518.1",
+      "sourceFeatureIndex": 11,
+      "sourceLocation": "3826..4750",
+      "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "id": "common-037",
+      "name": "GAL1 promoter (pYES2 variant)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "OR992668.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "1..453",
+      "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+    },
+    {
+      "id": "common-038",
+      "name": "CYC1 terminator",
+      "category": "Terminators and polyA",
+      "type": "terminator",
+      "accession": "OR992668.1",
+      "sourceFeatureIndex": 4,
+      "sourceLocation": "2516..2763",
+      "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+    },
+    {
+      "id": "common-039",
+      "name": "URA3 yeast selection marker",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "OR992668.1",
+      "sourceFeatureIndex": 8,
+      "sourceLocation": "complement(4719..5522)",
+      "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+    },
+    {
+      "id": "common-040",
+      "name": "URA3 promoter",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "OR992668.1",
+      "sourceFeatureIndex": 10,
+      "sourceLocation": "complement(5523..5738)",
+      "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+    },
+    {
+      "id": "common-041",
+      "name": "Yeast 2-micron origin",
+      "category": "Origins",
+      "type": "rep_origin",
+      "accession": "OR992668.1",
+      "sourceFeatureIndex": 11,
+      "sourceLocation": "6342..7222",
+      "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+    },
+    {
+      "id": "common-042",
+      "name": "T3 promoter (pCLV)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 2,
+      "sourceLocation": "974..992",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-043",
+      "name": "Lambda transcription terminator",
+      "category": "Terminators and polyA",
+      "type": "terminator",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 7,
+      "sourceLocation": "1830..1924",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-044",
+      "name": "GFPmut3",
+      "category": "Reporters",
+      "type": "CDS",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 9,
+      "sourceLocation": "complement(1944..2660)",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-045",
+      "name": "ECFP",
+      "category": "Reporters",
+      "type": "CDS",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 14,
+      "sourceLocation": "2751..3470",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-046",
+      "name": "Sh ble / Zeocin resistance",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 16,
+      "sourceLocation": "complement(3561..3935)",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-047",
+      "name": "M13 forward primer site",
+      "category": "Sequencing primers",
+      "type": "primer_bind",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 17,
+      "sourceLocation": "4150..4166",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-048",
+      "name": "Gentamicin resistance aacC1",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 19,
+      "sourceLocation": "4744..5277",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-049",
+      "name": "KS sequencing primer site",
+      "category": "Sequencing primers",
+      "type": "primer_bind",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 6,
+      "sourceLocation": "1763..1779",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-050",
+      "name": "SK sequencing primer site",
+      "category": "Sequencing primers",
+      "type": "primer_bind",
+      "accession": "ON924783.1",
+      "sourceFeatureIndex": 11,
+      "sourceLocation": "2699..2715",
+      "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "id": "common-051",
+      "name": "Human PGK promoter",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "1..511",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-052",
+      "name": "Puromycin resistance pac",
+      "category": "Markers",
+      "type": "CDS",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "533..1132",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-053",
+      "name": "SV40 poly(A) (pLKO.1 variant)",
+      "category": "Terminators and polyA",
+      "type": "polyA_signal",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 5,
+      "sourceLocation": "1565..1686",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-054",
+      "name": "RSV promoter (pLKO.1 variant)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 10,
+      "sourceLocation": "4742..4968",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-055",
+      "name": "Human U6 promoter (pLKO.1 variant)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 14,
+      "sourceLocation": "6574..6820",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-056",
+      "name": "RRE (pLKO.1 variant)",
+      "category": "Vector elements",
+      "type": "misc_feature",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 13,
+      "sourceLocation": "5814..6047",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-057",
+      "name": "cPPT / CTS (pLKO.1 variant)",
+      "category": "Vector elements",
+      "type": "misc_feature",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 16,
+      "sourceLocation": "6919..7036",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-058",
+      "name": "Lentiviral psi signal (pLKO.1 variant)",
+      "category": "Vector elements",
+      "type": "misc_feature",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 12,
+      "sourceLocation": "5196..5321",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-059",
+      "name": "3\u2032 LTR (pLKO.1 variant)",
+      "category": "Vector elements",
+      "type": "LTR",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 4,
+      "sourceLocation": "1260..1493",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-060",
+      "name": "5\u2032 LTR (pLKO.1 variant)",
+      "category": "Vector elements",
+      "type": "LTR",
+      "accession": "PX675714.1",
+      "sourceFeatureIndex": 11,
+      "sourceLocation": "4969..5149",
+      "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "id": "common-061",
+      "name": "AAV2 ITR (left reference variant)",
+      "category": "Vector elements",
+      "type": "repeat_region",
+      "accession": "J01901.1",
+      "sourceFeatureIndex": 1,
+      "sourceLocation": "1..145",
+      "recordSha256": "b00627838b9eab354e94a9ea3c87cc62a32b37ce80b0057440ce59668e3f1150"
+    },
+    {
+      "id": "common-062",
+      "name": "AAV2 ITR (right reference variant)",
+      "category": "Vector elements",
+      "type": "repeat_region",
+      "accession": "J01901.1",
+      "sourceFeatureIndex": 12,
+      "sourceLocation": "4531..4675",
+      "recordSha256": "b00627838b9eab354e94a9ea3c87cc62a32b37ce80b0057440ce59668e3f1150"
+    },
+    {
+      "id": "common-063",
+      "name": "pUC19 multiple cloning site",
+      "category": "Cloning sites",
+      "type": "misc_feature",
+      "accession": "M77789.2",
+      "sourceFeatureIndex": 3,
+      "sourceLocation": "233..289",
+      "recordSha256": "14b0b5ba06c7e24e0e2c2205c63f58155c17ea74e3ec5806243aba87e8394c22"
+    },
+    {
+      "id": "common-cmv-ie",
+      "name": "CMV IE enhancer/promoter (pEGFP-N1)",
+      "category": "Promoters",
+      "type": "promoter",
+      "accession": "U55762.1",
+      "sourceLocation": "1..589",
+      "annotationSource": "https://www.nature.com/articles/labinvest201042",
+      "annotationNote": "Coordinates 1\u2013589 described for pEGFP-N1; nucleotide data from U55762.1. Variant-specific full-pattern match.",
+      "recordSha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+    }
+  ]
+}

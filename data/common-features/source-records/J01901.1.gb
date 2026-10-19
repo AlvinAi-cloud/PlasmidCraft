@@ -1,0 +1,189 @@
+LOCUS       AA2CG                   4675 bp ss-DNA     linear   VRL 27-APR-1993
+DEFINITION  Adeno-associated virus 2, complete genome.
+ACCESSION   J01901 M12405 M12468 M12469
+VERSION     J01901.1
+KEYWORDS    alternative splicing; complete genome; major coat protein.
+SOURCE      adeno-associated virus 2
+  ORGANISM  adeno-associated virus 2
+            Viruses; Floreoviria; Shotokuvirae; Cossaviricota; Quintoviricetes;
+            Piccovirales; Parvoviridae; Parvovirinae; Dependoparvovirus;
+            Dependoparvovirus primate1.
+REFERENCE   1  (bases 4532 to 4675)
+  AUTHORS   Samulski,R.J., Srivastava,A., Berns,K.I. and Muzyczka,N.
+  TITLE     Rescue of adeno-associated virus from recombinant plasmids: gene
+            correction within the terminal repeats of AAV
+  JOURNAL   Cell 33 (1), 135-143 (1983)
+   PUBMED   6088052
+REFERENCE   2  (bases 1 to 4675)
+  AUTHORS   Srivastava,A., Lusby,E.W. and Berns,K.I.
+  TITLE     Nucleotide sequence and organization of the adeno-associated virus
+            2 genome
+  JOURNAL   J. Virol. 45 (2), 555-564 (1983)
+   PUBMED   6300419
+COMMENT     Original source text: Adeno-associated virus 2 DNA from human HeLa
+            cells.
+FEATURES             Location/Qualifiers
+     source          1..4675
+                     /organism="adeno-associated virus 2"
+                     /mol_type="genomic DNA"
+                     /db_xref="taxon:10804"
+     repeat_region   1..145
+                     /note="5' inverted terminal repeat"
+     misc_feature    42..83
+                     /note="flip oriented DNA"
+     mRNA            287..4447
+                     /note="major coat protein A mRNA (alt.)"
+     CDS             join(321..1906,2228..2252)
+                     /note="major coat protein A' (alt.)"
+                     /codon_start=1
+                     /protein_id="AAA42372.1"
+                     /translation="MPGFYEIVIKVPSDLDGHLPGISDSFVNWVAEKEWELPPDSDMD
+                     LNLIEQAPLTVAEKLQRDFLTEWRRVSKAPEALFFVQFEKGESYFHMHVLVETTGVKS
+                     MVLGRFLSQIREKLIQRIYRGIEPTLPNWFAVTKTRNGAGGGNKVVDECYIPNYLLPK
+                     TQPELQWAWTNMEQYLSACLNLTERKRLVAQHLTHVSQTQEQNKENQNPNSDAPVIRS
+                     KTSARYMELVGWLVDKGITSEKQWIQEDQASYISFNAASNSRSQIKAALDNAGKIMSL
+                     TKTAPDYLVGQQPVEDISSNRIYKILELNGYDPQYAASVFLGWATKKFGKRNTIWLFG
+                     PATTGKTNIAEAIAHTVPFYGCVNWTNENFPFNDCVDKMVIWWEEGKMTAKVVESAKA
+                     ILGGSKVRVDQKCKSSAQIDPTPVIVTSNTNMCAVIDGNSTTFEHQQPLQDRMFKFEL
+                     TRRLDHDFGKVTKQEVKDFFRWAKDHVVEVEHEFYVKKGGAKKRPAPSDADISEPKRV
+                     RESVAQPSTSDAEASINYADRLARGHSL"
+     CDS             321..2186
+                     /note="major coat protein A"
+                     /codon_start=1
+                     /protein_id="AAA42374.1"
+                     /translation="MPGFYEIVIKVPSDLDGHLPGISDSFVNWVAEKEWELPPDSDMD
+                     LNLIEQAPLTVAEKLQRDFLTEWRRVSKAPEALFFVQFEKGESYFHMHVLVETTGVKS
+                     MVLGRFLSQIREKLIQRIYRGIEPTLPNWFAVTKTRNGAGGGNKVVDECYIPNYLLPK
+                     TQPELQWAWTNMEQYLSACLNLTERKRLVAQHLTHVSQTQEQNKENQNPNSDAPVIRS
+                     KTSARYMELVGWLVDKGITSEKQWIQEDQASYISFNAASNSRSQIKAALDNAGKIMSL
+                     TKTAPDYLVGQQPVEDISSNRIYKILELNGYDPQYAASVFLGWATKKFGKRNTIWLFG
+                     PATTGKTNIAEAIAHTVPFYGCVNWTNENFPFNDCVDKMVIWWEEGKMTAKVVESAKA
+                     ILGGSKVRVDQKCKSSAQIDPTPVIVTSNTNMCAVIDGNSTTFEHQQPLQDRMFKFEL
+                     TRRLDHDFGKVTKQEVKDFFRWAKDHVVEVEHEFYVKKGGAKKRPAPSDADISEPKRV
+                     RESVAQPSTSDAEASINYADRYQNKCSRHVGMNLMLFPCRQCERMNQNSNICFTHGQK
+                     DCLECFPVSESQPVSVVKKAYQKLCYIHHIMGKVPDACTACDLVNVDLDDCIFEQ"
+     mRNA            873..4447
+                     /note="major coat protein A mRNA (alt.)"
+     CDS             join(993..1906,2228..2252)
+                     /note="major coat protein Aa (alt.)"
+                     /codon_start=1
+                     /protein_id="AAA42373.1"
+                     /translation="MELVGWLVDKGITSEKQWIQEDQASYISFNAASNSRSQIKAALD
+                     NAGKIMSLTKTAPDYLVGQQPVEDISSNRIYKILELNGYDPQYAASVFLGWATKKFGK
+                     RNTIWLFGPATTGKTNIAEAIAHTVPFYGCVNWTNENFPFNDCVDKMVIWWEEGKMTA
+                     KVVESAKAILGGSKVRVDQKCKSSAQIDPTPVIVTSNTNMCAVIDGNSTTFEHQQPLQ
+                     DRMFKFELTRRLDHDFGKVTKQEVKDFFRWAKDHVVEVEHEFYVKKGGAKKRPAPSDA
+                     DISEPKRVRESVAQPSTSDAEASINYADRLARGHSL"
+     CDS             993..2186
+                     /note="major coat protein A'' (alt.)"
+                     /codon_start=1
+                     /protein_id="AAA42375.1"
+                     /translation="MELVGWLVDKGITSEKQWIQEDQASYISFNAASNSRSQIKAALD
+                     NAGKIMSLTKTAPDYLVGQQPVEDISSNRIYKILELNGYDPQYAASVFLGWATKKFGK
+                     RNTIWLFGPATTGKTNIAEAIAHTVPFYGCVNWTNENFPFNDCVDKMVIWWEEGKMTA
+                     KVVESAKAILGGSKVRVDQKCKSSAQIDPTPVIVTSNTNMCAVIDGNSTTFEHQQPLQ
+                     DRMFKFELTRRLDHDFGKVTKQEVKDFFRWAKDHVVEVEHEFYVKKGGAKKRPAPSDA
+                     DISEPKRVRESVAQPSTSDAEASINYADRYQNKCSRHVGMNLMLFPCRQCERMNQNSN
+                     ICFTHGQKDCLECFPVSESQPVSVVKKAYQKLCYIHHIMGKVPDACTACDLVNVDLDD
+                     CIFEQ"
+     mRNA            1853..4447
+                     /note="major coat protein B mRNA (alt.)"
+     intron          1907..2227
+                     /note="major coat protein A intron"
+     CDS             2810..4324
+                     /note="major coat protein B"
+                     /codon_start=1
+                     /protein_id="AAA42376.1"
+                     /translation="MATGSGAPMADNNEGADGVGNSSGNWHCDSTWMGDRVITTSTRT
+                     WALPTYNNHLYKQISSQSGASNDNHYFGYSTPWGYFDFNRFHCHFSPRDWQRLINNNW
+                     GFRPKRLNFKLFNIQVKEVTQNDGTTTIANNLTSTVQVFTDSEYQLPYVLGSAHQGCL
+                     PPFPADVFMVPQYGYLTLNNGSQAVGRSSFYCLEYFPSQMLRTGNNFTFSYTFEDVPF
+                     HSSYAHSQSLDRLMNPLIDQYLYYLSRTNTPSGTTTQSRLQFSQAGASDIRDQSRNWL
+                     PGPCYRQQRVSKTSADNNNSEYSWTGATKYHLNGRDSLVNPAMASHKDDEEKFFPQSG
+                     VLIFGKQGSEKTNVNIEKVMITDEEEIGTTNPVATEQYGSVSTNLQRGNRQAATADVN
+                     TQGVLPGMVWQDRDVYLQGPIWAKIPHTDGHFHPSPLMGGFGLKHPPPQILIKNTPVP
+                     ANPSTTFSAAKFASFITQYSTGHGQRGDRVGAAEGKQQTLESRNSVHFQLQQVC"
+     repeat_region   4531..4675
+                     /note="3' inverted terminal repeat"
+     misc_feature    4592..4634
+                     /note="flop oriented DNA"
+ORIGIN      5' end of genomic DNA.
+        1 ttggccactc cctctctgcg cgctcgctcg ctcactgagg ccgggcgacc aaaggtcgcc
+       61 cgacgcccgg gctttgcccg ggcggcctca gtgagcgagc gagcgcgcag agagggagtg
+      121 gccaactcca tcactagggg ttcctggagg ggtggagtcg tgacgtgaat tacgtcatag
+      181 ggttagggag gtcctgtatt agaggtcacg tgagtgtttt gcgacatttt gcgacaccat
+      241 gtggtcacgc tgggtattta agcccgagtg agcacgcagg gtctccattt tgaagcggga
+      301 ggtttgaacg cgcagccgcc atgccggggt tttacgagat tgtgattaag gtccccagcg
+      361 accttgacgg gcatctgccc ggcatttctg acagctttgt gaactgggtg gccgagaagg
+      421 aatgggagtt gccgccagat tctgacatgg atctgaatct gattgagcag gcacccctga
+      481 ccgtggccga gaagctgcag cgcgactttc tgacggaatg gcgccgtgtg agtaaggccc
+      541 cggaggccct tttctttgtg caatttgaga agggagagag ctacttccac atgcacgtgc
+      601 tcgtggaaac caccggggtg aaatccatgg ttttgggacg tttcctgagt cagattcgcg
+      661 aaaaactgat tcagagaatt taccgcggga tcgagccgac tttgccaaac tggttcgcgg
+      721 tcacaaagac cagaaatggc gccggaggcg ggaacaaggt ggtggatgag tgctacatcc
+      781 ccaattactt gctccccaaa acccagcctg agctccagtg ggcgtggact aatatggaac
+      841 agtatttaag cgcctgtttg aatctcacgg agcgtaaacg gttggtggcg cagcatctga
+      901 cgcacgtgtc gcagacgcag gagcagaaca aagagaatca gaatcccaat tctgatgcgc
+      961 cggtgatcag atcaaaaact tcagccaggt acatggagct ggtcgggtgg ctcgtggaca
+     1021 aggggattac ctcggagaag cagtggatcc aggaggacca ggcctcatac atctccttca
+     1081 atgcggcctc caactcgcgg tcccaaatca aggctgcctt ggacaatgcg ggaaagatta
+     1141 tgagcctgac taaaaccgcc cccgactacc tggtgggcca gcagcccgtg gaggacattt
+     1201 ccagcaatcg gatttataaa attttggaac taaacgggta cgatccccaa tatgcggctt
+     1261 ccgtctttct gggatgggcc acgaaaaagt tcggcaagag gaacaccatc tggctgtttg
+     1321 ggcctgcaac taccgggaag accaacatcg cggaggccat agcccacact gtgcccttct
+     1381 acgggtgcgt aaactggacc aatgagaact ttcccttcaa cgactgtgtc gacaagatgg
+     1441 tgatctggtg ggaggagggg aagatgaccg ccaaggtcgt ggagtcggcc aaagccattc
+     1501 tcggaggaag caaggtgcgc gtggaccaga aatgcaagtc ctcggcccag atagacccga
+     1561 ctcccgtgat cgtcacctcc aacaccaaca tgtgcgccgt gattgacggg aactcaacga
+     1621 ccttcgaaca ccagcagccg ttgcaagacc ggatgttcaa atttgaactc acccgccgtc
+     1681 tggatcatga ctttgggaag gtcaccaagc aggaagtcaa agactttttc cggtgggcaa
+     1741 aggatcacgt ggttgaggtg gagcatgaat tctacgtcaa aaagggtgga gccaagaaaa
+     1801 gacccgcccc cagtgacgca gatataagtg agcccaaacg ggtgcgcgag tcagttgcgc
+     1861 agccatcgac gtcagacgcg gaagcttcga tcaactacgc agacaggtac caaaacaaat
+     1921 gttctcgtca cgtgggcatg aatctgatgc tgtttccctg cagacaatgc gagagaatga
+     1981 atcagaattc aaatatctgc ttcactcacg gacagaaaga ctgtttagag tgctttcccg
+     2041 tgtcagaatc tcaacccgtt tctgtcgtca aaaaggcgta tcagaaactg tgctacattc
+     2101 atcatatcat gggaaaggtg ccagacgctt gcactgcctg cgatctggtc aatgtggatt
+     2161 tggatgactg catctttgaa caataaatga tttaaatcag gtatggctgc cgatggttat
+     2221 cttccagatt ggctcgagga cactctctct gaaggaataa gacagtggtg gaagctcaaa
+     2281 cctggcccac caccaccaaa gcccgcagag cggcataagg acgacagcag gggtcttgtg
+     2341 cttcctgggt acaagtacct cggacccttc aacggactcg acaagggaga gccggtcaac
+     2401 gaggcagacg ccgcggccct cgagcacgta caaagcctac gaccggcagc tcgacagcgg
+     2461 agacaacccg tacctcaagt acaaccacgc cgacgcggag tttcaggagc gccttaaaga
+     2521 agatacgtct tttgggggca acctcggacg agcagtcttc caggcgaaaa agagggttct
+     2581 tgaacctctg ggcctggttg aggaacctgt taagacggct ccgggaaaaa agaggccggt
+     2641 agagcactct cctgtggagc cagactcctc ctcgggaacc ggaaaggcgg gccagcagcc
+     2701 tgcaagaaaa agattgaatt ttggtcagac tggagacgca gactcagtac ctgaccccca
+     2761 gcctctcgga cagccaccag cagccccctc tggtctggga actaatacga tggctacagg
+     2821 cagtggcgca ccaatggcag acaataacga gggcgccgac ggagtgggta attcctccgg
+     2881 aaattggcat tgcgattcca catggatggg cgacagagtc atcaccacca gcacccgaac
+     2941 ctgggccctg cccacctaca acaaccacct ctacaaacaa atttccagcc aatcaggagc
+     3001 ctcgaacgac aatcactact ttggctacag caccccttgg gggtattttg acttcaacag
+     3061 attccactgc cacttttcac cacgtgactg gcaaagactc atcaacaaca actggggatt
+     3121 ccgacccaag agactcaact tcaagctctt taacattcaa gtcaaagagg tcacgcagaa
+     3181 tgacggtacg acgacgattg ccaataacct taccagcacg gttcaggtgt ttactgactc
+     3241 ggagtaccag ctcccgtacg tcctcggctc ggcgcatcaa ggatgcctcc cgccgttccc
+     3301 agcagacgtc ttcatggtgc cacagtatgg atacctcacc ctgaacaacg ggagtcaggc
+     3361 agtaggacgc tcttcatttt actgcctgga gtactttcct tctcagatgc tgcgtaccgg
+     3421 aaacaacttt accttcagct acacttttga ggacgttcct ttccacagca gctacgctca
+     3481 cagccagagt ctggaccgtc tcatgaatcc tctcatcgac cagtacctgt attacttgag
+     3541 cagaacaaac actccaagtg gaaccaccac gcagtcaagg cttcagtttt ctcaggccgg
+     3601 agcgagtgac attcgggacc agtctaggaa ctggcttcct ggaccctgtt accgccagca
+     3661 gcgagtatca aagacatctg cggataacaa caacagtgaa tactcgtgga ctggagctac
+     3721 caagtaccac ctcaatggca gagactctct ggtgaatccg gccatggcaa gccacaagga
+     3781 cgatgaagaa aagttttttc ctcagagcgg ggttctcatc tttgggaagc aaggctcaga
+     3841 gaaaacaaat gtgaacattg aaaaggtcat gattacagac gaagaggaaa tcggaacaac
+     3901 caatcccgtg gctacggagc agtatggttc tgtatctacc aacctccaga gaggcaacag
+     3961 acaagcagct accgcagatg tcaacacaca aggcgttctt ccaggcatgg tctggcagga
+     4021 cagagatgtg taccttcagg ggcccatctg ggcaaagatt ccacacacgg acggacattt
+     4081 tcacccctct cccctcatgg gtggattcgg acttaaacac cctcctccac agattctcat
+     4141 caagaacacc ccggtacctg cgaatccttc gaccaccttc agtgcggcaa agtttgcttc
+     4201 cttcatcaca cagtactcca cgggacacgg tcagcgtgga gatcgagtgg gagctgcaga
+     4261 aggaaaacag caaacgctgg aatcccgaaa ttcagtacac ttccaactac aacaagtctg
+     4321 ttaatcgtgg acttaccgtg gatactaatg gcgtgtattc agagcctcgc cccattggca
+     4381 ccagatacct gactcgtaat ctgtaattgc ttgttaatca ataaaccgtt taattcgttt
+     4441 cagttgaact ttggtctctg cgtatttctt tcttatctag tttccatggc tacgtagata
+     4501 agtagcatgg cgggttaatc attaactaca aggaacccct agtgatggag ttggccactc
+     4561 cctctctgcg cgctcgctcg ctcactgagg ccgggcgacc aaaggtcgcc cgacgcccgg
+     4621 gctttgcccg ggcggcctca gtgagcgagc gagcgcgcag agagggagtg gccaa
+//

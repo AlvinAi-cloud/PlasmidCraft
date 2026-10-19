@@ -1,0 +1,38 @@
+{
+  "source": "https://github.com/biopython/biopython",
+  "ref": "c911b1210e69df202834418ec43fba62a9d0b100",
+  "files": [
+    {
+      "path": "SnapGene/sample-d.dna",
+      "sha256": "9f2b69c06c2a49f23bd41d02672fbd4ee037ce8b575e754be79bac9834130fa3"
+    },
+    {
+      "path": "SnapGene/sample-e.dna",
+      "sha256": "6c82f10cd22dd18af132d8b6391bdcd6eea9e3375649f2c524b92ab25359bacd"
+    },
+    {
+      "path": "SnapGene/sample-f.dna",
+      "sha256": "54b2ee70f4b14b2d57461ab0ce880fe0ec2688fd9d08d3f717c6a474ed884502"
+    },
+    {
+      "path": "SnapGene/pFA-KanMX4.dna",
+      "sha256": "73f034602def35033bb2cbaad43aec8b697f2a20f834f6192a821e203682905e"
+    },
+    {
+      "path": "SnapGene/looped_feature.dna",
+      "sha256": "4812fccc232c3d3b7874e70b92e2bf252d9cb2052d98e7f90348b73c03877e11"
+    },
+    {
+      "path": "SnapGene/looped_feature_origin.dna",
+      "sha256": "984fafde845f599a1162386b3ea587ca5833a2c0f8ea5f74436602726289c6c4"
+    },
+    {
+      "path": "Abi/3730.ab1",
+      "sha256": "e4663e4db40232576ccdda5b878dddb01ef80a3d1b032941ba053146ce53f77b"
+    },
+    {
+      "path": "Abi/empty.ab1",
+      "sha256": "c56a89d25ff8dde424ca3f6e177655dd16fe34322563ace3956b66f897172e85"
+    }
+  ]
+}

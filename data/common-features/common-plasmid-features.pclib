@@ -1,0 +1,1933 @@
+{
+  "format": "PlasmidCraftFeatureLibrary",
+  "version": 2,
+  "name": "Common plasmid features",
+  "features": [
+    {
+      "id": "common-001",
+      "name": "araO2 operator",
+      "sequence": "GAAACCAATTGTCCATAT",
+      "type": "misc_binding",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 1003..1020. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 1003..1020. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "1003..1020",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "e53faf548e82f1aae3a9072087ac4ba124849bf7b010fcdccde10b6334f6be74",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-002",
+      "name": "araC Pc promoter",
+      "sequence": "CATGACAAAAACGCGTAACAAAAGTGTCT",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 1125..1153. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 1125..1153. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "1125..1153",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "f42811ae247a3698f72d53cd4c634ba2efb77c305e1b797680bd61abee7946b2",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-003",
+      "name": "araO1 operator",
+      "sequence": "CGGCAGAAAAGTCCACATTGAT",
+      "type": "misc_binding",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 1161..1182. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 1161..1182. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "1161..1182",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "e2e32b59e55fae0362b283e7f1807dccbb00171b5f3cbbad40ebc13ca2d39aae",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-004",
+      "name": "araI1/I2 operator",
+      "sequence": "ATAGCATTTTTATCCATAAGATTAGCGGATCCTACCTGA",
+      "type": "misc_binding",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 1213..1251. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 1213..1251. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "1213..1251",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "2e37821da834654d5b048befbbb3765e4c7a6f5cae60935eb7d4e9373ca765f1",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-005",
+      "name": "araBAD promoter",
+      "sequence": "GACGCTTTTTATCGCAACTCTCTACTGT",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 1250..1277. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 1250..1277. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "1250..1277",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "1196f17e28976780ed51c8f6f1842de9848f7f8538e98c91ac0f6f332b8140eb",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-006",
+      "name": "pBAD24 cloning site",
+      "sequence": "GCTAGCAGGAGGAATTCACCATGGTACCCGGGGATCCTCTAGAGTCGACCTGCAGGCATGCAAGCTT",
+      "type": "misc_feature",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 1300..1366. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 1300..1366. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Cloning sites",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "1300..1366",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "1d8c81edfda9272530c0f6f9836f655eae552075317fa3521a378d3431869f49",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-007",
+      "name": "M13 origin (pBAD24)",
+      "sequence": "TTTACGCGCCCTGTAGCGGCGCATTAAGCGCGGCGGGTGTGGTGGTTACGCGCAGCGTGACCGCTACACTTGCCAGCGCCCTAGCGCCCGCTCCTTTCGCTTTCTTCCCTTCCTTTCTCGCCACGTTCGCCGGCTTTCCCCGTCAAGCTCTAAATCGGGGGCTCCCTTTAGGGTTCCGATTTAGTGCTTTACGGCACCTCGACCCCAAAAAACTTGATTTGGGTGATGGTTCACGTAGTGGGCCATCGCCCTGATAGACGGTTTTTCGCCCTTTGACGTTGGAGTCCACGTTCTTTAATAGTGGACTCTTGTTCCAAACTTGAACAACACTCAACCCTATCTCGGGCTATTCTTTTGATTTATAAGGGATTTTGCCGATTTCGGCCTATTGGTTAAAAAATGAGCTGATTTAACAAAAATTTAACGCGAATTTTAACAAAATATTAACGTTTACAATTT",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 2784..3242. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 2784..3242. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "2784..3242",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "44a9b4b30d45e3cb8df6c2bbae54a5ac73d2a1964057b97802099808616d68f8",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-008",
+      "name": "pBR322-derived origin (pBAD24)",
+      "sequence": "GATCTAGGTGAAGATCCTTTTTGATAATCTCATGACCAAAATCCCTTAACGTGAGTTTTCGTTCCACTGAGCGTCAGACCCCGTAGAAAAGATCAAAGGATCTTCTTGAGATCCTTTTTTTCTGCGCGTAATCTGCTGCTTGCAAACAAAAAAACCACCGCTACCAGCGGTGGTTTGTTTGCCGGATCAAGAGCTACCAACTCTTTTTCCGAAGGTAACTGGCTTCAGCAGAGCGCAGATACCAAATACTGTCCTTCTAGTGTAGCCGTAGTTAGGCCACCACTTCAAGAACTCTGTAGCACCGCCTACATACCTCGCTCTGCTAATCCTGTTACCAGTGGCTGCTGCCAGTGGCGATAAGTCGTGTCTTACCGGGTTGGACTCAAGACGATAGTTACCGGATAAGGCGCAGCGGTCGGGCTGAACGGGGGGTTCGTGCACACAGCCCAGCTTGGAGCGAACGACCTACACCGAACTGAGATACCTACAGCGTGAGCTATGAGAAAGCGCCACGCTTCCCGAAGGGAGAAAGGCGGACAGGTATCCGGTAAGCGGCAGGGTCGGAACAGGAGAGCGCACGAGGGAGCTTCCAGGGGGAAACGCCTGGTATCTTTATAGTCCTGTCGGGTTTCGCCACCTCTGACTTGAGCGTCGATTTTTGTGATGCTCGTCAGGGGGGCGGAGCCTATGGAAAAACG",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from X81837.1, 3248..3945. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X81837.1, 3248..3945. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X81837.1",
+        "recordName": "E.coli DNA for pBAD24 cloning vector.",
+        "location": "3248..3945",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X81837.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "bb7bef65cbd632c60ca525ed0926699b849599c562cbb335a17ff527d177f168",
+        "recordSha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+      }
+    },
+    {
+      "id": "common-009",
+      "name": "TetA tetracycline resistance",
+      "sequence": "ATGAAATCTAACAATGCGCTCATCGTCATCCTCGGCACCGTCACCCTGGATGCTGTAGGCATAGGCTTGGTTATGCCGGTACTGCCGGGCCTCTTGCGGGATATCGTCCATTCCGACAGCATCGCCAGTCACTATGGCGTGCTGCTAGCGCTATATGCGTTGATGCAATTTCTATGCGCACCCGTTCTCGGAGCACTGTCCGACCGCTTTGGCCGCCGCCCAGTCCTGCTCGCTTCGCTACTTGGAGCCACTATCGACTACGCGATCATGGCGACCACACCCGTCCTGTGGATCCTCTACGCCGGACGCATCGTGGCCGGCATCACCGGCGCCACAGGTGCGGTTGCTGGCGCCTATATCGCCGACATCACCGATGGGGAAGATCGGGCTCGCCACTTCGGGCTCATGAGCGCTTGTTTCGGCGTGGGTATGGTGGCAGGCCCCGTGGCCGGGGGACTGTTGGGCGCCATCTCCTTGCATGCACCATTCCTTGCGGCGGCGGTGCTCAACGGCCTCAACCTACTACTGGGCTGCTTCCTAATGCAGGAGTCGCATAAGGGAGAGCGTCGACCGATGCCCTTGAGAGCCTTCAACCCAGTCAGCTCCTTCCGGTGGGCGCGGGGCATGACTATCGTCGCCGCACTTATGACTGTCTTCTTTATCATGCAACTCGTAGGACAGGTGCCGGCAGCGCTCTGGGTCATTTTCGGCGAGGACCGCTTTCGCTGGAGCGCGACGATGATCGGCCTGTCGCTTGCGGTATTCGGAATCTTGCACGCCCTCGCTCAAGCCTTCGTCACTGGTCCCGCCACCAAACGTTTCGGCGAGAAGCAGGCCATTATCGCCGGCATGGCGGCCGACGCGCTGGGCTACGTCTTGCTGGCGTTCGCGACGCGAGGCTGGATGGCCTTCCCCATTATGATTCTTCTCGCTTCCGGCGGCATCGGGATGCCCGCGTTGCAGGCCATGCTGTCCAGGCAGGTAGATGACGACCATCAGGGACAGCTTCAAGGATCGCTCGCGGCTCTTACCAGCCTAACTTCGATCACTGGACCGCTGATCGTCACGGCGATTTATGCCGCCTCGGCGAGCACATGGAACGGGTTGGCATGGATTGTAGGCGCCGCCCTATACCTTGTCTGCCTCCCCGCGTTGCGTCGCGGTGCATGGAGCCGGGCCACCTCGACCTGA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from J01749.1, 86..1276. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from J01749.1, 86..1276. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/J01749.1"
+        ],
+        "gene": [
+          "tet"
+        ],
+        "product": [
+          "tetracycline resistance protein"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "J01749.1",
+        "recordName": "Cloning vector pBR322, complete sequence.",
+        "location": "86..1276",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/J01749.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "7d078d90add0611d42f5903b574fb4e57c62d0fb86a2bd29d4bb564bf03cad7c",
+        "recordSha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+      }
+    },
+    {
+      "id": "common-010",
+      "name": "Rop copy-number regulator",
+      "sequence": "GTGACCAAACAGGAAAAAACCGCCCTTAACATGGCCCGCTTTATCAGAAGCCAGACATTAACGCTTCTGGAGAAACTCAACGAGCTGGACGCGGATGAACAGGCAGACATCTGTGAATCGCTTCACGACCACGCTGATGAGCTTTACCGCAGCTGCCTCGCGCGTTTCGGTGATGACGGTGAAAACCTCTGA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from J01749.1, 1915..2106. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from J01749.1, 1915..2106. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/J01749.1"
+        ],
+        "product": [
+          "ROP protein"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "J01749.1",
+        "recordName": "Cloning vector pBR322, complete sequence.",
+        "location": "1915..2106",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/J01749.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "99c19857662293d712af5077badabf68f76658fe71b6de192592b2b528baef0d",
+        "recordSha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+      }
+    },
+    {
+      "id": "common-011",
+      "name": "TEM-1 beta-lactamase / AmpR",
+      "sequence": "ATGAGTATTCAACATTTCCGTGTCGCCCTTATTCCCTTTTTTGCGGCATTTTGCCTTCCTGTTTTTGCTCACCCAGAAACGCTGGTGAAAGTAAAAGATGCTGAAGATCAGTTGGGTGCACGAGTGGGTTACATCGAACTGGATCTCAACAGCGGTAAGATCCTTGAGAGTTTTCGCCCCGAAGAACGTTTTCCAATGATGAGCACTTTTAAAGTTCTGCTATGTGGCGCGGTATTATCCCGTGTTGACGCCGGGCAAGAGCAACTCGGTCGCCGCATACACTATTCTCAGAATGACTTGGTTGAGTACTCACCAGTCACAGAAAAGCATCTTACGGATGGCATGACAGTAAGAGAATTATGCAGTGCTGCCATAACCATGAGTGATAACACTGCGGCCAACTTACTTCTGACAACGATCGGAGGACCGAAGGAGCTAACCGCTTTTTTGCACAACATGGGGGATCATGTAACTCGCCTTGATCGTTGGGAACCGGAGCTGAATGAAGCCATACCAAACGACGAGCGTGACACCACGATGCCTGCAGCAATGGCAACAACGTTGCGCAAACTATTAACTGGCGAACTACTTACTCTAGCTTCCCGGCAACAATTAATAGACTGGATGGAGGCGGATAAAGTTGCAGGACCACTTCTGCGCTCGGCCCTTCCGGCTGGCTGGTTTATTGCTGATAAATCTGGAGCCGGTGAGCGTGGGTCTCGCGGTATCATTGCAGCACTGGGGCCAGATGGTAAGCCCTCCCGTATCGTAGTTATCTACACGACGGGGAGTCAGGCAACTATGGATGAACGAAATAGACAGATCGCTGAGATAGGTGCCTCACTGATTAAGCATTGGTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from J01749.1, complement(3293..4153). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from J01749.1, complement(3293..4153). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/J01749.1"
+        ],
+        "gene": [
+          "bla"
+        ],
+        "product": [
+          "beta-lactamase"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "J01749.1",
+        "recordName": "Cloning vector pBR322, complete sequence.",
+        "location": "complement(3293..4153)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/J01749.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "4110e9a760fe769492f2de1dde6e9488ccdbe2582ec55c5b0981ea6b3cfdfa46",
+        "recordSha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+      }
+    },
+    {
+      "id": "common-012",
+      "name": "p15A origin",
+      "sequence": "GCGCTAGCGGAGTGTATACTGGCTTACTATGTTGGCACTGATGAGGGTGTCAGTGAAGTGCTTCATGTGGCAGGAGAAAAAAGGCTGCACCGGTGCGTCAGCAGAATATGTGATACAGGATATATTCCGCTTCCTCGCTCACTGACTCGCTACGCTCGGTCGTTCGACTGCGGCGAGCGGAAATGGCTTACGAACGGGGCGGAGATTTCCTGGAAGATGCCAGGAAGATACTTAACAGGGAAGTGAGAGGGCCGCGGCAAAGCCGTTTTTCCATAGGCTCCGCCCCCCTGACAAGCATCACGAAATCTGACGCTCAAATCAGTGGTGGCGAAACCCGACAGGACTATAAAGATACCAGGCGTTTCCCCCTGGCGGCTCCCTCGTGCGCTCTCCTGTTCCTGCCTTTCGGTTTACCGGTGTCATTCCGCTGTTATGGCCGCGTTTGTCTCATTCCACGCCTGACACTCAGTTCCGGGTAGGCAGTTCGCTCCAAGCTGGACTGTATGCACGAACCCCCCGTTCAGTCCGACCGCTGCGCCTTATCCGGTAACTATCGTCTTGAGTCCAACCCGGAAAGACATGCAAAAGCACCACTGGCAGCAGCCACTGGTAATTGATTTAGAGGAGTTAGTCTTGAAGTCATGCGCCGGTTAAGGCTAAACTGAAAGGACAAGTTTTGGTGACTGCGCTCCTCCAAGCCAGTTACCTCGGTTCAAAGAGTTGGTAGCTCAGAGAACCTTCGAAAAACCGCCCTGCAAGGCGGTTTTTTCGTTTTCAGAGCAAGAGATTACGCGCAGACCAAAACGATCTCAAGAAGATCATCTTATTAATCAGATAAAATATTTCTAGATTTCAGTGCAATTTATCTCTTCAAATGTAGCACCTGAAGTCAGCCCCATACGATATAAGTTGT",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from X06403.1, 581..1493. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from X06403.1, 581..1493. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/X06403.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "X06403.1",
+        "recordName": "Cloning vector pACYC184.",
+        "location": "581..1493",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/X06403.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "252795606a1d1292389fe2db5d97bf4f729d55748eb099f1b9a25601d8389126",
+        "recordSha256": "b1820e3d45074255957dabf75146c169bbab2c3922371fbdc5655fe990210eaa"
+      }
+    },
+    {
+      "id": "common-013",
+      "name": "EGFP",
+      "sequence": "ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGTCCGGCGAGGGCGAGGGCGATGCCACCTACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTACGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTTCTTCAAGGACGACGGCAACTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTACAACAGCCACAACGTCTATATCATGGCCGACAAGCAGAAGAACGGCATCAAGGTGAACTTCAAGATCCGCCACAACATCGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGCCCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCTCGGCATGGACGAGCTGTACAAGTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from U55762.1, 679..1398. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U55762.1, 679..1398. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U55762.1"
+        ],
+        "gene": [
+          "egfp"
+        ],
+        "product": [
+          "enhanced green fluorescent protein"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Reporters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U55762.1",
+        "recordName": "Cloning vector pEGFP-N1, complete sequence, enhanced green fluorescent protein (egfp) and neomycin phosphotransferase genes, complete cds.",
+        "location": "679..1398",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U55762.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "e8d734949c2b74ac68d9ecd5aa1016aa75d496d292b124db7d4993f2e5409449",
+        "recordSha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+      }
+    },
+    {
+      "id": "common-014",
+      "name": "NeoR / KanR (pEGFP-N1)",
+      "sequence": "ATGATTGAACAAGATGGATTGCACGCAGGTTCTCCGGCCGCTTGGGTGGAGAGGCTATTCGGCTATGACTGGGCACAACAGACAATCGGCTGCTCTGATGCCGCCGTGTTCCGGCTGTCAGCGCAGGGGCGCCCGGTTCTTTTTGTCAAGACCGACCTGTCCGGTGCCCTGAATGAACTGCAAGACGAGGCAGCGCGGCTATCGTGGCTGGCCACGACGGGCGTTCCTTGCGCAGCTGTGCTCGACGTTGTCACTGAAGCGGGAAGGGACTGGCTGCTATTGGGCGAAGTGCCGGGGCAGGATCTCCTGTCATCTCACCTTGCTCCTGCCGAGAAAGTATCCATCATGGCTGATGCAATGCGGCGGCTGCATACGCTTGATCCGGCTACCTGCCCATTCGACCACCAAGCGAAACATCGCATCGAGCGAGCACGTACTCGGATGGAAGCCGGTCTTGTCGATCAGGATGATCTGGACGAAGAGCATCAGGGGCTCGCGCCAGCCGAACTGTTCGCCAGGCTCAAGGCGAGCATGCCCGACGGCGAGGATCTCGTCGTGACCCATGGCGATGCCTGCTTGCCGAATATCATGGTGGAAAATGGCCGCTTTTCTGGATTCATCGACTGTGGCCGGCTGGGTGTGGCGGACCGCTATCAGGACATAGCGTTGGCTACCCGTGATATTGCTGAAGAGCTTGGCGGCGAATGGGCTGACCGCTTCCTCGTGCTTTACGGTATCGCCGCTCCCGATTCGCAGCGCATCGCCTTCTATCGCCTTCTTGACGAGTTCTTCTGA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from U55762.1, 2629..3423. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U55762.1, 2629..3423. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U55762.1"
+        ],
+        "product": [
+          "neomycin phosphotransferase"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U55762.1",
+        "recordName": "Cloning vector pEGFP-N1, complete sequence, enhanced green fluorescent protein (egfp) and neomycin phosphotransferase genes, complete cds.",
+        "location": "2629..3423",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U55762.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "2338d47cf3274f1e9c4c5d97a52307038e2bb87e1cf7276ec3a5dcfe402621df",
+        "recordSha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+      }
+    },
+    {
+      "id": "common-015",
+      "name": "mCherry (AY678264 reference)",
+      "sequence": "ATGGTGAGCAAGGGCGAGGAGGATAACATGGCCATCATCAAGGAGTTCATGCGCTTCAAGGTGCACATGGAGGGCTCCGTGAACGGCCACGAGTTCGAGATCGAGGGCGAGGGCGAGGGCCGCCCCTACGAGGGCACCCAGACCGCCAAGCTGAAGGTGACCAAGGGTGGCCCCCTGCCCTTCGCCTGGGACATCCTGTCCCCTCAGTTCATGTACGGCTCCAAGGCCTACGTGAAGCACCCCGCCGACATCCCCGACTACTTGAAGCTGTCCTTCCCCGAGGGCTTCAAGTGGGAGCGCGTGATGAACTTCGAGGACGGCGGCGTGGTGACCGTGACCCAGGACTCCTCCCTGCAGGACGGCGAGTTCATCTACAAGGTGAAGCTGCGCGGCACCAACTTCCCCTCCGACGGCCCCGTAATGCAGAAGAAGACCATGGGCTGGGAGGCCTCCTCCGAGCGGATGTACCCCGAGGACGGCGCCCTGAAGGGCGAGATCAAGCAGAGGCTGAAGCTGAAGGACGGCGGCCACTACGACGCTGAGGTCAAGACCACCTACAAGGCCAAGAAGCCCGTGCAGCTGCCCGGCGCCTACAACGTCAACATCAAGTTGGACATCACCTCCCACAACGAGGACTACACCATCGTGGAACAGTACGAACGCGCCGAGGGCCGCCACTCCACCGGCGGCATGGACGAGCTGTACAAGTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from AY678264.1, 1..711. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from AY678264.1, 1..711. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/AY678264.1"
+        ],
+        "product": [
+          "monomeric red fluorescent protein"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Reporters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "AY678264.1",
+        "recordName": "Synthetic construct monomeric red fluorescent protein gene, complete cds.",
+        "location": "1..711",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/AY678264.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "8af4208438ce1704a507ad663baa2cbc8ea2046bd53a97359c7f7c42de7b9f1d",
+        "recordSha256": "1a0512e1aeb75dd932dd767fd8b7a3ed59c340d7c26d88dd6bb1896d49a7437f"
+      }
+    },
+    {
+      "id": "common-016",
+      "name": "pGL3 multiple cloning site",
+      "sequence": "GGTACCGAGCTCTTACGCGTGCTAGCCCGGGCTCGAGATCTGCGATCTAAGTAAGCTT",
+      "type": "misc_feature",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from U47295.1, 1..58. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, 1..58. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Cloning sites",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "1..58",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "45b62617375ac84a7ece2033608c114fdcb6044c68df760f6f0175e9a5488052",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-017",
+      "name": "Firefly luciferase luc+",
+      "sequence": "ATGGAAGACGCCAAAAACATAAAGAAAGGCCCGGCGCCATTCTATCCGCTGGAAGATGGAACCGCTGGAGAGCAACTGCATAAGGCTATGAAGAGATACGCCCTGGTTCCTGGAACAATTGCTTTTACAGATGCACATATCGAGGTGGACATCACTTACGCTGAGTACTTCGAAATGTCCGTTCGGTTGGCAGAAGCTATGAAACGATATGGGCTGAATACAAATCACAGAATCGTCGTATGCAGTGAAAACTCTCTTCAATTCTTTATGCCGGTGTTGGGCGCGTTATTTATCGGAGTTGCAGTTGCGCCCGCGAACGACATTTATAATGAACGTGAATTGCTCAACAGTATGGGCATTTCGCAGCCTACCGTGGTGTTCGTTTCCAAAAAGGGGTTGCAAAAAATTTTGAACGTGCAAAAAAAGCTCCCAATCATCCAAAAAATTATTATCATGGATTCTAAAACGGATTACCAGGGATTTCAGTCGATGTACACGTTCGTCACATCTCATCTACCTCCCGGTTTTAATGAATACGATTTTGTGCCAGAGTCCTTCGATAGGGACAAGACAATTGCACTGATCATGAACTCCTCTGGATCTACTGGTCTGCCTAAAGGTGTCGCTCTGCCTCATAGAACTGCCTGCGTGAGATTCTCGCATGCCAGAGATCCTATTTTTGGCAATCAAATCATTCCGGATACTGCGATTTTAAGTGTTGTTCCATTCCATCACGGTTTTGGAATGTTTACTACACTCGGATATTTGATATGTGGATTTCGAGTCGTCTTAATGTATAGATTTGAAGAAGAGCTGTTTCTGAGGAGCCTTCAGGATTACAAGATTCAAAGTGCGCTGCTGGTGCCAACCCTATTCTCCTTCTTCGCCAAAAGCACTCTGATTGACAAATACGATTTATCTAATTTACACGAAATTGCTTCTGGTGGCGCTCCCCTCTCTAAGGAAGTCGGGGAAGCGGTTGCCAAGAGGTTCCATCTGCCAGGTATCAGGCAAGGATATGGGCTCACTGAGACTACATCAGCTATTCTGATTACACCCGAGGGGGATGATAAACCGGGCGCGGTCGGTAAAGTTGTTCCATTTTTTGAAGCGAAGGTTGTGGATCTGGATACCGGGAAAACGCTGGGCGTTAATCAAAGAGGCGAACTGTGTGTGAGAGGTCCTATGATTATGTCCGGTTATGTAAACAATCCGGAAGCGACCAACGCCTTGATTGACAAGGATGGATGGCTACATTCTGGAGACATAGCTTACTGGGACGAAGACGAACACTTCTTCATCGTTGACCGCCTGAAGTCTCTGATTAAGTACAAAGGCTATCAGGTGGCTCCCGCTGAATTGGAATCCATCTTGCTCCAACACCCCAACATCTTCGACGCAGGTGTCGCAGGTCTTCCCGACGATGACGCCGGTGAACTTCCCGCCGCCGTTGTTGTTTTGGAGCACGGAAAGACGATGACGGAAAAAGAGATCGTGGATTACGTCGCCAGTCAAGTAACAACCGCGAAAAAGTTGCGCGGAGGAGTTGTGTTTGTGGACGAAGTACCGAAAGGTCTTACCGGAAAACTCGACGCAAGAAAAATCAGAGAGATCCTCATAAAGGCCAAGAAGGGCGGAAAGATCGCCGTGTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from U47295.1, 88..1740. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, 88..1740. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ],
+        "gene": [
+          "luc+"
+        ],
+        "product": [
+          "firefly luciferase"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Reporters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "88..1740",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "96f67d08021450f2b425c7da4a5e5487ed489b407444fe6ff5dc17ff8177c9f8",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-018",
+      "name": "GLprimer2 site",
+      "sequence": "CTTTATGTTTTTGGCGTCTTCCA",
+      "type": "primer_bind",
+      "color": "#58a593",
+      "directional": true,
+      "description": "Reference variant from U47295.1, complement(89..111). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, complement(89..111). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Sequencing primers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "complement(89..111)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "7f31c863c2525870943075210472c5b5091671b528ad710457e6524dba512fcf",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-019",
+      "name": "SV40 late poly(A) (pGL3)",
+      "sequence": "CAGACATGATAAGATACATTGATGAGTTTGGACAAACCACAACTAGAATGCAGTGAAAAAAATGCTTTATTTGTGAAATTTGTGATGCTATTGCTTTATTTGTAACCATTATAAGCTGCAATAAACAAGTTAACAACAACAATTGCATTCATTTTATGTTTCAGGTTCAGGGGGAGGTGTGGGAGGTTTTTTAAAGCAAGTAAAACCTCTACAAATGTGGTA",
+      "type": "polyA_signal",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from U47295.1, 1772..1993. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, 1772..1993. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "1772..1993",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "3b1f183a9290282771a585e9f3d30fe1bbef6f281f444f1101b9128bf3817821",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-020",
+      "name": "RVprimer4 site",
+      "sequence": "GACGATAGTCATGCCCCGCG",
+      "type": "primer_bind",
+      "color": "#58a593",
+      "directional": true,
+      "description": "Reference variant from U47295.1, complement(2061..2080). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, complement(2061..2080). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Sequencing primers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "complement(2061..2080)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "82d669af106304f133b5bbc3bedca483c4d3a58984498ce9a18eb61cd8bc6482",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-021",
+      "name": "f1 origin (pGL3)",
+      "sequence": "CGCGCCCTGTAGCGGCGCATTAAGCGCGGCGGGTGTGGTGGTTACGCGCAGCGTGACCGCTACACTTGCCAGCGCCCTAGCGCCCGCTCCTTTCGCTTTCTTCCCTTCCTTTCTCGCCACGTTCGCCGGCTTTCCCCGTCAAGCTCTAAATCGGGGGCTCCCTTTAGGGTTCCGATTTAGTGCTTTACGGCACCTCGACCCCAAAAAACTTGATTAGGGTGATGGTTCACGTAGTGGGCCATCGCCCTGATAGACGGTTTTTCGCCCTTTGACGTTGGAGTCCACGTTCTTTAATAGTGGACTCTTGTTCCAAACTGGAACAACACTCAACCCTATCTCGGTCTATTCTTTTGATTTATAAGGGATTTTGCCGATTTCGGCCTATTGGTTAAAAAATGAGCTGATTTAACAAAAATTTAACGCGAATTTTAACAAAATATTAACGTTTACAATTT",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from U47295.1, 4073..4527. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, 4073..4527. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "4073..4527",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "b3a78401ce58fe93134be74211616a3bdd160fdb64589d301b128df8b4920417",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-022",
+      "name": "Upstream poly(A) region (pGL3)",
+      "sequence": "AATAAAATATCTTTATTTTCATTACATCTGTGTGTTGGTTTTTTGTGTGAATCGATAGTACTAACATACGCTCTCCATCAAAACAAAACGAAACAAAACAAACTAGCAAAATAGGCTGTCCCCAGTGCAAGTGCAGGTGCCAGAACATTTCTCT",
+      "type": "polyA_signal",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from U47295.1, 4658..4811. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, 4658..4811. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "4658..4811",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "dea2ede2e5b52a0e8feb1a73e611d2153131be34741808fe1edbb5cdbc80ee91",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-023",
+      "name": "RVprimer3 site",
+      "sequence": "CTAGCAAAATAGGCTGTCCC",
+      "type": "primer_bind",
+      "color": "#58a593",
+      "directional": true,
+      "description": "Reference variant from U47295.1, 4760..4779. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U47295.1, 4760..4779. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1"
+        ]
+      },
+      "category": "Sequencing primers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U47295.1",
+        "recordName": "Cloning vector pGL3-Basic firefly luciferase (luc+) gene, beta-lactamase (AmpR) gene, complete cds.",
+        "location": "4760..4779",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U47295.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "16d32eec80761201d4c9057096180ad00bd18ec6d9eafc648ff4ca7a23f46111",
+        "recordSha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+      }
+    },
+    {
+      "id": "common-024",
+      "name": "HSV TK promoter",
+      "sequence": "AAATGAGTCTTCGGACCTCGCGGGGGCCGCTTAAGCGGTGGTTAGGGTTTGTCTGACGCGGGGGGAGGGGGAAGGAACGAAACACTCTCATTCGGAGGCGGCTCGGGGTTTGGTCTTGGTGGCCACGGGCACGCAGAAGAGCGCCGCGATCCTCTTAAGCACCCCCCCGCCCTCCGTGGAGGCGGGGGTTTGGTCGGCGGGTGGTAACTGGCGGGCCGCTGACTCGGGCGGGTCGCGCGCCCCAGAGTGTGACCTTTTCGGTCTGCTCGCAGACCCCCGGGCGGCGCCGCCGCGGCGGCGACGGGCTCGCTGGGTCCTAGGCTCCATGGGGACCGTATACGTGGACAGGCTCTGGAGCATCCGCACGACTGCGGTGATATTACCGGAGACCTTCTGCGGGACGAGCCGGGTCACGCGGCTGACGCGGAGCGTCCGTTGGGCGACAAACACCAGGACGGGGCACAGGTACACTATCTTGTCACCCGGAGGCGCGAGGGACTGCAGGAGCTTCAGGGAGTGGCGCAGCTGCTTCATCCCCGTGGCCCGTTGCTCGCGTTTGCTGGCGGTGTCCCCGGAAGAAATATATTTGCATGTCTTTAGTTCTATGATGACACAAACCCCGCCCAGCGTCTTGTCATTGGCGAATTCGAACACGCAGATGCAGTCGGGGCGGCGCGGTCCCAGGTCCACTTCGCATATTAAGGTGACGCGTGTGGCCTCGAACACCGAGCGACCCTGCAGCGACCCGCTTAA",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from AF025846.1, 7..759. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from AF025846.1, 7..759. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "AF025846.1",
+        "recordName": "Co-reporter vector pRL-TK.",
+        "location": "7..759",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "1882ea8b7b96751ba41836ea0212e6bfc7e43c90c4c80b173945cb4e14673565",
+        "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+      }
+    },
+    {
+      "id": "common-025",
+      "name": "Chimeric intron (pRL-TK)",
+      "sequence": "CAGGTAAGTATCAAGGTTACAAGACAGGTTTAAGGAGACCAATAGAAACTGGGCTTGTCGAGACAGAGAAGACTCTTGCGTTTCTGATAGGCACCTATTGGTCTTACTGACATCCACTTTGCCTTTCTCTCCACAGG",
+      "type": "intron",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from AF025846.1, 826..962. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from AF025846.1, 826..962. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1"
+        ]
+      },
+      "category": "Introns",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "AF025846.1",
+        "recordName": "Co-reporter vector pRL-TK.",
+        "location": "826..962",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "ae71e480370d68f08f90f036e53c33244f1560f5534fcefa4111cc354f7801e8",
+        "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+      }
+    },
+    {
+      "id": "common-026",
+      "name": "T7 promoter (pRL-TK)",
+      "sequence": "TAATACGACTCACTATAGG",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from AF025846.1, 1006..1024. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from AF025846.1, 1006..1024. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "AF025846.1",
+        "recordName": "Co-reporter vector pRL-TK.",
+        "location": "1006..1024",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "c3dc81c7f91793f57456cb75520782f0d6f520586cda997ff64f38d2257ad8c8",
+        "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+      }
+    },
+    {
+      "id": "common-027",
+      "name": "Renilla luciferase",
+      "sequence": "ATGACTTCGAAAGTTTATGATCCAGAACAAAGGAAACGGATGATAACTGGTCCGCAGTGGTGGGCCAGATGTAAACAAATGAATGTTCTTGATTCATTTATTAATTATTATGATTCAGAAAAACATGCAGAAAATGCTGTTATTTTTTTACATGGTAACGCGGCCTCTTCTTATTTATGGCGACATGTTGTGCCACATATTGAGCCAGTAGCGCGGTGTATTATACCAGACCTTATTGGTATGGGCAAATCAGGCAAATCTGGTAATGGTTCTTATAGGTTACTTGATCATTACAAATATCTTACTGCATGGTTTGAACTTCTTAATTTACCAAAGAAGATCATTTTTGTCGGCCATGATTGGGGTGCTTGTTTGGCATTTCATTATAGCTATGAGCATCAAGATAAGATCAAAGCAATAGTTCACGCTGAAAGTGTAGTAGATGTGATTGAATCATGGGATGAATGGCCTGATATTGAAGAAGATATTGCGTTGATCAAATCTGAAGAAGGAGAAAAAATGGTTTTGGAGAATAACTTCTTCGTGGAAACCATGTTGCCATCAAAAATCATGAGAAAGTTAGAACCAGAAGAATTTGCAGCATATCTTGAACCATTCAAAGAGAAAGGTGAAGTTCGTCGTCCAACATTATCATGGCCTCGTGAAATCCCGTTAGTAAAAGGTGGTAAACCTGACGTTGTACAAATTGTTAGGAATTATAATGCTTATCTACGTGCAAGTGATGATTTACCAAAAATGTTTATTGAATCGGACCCAGGATTCTTTTCCAATGCTATTGTTGAAGGTGCCAAGAAGTTTCCTAATACTGAATTTGTCAAAGTAAAAGGTCTTCATTTTTCGCAAGAAGATGCACCTGATGAAATGGGAAAATATATCAAATCGTTCGTTGAGCGAGTTCTCAAAAATGAACAATAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from AF025846.1, 1034..1969. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from AF025846.1, 1034..1969. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1"
+        ],
+        "gene": [
+          "Rluc"
+        ],
+        "product": [
+          "Renilla luciferase"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Reporters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "AF025846.1",
+        "recordName": "Co-reporter vector pRL-TK.",
+        "location": "1034..1969",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "5f433c4c767f5aeb6da1c2ae5cf5167d9c28f27dce0bd378193b5842c5e3cd70",
+        "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+      }
+    },
+    {
+      "id": "common-028",
+      "name": "SV40 late poly(A) (pRL-TK)",
+      "sequence": "GATGAGTTTGGACAAACCACAACTAGAATGCAGTGAAAAAAATGCTTTATTTGTGAAATTTGTGATGCTATTGCTTTATTTGTAACCATTATAAGCTGCAATAAACAAGTTAACAACAACAATTGCATTCATTTTATGTTTCAGGTTCAGGGGGAGGTGTGGGAGGTTTTTTAAAGCAAGTAAAACCTCTACAAATGTGGTA",
+      "type": "polyA_signal",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from AF025846.1, 2011..2212. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from AF025846.1, 2011..2212. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "AF025846.1",
+        "recordName": "Co-reporter vector pRL-TK.",
+        "location": "2011..2212",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/AF025846.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "f0348da9f99b66b5017feac5d2ec10ff8820a05c870648f9e0c11f2a0909b825",
+        "recordSha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+      }
+    },
+    {
+      "id": "common-029",
+      "name": "Rabbit beta-globin 3′ UTR / poly(A)",
+      "sequence": "GATCTTTTTCCCTCTGCCAAAAATTATGGGGACATCATGAAGCCCCTTGAGCATCTGACTTCTGGCTAATAAAGGAAATTTATTTTCATTGC",
+      "type": "polyA_signal",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, 91..182. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, 91..182. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "91..182",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "3fa3a305e1cdcd90b8ab6a36ef31ccd6dd69c857ba40a3a8417d8b6a4b9b0f88",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-030",
+      "name": "lac promoter (pCAGGS)",
+      "sequence": "GCGCAACGCAATTAATGTGAGTTAGCTCACTCATTAGGCACCCAGGCTTTACACTTTATGCTTCCGGCTCGTATGTTGTGTGG",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, complement(617..699). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, complement(617..699). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "complement(617..699)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "a12b53935be389c58b0b812ad791ab4c0cf183b5a4ae9128c30336965f4165ce",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-031",
+      "name": "SV40 origin",
+      "sequence": "GACTAATTTTTTTTATTTATGCAGAGGCCGAGGCCGCCTCGGCCTCTGAGCTATTCCAGAAGTAGTGAGGAGGCTT",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, 841..916. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, 841..916. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "841..916",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "4dd4f18068683cf7700835724a5573991ea5b4100eaf0e57c1fd25aba1b692c6",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-032",
+      "name": "SV40 poly(A) region (pCAGGS)",
+      "sequence": "AACTTGTTTATTGCAGCTTATAATGGTTACAAATAAAGCAATAGCATCACAAATTTCACAAATAAAGCATTTTTT",
+      "type": "polyA_signal",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, 947..1021. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, 947..1021. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "947..1021",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "038ede71060a352ba88fa237bb674c10713230a99420c781550c0ecd2336bb93",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-033",
+      "name": "pMB1 origin (pCAGGS)",
+      "sequence": "CTGAGATACCTACAGCGTGAGCTATGAGAAAGCGCCACGCTTCCCGAAGGGAGAAAGGCGGACAGGTATCCGGTAAGCGGCAGGGTCGGAACAGGAGAGCGCACGAGGGAGCTTCCAGGGGGAAACGCCTGGTATCTTTATAGTCCTGTCGGGTTTCGCCACCTCTGACTTGAGCGTCGATTTTTGTGATGCTCGTCAGGGGGGCGGAGCCTATGGAAAAACGCCAGCAACGCGGCCTTTTTACGGTTCCTGGCCTTTTGCTGGCCTTTTGCTCACATGTTCTTTCCTGCGTTATCCCTGATTCTGTGGATAACCGTATTACCGCCTTTGAGTGAGCTGATACCGCTCGCCGCAGCCGAACGACCGAGCGCAGCGAGTCAGTGAGCGAGGAAGCGGAAGAGC",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, complement(1136..1537). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, complement(1136..1537). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "complement(1136..1537)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "28b1d6155c5794ec4194d82e7ea68f219c27413bd6930a0545c78eeb1f7637c4",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-034",
+      "name": "CMV IE enhancer (pCAGGS)",
+      "sequence": "GACATTGATTATTGACTAGTTATTAATAGTAATCAATTACGGGGTCATTAGTTCATAGCCCATATATGGAGTTCCGCGTTACATAACTTACGGTAAATGGCCCGCCTGGCTGACCGCCCAACGACCCCCGCCCATTGACGTCAATAATGACGTATGTTCCCATAGTAACGCCAATAGGGACTTTCCATTGACGTCAATGGGTGGAGTATTTACGGTAAACTGCCCACTTGGCAGTACATCAAGTGTATCATATGCCAAGTACGCCCCCTATTGACGTCAATGACGGTAAATGGCCCGCCTGGCATTATGCCCAGTACATGACCTTATGGGACTTTCCTACTTGGCAGTACATCTACGTATTAGTCATCGCTATTACCA",
+      "type": "enhancer",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, 3074..3451. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, 3074..3451. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "3074..3451",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "660be85a6807a2cd548a5eed3714c6f490236da99815b34449f7ae3fcc9a1060",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-035",
+      "name": "Chicken beta-actin / AG promoter",
+      "sequence": "GAGGTGAGCCCCACGTTCTGCTTCACTCTCCCCATCTCCCCCCCCTCCCCACCCCCAATTTTGTATTTATTTATTTTTTAATTATTTTGTGCAGCGATGGGGGCGGGGGGGGGGGGGGGGCCCCCCCCAGGCGGGGCGGGGCGGGGCGAGGGGCGGGGCGGGGCGAGGCGGAAAGGTGCGGCGGCAGCCAATCAGAGCGGCGCGCTCCGAAAGTTTCCTTTTATGGCGAGGCGGCGGCGGCGGCGGCCCTATAAAAAGCGAAGCGCGCGGCGGGCGGGAGTCGTTGCGCGCTGCCTTCCCCCCGTGCCCCGCTCCGCCGCCGCCTCGCGCCGCCCGCCCCGGCTCTGACTGACCGCGTTACTCCCACAGGTGAGCGGGCGGGACGGCCCTTCTCCTCCGGGCTGTAATTAGCGCTTGGTTTAATGACGGCTTGTTTCTTTTCTGTGGCTGCGTGAAAGCCTTGAGGGGCTCCGGGAGGGCCCTTTGTGCGGGGGGAGCGGCTCGGGGGGTGCGTGCGTGTGTGTGTGCGTGGGGAGCGCCGCGTGCGGCTCCGCGCTGCCCGGCGGCTGTGAGCGCTGCGGGCGCGGCGCGGGGCTTTGTGCGCTCCGCAGTGTGCGCGAGGGGAGCGCGGCCGGGGGCGGTGCCCCGCGGTGCGGGGGGGGCTGCGAGGGGAACAAAGGCTGCGTGCGGGGTGTGTGCGTGGGGGGGTGAGCAGGGGGTGTGGGCGCGTCGGTCGGGCTGCAACCCCCCCTGCACCCCCCTCCCCGAGTTGCTGAGCACGGCCCGGCTTCGGGTGCGGGGCTCCGTACGGGGCGTGGCGCGGGGCTCGCCGTGCCGGGCGGGGGGTGGCGGCAGGTGGGGGTGCCGGGCGGGGCGGGGCCGCCTCGGGCCGGGGAGGGCTCGGGGGAAGGGGCGCGGCGGCCCCCGGAGCGCCGGCGGCTGTCGAGGCGCGGCGAGCCGCAGCCATTGCCTTTTATGGTAATCGTGCGAGAGGGCGCAGGGACTTCCTTTGTCCCAAATCTGTGCGGAGCCGAAATCTGGGAGGCGCCGCCGCACCCCCTCTAGCGGGCGCGGGGCGAAGCGGTGCGGCGCCGGCAGGAAGGAAATGGGCGGGGAGGGCCTTCGTGCGTCGCCGCGCCGCCGTCCCCTTCTCCCTCTCCAGCCTCGGGGCTGTCCGCGGGGGGACGGCTGCCTTCGGGGGGGACGGGGCAGGGCGGGGTTCGGCTTCTGGCGTGTGACCGGCGGCTCTAGAGCCTCTGCTAACCATGTTCATGCCTTCTTCTTTTTCCTACAGCTCCTGGGCAACGTGCTGGTTATTGTGCTGTCTCATCATTTTGGCAAA",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, 3457..4798. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, 3457..4798. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "3457..4798",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "f97fce7b1d3b285c0ec0994e068f62a3ea696335ee266c8da91466b120661633",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-036",
+      "name": "AG promoter intron",
+      "sequence": "GTGAGCGGGCGGGACGGCCCTTCTCCTCCGGGCTGTAATTAGCGCTTGGTTTAATGACGGCTTGTTTCTTTTCTGTGGCTGCGTGAAAGCCTTGAGGGGCTCCGGGAGGGCCCTTTGTGCGGGGGGAGCGGCTCGGGGGGTGCGTGCGTGTGTGTGTGCGTGGGGAGCGCCGCGTGCGGCTCCGCGCTGCCCGGCGGCTGTGAGCGCTGCGGGCGCGGCGCGGGGCTTTGTGCGCTCCGCAGTGTGCGCGAGGGGAGCGCGGCCGGGGGCGGTGCCCCGCGGTGCGGGGGGGGCTGCGAGGGGAACAAAGGCTGCGTGCGGGGTGTGTGCGTGGGGGGGTGAGCAGGGGGTGTGGGCGCGTCGGTCGGGCTGCAACCCCCCCTGCACCCCCCTCCCCGAGTTGCTGAGCACGGCCCGGCTTCGGGTGCGGGGCTCCGTACGGGGCGTGGCGCGGGGCTCGCCGTGCCGGGCGGGGGGTGGCGGCAGGTGGGGGTGCCGGGCGGGGCGGGGCCGCCTCGGGCCGGGGAGGGCTCGGGGGAAGGGGCGCGGCGGCCCCCGGAGCGCCGGCGGCTGTCGAGGCGCGGCGAGCCGCAGCCATTGCCTTTTATGGTAATCGTGCGAGAGGGCGCAGGGACTTCCTTTGTCCCAAATCTGTGCGGAGCCGAAATCTGGGAGGCGCCGCCGCACCCCCTCTAGCGGGCGCGGGGCGAAGCGGTGCGGCGCCGGCAGGAAGGAAATGGGCGGGGAGGGCCTTCGTGCGTCGCCGCGCCGCCGTCCCCTTCTCCCTCTCCAGCCTCGGGGCTGTCCGCGGGGGGACGGCTGCCTTCGGGGGGGACGGGGCAGGGCGGGGTTCGGCTTCTGGCGTGTGACCGGCGGCTCTAGAGCCTCTGCTAACCATGTTCATGCCTTCTTCTTTTTCCTACAG",
+      "type": "intron",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from LT727518.1, 3826..4750. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from LT727518.1, 3826..4750. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1"
+        ]
+      },
+      "category": "Introns",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "LT727518.1",
+        "recordName": "Mammalian expression vector pCAGGS, complete sequence.",
+        "location": "3826..4750",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/LT727518.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "e6a982eb874cb31aa96c02fa7c11f563236b7e463bfb786719b106fd12cf9e1a",
+        "recordSha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+      }
+    },
+    {
+      "id": "common-037",
+      "name": "GAL1 promoter (pYES2 variant)",
+      "sequence": "AGTACGGATTAGAAGCCGCCGAGCGGGTGACAGCCCTCCGAAGGAAGACTCTCCTCCGTGCGTCCTCGTCTTCACCGGTCGCGTTCCTGAAACGCAGATGTGCCTCGCGCCGCACTGCTCCGAACAATAAAGATTCTACAATACTAGCTTTTATGGTTATGAAGAGGAAAAATTGGCAGTAACCTGGCCCCACAAACCTTCAAATGAACGAATCAAATTAACAACCATAGGATGATAATGCGATTAGTTTTTTAGCCTTATTTCTGGGGTAATTAATCAGCGAAGCGATGATTTTTGATCTATTAACAGATATATAAATGCAAAAACTGCATAACCACTTTAACTAATACTTTCAACATTTTCGGTTTGTATTACTTCTTATTCAAATGTAATAAAAGTATCAACAAAAAATTGTTAATATACCTCTATACTTTAACGTCAAGGAGAAAAAAC",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from OR992668.1, 1..453. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from OR992668.1, 1..453. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "OR992668.1",
+        "recordName": "Cloning vector pYES2_AmVHPO_ePTS1, complete sequence.",
+        "location": "1..453",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "d765cbac0dc4c863e686e7de1b9b378e6fd197faf25aca64d6f84b8a59631903",
+        "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+      }
+    },
+    {
+      "id": "common-038",
+      "name": "CYC1 terminator",
+      "sequence": "TCATGTAATTAGTTATGTCACGCTTACATTCACGCCCTCCCCCCACATCCGCTCTAACCGAAAAGGAAGGAGTTAGACAACCTGAAGTCTAGGTCCCTATTTATTTTTTTATAGTTATGTTAGTATTAAGAACGTTATTTATATTTCAAATTTTTCTTTTTTTTCTGTACAGACGCGTGTACGCATGTAACATTATACTGAAAACCTTGCTTGAGAAGGTTTTGGGACGCTCGAAGGCTTTAATTTGC",
+      "type": "terminator",
+      "color": "#cd7a83",
+      "directional": true,
+      "description": "Reference variant from OR992668.1, 2516..2763. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from OR992668.1, 2516..2763. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "OR992668.1",
+        "recordName": "Cloning vector pYES2_AmVHPO_ePTS1, complete sequence.",
+        "location": "2516..2763",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "fcd578524f6ce62728a84c0018a19a1bb6dc904843aebcbfef6b517fb6cf584c",
+        "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+      }
+    },
+    {
+      "id": "common-039",
+      "name": "URA3 yeast selection marker",
+      "sequence": "ATGTCGAAAGCTACATATAAGGAACGTGCTGCTACTCATCCTAGTCCTGTTGCTGCCAAGCTATTTAATATCATGCACGAAAAGCAAACAAACTTGTGTGCTTCATTGGATGTTCGTACCACCAAGGAATTACTGGAGTTAGTTGAAGCATTAGGTCCCAAAATTTGTTTACTAAAAACACATGTGGATATCTTGACTGATTTTTCCATGGAGGGCACAGTTAAGCCGCTAAAGGCATTATCCGCCAAGTACAATTTTTTACTCTTCGAAGACAGAAAATTTGCTGACATTGGTAATACAGTCAAATTGCAGTACTCTGCGGGTGTATACAGAATAGCAGAATGGGCAGACATTACGAATGCACACGGTGTGGTGGGCCCAGGTATTGTTAGCGGTTTGAAGCAGGCGGCAGAAGAAGTAACAAAGGAACCTAGAGGCCTTTTGATGTTAGCAGAATTGTCATGCAAGGGCTCCCTATCTACTGGAGAATATACTAAGGGTACTGTTGACATTGCGAAGAGCGACAAAGATTTTGTTATCGGCTTTATTGCTCAAAGAGACATGGGTGGAAGAGATGAAGGTTACGATTGGTTGATTATGACACCCGGTGTGGGTTTAGATGACAAGGGAGACGCATTGGGTCAACAGTATAGAACCGTGGATGATGTGGTCTCTACAGGATCTGACATTATTATTGTTGGAAGAGGACTATTTGCAAAGGGAAGGGATGCTAAGGTAGAGGGTGAACGTTACAGAAAAGCAGGCTGGGAAGCATATTTGAGAAGATGCGGCCAGCAAAACTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from OR992668.1, complement(4719..5522). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from OR992668.1, complement(4719..5522). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1"
+        ],
+        "gene": [
+          "ura3"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "OR992668.1",
+        "recordName": "Cloning vector pYES2_AmVHPO_ePTS1, complete sequence.",
+        "location": "complement(4719..5522)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "fc3367f428642d5cb8f562e8ee92d3532a5f3af1a923b83637bed4ce93123e0c",
+        "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+      }
+    },
+    {
+      "id": "common-040",
+      "name": "URA3 promoter",
+      "sequence": "TTCAATTCATCATTTTTTTTTTATTCTTTTTTTTGATTTCGGTTTCTTTGAAATTTTTTTGATTCGGTAATCTCCGAACAGAAGGAAGAACGAAGGAAGGAGCACAGACTTAGATTGGTATATATACGCATATGTAGTGTTGAAGAAACATGAAATTGCCCAGTATTCTTAACCCAACTGCACAGAACAAAAACCTGCAGGAAACGAAGATAAATC",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from OR992668.1, complement(5523..5738). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from OR992668.1, complement(5523..5738). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "OR992668.1",
+        "recordName": "Cloning vector pYES2_AmVHPO_ePTS1, complete sequence.",
+        "location": "complement(5523..5738)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "0deae6514fa68a44bd4edef4e4f10548d4ee265cb325bdd937e9f3b086fa8d5c",
+        "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+      }
+    },
+    {
+      "id": "common-041",
+      "name": "Yeast 2-micron origin",
+      "sequence": "AACGAAGCATCTGTGCTTCATTTTGTAGAACAAAAATGCAACGCGAGAGCGCTAATTTTTCAAACAAAGAATCTGAGCTGCATTTTTACAGAACAGAAATGCAACGCGAAAGCGCTATTTTACCAACGAAGAATCTGTGCTTCATTTTTGTAAAACAAAAATGCAACGCGACGAGAGCGCTAATTTTTCAAACAAAGAATCTGAGCTGCATTTTTACAGAACAGAAATGCAACGCGAGAGCGCTATTTTACCAACAAAGAATCTATACTTCTTTTTTGTTCTACAAAAATGCATCCCGAGAGCGCTATTTTTCTAACAAAGCATCTTAGATTACTTTTTTTCTCCTTTGTGCGCTCTATAATGCAGTCTCTTGATAACTTTTTGCACTGTAGGTCCGTTAAGGTTAGAAGAAGGCTACTTTGGTGTCTATTTTCTCTTCCATAAAAAAAGCCTGACTCCACTTCCCGCGTTTACTGATTACTAGCGAAGCTGCGGGTGCATTTTTTCAAGATAAAGGCATCCCCGATTATATTCTATACCGATGTGGATTGCGCATACTTTGTGAACAGAAAGTGATAGCGTTGATGATTCTTCATTGGTCAGAAAATTATGAACGGTTTCTTCTATTTTGTCTCTATATACTACGTATAGGAAATGTTTACATTTTCGTATTGTTTTCGATTCACTCTATGAATAGTTCTTACTACAATTTTTTTGTCTAAAGAGTAATACTAGAGATAAACATAAAAAATGTAGAGGTCGAGTTTAGATGCAAGTTCAAGGAGCGAAAGGTGGATGGGTAGGTTATATAGGGATATAGCACAGAGATATATAGCAAAGAGATACTTTTGAGCAATGTTTGTGGAAGCGGTATTCGCAAT",
+      "type": "rep_origin",
+      "color": "#9b77b7",
+      "directional": true,
+      "description": "Reference variant from OR992668.1, 6342..7222. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from OR992668.1, 6342..7222. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1"
+        ]
+      },
+      "category": "Origins",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "OR992668.1",
+        "recordName": "Cloning vector pYES2_AmVHPO_ePTS1, complete sequence.",
+        "location": "6342..7222",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/OR992668.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "07e019348e12767200813e092625dbd2c074ff8eeb8a402660a661d932345e06",
+        "recordSha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+      }
+    },
+    {
+      "id": "common-042",
+      "name": "T3 promoter (pCLV)",
+      "sequence": "AATTAACCCTCACTAAAGG",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 974..992. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 974..992. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "974..992",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "ba208a39e807161c749a04ed3c2bee04d5ede84baa837f36c772250a774576fc",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-043",
+      "name": "Lambda transcription terminator",
+      "sequence": "ATTCTCACCAATAAAAAACGCCCGGCGGCAACCGAGCGTTCTGAACAAATCCAGATGGAGTTCTGAGGTCATTACTGGATCTATCAACAGGAGTC",
+      "type": "terminator",
+      "color": "#cd7a83",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 1830..1924. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 1830..1924. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "1830..1924",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "f82bed76cf7232b85c13c42ff18e2c8d8388442d32b862f3e6eb8745f6bd3d99",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-044",
+      "name": "GFPmut3",
+      "sequence": "ATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, complement(1944..2660). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, complement(1944..2660). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ],
+        "gene": [
+          "gfpmut3"
+        ],
+        "product": [
+          "unstable GFP variant GFPmut3"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Reporters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "complement(1944..2660)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "cdcb8f7ec3713ac40b1bdc59da66c41a845ef76b21761db9014835b5780983d2",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-045",
+      "name": "ECFP",
+      "sequence": "ATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGTCCGGCGAGGGCGAGGGCGATGCCACCTACGGCAAGCTGACCCTGAAGTTCATCTGCACCACCGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCCTGACCTGGGGCGTGCAGTGCTTCAGCCGCTACCCCGACCACATGAAGCAGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTTCTTCAAGGACGACGGCAACTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTACATCAGCCACAACGTCTATATCACCGCCGACAAGCAGAAGAACGGCATCAAGGCCAACTTCAAGATCCGCCACAACATCGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCCATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTGAGCACCCAGTCCGCCCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCTCGGCATGGACGAGCTGTACAAGTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 2751..3470. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 2751..3470. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ],
+        "gene": [
+          "ecfp"
+        ],
+        "product": [
+          "enhanced cyan fluorescent protein"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Reporters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "2751..3470",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "edd61f74fefb8c2fb78ada22131b2b3d74f81bb8258391e403fc57ba358ba86b",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-046",
+      "name": "Sh ble / Zeocin resistance",
+      "sequence": "ATGGCCAAGTTGACCAGTGCCGTTCCGGTGCTCACCGCGCGCGACGTCGCCGGAGCGGTCGAGTTCTGGACCGACCGGCTCGGGTTCTCCCGGGACTTCGTGGAGGACGACTTCGCCGGTGTGGTCCGGGACGACGTGACCCTGTTCATCAGCGCGGTCCAGGACCAGGTGGTGCCGGACAACACCCTGGCCTGGGTGTGGGTGCGCGGCCTGGACGAGCTGTACGCCGAGTGGTCGGAGGTCGTGTCCACGAACTTCCGGGACGCCTCCGGGCCGGCCATGACCGAGATCGGCGAGCAGCCGTGGGGGCGGGAGTTCGCCCTGCGCGACCCGGCCGGCAACTGCGTGCACTTCGTGGCCGAGGAGCAGGACTGA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, complement(3561..3935). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, complement(3561..3935). Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ],
+        "gene": [
+          "ble-Sh"
+        ],
+        "product": [
+          "phleomycin/bleomycin binding protein Ble-Sh"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "complement(3561..3935)",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "84fe32ec2187fc027c19294f1233aefc36a7c0acb46378a0319a3c0ae75cbf74",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-047",
+      "name": "M13 forward primer site",
+      "sequence": "ACTGGCCGTCGTTTTAC",
+      "type": "primer_bind",
+      "color": "#58a593",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 4150..4166. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 4150..4166. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ]
+      },
+      "category": "Sequencing primers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "4150..4166",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "d881a6a7c50a79ecbfc80422cc5ba2e804b59a20f23fbfdafe35b47f1ecb901a",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-048",
+      "name": "Gentamicin resistance aacC1",
+      "sequence": "ATGTTACGCAGCAGCAACGATGTTACGCAGCAGGGCAGTCGCCCTAAAACAAAGTTAGGTGGCTCAAGTATGGGCATCATTCGCACATGTAGGCTCGGCCCTGACCAAGTCAAATCCATGCGGGCTGCTCTTGATCTTTTCGGTCGTGAGTTCGGAGACGTAGCCACCTACTCCCAACATCAGCCGGACTCCGATTACCTCGGGAACTTGCTCCGTAGTAAGACATTCATCGCGCTTGCTGCCTTCGACCAAGAAGCGGTTGTTGGCGCTCTCGCGGCTTACGTTCTGCCCAAGTTTGAGCAGCCGCGTAGTGAGATCTATATCTATGATCTCGCAGTCTCCGGCGAGCACCGGAGGCAGGGCATTGCCACCGCGCTCATCAATCTCCTCAAGCATGAGGCCAACGCGCTTGGTGCTTATGTGATCTACGTGCAAGCAGATTACGGTGACGATCCCGCAGTGGCTCTCTATACAAAGTTGGGCATACGGGAAGAAGTGATGCACTTTGATATCGACCCAAGTACCGCCACCTAA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 4744..5277. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 4744..5277. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ],
+        "gene": [
+          "aacC1"
+        ],
+        "product": [
+          "gentamicin 3-N-acetyltransferase"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "4744..5277",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "081c35826ed50c54db9c09f3173010f20df1891bdcce74b8ddebaed3fe140bb5",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-049",
+      "name": "KS sequencing primer site",
+      "sequence": "CGAGGTCGACGGTATCG",
+      "type": "primer_bind",
+      "color": "#58a593",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 1763..1779. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 1763..1779. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ]
+      },
+      "category": "Sequencing primers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "1763..1779",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "b0186cae05fd4f121bb87bb91f4d7ce4a491a44afa113ff986de7778128439be",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-050",
+      "name": "SK sequencing primer site",
+      "sequence": "GATCCACTAGTTCTAGA",
+      "type": "primer_bind",
+      "color": "#58a593",
+      "directional": true,
+      "description": "Reference variant from ON924783.1, 2699..2715. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from ON924783.1, 2699..2715. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1"
+        ]
+      },
+      "category": "Sequencing primers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "ON924783.1",
+        "recordName": "Vector pCLV, complete sequence.",
+        "location": "2699..2715",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/ON924783.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "8da61bdc34be1a52713bd98c2db208ce38766933645d808b50a40ad1ee332d0e",
+        "recordSha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+      }
+    },
+    {
+      "id": "common-051",
+      "name": "Human PGK promoter",
+      "sequence": "GGGGTTGGGGTTGCGCCTTTTCCAAGGCAGCCCTGGGTTTGCGCAGGGACGCGGCTGCTCTGGGCGTGGTTCCGGGAAACGCAGCGGCGCCGACCCTGGGTCTCGCACATTCTTCACGTCCGTTCGCAGCGTCACCCGGATCTTCGCCGCTACCCTTGTGGGCCCCCCGGCGACGCTTCCTGCTCCGCCCCTAAGTCGGGAAGGTTCCTTGCGGTTCGCGGCGTGCCGGACGTGACAAACGGAAGCCGCACGTCTCACTAGTACCCTCGCAGACGGACAGCGCCAGGGAGCAATGGCAGCGCGCCGACCGCGATGGGCTGTGGCCAATAGCGGCTGCTCAGCAGGGCGCGCCGAGAGCAGCGGCCGGGAAGGGGCGGTGCGGGAGGCGGGGTGTGGGGCGGTAGTGTGGGCCCTGTTCCTGCCCGCGCGGTGTTCCGCATTCTGCAAGCCTCCGGAGCGCACGTCGGCAGTCGGCTCCCTCGTTGACCGAATCACCGACCTCTCTCCCCAG",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 1..511. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 1..511. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "1..511",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "ede31bb673fdbbcadcdcb456932ccaf17ffe4506450da42511cbcecf1c01c4da",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-052",
+      "name": "Puromycin resistance pac",
+      "sequence": "ATGACCGAGTACAAGCCCACGGTGCGCCTCGCCACCCGCGACGACGTCCCCAGGGCCGTACGCACCCTCGCCGCCGCGTTCGCCGACTACCCCGCCACGCGCCACACCGTCGATCCGGACCGCCACATCGAGCGGGTCACCGAGCTGCAAGAACTCTTCCTCACGCGCGTCGGGCTCGACATCGGCAAGGTGTGGGTCGCGGACGACGGCGCCGCGGTGGCGGTCTGGACCACGCCGGAGAGCGTCGAAGCGGGGGCGGTGTTCGCCGAGATCGGCCCGCGCATGGCCGAGTTGAGCGGTTCCCGGCTGGCCGCGCAGCAACAGATGGAAGGCCTCCTGGCGCCGCACCGGCCCAAGGAGCCCGCGTGGTTCCTGGCCACCGTCGGCGTCTCGCCCGACCACCAGGGCAAGGGTCTGGGCAGCGCCGTCGTGCTCCCCGGAGTGGAGGCGGCCGAGCGCGCCGGGGTGCCCGCCTTCCTGGAGACCTCCGCGCCCCGCAACCTCCCCTTCTACGAGCGGCTCGGCTTCACCGTCACCGCCGACGTCGAGGTGCCCGAAGGACCGCGCACCTGGTGCATGACCCGCAAGCCCGGTGCCTGA",
+      "type": "CDS",
+      "color": "#518ac2",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 533..1132. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 533..1132. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ],
+        "gene": [
+          "pac"
+        ],
+        "product": [
+          "puromycin N-acetyltransferase"
+        ],
+        "codon_start": [
+          "1"
+        ],
+        "transl_table": [
+          "11"
+        ]
+      },
+      "category": "Markers",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "533..1132",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "53d168802719e172a41dc7ce4d3b1fa06e4353a0c9b3a1628a564e8aaff2bbbf",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-053",
+      "name": "SV40 poly(A) (pLKO.1 variant)",
+      "sequence": "AACTTGTTTATTGCAGCTTATAATGGTTACAAATAAAGCAATAGCATCACAAATTTCACAAATAAAGCATTTTTTTCACTGCATTCTAGTTGTGGTTTGTCCAAACTCATCAATGTATCTTA",
+      "type": "polyA_signal",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 1565..1686. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 1565..1686. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Terminators and polyA",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "1565..1686",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "3605de8591804f5f76d64bd89634138342c3960560139b2fa76c5219bcc9203d",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-054",
+      "name": "RSV promoter (pLKO.1 variant)",
+      "sequence": "TGTAGTCTTATGCAATACTCTTGTAGTCTTGCAACATGGTAACGATGAGTTAGCAACATGCCTTACAAGGAGAGAAAAAGCACCGTGCATGCCGATTGGTGGAAGTAAGGTGGTACGATCGTGCCTTATTAGGAAGGCAACAGACGGGTCTGACATGGATTGGACGAACCACTGAATTGCCGCATTGCAGAGATATTGTATTTAAGTGCCTAGCTCGATACATAAAC",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 4742..4968. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 4742..4968. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "4742..4968",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "5cb7c9c2e9b9712521b43bad59b4400797d2accb732cd030e498981fc8dd90df",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-055",
+      "name": "Human U6 promoter (pLKO.1 variant)",
+      "sequence": "GAGGGCCTATTTCCCATGATTCCTTCATATTTGCATATACGATACAAGGCTGTTAGAGAGATAATTGGAATTAATTTGACTGTAAACACAAAGATATTAGTACAAAATACGTGACGTAGAAAGTAATAATTTCTTGGGTAGTTTGCAGTTTTAAAATTATGTTTTAAAATGGACTATCATATGCTTACCGTAACTTGAAAGTATTTCGATTTCTTGGCTTTATATATCTTGTGGAAAGGACGAAACA",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 6574..6820. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 6574..6820. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "6574..6820",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "ac83d27e095db59a3f0bb9ef1ef5769f3c2f302b6f98b6eb46b421317d0ea3be",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-056",
+      "name": "RRE (pLKO.1 variant)",
+      "sequence": "AGGAGCTTTGTTCCTTGGGTTCTTGGGAGCAGCAGGAAGCACTATGGGCGCAGCGTCAATGACGCTGACGGTACAGGCCAGACAATTATTGTCTGGTATAGTGCAGCAGCAGAACAATTTGCTGAGGGCTATTGAGGCGCAACAGCATCTGTTGCAACTCACAGTCTGGGGCATCAAGCAGCTCCAGGCAAGAATCCTGGCTGTGGAAAGATACCTAAAGGATCAACAGCTCCT",
+      "type": "misc_feature",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 5814..6047. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 5814..6047. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "5814..6047",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "a7d28477e0a0bc5afbca131fdce75113ecd04b913dc8c383c7428b2342095a5a",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-057",
+      "name": "cPPT / CTS (pLKO.1 variant)",
+      "sequence": "TTTTAAAAGAAAAGGGGGGATTGGGGGGTACAGTGCAGGGGAAAGAATAGTAGACATAATAGCAACAGACATACAAACTAAAGAATTACAAAAACAAATTACAAAAATTCAAAATTTT",
+      "type": "misc_feature",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 6919..7036. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 6919..7036. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "6919..7036",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "2a2e58217073f1c649bb628125d2f737258f0492f1ff3938c9f90c08ac078319",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-058",
+      "name": "Lentiviral psi signal (pLKO.1 variant)",
+      "sequence": "CTCTCTCGACGCAGGACTCGGCTTGCTGAAGCGCGCACGGCAAGAGGCGAGGGGCGGCGACTGGTGAGTACGCCAAAAATTTTGACTAGCGGAGGCTAGAAGGAGAGAGATGGGTGCGAGAGCGTC",
+      "type": "misc_feature",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 5196..5321. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 5196..5321. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "5196..5321",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "1547998cdb407e838df1e700a29c7e534b45c4761a3aeb2119972e68f49d4db9",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-059",
+      "name": "3′ LTR (pLKO.1 variant)",
+      "sequence": "TGGAAGGGCTAATTCACTCCCAACGAAGACAAGATCTGCTTTTTGCTTGTACTGGGTCTCTCTGGTTAGACCAGATCTGAGCCTGGGAGCTCTCTGGCTAACTAGGGAACCCACTGCTTAAGCCTCAATAAAGCTTGCCTTGAGTGCTTCAAGTAGTGTGTGCCCGTCTGTTGTGTGACTCTGGTAACTAGAGATCCCTCAGACCCTTTTAGTCAGTGTGGAAAATCTCTAGCA",
+      "type": "LTR",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 1260..1493. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 1260..1493. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "1260..1493",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "639765868777d9ef4d177abdbb7f8a998a5708a7f84dfc0a9ffda7264e37c2db",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-060",
+      "name": "5′ LTR (pLKO.1 variant)",
+      "sequence": "GGGTCTCTCTGGTTAGACCAGATCTGAGCCTGGGAGCTCTCTGGCTAACTAGGGAACCCACTGCTTAAGCCTCAATAAAGCTTGCCTTGAGTGCTTCAAGTAGTGTGTGCCCGTCTGTTGTGTGACTCTGGTAACTAGAGATCCCTCAGACCCTTTTAGTCAGTGTGGAAAATCTCTAGCA",
+      "type": "LTR",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from PX675714.1, 4969..5149. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from PX675714.1, 4969..5149. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "PX675714.1",
+        "recordName": "Synthetic construct clone pLKO.1 puro_konckdown_GJA1, complete sequence.",
+        "location": "4969..5149",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/PX675714.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "147639f1238ba6ead198afd5ce1c6e88d58e006b1fd8bcbba7defe6174f6b175",
+        "recordSha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+      }
+    },
+    {
+      "id": "common-061",
+      "name": "AAV2 ITR (left reference variant)",
+      "sequence": "TTGGCCACTCCCTCTCTGCGCGCTCGCTCGCTCACTGAGGCCGGGCGACCAAAGGTCGCCCGACGCCCGGGCTTTGCCCGGGCGGCCTCAGTGAGCGAGCGAGCGCGCAGAGAGGGAGTGGCCAACTCCATCACTAGGGGTTCCT",
+      "type": "repeat_region",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from J01901.1, 1..145. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from J01901.1, 1..145. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/J01901.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "J01901.1",
+        "recordName": "Adeno-associated virus 2, complete genome.",
+        "location": "1..145",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/J01901.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "d28654dd6a18bc02aae6fad09489d33ffdb10f691941acc171a58ddcdb32f43f",
+        "recordSha256": "b00627838b9eab354e94a9ea3c87cc62a32b37ce80b0057440ce59668e3f1150"
+      }
+    },
+    {
+      "id": "common-062",
+      "name": "AAV2 ITR (right reference variant)",
+      "sequence": "AGGAACCCCTAGTGATGGAGTTGGCCACTCCCTCTCTGCGCGCTCGCTCGCTCACTGAGGCCGGGCGACCAAAGGTCGCCCGACGCCCGGGCTTTGCCCGGGCGGCCTCAGTGAGCGAGCGAGCGCGCAGAGAGGGAGTGGCCAA",
+      "type": "repeat_region",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from J01901.1, 4531..4675. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from J01901.1, 4531..4675. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/J01901.1"
+        ]
+      },
+      "category": "Vector elements",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "J01901.1",
+        "recordName": "Adeno-associated virus 2, complete genome.",
+        "location": "4531..4675",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/J01901.1",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "5d36c701df453a0a31f2ddc7c50a4de5d6e5a5de25be14e7c7b866d9f3a8596f",
+        "recordSha256": "b00627838b9eab354e94a9ea3c87cc62a32b37ce80b0057440ce59668e3f1150"
+      }
+    },
+    {
+      "id": "common-063",
+      "name": "pUC19 multiple cloning site",
+      "sequence": "AAGCTTGCATGCCTGCAGGTCGACTCTAGAGGATCCCCGGGTACCGAGCTCGAATTC",
+      "type": "misc_feature",
+      "color": "#79a995",
+      "directional": true,
+      "description": "Reference variant from M77789.2, 233..289. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from M77789.2, 233..289. Boundaries retained from the public record; names/categories reviewed for this catalog.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/M77789.2"
+        ]
+      },
+      "category": "Cloning sites",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "M77789.2",
+        "recordName": "Cloning vector pUC19, complete sequence.",
+        "location": "233..289",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/M77789.2",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "7d25ccb76b8532922ba6677718cf7ee45f246ac3e72fb746016d04dca6342b4f",
+        "recordSha256": "14b0b5ba06c7e24e0e2c2205c63f58155c17ea74e3ec5806243aba87e8394c22"
+      }
+    },
+    {
+      "id": "common-cmv-ie",
+      "name": "CMV IE enhancer/promoter (pEGFP-N1)",
+      "sequence": "TAGTTATTAATAGTAATCAATTACGGGGTCATTAGTTCATAGCCCATATATGGAGTTCCGCGTTACATAACTTACGGTAAATGGCCCGCCTGGCTGACCGCCCAACGACCCCCGCCCATTGACGTCAATAATGACGTATGTTCCCATAGTAACGCCAATAGGGACTTTCCATTGACGTCAATGGGTGGAGTATTTACGGTAAACTGCCCACTTGGCAGTACATCAAGTGTATCATATGCCAAGTACGCCCCCTATTGACGTCAATGACGGTAAATGGCCCGCCTGGCATTATGCCCAGTACATGACCTTATGGGACTTTCCTACTTGGCAGTACATCTACGTATTAGTCATCGCTATTACCATGGTGATGCGGTTTTGGCAGTACATCAATGGGCGTGGATAGCGGTTTGACTCACGGGGATTTCCAAGTCTCCACCCCATTGACGTCAATGGGAGTTTGTTTTGGCACCAAAATCAACGGGACTTTCCAAAATGTCGTAACAACTCCGCCCCATTGACGCAAATGGGCGGTAGGCGTGTACGGTGGGAGGTCTATATAAGCAGAGCTGGTTTAGTGAACCGTCAGATC",
+      "type": "promoter",
+      "color": "#d6a34f",
+      "directional": true,
+      "description": "Reference variant from U55762.1, 1..589. Coordinates 1–589 described for pEGFP-N1; nucleotide data from U55762.1. Variant-specific full-pattern match.",
+      "qualifiers": {
+        "note": [
+          "Reference variant from U55762.1, 1..589. Coordinates 1–589 described for pEGFP-N1; nucleotide data from U55762.1. Variant-specific full-pattern match.",
+          "https://www.ncbi.nlm.nih.gov/nuccore/U55762.1"
+        ]
+      },
+      "category": "Promoters",
+      "provenance": {
+        "kind": "INSDC record",
+        "accession": "U55762.1",
+        "recordName": "Cloning vector pEGFP-N1, complete sequence, enhanced green fluorescent protein (egfp) and neomycin phosphotransferase genes, complete cds.",
+        "location": "1..589",
+        "sourceURL": "https://www.ncbi.nlm.nih.gov/nuccore/U55762.1",
+        "annotationSource": "https://www.nature.com/articles/labinvest201042",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "6638cd50a44d74805823926f19dea879657fce7ba6d840ddbb17bba2e2b8353f",
+        "recordSha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+      }
+    },
+    {
+      "id": "tag-ha-1",
+      "name": "HA tag",
+      "sequence": "TAYCCNTAYGAYGTNCCNGAYTAYGCN",
+      "type": "misc_feature",
+      "color": "#b894cc",
+      "directional": true,
+      "description": "Peptide-derived YPYDVPDYA coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+      "qualifiers": {
+        "note": [
+          "Peptide-derived YPYDVPDYA coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+          "https://www.thermofisher.com/kr/en/home/life-science/antibodies/antibodies-learning-center/antibodies-resource-library/antibody-methods/epitope-tagging-overview.html"
+        ]
+      },
+      "category": "Protein tags",
+      "provenance": {
+        "kind": "Peptide-derived motif",
+        "sourceURL": "https://www.thermofisher.com/kr/en/home/life-science/antibodies/antibodies-learning-center/antibodies-resource-library/antibody-methods/epitope-tagging-overview.html",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "791cc46d88e13ec41ec7b925ef6c10d7306aab73dac910bde8afc6a553702faa",
+        "peptide": "YPYDVPDYA",
+        "patternSetSha256": "791cc46d88e13ec41ec7b925ef6c10d7306aab73dac910bde8afc6a553702faa"
+      }
+    },
+    {
+      "id": "tag-flag-1",
+      "name": "FLAG / DYKDDDDK tag",
+      "sequence": "GAYTAYAARGAYGAYGAYGAYAAR",
+      "type": "misc_feature",
+      "color": "#b894cc",
+      "directional": true,
+      "description": "Peptide-derived DYKDDDDK coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+      "qualifiers": {
+        "note": [
+          "Peptide-derived DYKDDDDK coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+          "https://www.thermofisher.com/kr/en/home/life-science/antibodies/antibodies-learning-center/antibodies-resource-library/antibody-methods/epitope-tagging-overview.html"
+        ]
+      },
+      "category": "Protein tags",
+      "provenance": {
+        "kind": "Peptide-derived motif",
+        "sourceURL": "https://www.thermofisher.com/kr/en/home/life-science/antibodies/antibodies-learning-center/antibodies-resource-library/antibody-methods/epitope-tagging-overview.html",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "22729d75f99bc92dc9dda95e59389ef4e59dbfc2f3ac1d40237e8be4ec6e53f1",
+        "peptide": "DYKDDDDK",
+        "patternSetSha256": "22729d75f99bc92dc9dda95e59389ef4e59dbfc2f3ac1d40237e8be4ec6e53f1"
+      }
+    },
+    {
+      "id": "tag-6xhis-1",
+      "name": "6xHis tag",
+      "sequence": "CAYCAYCAYCAYCAYCAY",
+      "type": "misc_feature",
+      "color": "#b894cc",
+      "directional": true,
+      "description": "Peptide-derived HHHHHH coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+      "qualifiers": {
+        "note": [
+          "Peptide-derived HHHHHH coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+          "https://www.thermofisher.com/antibody/product/His-Tag-Antibody-clone-6G2A9-Monoclonal/A00186-100"
+        ]
+      },
+      "category": "Protein tags",
+      "provenance": {
+        "kind": "Peptide-derived motif",
+        "sourceURL": "https://www.thermofisher.com/antibody/product/His-Tag-Antibody-clone-6G2A9-Monoclonal/A00186-100",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "61b80e2ea94ee362db7e8fa9557d28a2f72152ee0efa7c836c2c5b19c8ad86a2",
+        "peptide": "HHHHHH",
+        "patternSetSha256": "61b80e2ea94ee362db7e8fa9557d28a2f72152ee0efa7c836c2c5b19c8ad86a2"
+      }
+    },
+    {
+      "id": "tag-myc-1",
+      "name": "Myc tag",
+      "sequence": "GARCARAARCTNATHAGYGARGARGAYCTN",
+      "alternateSequences": [
+        "GARCARAARCTNATHAGYGARGARGAYTTR",
+        "GARCARAARCTNATHTCNGARGARGAYCTN",
+        "GARCARAARCTNATHTCNGARGARGAYTTR",
+        "GARCARAARTTRATHAGYGARGARGAYCTN",
+        "GARCARAARTTRATHAGYGARGARGAYTTR",
+        "GARCARAARTTRATHTCNGARGARGAYCTN",
+        "GARCARAARTTRATHTCNGARGARGAYTTR"
+      ],
+      "type": "misc_feature",
+      "color": "#b894cc",
+      "directional": true,
+      "description": "Peptide-derived EQKLISEEDL coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+      "qualifiers": {
+        "note": [
+          "Peptide-derived EQKLISEEDL coding motif; covers synonymous codons using the DNA patterns grouped in this entry. A match does not establish an engineered tag or the expressed reading frame; review CDS context.",
+          "https://www.cellsignal.com/products/58730/datasheet?images=1&protocol=0"
+        ]
+      },
+      "category": "Protein tags",
+      "provenance": {
+        "kind": "Peptide-derived motif",
+        "sourceURL": "https://www.cellsignal.com/products/58730/datasheet?images=1&protocol=0",
+        "retrieved": "2026-10-17",
+        "sequenceSha256": "eb5bd82fd83b21d84aba72b1cbc870f93c4e8dc51badb2526c5b175161c591ab",
+        "peptide": "EQKLISEEDL",
+        "patternSetSha256": "3e4ee7080cb5c29df953a317d25dd5f86d96b1ab97a687608e53cf46c7380755"
+      }
+    }
+  ]
+}

@@ -1,0 +1,886 @@
+{
+  "product": "PlasmidCraft",
+  "version": "0.3.0",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "c76cbb28c2c9d3f12b7b9d320bdde45eada01ef254cdf8c55c08d84a6d2b69e8"
+    },
+    {
+      "path": ".github/workflows/desktop.yml",
+      "sha256": "c21f133473f2b35187a3ddffb1507f36efc97567c45762288f23a3320939f2a3"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "467cb9e94eb31c7d7dc679a0665c023be48643eb66dc17af6ed9b7c5aaed2233"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "2824e7c9f0bc7a85caad31473564e110031b9140f67f82b4367636ebb79d6f77"
+    },
+    {
+      "path": "data/common-features/common-plasmid-features.pclib",
+      "sha256": "893ad6bbbc88bc6ef8d746c83d00f1d2f7996ae0cc82f4bb869321c4effe8a72"
+    },
+    {
+      "path": "data/common-features/curation.json",
+      "sha256": "fcdf33f8e8c9b0c658b1f179801b880dcc4a992914b531b6d77fd07dc054526e"
+    },
+    {
+      "path": "data/common-features/README.md",
+      "sha256": "5c3f68702ab0bc1e6fccb6f9c239d9601a7dc30b470939ad1aaae93dc4d61b17"
+    },
+    {
+      "path": "data/common-features/source-records/AF025846.1.gb",
+      "sha256": "02ecb6ab338014b43052759c8437f767605e5074196feb6dcaf339ba55d40738"
+    },
+    {
+      "path": "data/common-features/source-records/AY678264.1.gb",
+      "sha256": "1a0512e1aeb75dd932dd767fd8b7a3ed59c340d7c26d88dd6bb1896d49a7437f"
+    },
+    {
+      "path": "data/common-features/source-records/J01749.1.gb",
+      "sha256": "7660b0fe95a91d492b102192dc72924508a69fda762988aa0923b3d5cc2073f6"
+    },
+    {
+      "path": "data/common-features/source-records/J01901.1.gb",
+      "sha256": "b00627838b9eab354e94a9ea3c87cc62a32b37ce80b0057440ce59668e3f1150"
+    },
+    {
+      "path": "data/common-features/source-records/LT727518.1.gb",
+      "sha256": "1db53452ba778a832400c015b92b0562bf011a37881bec37f5b71c488bff8dba"
+    },
+    {
+      "path": "data/common-features/source-records/M77789.2.gb",
+      "sha256": "14b0b5ba06c7e24e0e2c2205c63f58155c17ea74e3ec5806243aba87e8394c22"
+    },
+    {
+      "path": "data/common-features/source-records/ON924783.1.gb",
+      "sha256": "65d127adba2e86d583534d5c4fdf66a52f753235f3ae9d8da7a2dd067d5a4aa3"
+    },
+    {
+      "path": "data/common-features/source-records/OR992668.1.gb",
+      "sha256": "119df646ab2bdb1843667897d4c36e8da4422567c81a9b1a91a069694764135f"
+    },
+    {
+      "path": "data/common-features/source-records/PX675714.1.gb",
+      "sha256": "a20a8a52096a08ac650447d6829091d9f88197264e5568009c7e0f17d24cf64b"
+    },
+    {
+      "path": "data/common-features/source-records/U47295.1.gb",
+      "sha256": "a4649eebe754f038b922cb234a77333601b59ec312b90d5e1b3e24664543a578"
+    },
+    {
+      "path": "data/common-features/source-records/U55762.1.gb",
+      "sha256": "bf6a633fce38b828ed369628f45bed5755db623fac938772bcf9efd3f5f2481d"
+    },
+    {
+      "path": "data/common-features/source-records/X06403.1.gb",
+      "sha256": "b1820e3d45074255957dabf75146c169bbab2c3922371fbdc5655fe990210eaa"
+    },
+    {
+      "path": "data/common-features/source-records/X81837.1.gb",
+      "sha256": "eaf3527ff698b0d74ba0c1a11799c845fc9f8c01c689457bf5228fcfa162b5aa"
+    },
+    {
+      "path": "data/notices/BIOPYTHON-LICENSE.rst",
+      "sha256": "d4bbb0c4e5345e6f2508c3b93fb247fcb2db95783fb8a584c23cd88e3c03df6c"
+    },
+    {
+      "path": "data/notices/README.md",
+      "sha256": "e55e7df5f93a684a3e9af23ef9cfe341fdfb026caed30122ad2b1a9e35ddbde0"
+    },
+    {
+      "path": "data/notices/RUST-STANDARD-LIBRARY.html",
+      "sha256": "5647be074c8edf7339fd863055923a8fc80bc5610a8d4661ec3b767b9d392c27"
+    },
+    {
+      "path": "data/restriction-enzymes/README.md",
+      "sha256": "249a588672b5204a10e5fc720f1310f54bf1fcd189aeefa5c1e54fe0c555a2bb"
+    },
+    {
+      "path": "data/restriction-enzymes/vendor-facts.json",
+      "sha256": "33a9958df825f96253915751e278405465a10f62f674a6e6e9545b2f09472a35"
+    },
+    {
+      "path": "docs/AI_ASSISTANT.md",
+      "sha256": "2903f13102c008ca568f8cad9350feeb1202dae05deb738a0e06211240d49362"
+    },
+    {
+      "path": "docs/CLONING_DESIGN.md",
+      "sha256": "ed6a632d7d2ef2097815b7e047604ba0569f5a0281eacbad17fcea29d05cefee"
+    },
+    {
+      "path": "docs/CODON_OPTIMIZATION.md",
+      "sha256": "37b6d5edccf5440946d3d02ba3250b541578f69999528352a66c059c4dfda54e"
+    },
+    {
+      "path": "docs/DESKTOP.md",
+      "sha256": "9002063132c38b69c6596dd7c7513f55c67d93999f491c8e9cfff50df306bc96"
+    },
+    {
+      "path": "docs/FEATURE_CATALOG_AND_EXCHANGE.md",
+      "sha256": "753f6dd4ae20e91014129ea30f5d4e431ef125e5bd02afc2ad3890954f3faf2a"
+    },
+    {
+      "path": "docs/MUTAGENESIS.md",
+      "sha256": "3b2b41269e5726be46db4070fcdc421f86d41bdaa53ea9c4e67fe0e6a3015dfb"
+    },
+    {
+      "path": "docs/PROTEIN_ANALYSIS_AND_BLAST.md",
+      "sha256": "cb86de0d6cda3b53691528c55bc1eb08fb8aa8d67baa6459907b91740a9ed6d5"
+    },
+    {
+      "path": "docs/RELEASE.md",
+      "sha256": "4a45e29f547d45a8bdc440f7e3677b6ed6374f5cfa9f5df759e223d0b7df59b3"
+    },
+    {
+      "path": "docs/screenshots/0.3/all-library-matching.png",
+      "sha256": "74c75e7242bb5c065dbffc4ce20c4dce4372e040f05ace729bc9db5e2f36f02a"
+    },
+    {
+      "path": "docs/screenshots/0.3/api-model-picker.png",
+      "sha256": "fa11407570909f43aa0be16c2d4eeed23d915c41e1f209ffba8e9b9237b361d7"
+    },
+    {
+      "path": "docs/screenshots/0.3/auto-annotation.png",
+      "sha256": "27a698b8fc62d53d2af2f68971c8be408ae6d4f4d0238dabc7212396f0a3fb10"
+    },
+    {
+      "path": "docs/screenshots/0.3/common-enzyme-selection.png",
+      "sha256": "3f6e96e49222a35076e872ec1afd2fc06aa2b156779ea5b994f03dd0f6ba7e8d"
+    },
+    {
+      "path": "docs/screenshots/0.3/external-ai.png",
+      "sha256": "9f90f71bf68b9386323795b47d6e6e2310dab4d57b2fc11f69b7ba01c936dbe0"
+    },
+    {
+      "path": "docs/screenshots/0.3/golden-gate-workspace.png",
+      "sha256": "d05c9b8dda9ce128c4f991532e4c6bf0399f7b55e48de12dba2c473b5628e70d"
+    },
+    {
+      "path": "docs/screenshots/0.3/internal-ai-operations.png",
+      "sha256": "f895f038e4a922df10bc00037c124210d64b6e8bd3a9d1a3ac4a8c522d3cd499"
+    },
+    {
+      "path": "docs/screenshots/0.3/linked-protein-selection.png",
+      "sha256": "2da83d4549f188207ff237f11ca6b54a7296ca01607e6a77410939e79099a12e"
+    },
+    {
+      "path": "docs/screenshots/0.3/map.png",
+      "sha256": "c1c4691db60548968cb82f5ebd9dda3bc3e08b12800adfef65c2c26f27ce3847"
+    },
+    {
+      "path": "docs/screenshots/0.3/mutagenic-primer-design.png",
+      "sha256": "8611ce02c27eb46c48cb93f5cf375cab82500d752e85f3129606fe7b5a7f0ef7"
+    },
+    {
+      "path": "docs/screenshots/0.3/sequence-overview-center.png",
+      "sha256": "8b8a188b93f40ae89e818d7284ca35a2ee393a06b275c073e24cb03c3a3141ce"
+    },
+    {
+      "path": "docs/screenshots/0.3/sequence-primers-codons.png",
+      "sha256": "2ceb7405d6e02ee7c8b9a0bddf242cb4b12d043568ed97daf54f259b1a8da4c3"
+    },
+    {
+      "path": "docs/screenshots/0.3/tight-plasmid-map.png",
+      "sha256": "498b64d7ce3977772791fc55659f71ac0dda1422e8c0694e2a38d8c208c0033d"
+    },
+    {
+      "path": "docs/SEQUENCE_VERIFICATION.md",
+      "sha256": "a81526009ca7da0c4c8fff2becd88315f6bcc398a49be494ae17cdf16ba2990b"
+    },
+    {
+      "path": "docs/VALIDATION.md",
+      "sha256": "a877937ae166fa7c3eabe43d59363921f498829ff5f18bba2fad19b03ef7db5a"
+    },
+    {
+      "path": "docs/WORKFLOWS.md",
+      "sha256": "4a8b65bbbd171381836063c81d71ca1b2f787760323618710945ec02ec34b6b2"
+    },
+    {
+      "path": "examples/pCraft-demo.fasta",
+      "sha256": "886e06ba68bb06bde4595675d896cf3925f661f1ffead8fa5fd38807ca742926"
+    },
+    {
+      "path": "examples/pCraft-demo.gb",
+      "sha256": "47f60ad364237766ddfe5e6a26c3033452a806dc9cc8ba4c3c06fa081349b6f0"
+    },
+    {
+      "path": "Launch PlasmidCraft.command",
+      "sha256": "9e29d64a1608104351dc250254f5e22c6abbad0aca961b1fef3b8642eb0bf276"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "500ef8f9412568f338e6d9fa01806eb8028de11f01c4d952ca1ba87883b1c47f"
+    },
+    {
+      "path": "package.json",
+      "sha256": "be767efa6adeb0d1afec13eef454d99aaf62d6d52c7b84506b6ab6e07f335017"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "3a0ae7877bb41b4c9720ed0a89d4e5dbdba7c7234122a279b28c241a6631b494"
+    },
+    {
+      "path": "PRIVACY.md",
+      "sha256": "9eae0424c563e71dc993a72c25278b7b21bd979a7878fbaeb514962a6ed84f8f"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c14d79bd1379e0c5287f84823c96f5683a921bad92e03d76fd697d0d02c42d85"
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "sha256": "bda7be43d000a1dae6ab9e7d4cb24a78bbe38dc370581119684373cb43d38e3a"
+    },
+    {
+      "path": "scripts/build-common-features.mjs",
+      "sha256": "4c2a5ae241605b2dfb5b80b635899015992cd85656143df97e8c4d40a02662fd"
+    },
+    {
+      "path": "scripts/build-enzyme-catalog.py",
+      "sha256": "6cd878847eca285fd5c7d17743cc2e0bcb458aa7cdb43d08d6b51edeb6bdfed8"
+    },
+    {
+      "path": "scripts/check.mjs",
+      "sha256": "c0d4ae72a3b4257b185653a917f9fcded58d06cc9cd68647648fa5351d705c17"
+    },
+    {
+      "path": "scripts/desktop.mjs",
+      "sha256": "d1978d9118f2d0dfb11e9929cd514285aee37394326bc9fc293cc7ab658906ab"
+    },
+    {
+      "path": "scripts/extract-enzyme-vendors.py",
+      "sha256": "fdd99a4ed135adba08b9f4ec9474c1c5a359a641d2353b3c13c9cbf8c61773f7"
+    },
+    {
+      "path": "scripts/fetch-test-fixtures.mjs",
+      "sha256": "7c8c8e3d75500e42a4939ff7b60440573f1efe49048b5b388352690a1d56ed9a"
+    },
+    {
+      "path": "scripts/prepare-release.mjs",
+      "sha256": "ac9d5c607d11597c842690e0a7ba786249321924e74ce69284bfd5162b8eb25b"
+    },
+    {
+      "path": "scripts/serve.mjs",
+      "sha256": "af6aa401a51920f35e01396b0f11da298aabddaceeae67ca1c24a1adb180babc"
+    },
+    {
+      "path": "scripts/test-ui.mjs",
+      "sha256": "3b8eadab59e02730b617a63e2ea1c25533cbe491dcfb8408c035a3d05657724e"
+    },
+    {
+      "path": "scripts/third-party-notices.py",
+      "sha256": "d49006e728b9d0f0b37fa43e7f2bafe47d2496e99ada82a05113956b88e798cf"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "424efb187be04f1106557b8d9ef355163cdaa98cb5062dd0aa26e1afb5b4f35c"
+    },
+    {
+      "path": "src-tauri/build.rs",
+      "sha256": "6aeeab41bc35efde4e3c2b644a6248f7fc06d24ae30b75c0d33491cbb0c1fa31"
+    },
+    {
+      "path": "src-tauri/capabilities/main.json",
+      "sha256": "160bf1f93554bf76d2687da340dc169824b1ac560b855c5a2f99f25f3aced203"
+    },
+    {
+      "path": "src-tauri/Cargo.lock",
+      "sha256": "ed22645abb48a7f23b7ef5c3580f0ab79dc0c6f733087b7d9478c169ae767149"
+    },
+    {
+      "path": "src-tauri/Cargo.toml",
+      "sha256": "735c8798180c4abdea9c85ce799ea46df9c3ab80854af94528fe62c9312e1f18"
+    },
+    {
+      "path": "src-tauri/icons/128x128.png",
+      "sha256": "a31975266333fefbc28f5e33ebf1fe65ba1b2bbe19e22a149afc616c4b252b0f"
+    },
+    {
+      "path": "src-tauri/icons/128x128@2x.png",
+      "sha256": "cb5e66726f55d9d1b7fdd0a6dbe78befe686ae6acfd6699e58df8924529ac279"
+    },
+    {
+      "path": "src-tauri/icons/32x32.png",
+      "sha256": "afdc717ab5175ae35a57024bd557fd7f2ed4a8e288e81375aa0e1b1bfed96f68"
+    },
+    {
+      "path": "src-tauri/icons/64x64.png",
+      "sha256": "9a4a4291c631fab457fdebae7a131fec63c7916c08645310a62b123a723065ae"
+    },
+    {
+      "path": "src-tauri/icons/icon.icns",
+      "sha256": "80df8d7bfa15f501e89752939fc58c955634ab7ecc09f1cb7e87a908b69a9a38"
+    },
+    {
+      "path": "src-tauri/icons/icon.ico",
+      "sha256": "94820fbb00dcfdf9dab25e49834489d1bb0892e636f38671a8baa52932fa77cd"
+    },
+    {
+      "path": "src-tauri/icons/icon.png",
+      "sha256": "553f8912e36b3f42387e22d4298f569a2b3eb17a8bd634ab463e13fd53306556"
+    },
+    {
+      "path": "src-tauri/icons/Square107x107Logo.png",
+      "sha256": "136058e597f67e6dc0240ee45b1f0c656f20ef34dbe6bfb4f28e03de96961b4e"
+    },
+    {
+      "path": "src-tauri/icons/Square142x142Logo.png",
+      "sha256": "af4003e56b0745b481beacdaa62a40c161656cd2083213c142494d0a85d8cf2a"
+    },
+    {
+      "path": "src-tauri/icons/Square150x150Logo.png",
+      "sha256": "196e2e70336b96d5748ee97597342a4ffe894737bf1d5032b7ad8d35c18e4b14"
+    },
+    {
+      "path": "src-tauri/icons/Square284x284Logo.png",
+      "sha256": "bc48a06540ee12b5a8bdd6855591e4bc5bd12e4bdedbabadd05d02a1ed0a0433"
+    },
+    {
+      "path": "src-tauri/icons/Square30x30Logo.png",
+      "sha256": "4f85c60cb3f2cb830508fc122c9b2eacf3cb4313866c6d7a74847268c405ada1"
+    },
+    {
+      "path": "src-tauri/icons/Square310x310Logo.png",
+      "sha256": "8c8822ebde5c581430360d59809b029417b01db5a5cba0ca15e8b1c4b06f0add"
+    },
+    {
+      "path": "src-tauri/icons/Square44x44Logo.png",
+      "sha256": "b9762acaa3f827c196c2381e71c33e1ae7f2d8b69655a2c666c9cc75683a507a"
+    },
+    {
+      "path": "src-tauri/icons/Square71x71Logo.png",
+      "sha256": "48c1f25562cd2f1ea05bcea9ea3fecb0c9676170c24910423ac1b9e756062fc4"
+    },
+    {
+      "path": "src-tauri/icons/Square89x89Logo.png",
+      "sha256": "4786e7a2c4272e2b57efb6d28df0458a55120841ea69d927fb3690407b0f352e"
+    },
+    {
+      "path": "src-tauri/icons/StoreLogo.png",
+      "sha256": "32f4bac4f89f27bf821b8a236174fb0a57bdc7a07f6ed8afba74d2e01ecf0f20"
+    },
+    {
+      "path": "src-tauri/src/ai_models.rs",
+      "sha256": "c6e581ef39a0f327156cac98964e3012bee04a4cd8730cc7913b11d078fe87e1"
+    },
+    {
+      "path": "src-tauri/src/ai_vault.rs",
+      "sha256": "43a27056a2c73fd4188e71aacf6c99ea7145295b7d300ae27e9718a90caf6d5a"
+    },
+    {
+      "path": "src-tauri/src/ai.rs",
+      "sha256": "26c4d806ea254ebe3d0d940d9504e72eddd504ce824c0e78663643e1b4796cee"
+    },
+    {
+      "path": "src-tauri/src/blast.rs",
+      "sha256": "4305a5e225b0f484614e72f79c612210a877b5c3c4aab618a38fb5d37b621838"
+    },
+    {
+      "path": "src-tauri/src/chatgpt.rs",
+      "sha256": "d14fb85bb76bdae05f6ee7e0c51ff599fac2b357ce22928ad3fc4f257e783f39"
+    },
+    {
+      "path": "src-tauri/src/files.rs",
+      "sha256": "9916297ec7304ec86393c0563d191f9914fbc68d2bbd212c9a6cafc01bf26370"
+    },
+    {
+      "path": "src-tauri/src/lib.rs",
+      "sha256": "006d90da50ee28d7a70858b1d6e19407d29d018df4c4b647aee22436cc8696e7"
+    },
+    {
+      "path": "src-tauri/src/main.rs",
+      "sha256": "2335c85b07086eadaaa6b83403fb781489089f946775305c6e4aa4a9fabff482"
+    },
+    {
+      "path": "src-tauri/tauri.conf.json",
+      "sha256": "e7fd638d1dcd887fecc6e51ec3db8e007812b00d92d5c9589e527dfbfd77fea5"
+    },
+    {
+      "path": "src-tauri/tests/fixtures/chatgpt-test-only-jwks.json",
+      "sha256": "5a19683400c1a11b9ff3edd77b720135660cfc3862de018ebe05ee06993e4328"
+    },
+    {
+      "path": "src-tauri/tests/fixtures/chatgpt-test-only-key.pem",
+      "sha256": "9aea326f040f2e6ec1c6bfb3c5deceb62ad5832b472b3bd451ade811a2c7684a"
+    },
+    {
+      "path": "src-tauri/tests/fixtures/README.md",
+      "sha256": "ce6892fb3d9da56f53e1ad6bc2cc57580b7cc2f6eb8ad0d674ffce57fa0da481"
+    },
+    {
+      "path": "tests/advanced-ui-smoke.mjs",
+      "sha256": "c9d6a6fd12a063e2f7be25465e4991c69844a8f53b2953efd05fd880dfe74f5a"
+    },
+    {
+      "path": "tests/advanced.test.mjs",
+      "sha256": "5bdba298ac59fde02fc4bde9847e9050f33235bb288379a6f0b2f5c1793b7578"
+    },
+    {
+      "path": "tests/ai-device-ui-smoke.mjs",
+      "sha256": "d166d79eca6b82986bf2b1ec5759118ccb206bfdf99c2f1151d50016d01a4ac6"
+    },
+    {
+      "path": "tests/ai-tools.test.mjs",
+      "sha256": "54cd45b1261b650aed1b9ea47216535c7bd78c17651065af1f721dc258ffe520"
+    },
+    {
+      "path": "tests/ai-ui-smoke.mjs",
+      "sha256": "b1af0ed8f1d4c740e264ea53bdcd1c57e6aee584a3ea4c076777094d0114f84a"
+    },
+    {
+      "path": "tests/ai.test.mjs",
+      "sha256": "a40a9b082f900ba1c1c126bc7b6873054dc4afa5545c32b0406e28dfccde85a5"
+    },
+    {
+      "path": "tests/assembly-map-primer-ui-smoke.mjs",
+      "sha256": "8304ac539ef5546389418fcb27cafdfd8c0500a8576926a5bb39e356a5366821"
+    },
+    {
+      "path": "tests/auto-annotation-ui-smoke.mjs",
+      "sha256": "7bfb9f02d870c313ea57013bf129a5bc88d0bb3ebbf5458d32a226ef66d4a8a8"
+    },
+    {
+      "path": "tests/biopython-codon.py",
+      "sha256": "7cd9cf438b1c64f9085594987d730fb86c7d407eeea6e7c4fb03c33579729027"
+    },
+    {
+      "path": "tests/biopython-plasmid.py",
+      "sha256": "a5d27249d85d45c1ab9a5c94a3e10daec6935c1c55dc6616a3b0690fd7bf9813"
+    },
+    {
+      "path": "tests/biopython-protein.py",
+      "sha256": "6cd64fff9e0322ba1ee42ce7ea2ce1402f347271892a13c5c009246c31d82468"
+    },
+    {
+      "path": "tests/biopython-transforms.py",
+      "sha256": "ab7c6fa7fe689f49ac9372ddad513253ff2f0b10877f9c89c506b30e966027c3"
+    },
+    {
+      "path": "tests/biopython-workflows.py",
+      "sha256": "860a7132a79df5e7c3d1fe19d1977c2a58d356d466b2b484044b9a5eb901cc34"
+    },
+    {
+      "path": "tests/browser-smoke.mjs",
+      "sha256": "2c2cc12967f75bbcf7f2e20014888b184cb7daf7971f906a6a68cea0ef3b32ec"
+    },
+    {
+      "path": "tests/catalog-export-ui-smoke.mjs",
+      "sha256": "8ea7eb35f1b8671249e691ffab4a71992cad946c2319521930da5eb9a29450fa"
+    },
+    {
+      "path": "tests/catalog-export.test.mjs",
+      "sha256": "6ca4884fa23b52271742a1ee0aae017323a897120ae90b838966bdba640dd664"
+    },
+    {
+      "path": "tests/cds-translation-ui-smoke.mjs",
+      "sha256": "8ea509893ebd926a828599c1b9211ecf4ca13db312eca2bde386045c4dfafbba"
+    },
+    {
+      "path": "tests/chatgpt-ui-smoke.mjs",
+      "sha256": "d828de3c13544378a6b6331beaeb5e28202fd36d3cd840b79e5266082cfdbae9"
+    },
+    {
+      "path": "tests/cloning-design-ui-smoke.mjs",
+      "sha256": "e8cde6a7fb2e69cd398b271d930b7ad6b20655e7ba1220b62c45f3b9ffe9f1cf"
+    },
+    {
+      "path": "tests/cloning-design.test.mjs",
+      "sha256": "55b2ddb0145d8c15aece1ac18dba7ec08d4a292d8a0f46f5284a1bd6be087844"
+    },
+    {
+      "path": "tests/codon-reference.mjs",
+      "sha256": "d805e3c02041e6fa52cd0cd0b5fce5abe41e25cfe421c0d790689d01e9e54c1b"
+    },
+    {
+      "path": "tests/codon-ui-smoke.mjs",
+      "sha256": "e1f7d1d8480b5b7ba55034e57fb359ff9e1a04b398f0fcc417147bc4825ae237"
+    },
+    {
+      "path": "tests/codon.test.mjs",
+      "sha256": "2c1fff11d014275bf89689a975b3e740f42b94ffa9665162a26282f8eb932fe2"
+    },
+    {
+      "path": "tests/compact-map.test.mjs",
+      "sha256": "8638479397daa315f55249ad8fb577cbf628c7298ede4e4b3c83b959432a1293"
+    },
+    {
+      "path": "tests/connected-ai-ui-smoke.mjs",
+      "sha256": "759c8596d0e4e2d1bc458373108d93954672a92245259d88f1cb7b2297cb0d3b"
+    },
+    {
+      "path": "tests/continuous-sequence-ui-smoke.mjs",
+      "sha256": "054ba17a4823c5e8c6752884fb26f12bf260de2db36c7281bae32b2c03cd52ca"
+    },
+    {
+      "path": "tests/core.test.mjs",
+      "sha256": "f7ae3e5e6f10992e5fcb225319fdd4ab5a9cf926373d5e1e98eadbf65dfdc3e7"
+    },
+    {
+      "path": "tests/desktop-bridge-smoke.mjs",
+      "sha256": "54a517773e471b1136012bbf2760a78132fc84bf8fe72c73a9183e4811b8d5ca"
+    },
+    {
+      "path": "tests/editor-ui-smoke.mjs",
+      "sha256": "8e83c93261322e98693ac50c4cf07f2e7d902134c121c7f93fa88872a1d2893c"
+    },
+    {
+      "path": "tests/enzyme-catalog.test.mjs",
+      "sha256": "2d4f17357e429779939fb6672c861966e27e9c0e2704200ff51160deabd762de"
+    },
+    {
+      "path": "tests/enzyme-ui-smoke.mjs",
+      "sha256": "60adf1d2c9942bbfb580f25940b2e2175abfd94fd473575ca75ef2fa363bcfdf"
+    },
+    {
+      "path": "tests/fixtures/enzyme-reference.json",
+      "sha256": "3d38f19d4f44a797816a4d501e668d22b89260456912eb67c1379fd17bf7770e"
+    },
+    {
+      "path": "tests/fixtures/protein-properties-reference.json",
+      "sha256": "55675a0e95f381cee9daba3a4358f8de85347c7fd949c0bf22b2ec3759666287"
+    },
+    {
+      "path": "tests/fixtures/reference-downloads.json",
+      "sha256": "058bc63a9a9141699395b3efc43d13cc372f930d2d50bcb844239c583b8dcadf"
+    },
+    {
+      "path": "tests/library-all.test.mjs",
+      "sha256": "9fe8b4ed67add7122491bed58e62489ac113a16ae23329e014186821241a56cb"
+    },
+    {
+      "path": "tests/map-enzymes.test.mjs",
+      "sha256": "18c3778541451527616d2b50cb63d6cc8b289af6aa5e6a1a1f726e0a3e0960b4"
+    },
+    {
+      "path": "tests/model-overview-ui-smoke.mjs",
+      "sha256": "e3c69970c856ac0599f97fc15727c0067ded379806b970d189398f7b44d9489c"
+    },
+    {
+      "path": "tests/mutagenesis-ui-smoke.mjs",
+      "sha256": "c147edd15687ba04bd08838c01c736880db9e18478ab39b696e4548a2ce08600"
+    },
+    {
+      "path": "tests/mutagenesis.test.mjs",
+      "sha256": "c37e2408d2bc851b4964771a9eaa3bcc058e7838ce24da648a7c1968a05f52a0"
+    },
+    {
+      "path": "tests/plasmid-reference.mjs",
+      "sha256": "82210c0dfc2d1a1b4fde2fc5a84032468fab485f5e31c1d3fed7183169817e7b"
+    },
+    {
+      "path": "tests/platform.test.mjs",
+      "sha256": "e92e86ad730fd8090b11e02d35596b396e69d07137a4cfc201f44bbdb0fb5aa1"
+    },
+    {
+      "path": "tests/primer-extension.test.mjs",
+      "sha256": "8737dc70cec81136cb5fd2e49bd41336eb3b9610d602c59f39e901b2fe1be6db"
+    },
+    {
+      "path": "tests/project.test.mjs",
+      "sha256": "f01898cf2fdc26df8716612985f7fc7a184d0de657ab2dafa388ba442b40d4bf"
+    },
+    {
+      "path": "tests/protein-analysis.test.mjs",
+      "sha256": "8bc450e8a88e3bc9c6374276e71c6ca6e780d94bd7b60b6d63c333806d530d4b"
+    },
+    {
+      "path": "tests/protein-blast-ui-smoke.mjs",
+      "sha256": "b7ef1db5e565a8a66b8714d5479b08a2c96f0de00497d10c749169ef074f2793"
+    },
+    {
+      "path": "tests/protein-reference.mjs",
+      "sha256": "b930d87cf1b62d3dce375aa38b04fb85d4c32e1a0e33e412f69a9727197429b5"
+    },
+    {
+      "path": "tests/protein-ui-smoke.mjs",
+      "sha256": "3a28200c167d1b8b1ee8968e6931d79f7cb48fc6db12014c58df93223c8c64de"
+    },
+    {
+      "path": "tests/protein.test.mjs",
+      "sha256": "dc9e8e64907f9310bfef53933a2d15e9b2c626dc222369ddf2998de8392b2e49"
+    },
+    {
+      "path": "tests/reference-imports.mjs",
+      "sha256": "265d47b705e92ade57918178db304b53ab5ae3b869b3d86e18f4af1fd70d4b3b"
+    },
+    {
+      "path": "tests/reference-transforms.mjs",
+      "sha256": "50f5ceaee5aae11311924e9837eece34c0a5e9ce86c7e4a6ee543ebce3415f7a"
+    },
+    {
+      "path": "tests/refinement-ui-smoke.mjs",
+      "sha256": "dbc766bde2b8ca0c5fba2b83939ea9beba820eefb86765604649d16867af590a"
+    },
+    {
+      "path": "tests/selected-primer-ui-smoke.mjs",
+      "sha256": "b847f7d10e1de0f378a34050d999a1eae8f9c8e7d75f64f7510f36e56c4a7cec"
+    },
+    {
+      "path": "tests/selected-primer.test.mjs",
+      "sha256": "86cd73492a1aa7ca714665660cbfc6f15019fc424e162d5ec8b59e8184d0c285"
+    },
+    {
+      "path": "tests/sequence-display.test.mjs",
+      "sha256": "8fefa1bba215bbf91d285225eadf2d27c4ee6477dbbb4ebcbb69500a7d5b92b0"
+    },
+    {
+      "path": "tests/sequence-selection.test.mjs",
+      "sha256": "3b2573c3311bd2ccbacc98ce8ca54e03fc216b3461ab26e0bdc66026c1982b74"
+    },
+    {
+      "path": "tests/sequence-tools-ui-smoke.mjs",
+      "sha256": "e9a81118530d075ce2de68644ef9c455024eaa6d535f8cda3f5587cf5e6bc0dd"
+    },
+    {
+      "path": "tests/sequence-tools.test.mjs",
+      "sha256": "591b5c7f656c856b5b85fc7fdea9f2e61794fccd0d0a408b44ce61806354fde1"
+    },
+    {
+      "path": "tests/sequence-tracks-ui-smoke.mjs",
+      "sha256": "273204dd95add93355454ad5eea6d69bf0afc68cef2c4c6002f7d17ba305a7ef"
+    },
+    {
+      "path": "tests/snapgene-reference.mjs",
+      "sha256": "893c3806b4c8d24e9a3dc29adec182d04fa2b44c80ca2fd83b8392b24641375e"
+    },
+    {
+      "path": "tests/ui-browser.mjs",
+      "sha256": "c6bf51c361ed682dd4a89350de4750d71e1ce2d8f193068b603f30d25106e64f"
+    },
+    {
+      "path": "tests/workflow-reference.mjs",
+      "sha256": "f7a1cc01cbf2db1dc2a315e2bb2783b1f1054a5d91f67182f58428bca0541616"
+    },
+    {
+      "path": "tests/workflows-ui-smoke.mjs",
+      "sha256": "a880c3dfb499729fd8f7d064ae098620ae2a3d2d471bc29ad1d29a8729dd4b1f"
+    },
+    {
+      "path": "tests/workflows.test.mjs",
+      "sha256": "7d6aad4f05f00c8a7271f381331961aa1697d57beab0fd27bb1328262354b78a"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.txt",
+      "sha256": "bf822b14c2f5bcc303a48c98e130af32aea15b3ae9665d02d722f0f206b08045"
+    },
+    {
+      "path": "viewer/ai-tools.mjs",
+      "sha256": "41161b139d10243a0618b6bc763b4e36c25d0c70cc65db9c1d5970cb09f9cd81"
+    },
+    {
+      "path": "viewer/ai-ui.mjs",
+      "sha256": "9230d5d37ca0f76e9d5409335c3331273fdb7e62a0fb99316540a5a66c840227"
+    },
+    {
+      "path": "viewer/ai.mjs",
+      "sha256": "87b9fe1cbb97575c61a8696144bbee42aa9c4263ed9889d08f34f118af6d024f"
+    },
+    {
+      "path": "viewer/alignment-storage.mjs",
+      "sha256": "70e6d52b7ad6b6e786987a09229e59d213d304222b433c2d91627bc494cf4ba0"
+    },
+    {
+      "path": "viewer/alignment.mjs",
+      "sha256": "da715d52c177b90e0e085d911e3ddc4b29f48e474cba23ebfb1dd94905fed710"
+    },
+    {
+      "path": "viewer/app.mjs",
+      "sha256": "9f178dec379af30cab312b314bc0bdf6150a3d859ebe50c1754eaf3ad6d60203"
+    },
+    {
+      "path": "viewer/assembly.mjs",
+      "sha256": "8cc296bf5d33844b4f9301d07387ce61afce7673a24e98357ad0ce03291a04cf"
+    },
+    {
+      "path": "viewer/cloning-design.mjs",
+      "sha256": "250cb3ef2f1ab973725717ab88d02474e8a4f6b611c8d0bb72a61db6cb82648a"
+    },
+    {
+      "path": "viewer/cloning-draft.mjs",
+      "sha256": "3ae28db1490b3c866a0235d5c87208b90b257cdecb0ce8a4441b591eee91f612"
+    },
+    {
+      "path": "viewer/cloning-optimization.mjs",
+      "sha256": "1a69d25f6317ba16f1e8ec9a31a340ce7c314d66d613ef5dab623935dd2eac4d"
+    },
+    {
+      "path": "viewer/codon-optimization.mjs",
+      "sha256": "18dfbfd9044b029a562bf976b2b521294eb71d9644449e828efbe9f0bd9400ad"
+    },
+    {
+      "path": "viewer/codon-ui.mjs",
+      "sha256": "20cdee1502b09bd3693477bb60edf281485f0c110c21a0e2a2e89693c6b9c1c9"
+    },
+    {
+      "path": "viewer/codon-usage.mjs",
+      "sha256": "54c622785b4c3bab27f2ae5f568547e386f802563579bc089991d3ff2dac407e"
+    },
+    {
+      "path": "viewer/common-features.mjs",
+      "sha256": "2a2c621e13cda719e30d438c2cfeec59ed56c8a4eec45c42c6c2e216d4d9c5a5"
+    },
+    {
+      "path": "viewer/compact-map.mjs",
+      "sha256": "7717b4f22cdea2fba0f9285ece3303d9cd8aa1c1d4b3e14e2de2ba518ff74a9f"
+    },
+    {
+      "path": "viewer/core.mjs",
+      "sha256": "d0466424e0e6398a6acad13a551c5f102cd5125416926885081455ab69c28069"
+    },
+    {
+      "path": "viewer/demo.mjs",
+      "sha256": "a37857d90ed9427e07b3b8c0c4fc642dfa42aa02e3bc14d703f306ac6e66c2ee"
+    },
+    {
+      "path": "viewer/desktop.css",
+      "sha256": "0db13b613d8c4513fe691fc25771e2915a14f6ff4a5737d949211428e1fa0ce9"
+    },
+    {
+      "path": "viewer/dna-ends.mjs",
+      "sha256": "1ed4b4e0b32530e22cbe193717f9ffe952111f45da817109eace2af8baf40393"
+    },
+    {
+      "path": "viewer/domestication.mjs",
+      "sha256": "d3bf21b53e21cf943578a7f93ebd4139f575e557ce76517e715a4a23aefd64df"
+    },
+    {
+      "path": "viewer/edit-history.mjs",
+      "sha256": "32eba6aaa57b693a4c65dccf74a8329706f9e1ce63d1a96fe1b77fb16c1a0a8e"
+    },
+    {
+      "path": "viewer/enzyme-catalog.mjs",
+      "sha256": "6a597a334e1f284bdc85a67d4c4275875f2292eb40a82489e47f2144bae6f7e0"
+    },
+    {
+      "path": "viewer/favicon.svg",
+      "sha256": "7a95777da82d9745e90a30b58f311e5c80398b70bd1e0b3d6eef77119e613071"
+    },
+    {
+      "path": "viewer/index.html",
+      "sha256": "be963d9c43dc40ac07195b4ef7f825f6ffea5f7ea96b7bad396223aea15beb65"
+    },
+    {
+      "path": "viewer/library.mjs",
+      "sha256": "5b777aed24a2ebee725e5c6bb27cba306a33653ed8afc5fd658c69f2cc618034"
+    },
+    {
+      "path": "viewer/LICENSE",
+      "sha256": "500ef8f9412568f338e6d9fa01806eb8028de11f01c4d952ca1ba87883b1c47f"
+    },
+    {
+      "path": "viewer/map-enzymes.mjs",
+      "sha256": "37719f78cc1383df0402749d8e44fb180f1a1d6c88ab2b3ac80e9928c95d097c"
+    },
+    {
+      "path": "viewer/mutagenesis-ui.mjs",
+      "sha256": "0970cfe2a0da748b71e7da66086d306cfb0d25ccec7fc094cd91ff32d6afdb94"
+    },
+    {
+      "path": "viewer/mutagenesis.mjs",
+      "sha256": "25f22470d565d8cbca02ebec28d75bedefbd59c180fd10bdf01936b8df374c23"
+    },
+    {
+      "path": "viewer/plasmid-alignment.mjs",
+      "sha256": "a56f8c3ea9c95a25dd177e671a45c36c5747cccbb824c4ebd9eed93673073789"
+    },
+    {
+      "path": "viewer/platform.mjs",
+      "sha256": "f945144840d01ad54d1aa2ebae0cd1ec6a8f813172abd15f1488326137d5cfb2"
+    },
+    {
+      "path": "viewer/primer-alignment.mjs",
+      "sha256": "f55a82cd6a39c1963cb801649244423a9cdca4b4f666fb97e62a450c473412fa"
+    },
+    {
+      "path": "viewer/primers.mjs",
+      "sha256": "4db8d28f69639025353aa579878f8dd849f28d2cdb1ce03c34cdf463885c5e27"
+    },
+    {
+      "path": "viewer/project.mjs",
+      "sha256": "4caccb57376b379d426c84e7e69f38c9ec6251527ae5d6187db129215d5a4651"
+    },
+    {
+      "path": "viewer/protein-analysis.mjs",
+      "sha256": "db4e6644dd8dd8e01678c1d9a8ef2c1b6da419d5989ab513f4cf09d3dbaa7312"
+    },
+    {
+      "path": "viewer/protein-documents.mjs",
+      "sha256": "c04e96356e949bd38fa4dd6814bdfb9e3ea9e95ea80aa80910f74988de1eaa4e"
+    },
+    {
+      "path": "viewer/protein-tools-ui.mjs",
+      "sha256": "dda1e77cb246c41ac9482def37b41ebd656b85f13fe1784852a8071e21ea4b94"
+    },
+    {
+      "path": "viewer/protein.mjs",
+      "sha256": "3e2f7b0507968fa26beb58b4d3fafc9045f40d84e4864b90f9677fccff6c6e51"
+    },
+    {
+      "path": "viewer/read-assembly-ui.mjs",
+      "sha256": "344144965ff6bc0be4cedbb77620c103d076b9c1f27e7a3038438afb913d587f"
+    },
+    {
+      "path": "viewer/read-assembly.mjs",
+      "sha256": "475cdba5d8204c257ae97ed5269b86e38f0f5ced05cf7e46d120b6bb5614e9a2"
+    },
+    {
+      "path": "viewer/selected-primer-ui.mjs",
+      "sha256": "479f6c2ccab7eefd6a644e0d6bb9c016a6a498b8ac32b8cff121c7739829a857"
+    },
+    {
+      "path": "viewer/selected-primer.mjs",
+      "sha256": "a0f04e06cdbe60840c356b91d13ed7b871b341048abc4c63cf157983c5408be6"
+    },
+    {
+      "path": "viewer/sequence-display.mjs",
+      "sha256": "e9d047d1cac39d9140fb572c704e93186021ea1575305d04bb854b2d54370d66"
+    },
+    {
+      "path": "viewer/sequence-editing.mjs",
+      "sha256": "2ac04fceb01e4cc8fbadfa40b6578d208ca6e9097e39cfcd174562bad3c7c44f"
+    },
+    {
+      "path": "viewer/sequence-scroll.mjs",
+      "sha256": "76cff310f5b11ce0e960e1a3fc193e4462d93eee2f76c8da21c1e49b60d1925f"
+    },
+    {
+      "path": "viewer/sequence-selection.mjs",
+      "sha256": "f7aa7eeae01511ff8fd7485f9ec18cc3b5ece4129a20a471f1f7a719969633af"
+    },
+    {
+      "path": "viewer/sequence-tools.mjs",
+      "sha256": "a55987cf6c193d44b8fe5e97307a59740ad784d93ac04a15b33b8c35d089e845"
+    },
+    {
+      "path": "viewer/snapgene-export.mjs",
+      "sha256": "7e257e8336e77103b3eedefbf94712e13f5ae00daeb802ea5c43dedbeb4bc500"
+    },
+    {
+      "path": "viewer/style.css",
+      "sha256": "8b1f8c1efd2fd04b7d1144c662c6f93d3dad06be911963fabd683c7b3bc77c91"
+    },
+    {
+      "path": "viewer/whole-alignment-ui.mjs",
+      "sha256": "79fe7c2cdcb429ccfcb1197eb1606518752ec24b0d231dcde737ce3056c42317"
+    },
+    {
+      "path": "viewer/workbench-ui.mjs",
+      "sha256": "4bafa1c6ce4f7304edb9545f53afc606cbeda1c892b11728cca6b11fcf973f11"
+    },
+    {
+      "path": "viewer/workflow-common.mjs",
+      "sha256": "ac531f1a9dc0a54e255736444166a14370764b58f9b1ceaa7696c71f9a1c3336"
+    },
+    {
+      "path": "viewer/workflow-demo.mjs",
+      "sha256": "ae957af93353c07cee44ffca38b9ddfc1e1fdc60ef45ce6de82f4b031bcd49b7"
+    },
+    {
+      "path": "viewer/workflow-worker.mjs",
+      "sha256": "c639d59cd06a069570d7c67f51b5f5a17cbcfc97364222f9ecd9ba0b2f5b317a"
+    }
+  ]
+}

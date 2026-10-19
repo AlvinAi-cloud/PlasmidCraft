@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f1f5f2" />
+    <title>PlasmidCraft</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./desktop.css" />
+  </head>
+  <body>
+    <header class="application-bar">
+      <div class="app-brand">
+        <img src="./favicon.svg" alt="" /><strong>PlasmidCraft</strong>
+      </div>
+      <nav class="application-menus" aria-label="Application menus">
+        <div class="app-menu">
+          <button
+            class="app-menu-trigger"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="app-file-menu"
+          >
+            File
+          </button>
+          <div class="app-menu-popup" id="app-file-menu" role="menu" hidden>
+            <button role="menuitem" data-command="open">
+              Open…<kbd aria-hidden="true" data-shortcut="O">⌘O</kbd>
+            </button>
+            <button role="menuitem" data-command="paste">
+              New from Pasted DNA…
+            </button>
+            <button role="menuitem" data-command="paste-protein">
+              New from Pasted Protein…
+            </button>
+            <button role="menuitem" data-command="extract-dna">
+              New DNA from Selection…
+            </button>
+            <hr />
+            <button role="menuitem" data-command="save-project">
+              Save<kbd aria-hidden="true" data-shortcut="S">⌘S</kbd>
+            </button>
+            <button role="menuitem" data-command="save-project-as">
+              Save As…<kbd aria-hidden="true" data-shortcut="Shift+S">⇧⌘S</kbd>
+            </button>
+            <hr />
+            <button role="menuitem" data-command="export-genbank">
+              Export GenBank…
+            </button>
+            <button role="menuitem" data-command="export-snapgene">
+              Export SnapGene format…
+            </button>
+            <button role="menuitem" data-command="export-fasta">
+              Export FASTA…
+            </button>
+            <button role="menuitem" data-command="export-svg">
+              Export Map SVG…
+            </button>
+            <hr />
+            <button role="menuitem" data-command="close-document">
+              Close Document
+            </button>
+          </div>
+        </div>
+        <div class="app-menu">
+          <button
+            class="app-menu-trigger"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="app-edit-menu"
+          >
+            Edit
+          </button>
+          <div class="app-menu-popup" id="app-edit-menu" role="menu" hidden>
+            <button role="menuitem" data-command="undo-annotation">
+              Undo Last Change<kbd aria-hidden="true" data-shortcut="Z">⌘Z</kbd>
+            </button>
+            <button role="menuitem" data-command="redo-annotation">
+              Redo Last Change<kbd aria-hidden="true" data-shortcut="Shift+Z"
+                >⇧⌘Z</kbd
+              >
+            </button>
+            <hr />
+            <button role="menuitem" data-command="edit-dna">
+              Insert, Replace or Delete DNA…
+            </button>
+            <button role="menuitem" data-command="reverse-dna">
+              Reverse Complement DNA…
+            </button>
+            <button role="menuitem" data-command="set-origin">
+              Set Circular Origin…
+            </button>
+            <hr />
+            <button role="menuitem" data-command="copy-sequence">
+              Copy Selected Sequence…
+            </button>
+            <button role="menuitem" data-command="copy-reverse">
+              Copy Reverse Complement
+            </button>
+            <button role="menuitem" data-command="find">
+              Find DNA or Annotation…<kbd aria-hidden="true" data-shortcut="F"
+                >⌘F</kbd
+              >
+            </button>
+            <hr />
+            <button role="menuitem" data-command="add-feature">
+              Add Feature…
+            </button>
+            <button role="menuitem" data-command="edit-feature">
+              Edit Selected Feature…
+            </button>
+          </div>
+        </div>
+        <div class="app-menu">
+          <button
+            class="app-menu-trigger"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="app-view-menu"
+          >
+            View
+          </button>
+          <div class="app-menu-popup" id="app-view-menu" role="menu" hidden>
+            <button role="menuitem" data-command="view-map">Map</button>
+            <button role="menuitem" data-command="view-sequence">
+              Sequence
+            </button>
+            <hr />
+            <button role="menuitem" data-command="layout-circular">
+              Circular Map
+            </button>
+            <button role="menuitem" data-command="layout-linear">
+              Linear Map
+            </button>
+            <hr />
+            <button
+              role="menuitemcheckbox"
+              aria-checked="false"
+              data-command="toggle-files"
+            >
+              Open Documents Panel
+            </button>
+            <button
+              role="menuitemcheckbox"
+              aria-checked="true"
+              data-command="toggle-inspector"
+            >
+              Selection Inspector
+            </button>
+            <hr />
+            <button role="menuitem" data-command="view-features">
+              Feature List
+            </button>
+            <button role="menuitem" data-command="view-primers">
+              Primer List
+            </button>
+            <button role="menuitem" data-command="view-enzymes">
+              Restriction Sites
+            </button>
+            <button
+              role="menuitemcheckbox"
+              aria-checked="true"
+              data-command="toggle-features"
+            >
+              Show Features
+            </button>
+            <button
+              role="menuitemcheckbox"
+              aria-checked="true"
+              data-command="toggle-primers"
+            >
+              Show Primer Binding Sites
+            </button>
+            <button
+              role="menuitemcheckbox"
+              aria-checked="true"
+              data-command="toggle-enzymes"
+            >
+              Show Unique Sites on Map
+            </button>
+          </div>
+        </div>
+        <div class="app-menu">
+          <button
+            class="app-menu-trigger"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="app-tools-menu"
+          >
+            Tools
+          </button>
+          <div class="app-menu-popup" id="app-tools-menu" role="menu" hidden>
+            <button role="menuitem" data-command="feature-libraries">
+              Feature Libraries…
+            </button>
+            <button role="menuitem" data-command="auto-annotation">
+              Auto Annotation…
+            </button>
+            <button role="menuitem" data-command="design-primers">
+              Primer Design…
+            </button>
+            <button role="menuitem" data-command="create-selection-primer">
+              Primer from Selected DNA…
+            </button>
+            <button role="menuitem" data-command="design-mutagenesis">
+              Mutagenic Primer Design…
+            </button>
+            <button role="menuitem" data-command="simulate-pcr">
+              Simulate PCR…
+            </button>
+            <button role="menuitem" data-command="align-reads">
+              Align Sanger / DNA Reads…
+            </button>
+            <button role="menuitem" data-command="protein-documents">
+              Protein Documents / Protein → DNA…
+            </button>
+            <button role="menuitem" data-command="optimize-codons">
+              Optimize Selected CDS Codons…
+            </button>
+            <button role="menuitem" data-command="compare-plasmids">
+              Align Whole Plasmids…
+            </button>
+            <button role="menuitem" data-command="read-consensus">
+              Read Assembly &amp; Consensus…
+            </button>
+            <button role="menuitem" data-command="assembly-workbench">
+              Cloning &amp; Assembly…
+            </button>
+            <button role="menuitem" data-command="design-gibson">
+              Design Gibson Cloning…
+            </button>
+            <button role="menuitem" data-command="design-golden">
+              Design Golden Gate Cloning…
+            </button>
+            <hr />
+            <button role="menuitem" data-command="view-enzymes">
+              Restriction Analysis…
+            </button>
+            <button role="menuitem" data-command="view-translation">
+              Six-frame Translation…
+            </button>
+            <button role="menuitem" data-command="coding-proteins">
+              Coding Feature Proteins…
+            </button>
+            <button role="menuitem" data-command="find-orfs">
+              Find Open Reading Frames…
+            </button>
+            <button role="menuitem" data-command="go-to">Go to Bases…</button>
+            <hr />
+            <button role="menuitem" data-command="protein-analysis">
+              Protein Analysis…
+            </button>
+            <button role="menuitem" data-command="blast">NCBI BLAST…</button>
+          </div>
+        </div>
+        <div class="app-menu">
+          <button
+            class="app-menu-trigger"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="app-ai-menu"
+          >
+            AI
+          </button>
+          <div class="app-menu-popup" id="app-ai-menu" role="menu" hidden>
+            <button role="menuitem" data-command="ai-assistant">
+              Internal AI Operations…
+            </button>
+            <button role="menuitem" data-command="ai-external">
+              External AI…
+            </button>
+            <div class="menu-separator" role="separator"></div>
+            <button role="menuitem" data-command="ai-settings">
+              Accounts and Models…
+            </button>
+          </div>
+        </div>
+        <div class="app-menu">
+          <button
+            class="app-menu-trigger"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="app-help-menu"
+          >
+            Help
+          </button>
+          <div class="app-menu-popup" id="app-help-menu" role="menu" hidden>
+            <button role="menuitem" data-command="help">Getting Started</button>
+            <button role="menuitem" data-command="workflow-examples">
+              Load Workflow Examples
+            </button>
+            <button role="menuitem" data-command="example">
+              Open Example Plasmid
+            </button>
+            <button role="menuitem" data-command="about">
+              About PlasmidCraft
+            </button>
+          </div>
+        </div>
+      </nav>
+      <span class="version-label" id="version-label">0.3.0</span>
+      <button
+        class="icon-button"
+        id="about-button"
+        aria-label="About PlasmidCraft"
+      >
+        <span data-icon="info"></span>
+      </button>
+    </header>
+    <main class="workspace">
+      <div class="commandbar" role="toolbar" aria-label="Sequence commands">
+        <div class="toolbar-group">
+          <button
+            class="toolbar-button"
+            id="ai-assistant-button"
+            aria-controls="ai-panel"
+            aria-expanded="false"
+            data-command="ai-toggle"
+            title="AI design and workflow assistant"
+          >
+            <span data-icon="activity"></span><span>AI Assistant</span>
+          </button>
+        </div>
+        <div class="toolbar-group">
+          <button
+            class="toolbar-button"
+            id="toggle-files"
+            data-command="toggle-files"
+            aria-label="Toggle open documents panel"
+            aria-controls="file-sidebar"
+            aria-expanded="false"
+            title="Show open documents"
+          >
+            <span data-icon="folder"></span><span>Files</span>
+          </button>
+        </div>
+        <div class="toolbar-group">
+          <button
+            class="toolbar-button"
+            id="open-file"
+            aria-label="Open sequence file"
+            title="Open sequence file"
+          >
+            <span data-icon="folder-open"></span><span>Open</span>
+          </button>
+          <button
+            class="toolbar-button"
+            id="save-project-button"
+            aria-label="Save PlasmidCraft document"
+            title="Save PlasmidCraft document"
+          >
+            <span data-icon="save"></span><span>Save</span>
+          </button>
+          <div class="menu-container">
+            <button
+              class="toolbar-button"
+              id="export-button"
+              title="Export a format copy"
+            >
+              <span data-icon="download"></span><span>Export</span
+              ><span class="toolbar-chevron" data-icon="chevron"></span>
+            </button>
+            <div class="dropdown" id="export-menu" hidden>
+              <button data-export="gb">
+                GenBank<small>Sequence + annotations</small>
+              </button>
+              <button data-export="dna">
+                Export SnapGene format<small>DNA (.dna)</small>
+              </button>
+              <button data-export="fasta">
+                FASTA<small>Sequence only</small>
+              </button>
+              <button data-export="svg">
+                Map SVG<small>Scalable illustration</small>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar-group history-buttons">
+          <button
+            class="toolbar-button"
+            id="undo-button"
+            aria-label="Undo last change"
+            title="Undo last change"
+            disabled
+          >
+            <span data-icon="undo"></span><span>Undo</span>
+          </button>
+          <button
+            class="toolbar-button"
+            id="redo-button"
+            aria-label="Redo last change"
+            title="Redo last change"
+            disabled
+          >
+            <span data-icon="redo"></span><span>Redo</span>
+          </button>
+        </div>
+        <div class="toolbar-group">
+          <button
+            class="toolbar-button feature-tool"
+            data-action="annotate"
+            title="Add a feature to the selected region"
+          >
+            <span data-icon="tag-plus"></span><span>Add Feature</span>
+          </button>
+          <button
+            class="toolbar-button"
+            data-command="copy-sequence"
+            title="Copy selected DNA or protein"
+          >
+            <span data-icon="copy"></span><span>Copy Sequence</span>
+          </button>
+          <button
+            class="toolbar-button"
+            data-command="edit-dna"
+            title="Insert, replace or delete DNA"
+          >
+            <span data-icon="edit"></span><span>Edit DNA</span>
+          </button>
+        </div>
+        <div class="toolbar-group">
+          <div class="menu-container">
+            <button
+              class="toolbar-button tools-button"
+              id="tools-button"
+              title="Analysis tools"
+            >
+              <span data-icon="tools"></span><span>Analyze</span
+              ><span class="toolbar-chevron" data-icon="chevron"></span>
+            </button>
+            <div class="dropdown tools-menu" id="tools-menu" hidden>
+              <button data-command="feature-libraries">
+                <span data-icon="tag"></span>
+                <div>
+                  Feature libraries<small>Preview automatic annotations</small>
+                </div>
+              </button>
+              <button data-command="design-primers">
+                <span data-icon="primer"></span>
+                <div>
+                  Primer design &amp; PCR<small
+                    >Design oligos and predict products</small
+                  >
+                </div>
+              </button>
+              <button data-command="align-reads">
+                <span data-icon="activity"></span>
+                <div>
+                  Align Sanger reads<small
+                    >Inspect differences with trace evidence</small
+                  >
+                </div>
+              </button>
+              <button data-command="assembly-workbench">
+                <span data-icon="tools"></span>
+                <div>
+                  Cloning &amp; assembly<small
+                    >Review fragments and junctions</small
+                  >
+                </div>
+              </button>
+              <button data-command="view-enzymes">
+                <span data-icon="scissors"></span>
+                <div>
+                  Restriction sites<small>Predict digest fragments</small>
+                </div>
+              </button>
+              <button data-command="view-translation">
+                <span data-icon="protein"></span>
+                <div>Translate DNA<small>Explore all six frames</small></div>
+              </button>
+              <button data-command="find-orfs">
+                <span data-icon="dna"></span>
+                <div>
+                  Find ORFs<small>Review candidate coding regions</small>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar-spacer"></div>
+        <button
+          class="toolbar-button inspector-tool"
+          data-command="toggle-inspector"
+          aria-label="Toggle selection inspector"
+          aria-controls="inspector"
+          aria-pressed="true"
+          title="Show or hide selection inspector"
+        >
+          <span data-icon="panel"></span><span>Inspector</span>
+        </button>
+      </div>
+      <div
+        class="document-tabs"
+        id="document-tabs"
+        role="tablist"
+        aria-label="Documents"
+      ></div>
+      <section class="document-header" aria-label="Active sequence">
+        <div class="title-line">
+          <span class="document-symbol" data-icon="dna"></span>
+          <h1 id="document-name"></h1>
+          <span class="badge" id="document-format"></span
+          ><span class="badge annotation-dirty" id="dirty-indicator" hidden
+            >Unsaved changes</span
+          >
+        </div>
+        <p id="document-summary"></p>
+        <span id="breadcrumb-name" hidden></span>
+      </section>
+      <div class="editor-body">
+        <nav class="display-rail" aria-label="Display controls">
+          <button
+            data-command="toggle-features"
+            aria-pressed="true"
+            aria-label="Show features"
+            title="Show or hide features"
+          >
+            <span data-icon="tag"></span><small>Features</small>
+          </button>
+          <button
+            data-command="toggle-primers"
+            aria-pressed="true"
+            aria-label="Show primer binding sites"
+            title="Show or hide primer binding sites"
+          >
+            <span data-icon="primer"></span><small>Primers</small>
+          </button>
+          <button
+            data-command="toggle-enzymes"
+            aria-pressed="true"
+            aria-label="Show unique restriction sites"
+            title="Show or hide unique restriction sites"
+          >
+            <span data-icon="scissors"></span><small>Enzymes</small>
+          </button>
+          <div class="rail-divider"></div>
+          <button
+            data-command="layout-circular"
+            aria-pressed="true"
+            aria-label="Circular map"
+            title="Display a circular map"
+          >
+            <span data-icon="circle"></span><small>Circular</small>
+          </button>
+          <button
+            data-command="layout-linear"
+            aria-pressed="false"
+            aria-label="Linear map"
+            title="Display a linear map"
+          >
+            <span data-icon="linear"></span><small>Linear</small>
+          </button>
+          <div class="rail-divider"></div>
+          <button
+            data-command="toggle-complement"
+            aria-pressed="true"
+            aria-label="Show sequence complement"
+            title="Show or hide the complement in Sequence view"
+          >
+            <span data-icon="dna"></span><small>dsDNA</small>
+          </button>
+          <div class="rail-spacer"></div>
+          <button
+            data-command="help"
+            aria-label="Getting started"
+            title="Getting started"
+          >
+            <span data-icon="help"></span>
+          </button>
+        </nav>
+        <aside
+          class="file-sidebar"
+          id="file-sidebar"
+          aria-label="Open documents"
+          hidden
+        >
+          <div class="file-panel-heading">
+            Open documents <span id="doc-count">1</span
+            ><button
+              class="icon-button"
+              data-command="toggle-files"
+              aria-label="Hide open documents panel"
+            >
+              ×
+            </button>
+          </div>
+          <nav id="documents" aria-label="Open sequences"></nav>
+          <button class="side-action" id="paste-sequence">
+            <span data-icon="plus"></span>Paste a sequence
+          </button>
+          <div class="file-panel-footer">
+            <button class="side-action" id="load-example">
+              <span data-icon="flask"></span>Example plasmid</button
+            ><button class="side-action" id="help-button">
+              <span data-icon="help"></span>Getting started
+            </button>
+          </div>
+        </aside>
+        <div class="editor-center">
+          <div class="searchbar">
+            <div class="search-input">
+              <span data-icon="search"></span
+              ><input
+                id="sequence-search"
+                aria-label="Search DNA sequence or annotations"
+                placeholder="Find sequence or feature…"
+                autocomplete="off"
+                spellcheck="false"
+              /><kbd aria-hidden="true" data-shortcut="F">⌘F</kbd>
+            </div>
+            <span id="search-status" class="search-status"></span>
+            <button
+              class="icon-button"
+              id="previous-match"
+              aria-label="Previous search match"
+              disabled
+            >
+              <span data-icon="up"></span>
+            </button>
+            <button
+              class="icon-button"
+              id="next-match"
+              aria-label="Next search match"
+              disabled
+            >
+              <span data-icon="down"></span>
+            </button>
+            <span class="search-spacer"></span>
+            <button class="text-button" id="go-to">
+              <span data-icon="target"></span>Go to bases
+            </button>
+          </div>
+          <div class="content-grid">
+            <section
+              id="main-panel"
+              class="main-panel"
+              aria-label="Sequence content"
+            ></section>
+            <aside
+              class="inspector"
+              id="inspector"
+              aria-label="Sequence inspector"
+            ></aside>
+            <aside
+              class="ai-panel"
+              id="ai-panel"
+              aria-label="AI Design Assistant"
+              hidden
+            >
+              <header class="ai-panel-header">
+                <h2>AI Workspace</h2>
+                <button
+                  class="icon-button"
+                  data-ai="close"
+                  aria-label="Hide AI assistant"
+                  title="Hide AI assistant"
+                >
+                  ×
+                </button>
+              </header>
+              <div id="ai-panel-body" class="ai-panel-body"></div>
+            </aside>
+          </div>
+          <div class="viewbar">
+            <nav class="view-tabs" id="view-tabs" aria-label="Sequence views">
+              <button data-view="map" class="active">
+                <span data-icon="circle"></span>Map
+              </button>
+              <button data-view="sequence">
+                <span data-icon="sequence"></span>Sequence
+              </button>
+              <button data-view="enzymes">
+                <span data-icon="scissors"></span>Enzymes
+              </button>
+              <button data-view="features">
+                <span data-icon="tag"></span>Features
+                <span class="count" id="feature-count"></span>
+              </button>
+              <button data-view="primers">
+                <span data-icon="primer"></span>Primers
+                <span class="count" id="primer-count"></span>
+              </button>
+              <button data-view="translation">
+                <span data-icon="protein"></span>Translation
+              </button>
+              <button data-view="alignment" id="alignment-tab" hidden>
+                <span data-icon="activity"></span>Alignments
+                <span class="count" id="alignment-count"></span>
+              </button>
+              <button data-view="trace" id="trace-tab" hidden>
+                <span data-icon="activity"></span>Trace
+              </button>
+              <button data-view="history">
+                <span data-icon="activity"></span>History
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <footer class="statusbar">
+        <span
+          ><span class="local-dot"></span
+          ><span id="runtime-label">Local viewer</span
+          ><span class="status-separator">·</span
+          ><span id="status-source"></span></span
+        ><span id="selection-status">No bases selected</span
+        ><span
+          ><button class="status-edit-button" data-command="edit-dna">
+            <span id="sequence-edit-status">Edit DNA…</span
+            ><span class="lock-icon" data-icon="edit"></span>
+          </button>
+        </span>
+      </footer>
+    </main>
+    <input
+      type="file"
+      id="file-input"
+      accept=".pcraft,.pcprotein,.faa,.pep,.gb,.gbk,.genbank,.fa,.fasta,.fna,.dna,.ab1,.txt"
+      multiple
+      hidden
+    />
+    <div class="drop-overlay" id="drop-overlay" hidden>
+      <div>
+        <span data-icon="folder-open"></span>
+        <h2>Drop your sequence files here</h2>
+        <p>PlasmidCraft · GenBank · FASTA · SnapGene DNA · AB1 traces</p>
+      </div>
+    </div>
+    <dialog id="modal"><div id="modal-content"></div></dialog>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

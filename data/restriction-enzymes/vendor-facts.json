@@ -1,0 +1,4054 @@
+[
+  {
+    "name": "AclI",
+    "notation": "AA/CGTT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HindIII",
+    "notation": "A/AGCTT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HindIII-HF",
+    "notation": "A/AGCTT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SspI-HF",
+    "notation": "AAT/ATT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MluCI",
+    "notation": "/AATT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PciI",
+    "notation": "A/CATGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AgeI-HF",
+    "notation": "A/CCGGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BfuAI",
+    "notation": "ACCTGC(4/8)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspMI",
+    "notation": "ACCTGC(4/8)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SexAI",
+    "notation": "A/CCWGGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MluI-HF",
+    "notation": "A/CGCGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BceAI",
+    "notation": "ACGGC(12/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HpyCH4IV",
+    "notation": "A/CGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HpyCH4III",
+    "notation": "ACN/GT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BaeI",
+    "notation": "(10/15)ACNNNNGTAYC(12/7)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaXI",
+    "notation": "(9/12)ACNNNNNCTCC(10/7)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AflIII",
+    "notation": "A/CRYGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SpeI-HF",
+    "notation": "A/CTAGT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsrI",
+    "notation": "ACTGG(1/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BmrI",
+    "notation": "ACTGGG(5/4)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BglII",
+    "notation": "A/GATCT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AfeI",
+    "notation": "AGC/GCT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AluI",
+    "notation": "AG/CT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "StuI",
+    "notation": "AGG/CCT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ScaI-HF",
+    "notation": "AGT/ACT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ClaI",
+    "notation": "AT/CGAT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspDI",
+    "notation": "AT/CGAT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PI-SceI",
+    "notation": "ATCTATGTCGGGTGCGGAGAAAGAGGTAAT(-15/-19)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NsiI",
+    "notation": "ATGCA/T",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NsiI-HF",
+    "notation": "ATGCA/T",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AseI",
+    "notation": "AT/TAAT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SwaI",
+    "notation": "ATTT/AAAT",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "CspCI",
+    "notation": "(11/13)CAANNNNNGTGG(12/10)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MfeI-HF",
+    "notation": "C/AATTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PaqCI",
+    "notation": "CACCTGC(4/8)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BssSI-v2",
+    "notation": "CACGAG(-5/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nb.BssSI",
+    "notation": "CACGAG(none/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BmgBI",
+    "notation": "CACGTC(-3/-3)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PmlI",
+    "notation": "CAC/GTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "DraIII-HF",
+    "notation": "CACNNN/GTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AleI-v2",
+    "notation": "CACNN/NNGTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoP15I",
+    "notation": "CAGCAG(25/27)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PvuII",
+    "notation": "CAG/CTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PvuII-HF",
+    "notation": "CAG/CTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AlwNI",
+    "notation": "CAGNNN/CTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BtsIMutI",
+    "notation": "CAGTG(2/0)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NdeI",
+    "notation": "CA/TATG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "FatI",
+    "notation": "/CATG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NlaIII",
+    "notation": "CATG/",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MslI",
+    "notation": "CAYNN/NNRTG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "XcmI",
+    "notation": "CCANNNNN/NNNNTGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstXI",
+    "notation": "CCANNNNN/NTGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PflMI",
+    "notation": "CCANNNN/NTGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BccI",
+    "notation": "CCATC(4/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NcoI",
+    "notation": "C/CATGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NcoI-HF",
+    "notation": "C/CATGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BseYI",
+    "notation": "CCCAGC(-5/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "FauI",
+    "notation": "CCCGC(4/6)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SmaI",
+    "notation": "CCC/GGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "XmaI",
+    "notation": "C/CCGGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "TspMI",
+    "notation": "C/CCGGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.CviPII",
+    "notation": "CCD(-3/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AciI",
+    "notation": "CCGC(-3/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SacII",
+    "notation": "CCGC/GG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsrBI",
+    "notation": "CCGCTC(-3/-3)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HpaII",
+    "notation": "C/CGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MspI",
+    "notation": "C/CGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "StyD4I",
+    "notation": "/CCNGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ScrFI",
+    "notation": "CC/NGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaJI",
+    "notation": "C/CNNGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BslI",
+    "notation": "CCNNNNN/NNGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BtgI",
+    "notation": "C/CRYGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NciI",
+    "notation": "CC/SGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AvrII",
+    "notation": "C/CTAGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MnlI",
+    "notation": "CCTC(7/6)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BbvCI",
+    "notation": "CCTCAGC(-5/-2)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nb.BbvCI",
+    "notation": "CCTCAGC(none/-2)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.BbvCI",
+    "notation": "CCTCAGC(-5/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SbfI-HF",
+    "notation": "CCTGCA/GG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Bpu10I",
+    "notation": "CCTNAGC(-5/-2)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Bsu36I",
+    "notation": "CC/TNAGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoNI",
+    "notation": "CCTNN/NNNAGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HpyAV",
+    "notation": "CCTTC(6/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstNI",
+    "notation": "CC/WGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PspGI",
+    "notation": "/CCWGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "StyI-HF",
+    "notation": "C/CWWGG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BcgI",
+    "notation": "(10/12)CGANNNNNNTGC(12/10)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PvuI-HF",
+    "notation": "CGAT/CG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstUI",
+    "notation": "CG/CG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EagI-HF",
+    "notation": "C/GGCCG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "RsrII",
+    "notation": "CG/GWCCG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsiEI",
+    "notation": "CGRY/CG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsiWI",
+    "notation": "C/GTACG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsiWI-HF",
+    "notation": "C/GTACG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Esp3I",
+    "notation": "CGTCTC(1/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsmBI-v2",
+    "notation": "CGTCTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Hpy99I",
+    "notation": "CGWCG/",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MspA1I",
+    "notation": "CMG/CKG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MspJI",
+    "notation": "CNNR(9/13)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SgrAI",
+    "notation": "CR/CCGGYG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BfaI",
+    "notation": "C/TAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspCNI",
+    "notation": "CTCAG(9/7)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PaeR7I",
+    "notation": "C/TCGAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "XhoI",
+    "notation": "C/TCGAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EarI",
+    "notation": "CTCTTC(1/4)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AcuI",
+    "notation": "CTGAAG(16/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PstI",
+    "notation": "CTGCA/G",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PstI-HF",
+    "notation": "CTGCA/G",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BpmI",
+    "notation": "CTGGAG(16/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "DdeI",
+    "notation": "C/TNAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SfcI",
+    "notation": "C/TRYAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AflII",
+    "notation": "C/TTAAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BpuEI",
+    "notation": "CTTGAG(16/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SmlI",
+    "notation": "C/TYRAG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsoBI",
+    "notation": "C/YCGRG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AvaI",
+    "notation": "C/YCGRG",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MboII",
+    "notation": "GAAGA(8/7)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BbsI-HF",
+    "notation": "GAAGAC(2/6)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BbsI",
+    "notation": "GAAGAC(2/6)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "XmnI",
+    "notation": "GAANN/NNTTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsmI",
+    "notation": "GAATGC(1/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nb.BsmI",
+    "notation": "GAATGC(none/-1)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoRI",
+    "notation": "G/AATTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoRI-HF",
+    "notation": "G/AATTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HgaI",
+    "notation": "GACGC(5/10)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ZraI",
+    "notation": "GAC/GTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AatII",
+    "notation": "GACGT/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PflFI",
+    "notation": "GACN/NNGTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Tth111I",
+    "notation": "GACN/NNGTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PshAI",
+    "notation": "GACNN/NNGTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AhdI",
+    "notation": "GACNNN/NNGTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "DrdI",
+    "notation": "GACNNNN/NNGTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Eco53kI",
+    "notation": "GAG/CTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SacI-HF",
+    "notation": "GAGCT/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BseRI",
+    "notation": "GAGGAG(10/8)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MlyI",
+    "notation": "GAGTC(5/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PleI",
+    "notation": "GAGTC(4/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.BstNBI",
+    "notation": "GAGTC(4/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.BstNBI",
+    "notation": "GAGTC(4/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HinfI",
+    "notation": "G/ANTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoRV",
+    "notation": "GAT/ATC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoRV-HF",
+    "notation": "GAT/ATC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Sau3AI",
+    "notation": "/GATC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MboI",
+    "notation": "/GATC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "DpnII",
+    "notation": "/GATC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "DpnI",
+    "notation": "GA/TC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaBI",
+    "notation": "GATNN/NNATC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "TfiI",
+    "notation": "G/AWTC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsrDI",
+    "notation": "GCAATG(2/0)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nb.BsrDI",
+    "notation": "GCAATG(none/0)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BbvI",
+    "notation": "GCAGC(8/12)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BtsI-v2",
+    "notation": "GCAGTG(2/0)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nb.BtsI",
+    "notation": "GCAGTG(none/0)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstAPI",
+    "notation": "GCANNNN/NTGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SfaNI",
+    "notation": "GCATC(5/9)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SphI",
+    "notation": "GCATG/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SphI-HF",
+    "notation": "GCATG/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SrfI",
+    "notation": "GCCC/GGGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NmeAIII",
+    "notation": "GCCGAG(21/19)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NaeI",
+    "notation": "GCC/GGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NgoMIV",
+    "notation": "G/CCGGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BglI",
+    "notation": "GCCNNNN/NGGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AsiSI",
+    "notation": "GCGAT/CGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BtgZI",
+    "notation": "GCGATG(10/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HinP1I",
+    "notation": "G/CGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HhaI",
+    "notation": "GCG/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BssHII",
+    "notation": "G/CGCGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NotI",
+    "notation": "GC/GGCCGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NotI-HF",
+    "notation": "GC/GGCCGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Fnu4HI",
+    "notation": "GC/NGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Cac8I",
+    "notation": "GCN/NGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MwoI",
+    "notation": "GCNNNNN/NNGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BmtI-HF",
+    "notation": "GCTAG/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NheI-HF",
+    "notation": "G/CTAGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SapI",
+    "notation": "GCTCTTC(1/4)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspQI-HF",
+    "notation": "GCTCTTC(1/4)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspQI",
+    "notation": "GCTCTTC(1/4)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.BspQI",
+    "notation": "GCTCTTC(1/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BlpI",
+    "notation": "GC/TNAGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ApeKI",
+    "notation": "G/CWGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "TseI",
+    "notation": "G/CWGC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Bsp1286I",
+    "notation": "GDGCH/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AlwI",
+    "notation": "GGATC(4/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BamHI",
+    "notation": "G/GATCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BamHI-HF",
+    "notation": "G/GATCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.AlwI",
+    "notation": "GGATC(4/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BtsCI",
+    "notation": "GGATG(2/0)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "FokI",
+    "notation": "GGATG(9/13)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HaeIII",
+    "notation": "GG/CC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "FseI",
+    "notation": "GGCCGG/CC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SfiI",
+    "notation": "GGCCNNNN/NGGCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PluTI",
+    "notation": "GGCGC/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SfoI",
+    "notation": "GGC/GCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NarI",
+    "notation": "GG/CGCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "KasI",
+    "notation": "G/GCGCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AscI",
+    "notation": "GG/CGCGCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EciI",
+    "notation": "GGCGGA(11/9)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsmFI",
+    "notation": "GGGAC(10/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ApaI",
+    "notation": "GGGCC/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PspOMI",
+    "notation": "G/GGCCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Sau96I",
+    "notation": "G/GNCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NlaIV",
+    "notation": "GGN/NCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Acc65I",
+    "notation": "G/GTACC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "KpnI-HF",
+    "notation": "GGTAC/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaI-HFv2",
+    "notation": "GGTCTC(1/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HphI",
+    "notation": "GGTGA(8/7)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstEII-HF",
+    "notation": "G/GTNACC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AvaII",
+    "notation": "G/GWCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BanI",
+    "notation": "G/GYRCC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BaeGI",
+    "notation": "GKGCM/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaHI",
+    "notation": "GR/CGYC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BanII",
+    "notation": "GRGCY/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "RsaI",
+    "notation": "GT/AC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "CviQI",
+    "notation": "G/TAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstZ17I-HF",
+    "notation": "GTATAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BciVI",
+    "notation": "GTATCC(6/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SalI",
+    "notation": "G/TCGAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SalI-HF",
+    "notation": "G/TCGAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsmAI",
+    "notation": "GTCTC(1/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BcoDI",
+    "notation": "GTCTC(1/5)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Nt.BsmAI",
+    "notation": "GTCTC(1/none)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ApaLI",
+    "notation": "G/TGCAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsgI",
+    "notation": "GTGCAG(16/14)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AccI",
+    "notation": "GT/MKAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Hpy166II",
+    "notation": "GTN/NAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Tsp45I",
+    "notation": "/GTSAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HpaI",
+    "notation": "GTT/AAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PmeI",
+    "notation": "GTTT/AAAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HincII",
+    "notation": "GTY/RAC",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsiHKAI",
+    "notation": "GWGCW/C",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "TspRI",
+    "notation": "NNCASTGNN/",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "ApoI-HF",
+    "notation": "R/AATTY",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NspI",
+    "notation": "RCATG/Y",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsrFI-v2",
+    "notation": "R/CCGGY",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstYI",
+    "notation": "R/GATCY",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HaeII",
+    "notation": "RGCGC/Y",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "CviKI-1",
+    "notation": "RG/CY",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EcoO109I",
+    "notation": "RG/GNCCY",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PpuMI",
+    "notation": "RG/GWCCY",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "I-CeuI",
+    "notation": "TAACTATAACGGTCCTAAGGTAGCGAA(-9/-13)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "SnaBI",
+    "notation": "TAC/GTA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "I-SceI",
+    "notation": "TAGGGATAACAGGGTAAT(-9/-13)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspHI",
+    "notation": "T/CATGA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BspEI",
+    "notation": "T/CCGGA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MmeI",
+    "notation": "TCCRAC(20/18)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "TaqI-v2",
+    "notation": "T/CGA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "NruI-HF",
+    "notation": "TCG/CGA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Hpy188I",
+    "notation": "TCN/GA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "Hpy188III",
+    "notation": "TC/NNGA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "XbaI",
+    "notation": "T/CTAGA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BclI",
+    "notation": "T/GATCA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BclI-HF",
+    "notation": "T/GATCA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "HpyCH4V",
+    "notation": "TG/CA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "FspI",
+    "notation": "TGC/GCA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PI-PspI",
+    "notation": "TGGCAAACAGCTATTATGGGTATTATGGGT(-13/-17)",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MscI",
+    "notation": "TGG/CCA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsrGI-HF",
+    "notation": "T/GTACA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "MseI",
+    "notation": "T/TAA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PacI",
+    "notation": "TTAAT/TAA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PsiI-v2",
+    "notation": "TTA/TAA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BstBI",
+    "notation": "TT/CGAA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "DraI",
+    "notation": "TTT/AAA",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "PspXI",
+    "notation": "VC/TCGAGB",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaWI",
+    "notation": "W/CCGGW",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "BsaAI",
+    "notation": "YAC/GTR",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "EaeI",
+    "notation": "Y/GGCCR",
+    "vendor": "NEB",
+    "source": "neb"
+  },
+  {
+    "name": "AanI",
+    "notation": "TTA^TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AarI",
+    "notation": "CACCTGC(4/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AatII",
+    "notation": "GACGT^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Acc65I",
+    "notation": "G^GTACC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AdeI",
+    "notation": "CACNNN^GTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AjiI",
+    "notation": "CAC^GTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AjuI",
+    "notation": "^(7/12)GAA(N)7TTGG(11/6)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AlfI",
+    "notation": "^(10/12)GCA(N)6TGC(12/10)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AloI",
+    "notation": "^(7/12-13)GAAC(N)6TCC(12-13/7)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "AluI",
+    "notation": "AG^CT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Alw21I",
+    "notation": "GWGCW^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Alw26I",
+    "notation": "GTCTC(1/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Alw44I",
+    "notation": "G^TGCAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "ApaI",
+    "notation": "GGGCC^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BamHI",
+    "notation": "G^GATCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BauI",
+    "notation": "CACGAG(-5/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BclI",
+    "notation": "T^GATCA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BcnI",
+    "notation": "CC^SGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BcuI",
+    "notation": "A^CTAGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BfmI",
+    "notation": "C^TRYAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BfuI",
+    "notation": "GTATCC(6/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BglI",
+    "notation": "GCCNNNN^NGGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BglII",
+    "notation": "A^GATCT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bme1390I",
+    "notation": "CC^NGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BoxI",
+    "notation": "GACNN^NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BpiI",
+    "notation": "GAAGAC(2/6)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BplI",
+    "notation": "^(8/13)GAG(N)5CTC(13/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bpu10I",
+    "notation": "CCTNAGC(-5/-2)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bpu1102I",
+    "notation": "GC^TNAGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseDI",
+    "notation": "C^CNNGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseGI",
+    "notation": "GGATG(2/0)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseJI",
+    "notation": "GATNN^NNATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseLI",
+    "notation": "CCNNNNN^NNGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseMI",
+    "notation": "GCAATG(2/0)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseMII",
+    "notation": "CTCAG(10/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseNI",
+    "notation": "ACTGG(1/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseSI",
+    "notation": "GKGCM^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BseXI",
+    "notation": "GCAGC(8/12)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsh1236I",
+    "notation": "CG^CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsh1285I",
+    "notation": "CGRY^CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BshNI",
+    "notation": "G^GYRCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BshTI",
+    "notation": "A^CCGGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsp119I",
+    "notation": "TT^CGAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsp120I",
+    "notation": "G^GGCCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsp1407I",
+    "notation": "T^GTACA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsp143I",
+    "notation": "^GATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsp68I",
+    "notation": "TCG^CGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BspLI",
+    "notation": "GGN^NCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BspOI",
+    "notation": "GCTAG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BspPI",
+    "notation": "GGATC(4/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BspTI",
+    "notation": "C^TTAAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bst1107I",
+    "notation": "GTA^TAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BstXI",
+    "notation": "CCANNNNN^NTGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Bsu15I",
+    "notation": "AT^CGAT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BsuRI",
+    "notation": "GG^CC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BveI",
+    "notation": "ACCTGC(4/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "CaiI",
+    "notation": "CAGNNN^CTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Cfr10I",
+    "notation": "R^CCGGY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Cfr13I",
+    "notation": "G^GNCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Cfr42I",
+    "notation": "CCGC^GG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Cfr9I",
+    "notation": "C^CCGGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "CpoI",
+    "notation": "CG^GWCCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "CseI",
+    "notation": "GACGC(5/10)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Csp6I",
+    "notation": "G^TAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "DpnI",
+    "notation": "GA^TC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "DraI",
+    "notation": "TTT^AAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eam1104I",
+    "notation": "CTCTTC(1/4)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eam1105I",
+    "notation": "GACNNN^NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Ecl136II",
+    "notation": "GAG^CTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco105I",
+    "notation": "TAC^GTA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco130I",
+    "notation": "C^CWWGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco147I",
+    "notation": "AGG^CCT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco24I",
+    "notation": "GRGCY^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco31I",
+    "notation": "GGTCTC(1/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco32I",
+    "notation": "GAT^ATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco47I",
+    "notation": "G^GWCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco47III",
+    "notation": "AGC^GCT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco52I",
+    "notation": "C^GGCCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco57I",
+    "notation": "CTGAAG(16/14)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco72I",
+    "notation": "CAC^GTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco81I",
+    "notation": "CC^TNAGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco88I",
+    "notation": "C^YCGRG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Eco91I",
+    "notation": "G^GTNACC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "EcoO109I",
+    "notation": "RG^GNCCY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "EcoRI",
+    "notation": "G^AATTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "EcoRII",
+    "notation": "^CCWGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "EheI",
+    "notation": "GGC^GCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Esp3I",
+    "notation": "CGTCTC(1/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "FaqI",
+    "notation": "GGGAC(10/14)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "FspAI",
+    "notation": "RTGC^GCAY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "FspBI",
+    "notation": "C^TAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "GsuI",
+    "notation": "CTGGAG(16/14)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HhaI",
+    "notation": "GCG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Hin1I",
+    "notation": "GR^CGYC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Hin1II",
+    "notation": "CATG^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Hin6I",
+    "notation": "G^CGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HincII",
+    "notation": "GTY^RAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HindIII",
+    "notation": "A^AGCTT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HinfI",
+    "notation": "G^ANTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HpaII",
+    "notation": "C^CGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HphI",
+    "notation": "GGTGA(8/7)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Hpy8I",
+    "notation": "GTN^NAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HpyF10VI",
+    "notation": "GCNNNNN^NNGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "HpyF3I",
+    "notation": "C^TNAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "I-SceI",
+    "notation": "TAGGGATAACAGGGTAAT(-9/-13)",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Kpn2I",
+    "notation": "T^CCGGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "KpnI",
+    "notation": "GGTAC^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "KspAI",
+    "notation": "GTT^AAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "LguI",
+    "notation": "GCTCTTC(1/4)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Lsp1109I",
+    "notation": "GCAGC(8/12)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "LweI",
+    "notation": "GCATC(5/9)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MauBI",
+    "notation": "CG^CGCGCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MbiI",
+    "notation": "CCGCTC(-3/-3)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MboI",
+    "notation": "^GATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MboII",
+    "notation": "GAAGA(8/7)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MlsI",
+    "notation": "TGG^CCA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MluI",
+    "notation": "A^CGCGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MnlI",
+    "notation": "CCTC(7/6)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Mph1103I",
+    "notation": "ATGCA^T",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MreI",
+    "notation": "CG^CCGGCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MspI",
+    "notation": "C^CGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MssI",
+    "notation": "GTTT^AAAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MunI",
+    "notation": "C^AATTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Mva1269I",
+    "notation": "GAATGC(1/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "MvaI",
+    "notation": "CC^WGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Nb.Bpu10I",
+    "notation": "CCTNAGCGGANT?CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Nb.Mva1269I",
+    "notation": "GAATGCCTTAC?G",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "NcoI",
+    "notation": "C^CATGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "NdeI",
+    "notation": "CA^TATG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "NheI",
+    "notation": "G^CTAGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "NmuCI",
+    "notation": "^GTSAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "NotI",
+    "notation": "GC^GGCCGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "NsbI",
+    "notation": "TGC^GCA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Nt.Bpu10I",
+    "notation": "CC^TNAGCGGANTCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "OliI",
+    "notation": "CACNN^NNGTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PacI",
+    "notation": "TTAAT^TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PaeI",
+    "notation": "GCATG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PagI",
+    "notation": "T^CATGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PasI",
+    "notation": "CC^CWGGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PauI",
+    "notation": "G^CGCGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PdiI",
+    "notation": "GCC^GGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PdmI",
+    "notation": "GAANN^NNTTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PfeI",
+    "notation": "G^AWTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Pfl23II",
+    "notation": "C^GTACG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PfoI",
+    "notation": "T^CCNGGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Ppu21I",
+    "notation": "YAC^GTR",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PscI",
+    "notation": "A^CATGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Psp1406I",
+    "notation": "AA^CGTT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Psp5II",
+    "notation": "RG^GWCCY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PstI",
+    "notation": "CTGCA^G",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PsuI",
+    "notation": "R^GATCY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PsyI",
+    "notation": "GACN^NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PvuI",
+    "notation": "CGAT^CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "PvuII",
+    "notation": "CAG^CTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "RsaI",
+    "notation": "GT^AC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "RseI",
+    "notation": "CAYNN^NNRTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SacI",
+    "notation": "GAGCT^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SalI",
+    "notation": "G^TCGAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SatI",
+    "notation": "GC^NGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "ScaI",
+    "notation": "AGT^ACT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SchI",
+    "notation": "GAGTC(5/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SdaI",
+    "notation": "CCTGCA^GG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SduI",
+    "notation": "GDGCH^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SfaAI",
+    "notation": "GCGAT^CGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SfiI",
+    "notation": "GGCCNNNN^NGGCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SgeI",
+    "notation": "CNNG(9/13)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SgrDI",
+    "notation": "CG^TCGACG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SgsI",
+    "notation": "GG^CGCGCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SmaI",
+    "notation": "CCC^GGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SmiI",
+    "notation": "ATTT^AAAT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SmoI",
+    "notation": "C^TYRAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SsiI",
+    "notation": "CCGC(-3/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SspDI",
+    "notation": "G^GCGCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "SspI",
+    "notation": "AAT^ATT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TaaI",
+    "notation": "ACN^GT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TaiI",
+    "notation": "ACGT^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TaqI",
+    "notation": "T^CGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TasI",
+    "notation": "^AATT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TatI",
+    "notation": "W^GTACW",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TauI",
+    "notation": "GCSG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Tru1I",
+    "notation": "T^TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "TscAI",
+    "notation": "CASTG(2/-7)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "Van91I",
+    "notation": "CCANNNN^NTGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "VspI",
+    "notation": "AT^TAAT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XagI",
+    "notation": "CCTNN^NNNAGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XapI",
+    "notation": "R^AATTY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XbaI",
+    "notation": "T^CTAGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XceI",
+    "notation": "RCATG^Y",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XhoI",
+    "notation": "C^TCGAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XmaJI",
+    "notation": "C^CTAGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "XmiI",
+    "notation": "GT^MKAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-conventional"
+  },
+  {
+    "name": "BmsI",
+    "notation": "GCATC(5/9)",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "AasI",
+    "notation": "GACNNNN/NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "CsiI",
+    "notation": "A/CCWGGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "PteI",
+    "notation": "G/CGCGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "FokI",
+    "notation": "GGATG(9/13)",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "RruI",
+    "notation": "TCG/CGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "KflI",
+    "notation": "GG/GWCCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "SaqAI",
+    "notation": "T/TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "BfoI",
+    "notation": "RGCGC/Y",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "PspFI",
+    "notation": "CCCAG/C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest"
+  },
+  {
+    "name": "Eco31I",
+    "notation": "GGTCTC(1/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco31I"
+  },
+  {
+    "name": "Esp3I",
+    "notation": "CGTCTC(1/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Esp3I"
+  },
+  {
+    "name": "BpiI",
+    "notation": "GAAGAC(2/6)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BpiI"
+  },
+  {
+    "name": "MnlI",
+    "notation": "CCTC(7/6)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MnlI"
+  },
+  {
+    "name": "Alw26I",
+    "notation": "GTCTC(1/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Alw26I"
+  },
+  {
+    "name": "MboII",
+    "notation": "GAAGA(8/7)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MboII"
+  },
+  {
+    "name": "BmsI",
+    "notation": "GCATC(5/9)",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BmsI"
+  },
+  {
+    "name": "Mva1269I",
+    "notation": "GAATGC(1/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Mva1269I"
+  },
+  {
+    "name": "LguI",
+    "notation": "GCTCTTC(1/4)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest LguI"
+  },
+  {
+    "name": "BseGI",
+    "notation": "GGATG(2/0)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseGI"
+  },
+  {
+    "name": "AluI",
+    "notation": "AG^CT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest AluI"
+  },
+  {
+    "name": "Alw21I",
+    "notation": "GWGCW^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Alw21I"
+  },
+  {
+    "name": "Alw44I",
+    "notation": "G^TGCAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Alw44I"
+  },
+  {
+    "name": "BamHI",
+    "notation": "G^GATCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BamHI"
+  },
+  {
+    "name": "BcnI",
+    "notation": "CC^SGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BcnI"
+  },
+  {
+    "name": "BglI",
+    "notation": "GCCNNNN^NGGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BglI"
+  },
+  {
+    "name": "BglII",
+    "notation": "A^GATCT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BglII"
+  },
+  {
+    "name": "Bpu1102I",
+    "notation": "GC^TNAGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bpu1102I"
+  },
+  {
+    "name": "Bsp119I",
+    "notation": "TT^CGAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsp119I"
+  },
+  {
+    "name": "Bsp120I",
+    "notation": "G^GGCCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsp120I"
+  },
+  {
+    "name": "Bsu15I",
+    "notation": "AT^CGAT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsu15I"
+  },
+  {
+    "name": "BsuRI",
+    "notation": "GG^CC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BsuRI"
+  },
+  {
+    "name": "Cfr10I",
+    "notation": "R^CCGGY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Cfr10I"
+  },
+  {
+    "name": "Cfr13I",
+    "notation": "G^GNCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Cfr13I"
+  },
+  {
+    "name": "Csp6I",
+    "notation": "G^TAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Csp6I"
+  },
+  {
+    "name": "DraI",
+    "notation": "TTT^AAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest DraI"
+  },
+  {
+    "name": "Eam1104I",
+    "notation": "CTCTTC(1/4)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eam1104I"
+  },
+  {
+    "name": "Eam1105I",
+    "notation": "GACNNN^NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eam1105I"
+  },
+  {
+    "name": "Ecl136II",
+    "notation": "GAG^CTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Ecl136II"
+  },
+  {
+    "name": "EcoO109I",
+    "notation": "RG^GNCCY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest EcoO109I"
+  },
+  {
+    "name": "EcoRI",
+    "notation": "G^AATTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest EcoRI"
+  },
+  {
+    "name": "Eco32I",
+    "notation": "GAT^ATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco32I"
+  },
+  {
+    "name": "Eco47I",
+    "notation": "G^GWCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco47I"
+  },
+  {
+    "name": "Eco47III",
+    "notation": "AGC^GCT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco47III"
+  },
+  {
+    "name": "Eco52I",
+    "notation": "C^GGCCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco52I"
+  },
+  {
+    "name": "Eco57I",
+    "notation": "CTGAAG(16/14)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco57I"
+  },
+  {
+    "name": "Eco72I",
+    "notation": "CAC^GTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco72I"
+  },
+  {
+    "name": "Eco81I",
+    "notation": "CC^TNAGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco81I"
+  },
+  {
+    "name": "Eco88I",
+    "notation": "C^YCGRG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco88I"
+  },
+  {
+    "name": "Eco91I",
+    "notation": "G^GTNACC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco91I"
+  },
+  {
+    "name": "Eco105I",
+    "notation": "TAC^GTA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco105I"
+  },
+  {
+    "name": "Eco130I",
+    "notation": "C^CWWGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco130I"
+  },
+  {
+    "name": "Eco147I",
+    "notation": "AGG^CCT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Eco147I"
+  },
+  {
+    "name": "ScaI",
+    "notation": "AGT^ACT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest ScaI"
+  },
+  {
+    "name": "EheI",
+    "notation": "GGC^GCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest EheI"
+  },
+  {
+    "name": "GsuI",
+    "notation": "CTGGAG(16/14)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest GsuI"
+  },
+  {
+    "name": "Hin1I",
+    "notation": "GR^CGYC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Hin1I"
+  },
+  {
+    "name": "Hin6I",
+    "notation": "G^CGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Hin6I"
+  },
+  {
+    "name": "HincII",
+    "notation": "GTY^RAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HincII"
+  },
+  {
+    "name": "HindIII",
+    "notation": "A^AGCTT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HindIII"
+  },
+  {
+    "name": "HpaII",
+    "notation": "C^CGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HpaII"
+  },
+  {
+    "name": "KpnI",
+    "notation": "GGTAC^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest KpnI"
+  },
+  {
+    "name": "Kpn2I",
+    "notation": "T^CCGGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Kpn2I"
+  },
+  {
+    "name": "MspI",
+    "notation": "C^CGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MspI"
+  },
+  {
+    "name": "MvaI",
+    "notation": "CC^WGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MvaI"
+  },
+  {
+    "name": "MluI",
+    "notation": "A^CGCGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MluI"
+  },
+  {
+    "name": "NcoI",
+    "notation": "C^CATGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest NcoI"
+  },
+  {
+    "name": "NdeI",
+    "notation": "CA^TATG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest NdeI"
+  },
+  {
+    "name": "NotI",
+    "notation": "GC^GGCCGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest NotI"
+  },
+  {
+    "name": "PaeI",
+    "notation": "GCATG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PaeI"
+  },
+  {
+    "name": "PstI",
+    "notation": "CTGCA^G",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PstI"
+  },
+  {
+    "name": "PvuI",
+    "notation": "CGAT^CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PvuI"
+  },
+  {
+    "name": "PvuII",
+    "notation": "CAG^CTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PvuII"
+  },
+  {
+    "name": "SalI",
+    "notation": "G^TCGAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SalI"
+  },
+  {
+    "name": "SduI",
+    "notation": "GDGCH^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SduI"
+  },
+  {
+    "name": "SmaI",
+    "notation": "CCC^GGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SmaI"
+  },
+  {
+    "name": "TaqI",
+    "notation": "T^CGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TaqI"
+  },
+  {
+    "name": "XbaI",
+    "notation": "T^CTAGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XbaI"
+  },
+  {
+    "name": "XhoI",
+    "notation": "C^TCGAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XhoI"
+  },
+  {
+    "name": "Bst1107I",
+    "notation": "GTA^TAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bst1107I"
+  },
+  {
+    "name": "Van91I",
+    "notation": "CCANNNN^NTGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Van91I"
+  },
+  {
+    "name": "BclI",
+    "notation": "T^GATCA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BclI"
+  },
+  {
+    "name": "Mph1103I",
+    "notation": "ATGCA^T",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Mph1103I"
+  },
+  {
+    "name": "CpoI",
+    "notation": "CG^GWCCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest CpoI"
+  },
+  {
+    "name": "MunI",
+    "notation": "C^AATTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MunI"
+  },
+  {
+    "name": "Psp5II",
+    "notation": "RG^GWCCY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Psp5II"
+  },
+  {
+    "name": "SspI",
+    "notation": "AAT^ATT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SspI"
+  },
+  {
+    "name": "Bsp143I",
+    "notation": "^GATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsp143I"
+  },
+  {
+    "name": "HinfI",
+    "notation": "G^ANTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HinfI"
+  },
+  {
+    "name": "MboI",
+    "notation": "^GATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MboI"
+  },
+  {
+    "name": "BspTI",
+    "notation": "C^TTAAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BspTI"
+  },
+  {
+    "name": "Pfl23II",
+    "notation": "C^GTACG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Pfl23II"
+  },
+  {
+    "name": "BseNI",
+    "notation": "ACTGG(1/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseNI"
+  },
+  {
+    "name": "Bsh1285I",
+    "notation": "CGRY^CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsh1285I"
+  },
+  {
+    "name": "Acc65I",
+    "notation": "G^GTACC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Acc65I"
+  },
+  {
+    "name": "VspI",
+    "notation": "AT^TAAT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest VspI"
+  },
+  {
+    "name": "Bsh1236I",
+    "notation": "CG^CG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsh1236I"
+  },
+  {
+    "name": "Bsp1407I",
+    "notation": "T^GTACA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bsp1407I"
+  },
+  {
+    "name": "Psp1406I",
+    "notation": "AA^CGTT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Psp1406I"
+  },
+  {
+    "name": "NheI",
+    "notation": "G^CTAGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest NheI"
+  },
+  {
+    "name": "Tru1I",
+    "notation": "T^TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Tru1I"
+  },
+  {
+    "name": "AatII",
+    "notation": "GACGT^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest AatII"
+  },
+  {
+    "name": "BshNI",
+    "notation": "G^GYRCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BshNI"
+  },
+  {
+    "name": "BstXI",
+    "notation": "CCANNNNN^NTGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BstXI"
+  },
+  {
+    "name": "KspAI",
+    "notation": "GTT^AAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest KspAI"
+  },
+  {
+    "name": "BseDI",
+    "notation": "C^CNNGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseDI"
+  },
+  {
+    "name": "RsaI",
+    "notation": "GT^AC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest RsaI"
+  },
+  {
+    "name": "SacI",
+    "notation": "GAGCT^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SacI"
+  },
+  {
+    "name": "TaiI",
+    "notation": "ACGT^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TaiI"
+  },
+  {
+    "name": "BspLI",
+    "notation": "GGN^NCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BspLI"
+  },
+  {
+    "name": "BfmI",
+    "notation": "C^TRYAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BfmI"
+  },
+  {
+    "name": "Bpu10I",
+    "notation": "CCTNAGC(-5/-2)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bpu10I"
+  },
+  {
+    "name": "SdaI",
+    "notation": "CCTGCA^GG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SdaI"
+  },
+  {
+    "name": "BseLI",
+    "notation": "CCNNNNN^NNGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseLI"
+  },
+  {
+    "name": "MlsI",
+    "notation": "TGG^CCA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MlsI"
+  },
+  {
+    "name": "NsbI",
+    "notation": "TGC^GCA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest NsbI"
+  },
+  {
+    "name": "AdeI",
+    "notation": "CACNNN^GTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest AdeI"
+  },
+  {
+    "name": "SmiI",
+    "notation": "ATTT^AAAT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SmiI"
+  },
+  {
+    "name": "BcuI",
+    "notation": "A^CTAGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BcuI"
+  },
+  {
+    "name": "BseMI",
+    "notation": "GCAATG(2/0)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseMI"
+  },
+  {
+    "name": "MbiI",
+    "notation": "CCGCTC(-3/-3)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MbiI"
+  },
+  {
+    "name": "PagI",
+    "notation": "T^CATGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PagI"
+  },
+  {
+    "name": "TatI",
+    "notation": "W^GTACW",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TatI"
+  },
+  {
+    "name": "XagI",
+    "notation": "CCTNN^NNNAGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XagI"
+  },
+  {
+    "name": "BplI",
+    "notation": "^(8/13)GAG(N)5CTC(13/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BplI"
+  },
+  {
+    "name": "PsyI",
+    "notation": "GACN^NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PsyI"
+  },
+  {
+    "name": "MssI",
+    "notation": "GTTT^AAAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MssI"
+  },
+  {
+    "name": "TasI",
+    "notation": "^AATT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TasI"
+  },
+  {
+    "name": "TaaI",
+    "notation": "ACN^GT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TaaI"
+  },
+  {
+    "name": "SchI",
+    "notation": "GAGTC(5/5)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SchI"
+  },
+  {
+    "name": "XapI",
+    "notation": "R^AATTY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XapI"
+  },
+  {
+    "name": "CaiI",
+    "notation": "CAGNNN^CTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest CaiI"
+  },
+  {
+    "name": "BseMII",
+    "notation": "CTCAG(10/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseMII"
+  },
+  {
+    "name": "ApaI",
+    "notation": "GGGCC^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest ApaI"
+  },
+  {
+    "name": "Bme1390I",
+    "notation": "CC^NGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Bme1390I"
+  },
+  {
+    "name": "BoxI",
+    "notation": "GACNN^NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BoxI"
+  },
+  {
+    "name": "BseSI",
+    "notation": "GKGCM^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseSI"
+  },
+  {
+    "name": "BseXI",
+    "notation": "GCAGC(8/12)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseXI"
+  },
+  {
+    "name": "BshTI",
+    "notation": "A^CCGGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BshTI"
+  },
+  {
+    "name": "XceI",
+    "notation": "RCATG^Y",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XceI"
+  },
+  {
+    "name": "XmiI",
+    "notation": "GT^MKAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XmiI"
+  },
+  {
+    "name": "NmuCI",
+    "notation": "^GTSAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest NmuCI"
+  },
+  {
+    "name": "PdiI",
+    "notation": "GCC^GGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PdiI"
+  },
+  {
+    "name": "PdmI",
+    "notation": "GAANN^NNTTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PdmI"
+  },
+  {
+    "name": "PsuI",
+    "notation": "R^GATCY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PsuI"
+  },
+  {
+    "name": "XmaJI",
+    "notation": "C^CTAGG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest XmaJI"
+  },
+  {
+    "name": "Hpy8I",
+    "notation": "GTN^NAC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Hpy8I"
+  },
+  {
+    "name": "OliI",
+    "notation": "CACNN^NNGTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest OliI"
+  },
+  {
+    "name": "SatI",
+    "notation": "GC^NGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SatI"
+  },
+  {
+    "name": "TauI",
+    "notation": "GCSG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TauI"
+  },
+  {
+    "name": "FspAI",
+    "notation": "RTGC^GCAY",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest FspAI"
+  },
+  {
+    "name": "DpnI",
+    "notation": "GA^TC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest DpnI"
+  },
+  {
+    "name": "BseJI",
+    "notation": "GATNN^NNATC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BseJI"
+  },
+  {
+    "name": "AasI",
+    "notation": "GACNNNN/NNGTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest AasI"
+  },
+  {
+    "name": "HpyF10VI",
+    "notation": "GCNNNNN^NNGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HpyF10VI"
+  },
+  {
+    "name": "BveI",
+    "notation": "ACCTGC(4/8)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BveI"
+  },
+  {
+    "name": "PfoI",
+    "notation": "T^CCNGGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PfoI"
+  },
+  {
+    "name": "FspBI",
+    "notation": "C^TAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest FspBI"
+  },
+  {
+    "name": "PfeI",
+    "notation": "G^AWTC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PfeI"
+  },
+  {
+    "name": "SsiI",
+    "notation": "CCGC(-3/-1)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SsiI"
+  },
+  {
+    "name": "FaqI",
+    "notation": "GGGAC(10/14)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest FaqI"
+  },
+  {
+    "name": "SfiI",
+    "notation": "GGCCNNNN^NGGCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SfiI"
+  },
+  {
+    "name": "Hin1II",
+    "notation": "CATG^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Hin1II"
+  },
+  {
+    "name": "HhaI",
+    "notation": "GCG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HhaI"
+  },
+  {
+    "name": "HpyF3I",
+    "notation": "C^TNAG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest HpyF3I"
+  },
+  {
+    "name": "SgsI",
+    "notation": "GG^CGCGCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SgsI"
+  },
+  {
+    "name": "CseI",
+    "notation": "GACGC(5/10)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest CseI"
+  },
+  {
+    "name": "AjuI",
+    "notation": "^(7/12)GAA(N)7TTGG(11/6)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest AjuI"
+  },
+  {
+    "name": "Ppu21I",
+    "notation": "YAC^GTR",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Ppu21I"
+  },
+  {
+    "name": "RseI",
+    "notation": "CAYNN^NNRTG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest RseI"
+  },
+  {
+    "name": "MreI",
+    "notation": "CG^CCGGCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MreI"
+  },
+  {
+    "name": "BspOI",
+    "notation": "GCTAG^C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BspOI"
+  },
+  {
+    "name": "AanI",
+    "notation": "TTA^TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest AanI"
+  },
+  {
+    "name": "Lsp1109I",
+    "notation": "GCAGC(8/12)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest Lsp1109I"
+  },
+  {
+    "name": "MauBI",
+    "notation": "CG^CGCGCG",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest MauBI"
+  },
+  {
+    "name": "SfaAI",
+    "notation": "GCGAT^CGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SfaAI"
+  },
+  {
+    "name": "TscAI",
+    "notation": "CASTG(2/-7)^",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest TscAI"
+  },
+  {
+    "name": "CsiI",
+    "notation": "A/CCWGGT",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest CsiI"
+  },
+  {
+    "name": "PteI",
+    "notation": "G/CGCGC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PteI"
+  },
+  {
+    "name": "FokI",
+    "notation": "GGATG(9/13)",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest FokI"
+  },
+  {
+    "name": "RruI",
+    "notation": "TCG/CGA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest RruI"
+  },
+  {
+    "name": "KflI",
+    "notation": "GG/GWCCC",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest KflI"
+  },
+  {
+    "name": "SaqAI",
+    "notation": "T/TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest SaqAI"
+  },
+  {
+    "name": "BfoI",
+    "notation": "RGCGC/Y",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest BfoI"
+  },
+  {
+    "name": "PacI",
+    "notation": "TTAAT^TAA",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PacI"
+  },
+  {
+    "name": "PspFI",
+    "notation": "CCCAG/C",
+    "vendor": "Thermo Fisher",
+    "source": "thermo-fastdigest",
+    "productName": "FastDigest PspFI"
+  },
+  {
+    "name": "FspEI",
+    "notation": "CC(12/16)",
+    "vendor": "NEB",
+    "source": "neb-epigenetics"
+  },
+  {
+    "name": "LpnPI",
+    "notation": "CCDG(10/14)",
+    "vendor": "NEB",
+    "source": "neb-epigenetics"
+  },
+  {
+    "name": "McrBC",
+    "notation": "RC",
+    "vendor": "NEB",
+    "source": "neb-epigenetics"
+  }
+]

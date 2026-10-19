@@ -1,0 +1,1 @@
+The RSA key and JWKS here were generated solely for offline signature-validation tests. They are public, synthetic fixtures, never production credentials, and are excluded from release compilation by `cfg(test)`.
