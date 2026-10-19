@@ -11,6 +11,7 @@ An independent desktop workspace for plasmid viewing, sequence editing, protein 
 ## Install
 
 Use the package matching your computer from the release assets:
+https://github.com/AlvinAi-cloud/PlasmidCraft-0.3/releases/tag/v0.3.0
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
