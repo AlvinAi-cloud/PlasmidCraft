@@ -188,7 +188,7 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "a877937ae166fa7c3eabe43d59363921f498829ff5f18bba2fad19b03ef7db5a"
+      "sha256": "25de2509dac8526991572dc71ef5cdc18a73d7104edf9acb32e3ae63638ced2a"
     },
     {
       "path": "docs/WORKFLOWS.md",
@@ -212,7 +212,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "be767efa6adeb0d1afec13eef454d99aaf62d6d52c7b84506b6ab6e07f335017"
+      "sha256": "c111b51755e30854a05d29ab3d3be9cdbb99de886b68a8abc7875b9fa764a52a"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -244,7 +244,7 @@
     },
     {
       "path": "scripts/desktop.mjs",
-      "sha256": "d1978d9118f2d0dfb11e9929cd514285aee37394326bc9fc293cc7ab658906ab"
+      "sha256": "eb7daa7f8ad2f71dda566d2fcfcbd64fa2365b6bd2c496cf57073fed2a91356c"
     },
     {
       "path": "scripts/extract-enzyme-vendors.py",
@@ -521,6 +521,10 @@
     {
       "path": "tests/desktop-bridge-smoke.mjs",
       "sha256": "54a517773e471b1136012bbf2760a78132fc84bf8fe72c73a9183e4811b8d5ca"
+    },
+    {
+      "path": "tests/desktop-launcher.test.mjs",
+      "sha256": "7f6702b80c674f0cc3f6809a23b83edf314ae52a81bbbb24073d69a692545048"
     },
     {
       "path": "tests/editor-ui-smoke.mjs",

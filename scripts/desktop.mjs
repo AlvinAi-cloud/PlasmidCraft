@@ -31,16 +31,25 @@ if (!fs.existsSync(cli)) {
   process.exit(1);
 }
 const environment = { ...process.env };
-environment.PATH = [path.dirname(process.execPath), environment.PATH].join(
-  path.delimiter,
-);
+// Windows environment keys are case-insensitive, but this copied object is not.
+// Reuse Path/PATH so spawning Node does not discard Cargo's inherited search path.
+const pathKey =
+  process.platform === "win32"
+    ? Object.keys(environment).find((key) => key.toUpperCase() === "PATH") ||
+      "Path"
+    : "PATH";
+environment[pathKey] = [path.dirname(process.execPath), environment[pathKey]]
+  .filter(Boolean)
+  .join(path.delimiter);
 const localCargo = path.join(root, ".tooling/cargo");
-if (fs.existsSync(path.join(localCargo, "bin/cargo"))) {
+const cargoExecutable = process.platform === "win32" ? "cargo.exe" : "cargo";
+if (fs.existsSync(path.join(localCargo, "bin", cargoExecutable))) {
   environment.CARGO_HOME = localCargo;
   environment.RUSTUP_HOME = path.join(root, ".tooling/rustup");
-  environment.PATH = [path.join(localCargo, "bin"), environment.PATH].join(
-    path.delimiter,
-  );
+  environment[pathKey] = [
+    path.join(localCargo, "bin"),
+    environment[pathKey],
+  ].join(path.delimiter);
 }
 const args = [cli, command, ...process.argv.slice(3)];
 const child = spawn(process.execPath, args, {
