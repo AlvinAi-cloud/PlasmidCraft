@@ -1,6 +1,6 @@
 # Gibson and Golden Gate cloning design
 
-Open **Tools → Cloning & Assembly** and choose **Gibson / HiFi cloning design** or **Golden Gate cloning design** in **Assembly workflow**. The form switches to the corresponding overlap or Type IIS/overhang controls. Tools → Design Gibson Cloning / Design Golden Gate Cloning opens the same forms. Add 2–8 parts in circular order. Coordinates are inclusive and refer to the original template before optional reverse complementation. A first base greater than the last crosses a circular origin. For example, retain bases 201–100 to exclude a cassette at 101–200. Preview verifies PCR/digest intermediates and final DNA before creating separate documents.
+Open **Tools → Cloning and Assembly…** and choose **Gibson / HiFi cloning design** or **Golden Gate cloning design** in **Assembly workflow**. The form switches to the corresponding overlap or Type IIS/overhang controls. Tools → Design Gibson Cloning / Design Golden Gate Cloning opens the same forms. Add 2–8 parts in circular order. Coordinates are inclusive and refer to the original template before optional reverse complementation. A first base greater than the last crosses a circular origin. For example, retain bases 201–100 to exclude a cassette at 101–200. Preview verifies PCR/digest intermediates and final DNA before creating separate documents.
 
 ## PCR and existing fragments
 

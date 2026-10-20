@@ -166,6 +166,16 @@ fn application_menu(app: &App) -> tauri::Result<Menu<tauri::Wry>> {
         .build()?;
     let help = SubmenuBuilder::new(app, "Help")
         .text("help", "Getting Started")
+        .text("help-guide-getting-started", "User Guide and Search…")
+        .text("help-guide-mutagenesis", "Mutagenic Primers")
+        .text("help-guide-alignment", "Editing and Alignment")
+        .text("help-guide-pcr", "PCR and Assembly")
+        .text("help-guide-cloning", "Gibson / HiFi and Golden Gate")
+        .text("help-guide-codons", "Codon Optimization")
+        .text("help-guide-protein", "Protein Analysis and BLAST")
+        .text("help-guide-features", "Feature Libraries and File Formats")
+        .text("help-guide-ai", "AI Connections and Operations")
+        .separator()
         .text("workflow-examples", "Load Workflow Examples");
     #[cfg(not(target_os = "macos"))]
     let help = help.separator().item(&about);

@@ -2,7 +2,7 @@
 set -eu
 PLASMIDCRAFT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
 for PLASMIDCRAFT_TARGET in "release" "x86_64-apple-darwin/release" "aarch64-apple-darwin/release" "debug"; do
-  PLASMIDCRAFT_APP="$PLASMIDCRAFT_DIR/src-tauri/target/$PLASMIDCRAFT_TARGET/bundle/macos/PlasmidCraft 0.31.app"
+  PLASMIDCRAFT_APP="$PLASMIDCRAFT_DIR/src-tauri/target/$PLASMIDCRAFT_TARGET/bundle/macos/PlasmidCraft 0.32.app"
   if [ -d "$PLASMIDCRAFT_APP" ]; then
     exec /usr/bin/open -n "$PLASMIDCRAFT_APP"
   fi

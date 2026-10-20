@@ -282,8 +282,9 @@ try {
   checks++;
   assert.equal(await page.locator(".translation-block").count(), 6);
   await page.evaluate(() => window.__desktopMock.menu("help"));
-  assert.match(await page.locator("#modal-content").textContent(), /\.pcraft/);
-  await page.getByRole("button", { name: "Done", exact: true }).click();
+  await page.locator("#help-dialog").waitFor({ state: "visible" });
+  assert.match(await page.locator("#help-article").textContent(), /\.pcraft/);
+  await page.locator("#help-dialog [data-help-close]").click();
   checks++;
   // An inactive document still has unsaved changes, even though the active one is saved.
   await page.evaluate(() => window.__desktopMock.menu("quit"));

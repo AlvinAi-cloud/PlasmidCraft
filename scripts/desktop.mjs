@@ -30,6 +30,13 @@ if (!fs.existsSync(cli)) {
   console.error("Desktop dependencies are missing. Run npm install first.");
   process.exit(1);
 }
+if (["dev", "build"].includes(command)) {
+  const help = spawnSync(process.execPath, ["scripts/build-help.mjs"], {
+    cwd: root,
+    stdio: "inherit",
+  });
+  if (help.status !== 0) process.exit(help.status ?? 1);
+}
 const environment = { ...process.env };
 // Windows environment keys are case-insensitive, but this copied object is not.
 // Reuse Path/PATH so spawning Node does not discard Cargo's inherited search path.

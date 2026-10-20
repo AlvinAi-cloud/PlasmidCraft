@@ -1,8 +1,10 @@
-# PlasmidCraft 0.31
+# PlasmidCraft 0.32
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
 Test release of the PlasmidCraft desktop sequence workspace for Mac Intel, Mac Apple Silicon and Windows x64.
+
+- Help now includes Getting Started, User Guide and Search, and direct shortcuts for mutagenic primers, editing/alignment, PCR/assembly, Gibson/HiFi and Golden Gate, codon optimization, protein analysis/BLAST, feature libraries/file formats and AI. Thirteen guides and their screenshots are bundled for offline reading, with full-text topic search, section navigation and cross-guide links in a separate movable window. Guide menu paths have been updated and editing drafts remain available while reading.
 
 - Tight circular maps with full curved feature labels and SVG export. Activating tight mode hides restriction-enzyme markings automatically. The Common enzymes group contains the 23-enzyme preset without preselecting it. The default map displays up to 10 single cutters automatically. Editable Map checkboxes and explicit select/clear controls are independent of digest selection and support multiple cut sites.
 - Circular/linear maps and a continuous scrolling DNA Sequence view with annotation, primer, complement, CDS codon and selectable six-frame protein tracks. Non-overlapping CDS share translation lanes; DNA and protein selections highlight together, with DNA-strand/protein copy and FASTA options. A clickable annotation overview stays below Map and Sequence, and annotation starts center in the sequence viewport. CDS translations display by default with one-letter/three-letter notation. Large sequences render nearby rows on demand.

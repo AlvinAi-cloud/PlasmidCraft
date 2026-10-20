@@ -29,7 +29,10 @@ async function moveDialog(left = 16, top = 120) {
 }
 try {
   await page.goto(process.env.PLASMIDCRAFT_URL || "http://127.0.0.1:4317");
-  assert.match(await page.locator("#version-label").textContent(), /0\.31\.0/);
+  const { version } = JSON.parse(
+    await fs.readFile(new URL("../package.json", import.meta.url), "utf8"),
+  );
+  assert.equal(await page.locator("#version-label").textContent(), version);
   const sizes = await page.evaluate(() =>
     [
       document.body,
@@ -208,7 +211,7 @@ try {
   checks++;
   assert.deepEqual(errors, []);
   console.log(
-    `${checks} 0.31 preview UI checks passed: typography, Tools order, adaptive rows, movable modeless dialogs, source guards and primer design on ambiguous templates.`,
+    `${checks} responsive editor UI checks passed: typography, Tools order, adaptive rows, movable modeless dialogs, source guards and primer design on ambiguous templates.`,
   );
 } finally {
   await browser.close();

@@ -1,12 +1,12 @@
-# PlasmidCraft 0.31
+# PlasmidCraft 0.32
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
-Desktop test release. Source and installer packages are versioned **0.31.0**.
+Desktop test release. Source and installer packages are versioned **0.32.0**.
 
 An independent desktop workspace for plasmid viewing, sequence editing, protein analysis and cloning design. Built with JavaScript, Rust and Tauri 2. The application embeds its interface and works without Node.js, Python or a local web server.
 
-![PlasmidCraft map](docs/screenshots/0.31/map.png)
+![PlasmidCraft map](docs/screenshots/0.32/map.png)
 
 ## Install
 
@@ -14,13 +14,13 @@ Use the package matching your computer from the release assets:
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
-| Mac Apple Silicon | `PlasmidCraft-0.31.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
-| Mac Intel | `PlasmidCraft-0.31.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
-| Windows | `PlasmidCraft-0.31.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
+| Mac Apple Silicon | `PlasmidCraft-0.32.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
+| Mac Intel | `PlasmidCraft-0.32.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
+| Windows | `PlasmidCraft-0.32.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
 
-Mac: open the disk image and drag **PlasmidCraft 0.31** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
+Mac: open the disk image and drag **PlasmidCraft 0.32** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
 
-**0.31 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
+**0.32 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
 
 ## Features
 
@@ -45,6 +45,10 @@ The app opens the supplied **pET-21b(+)** plasmid (5,442 bp) by default. Its sou
 
 Open a sequence using **File → Open Sequence**. Use **View** for panels/lists, **Edit** for annotation and DNA changes, and **Tools** for analysis and design. To compare plasmids, open both and choose **Tools → Align Whole Plasmids**. Right-click a CDS for protein analysis, codon optimization or protein BLAST. Load synthetic workflow examples from Help to try PCR, Gibson and Golden Gate.
 
+The same guides are bundled offline under **Help → User Guide and Search…**, with full-text topic search, section navigation and direct Help menu shortcuts. **Getting Started** explains the example plasmid, layout, file handling and workflow entry points.
+
+![Offline Help and workflow guides](docs/screenshots/0.32/help.png)
+
 Guides: [mutagenic primers](docs/MUTAGENESIS.md), [editing and alignment](docs/SEQUENCE_VERIFICATION.md), [PCR and assembly](docs/WORKFLOWS.md), [cloning design](docs/CLONING_DESIGN.md), [codon optimization](docs/CODON_OPTIMIZATION.md), [protein analysis and BLAST](docs/PROTEIN_ANALYSIS_AND_BLAST.md), [feature catalogs and exchange](docs/FEATURE_CATALOG_AND_EXCHANGE.md), [AI connections](docs/AI_ASSISTANT.md).
 
 ## Privacy and scientific limits
@@ -60,6 +64,7 @@ Install Node.js 24 LTS (minimum 22.13), Rust stable (minimum 1.90), and the [Tau
 ```sh
 npm install --global pnpm@11.25.0
 pnpm install --frozen-lockfile --ignore-scripts
+pnpm help:build
 pnpm check
 pnpm test
 cargo test --locked --manifest-path src-tauri/Cargo.toml --lib
@@ -77,7 +82,7 @@ pnpm test:ui
 
 Run a second pass with environment variable `PLASMIDCRAFT_BROWSER=webkit` (PowerShell: `$env:PLASMIDCRAFT_BROWSER='webkit'`). UI tests start and stop a localhost-only development server and download checksum-pinned public Biopython fixtures into `test-results/`. They use simulated native/network services, without sending biology queries to AI or NCBI. `PLASMIDCRAFT_REFERENCE_DIR` can point at an already downloaded fixture directory for offline testing. The server is an internal test harness, not a distributed browser product.
 
-Build native packages with `pnpm desktop:build --ci`. GitHub Actions builds Intel Mac, Apple Silicon Mac and Windows x64, tests the native Rust layer on each runner, and uploads artifacts. CI must be run after uploading this folder to your own repository. [Release instructions](docs/RELEASE.md) cover packages, signatures and publishing.
+Build native packages with `pnpm desktop:build --ci`. See [installation and signing](docs/RELEASE.md) for platform packages and signatures.
 
 Feature lists from an existing local SnapGene installation can be imported under **Tools → Feature Libraries → Import**. See the [step-by-step feature import instructions](docs/FEATURE_CATALOG_AND_EXCHANGE.md#import-features-from-an-existing-snapgene-installation).
 

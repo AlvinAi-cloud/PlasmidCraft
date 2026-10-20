@@ -79,7 +79,7 @@ jobs:
         run: pnpm desktop:build --ci --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
       - uses: actions/upload-artifact@v7
         with:
-          name: PlasmidCraft-0.3-${{ matrix.target }}
+          name: PlasmidCraft-0.32-${{ matrix.target }}
           path: |
             src-tauri/target/${{ matrix.target }}/release/bundle/dmg/*.dmg
             src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*.exe

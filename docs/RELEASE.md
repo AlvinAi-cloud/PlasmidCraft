@@ -1,6 +1,6 @@
-# PlasmidCraft 0.31 release guide
+# PlasmidCraft 0.32 release guide
 
-Release version: **0.31.0**. Display name: **PlasmidCraft 0.31**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
+Release version: **0.32.0**. Display name: **PlasmidCraft 0.32**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
 
 ## Test installers
 
@@ -9,6 +9,8 @@ This package is a test release. There is no Developer ID or Windows publisher si
 For Mac testing, open the matching DMG, drag the app to Applications, then launch it. If macOS blocks an app you have independently verified, use the app-specific **Open Anyway** control in System Settings → Privacy & Security. Do not disable Gatekeeper globally. On Windows, verify the source and hash before making any app-specific SmartScreen decision. Organizations may prohibit unsigned applications.
 
 The Mac build declares macOS 12.3 as its minimum; this release was built on macOS 15.7.9 with Xcode 26.3. Older OS compatibility and target-device acceptance need testing. Windows targets x64 MSVC and requires Windows 10/11 with Microsoft Edge WebView2 Runtime. The NSIS installer uses Tauri's WebView2 bootstrapper when needed, which can require an Internet connection.
+
+If an approved Mac test app remains bouncing without a window, force quit that stalled copy and try a restart once. A prior M1/macOS 27.0.1 report cleared after restarting; the cause was not confirmed, and restarting is not a guaranteed remedy. Keep a working previous app until the new copy launches. If it persists, collect a process sample and report the package/version and OS. Mac app ZIPs are supplied alongside DMGs as an alternative packaging route.
 
 ## Native builds
 
@@ -24,7 +26,7 @@ The Windows command normally runs on Windows with Visual Studio C++ Build Tools.
 
 Native macOS outputs are under `src-tauri/target/TARGET/release/bundle/macos/`; installers under `bundle/dmg/` or `bundle/nsis/`. A build without `--target` uses `src-tauri/target/release/`. An app ZIP is also usable for Mac testing. The locally supplied DMGs use hdiutil with an Applications shortcut and do not require Finder scripting.
 
-**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.31 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
+**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.32 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
 
 ## Signing a public Mac release
 
@@ -35,11 +37,3 @@ Rebuild **both architectures** with the signing/notarization configuration. Veri
 ## Signing a public Windows release
 
 Obtain a trusted code-signing certificate/service and configure Tauri's Windows signing options (certificate thumbprint and timestamp service, or a custom signing command for the chosen service). See [Tauri's Windows signing guide](https://v2.tauri.app/distribute/sign/windows/). Rebuild so both app and installer receive the intended signatures; verify Authenticode and timestamp on Windows with `Get-AuthenticodeSignature` and the Windows SDK's `signtool verify /pa /v`. Store credentials in protected CI secrets, never source. Recalculate checksums after signing. A signature does not guarantee immediate SmartScreen reputation.
-
-## Upload to GitHub
-
-Upload the **contents** of the supplied `PlasmidCraft-0.31-GitHub` folder as the repository root, including `.github`, `.gitignore`, lockfiles, LICENSE and notices. Command-line Git is the simplest way to preserve hidden directories. Do not upload `.tooling`, `node_modules`, Rust `target`, local profiles, private sequence files or installer binaries into the source tree. The source ZIP includes hidden files.
-
-Enable Actions and run **Desktop builds**. It tests each platform's native Rust layer and builds three native installer targets. The renderer job runs Chromium and WebKit tests on macOS. Review the build logs and downloaded artifacts; the new 0.31 source must pass CI after you upload it to your repository. Builds are unsigned until you configure signing separately. CI does not publish anything automatically.
-
-After completing the [acceptance checklist](VALIDATION.md), create a GitHub release tagged `v0.31.0`, paste RELEASE_NOTES.md, attach the three installers, optional Mac ZIPs, checksums and validation report, and review it as a draft before publishing. Until all platform acceptance is recorded, label it a **pre-release/test release**. Signed/notarized public installers require the additional steps above.

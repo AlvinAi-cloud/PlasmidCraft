@@ -1,4 +1,4 @@
-# AI design assistant — desktop 0.31
+# AI design assistant — desktop 0.32
 
 The **AI Assistant** toolbar button toggles a docked panel beside the sequence inspector. It leaves map/sequence editing available. On narrow windows it tiles below the editor. Close with the panel's × button; response and request text remain in the current session. Opening or closing other tool dialogs does not cancel AI work. Closing the AI panel itself cancels pending sign-in/inference and suppresses late responses.
 
@@ -25,7 +25,7 @@ The transport uses OpenAI Responses, Claude Messages, Gemini GenerateContent, or
 
 Official API contracts: [OpenAI authentication](https://developers.openai.com/api/reference/overview), [Claude API](https://platform.claude.com/docs/en/api/overview), [Gemini GenerateContent](https://ai.google.dev/api/generate-content).
 
-![Internal AI Operations](screenshots/0.31/internal-ai-operations.png)
+![Internal AI Operations](screenshots/0.32/internal-ai-operations.png)
 
 Interface illustration uses a synthetic test document and a mocked provider.
 

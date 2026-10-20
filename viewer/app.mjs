@@ -1,3 +1,4 @@
+import { HelpUI } from "./help-ui.mjs";
 import { documentNotes } from "./document-notes.mjs";
 import {
   containsBase,
@@ -2326,6 +2327,7 @@ function runCommand(action) {
   else if (action === "paste") $("#paste-sequence").click();
   else if (action === "paste-protein") codonUI.action("paste");
   else if (action === "help") help();
+  else if (action.startsWith("help-guide-")) helpUI.show(action.slice(11));
   else if (action === "example") loadExample();
   else if (action === "workflow-examples") {
     const examples = workflowDemoRecords(),
@@ -3458,16 +3460,13 @@ $("#paste-sequence").addEventListener("click", () =>
     `<button class="button" data-action="close-modal">Cancel</button><button class="button primary" data-action="paste-import">Open sequence</button>`,
   ),
 );
-const help = () =>
-  modal(
-    "Getting started",
-    `<p><strong>Open your files.</strong> Use Open in the toolbar or drag files into this window. PlasmidCraft documents (.pcraft), GenBank, FASTA, SnapGene DNA, and AB1 are supported. Multi-record FASTA and GenBank files open as separate documents.</p><p><strong>Explore.</strong> Switch views with the bottom tabs. Select map annotations, browse the feature and primer tables, or scroll the full DNA document and drag across bases in Sequence view. The left toolbar controls visible features, primers, restriction sites, and the complement. Use Files and Inspector in the top toolbar to show or hide those panels. Search DNA on both strands with ⌘F / Ctrl+F; IUPAC searches include possible ambiguous matches.</p><p><strong>Annotate and share.</strong> Add or edit annotations and undo changes. Use Save (⌘S / Ctrl+S) to keep sequence, annotations, primers, and available trace data in a .pcraft document. Use Export for GenBank, SnapGene format, FASTA, or SVG copies; FASTA contains the sequence only. Reopen saved documents with Open.</p><p><strong>Design workflows.</strong> Help → Load Workflow Examples opens synthetic tutorial inputs. Tools → Feature Libraries previews automatic annotation from your own patterns. Tools provides manual oligos, pair design and PCR previews with explicit 5′ tails. Tools → Align Sanger / DNA Reads retains read evidence in saved reports; Tools → Cloning &amp; Assembly checks exact overlaps or restriction/Golden Gate junctions before creating a separate DNA document. Tools → Design Gibson Cloning / Design Golden Gate Cloning generates primers, junctions, PCR intermediates and a verified circular construct from retained source regions.</p><p><strong>More tools.</strong> Browse 407 restriction-enzyme entries, predict complete-digest fragment sizes, and translate all six frames. Tools → Find Open Reading Frames scans both strands with length/start/genetic-code settings; review a candidate before adding it as a predicted CDS. Tools → Coding Feature Proteins recalculates CDS proteins using strand, joined segments, codon_start and supported genetic codes (1, 2, 11), with protein FASTA export.</p><p><strong>DNA tools.</strong> Use Edit DNA in the toolbar for insertions, replacements, or deletions. Preview changes before applying; Undo restores sequence and annotations together. The Edit menu also reverse-complements DNA and sets a circular origin. File → New DNA from Selection creates a separate annotated fragment, including circular-origin ranges.</p><p>Sanger traces remain read-only; extract a DNA copy for editing. Save native documents to retain the full supported analysis and edit history.</p>`,
-  );
+const helpUI = new HelpUI(platform);
+const help = () => helpUI.show("getting-started");
 $("#help-button").addEventListener("click", help);
 $("#about-button").addEventListener("click", () =>
   modal(
     "PlasmidCraft",
-    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.31.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
+    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.32.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
   ),
 );
 let dragDepth = 0;
@@ -3551,7 +3550,7 @@ hydrateIcons();
 loadExample();
 if (platform.desktop) {
   $("#runtime-label").textContent = "Desktop app";
-  $("#version-label").textContent = "Desktop 0.31.0";
+  $("#version-label").textContent = "Desktop 0.32.0";
 }
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
   for (const label of document.querySelectorAll("[data-shortcut]"))

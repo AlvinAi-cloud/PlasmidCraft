@@ -1,20 +1,21 @@
 {
   "name": "plasmidcraft",
-  "version": "0.31.0",
+  "version": "0.32.0",
   "private": true,
   "type": "module",
-  "description": "PlasmidCraft — local plasmid sequence viewing and analysis",
+  "description": "PlasmidCraft \u2014 local plasmid sequence viewing and analysis",
   "license": "MIT",
   "scripts": {
     "start": "node scripts/desktop.mjs dev",
-    "test": "node --test tests/document-notes.test.mjs tests/default-example.test.mjs tests/desktop-launcher.test.mjs tests/ai-tools.test.mjs tests/sequence-selection.test.mjs tests/library-all.test.mjs tests/map-enzymes.test.mjs tests/compact-map.test.mjs tests/primer-extension.test.mjs tests/sequence-display.test.mjs tests/selected-primer.test.mjs tests/mutagenesis.test.mjs tests/protein-analysis.test.mjs tests/enzyme-catalog.test.mjs tests/core.test.mjs tests/platform.test.mjs tests/project.test.mjs tests/sequence-tools.test.mjs tests/protein.test.mjs tests/workflows.test.mjs tests/cloning-design.test.mjs tests/advanced.test.mjs tests/codon.test.mjs tests/catalog-export.test.mjs tests/ai.test.mjs",
+    "test": "node --test tests/help.test.mjs tests/document-notes.test.mjs tests/default-example.test.mjs tests/desktop-launcher.test.mjs tests/ai-tools.test.mjs tests/sequence-selection.test.mjs tests/library-all.test.mjs tests/map-enzymes.test.mjs tests/compact-map.test.mjs tests/primer-extension.test.mjs tests/sequence-display.test.mjs tests/selected-primer.test.mjs tests/mutagenesis.test.mjs tests/protein-analysis.test.mjs tests/enzyme-catalog.test.mjs tests/core.test.mjs tests/platform.test.mjs tests/project.test.mjs tests/sequence-tools.test.mjs tests/protein.test.mjs tests/workflows.test.mjs tests/cloning-design.test.mjs tests/advanced.test.mjs tests/codon.test.mjs tests/catalog-export.test.mjs tests/ai.test.mjs",
     "check": "node scripts/check.mjs",
     "desktop:dev": "node scripts/desktop.mjs dev",
     "desktop:build": "node scripts/desktop.mjs build",
     "tauri": "tauri",
     "dev:ui-test": "node scripts/serve.mjs",
     "test:ui": "node scripts/test-ui.mjs",
-    "release:source": "node scripts/prepare-release.mjs"
+    "release:source": "node scripts/prepare-release.mjs",
+    "help:build": "node scripts/build-help.mjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "2.12.3",

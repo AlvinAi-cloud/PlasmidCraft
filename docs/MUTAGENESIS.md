@@ -1,6 +1,6 @@
 # Mutagenic primer design
 
-Open a circular plasmid and choose **Primers → Primer Design → Mutagenesis**. **Tools → Mutagenic Primer Design** opens the same workspace. PCR amplification and mutagenesis share the Primer Design tab. The tool designs substitutions, insertions and deletions with either overlapping Gibson/HiFi primers (default) or non-overlapping inverse-PCR primers for ligation/KLD. It previews oligos and a DNA design; it does not modify the source plasmid.
+Open a circular plasmid and choose **Tools → Primer Design…**, then select **Mutagenesis**. **Tools → Mutagenic Primer Design** opens the same workspace. PCR amplification and mutagenesis share the Primer Design tab. The tool designs substitutions, insertions and deletions with either overlapping Gibson/HiFi primers (default) or non-overlapping inverse-PCR primers for ligation/KLD. It previews oligos and a DNA design; it does not modify the source plasmid.
 
 Choose **Mutation** (substitution, insertion or deletion) and **Coordinates / input** (DNA, CDS amino acids or explicit codons). Substitutions use one site per line:
 

@@ -13,7 +13,7 @@ These are designed sequences. Applying them to a plasmid document does not imply
 
 ## Import a protein and generate DNA
 
-**File → New from Pasted Protein…** opens the protein-paste dialog directly. Enter a name and one-letter amino-acid sequence, then choose **Open protein document** to use the protein-to-DNA and codon-optimization workspace. **Tools → Protein Documents / Protein → DNA** also opens that separate protein workspace. Use **Import protein documents** for protein FASTA (`.faa`, `.pep`, `.fa`, `.fasta`), plain amino-acid text (`.txt`) or native `.pcprotein` documents. **Paste a protein** opens a new protein document from one-letter residues. Multiple FASTA records appear as separately selectable protein documents in this workspace; they are not DNA tabs.
+**File → New from Pasted Protein…** opens the protein-paste dialog directly. Enter a name and one-letter amino-acid sequence, then choose **Open protein document** to use the protein-to-DNA and codon-optimization workspace. **Tools → Protein Documents / Protein to DNA…** also opens that separate protein workspace. Use **Import protein documents** for protein FASTA (`.faa`, `.pep`, `.fa`, `.fasta`), plain amino-acid text (`.txt`) or native `.pcprotein` documents. **Paste a protein** opens a new protein document from one-letter residues. Multiple FASTA records appear as separately selectable protein documents in this workspace; they are not DNA tabs.
 
 The main Open/drop action recognizes `.faa`, `.pep`, `.pcprotein`, and clearly protein-containing `.fa/.fasta` files. A FASTA consisting entirely of DNA-compatible letters (for example ACGT or MKWV) is inherently ambiguous and defaults to DNA through ordinary Open; import it explicitly through the protein workspace or name it `.faa`.
 
