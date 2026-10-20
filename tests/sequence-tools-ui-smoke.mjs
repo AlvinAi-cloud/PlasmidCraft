@@ -123,6 +123,38 @@ try {
     { width: 390, height: 700 },
   ]) {
     await page.setViewportSize(viewport);
+    // setViewportSize acknowledges the browser resize before resize handlers and
+    // ResizeObserver necessarily finish repositioning a floating dialog. Poll
+    // actual geometry instead of asserting against that intermediate frame.
+    try {
+      await page.waitForFunction(
+        ({ width, height }) => {
+          const button = document.querySelector("#apply-sequence-tool");
+          if (!button || innerWidth !== width || innerHeight !== height)
+            return false;
+          const rect = button.getBoundingClientRect();
+          return (
+            rect.width > 0 &&
+            rect.height > 0 &&
+            rect.top >= 0 &&
+            rect.bottom <= height &&
+            rect.left >= 0 &&
+            rect.right <= width
+          );
+        },
+        viewport,
+        { timeout: 5000 },
+      );
+    } catch (error) {
+      await page.screenshot({
+        path: testOutput("sequence-tool-viewport-failure.png"),
+      });
+      const bounds = await page.locator("#apply-sequence-tool").boundingBox();
+      throw new Error(
+        `Apply did not fit viewport ${JSON.stringify(viewport)}; bounds ${JSON.stringify(bounds)}`,
+        { cause: error },
+      );
+    }
     const applyBounds = await page
       .locator("#apply-sequence-tool")
       .boundingBox();
