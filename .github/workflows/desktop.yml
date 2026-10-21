@@ -3,7 +3,13 @@ on:
   workflow_dispatch:
   push:
     branches: [main, master]
+    paths-ignore:
+      - .github/workflows/linux-appimage.yml
+      - SOURCE_MANIFEST.json
   pull_request:
+    paths-ignore:
+      - .github/workflows/linux-appimage.yml
+      - SOURCE_MANIFEST.json
 permissions:
   contents: read
 concurrency:
@@ -43,10 +49,10 @@ jobs:
         include:
           - os: macos-15
             target: aarch64-apple-darwin
-            bundles: app,dmg
+            bundles: app
           - os: macos-15-intel
             target: x86_64-apple-darwin
-            bundles: app,dmg
+            bundles: app
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             bundles: nsis
@@ -77,6 +83,15 @@ jobs:
         run: cargo test --locked --manifest-path src-tauri/Cargo.toml --lib
       - name: Build desktop package
         run: pnpm desktop:build --ci --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
+      - name: Package macOS disk image
+        if: runner.os == 'macOS'
+        shell: bash
+        env:
+          BUILD_TARGET: ${{ matrix.target }}
+        run: |
+          bash .github/scripts/package-macos-dmg.sh \
+            "src-tauri/target/$BUILD_TARGET/release/bundle/macos/PlasmidCraft 0.34.app" \
+            "src-tauri/target/$BUILD_TARGET/release/bundle/dmg/PlasmidCraft 0.34_0.34.0_$BUILD_TARGET.dmg"
       - uses: actions/upload-artifact@v7
         with:
           name: PlasmidCraft-0.34-${{ matrix.target }}

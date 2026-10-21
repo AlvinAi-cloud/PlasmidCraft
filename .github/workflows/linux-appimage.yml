@@ -4,7 +4,15 @@ on:
   workflow_dispatch:
   push:
     branches: [main, master]
+    paths-ignore:
+      - .github/workflows/desktop.yml
+      - .github/scripts/package-macos-dmg.sh
+      - SOURCE_MANIFEST.json
   pull_request:
+    paths-ignore:
+      - .github/workflows/desktop.yml
+      - .github/scripts/package-macos-dmg.sh
+      - SOURCE_MANIFEST.json
 
 permissions:
   contents: read

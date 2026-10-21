@@ -7,12 +7,16 @@
       "sha256": "098c3a6fa937ebe43baa2b2e1dc155b78930f0a38a961469842684a6fc8feead"
     },
     {
+      "path": ".github/scripts/package-macos-dmg.sh",
+      "sha256": "f08039a76341c97277fdb74e8232c83a73fe54d3b433d2c645a2d5f90a5c6e65"
+    },
+    {
       "path": ".github/workflows/desktop.yml",
-      "sha256": "d89bfb909c42699bed4502d874daa19a5b74171f2b0941b715d12438df5d5650"
+      "sha256": "f12dd62122f5aafbb95ef0695a74e149119422c18c3ef45de0ec12f74b45d56a"
     },
     {
       "path": ".github/workflows/linux-appimage.yml",
-      "sha256": "5febd98413b1baed96ca5727ddf33babe3120aeaa5f49f975744f6efff8a9b28"
+      "sha256": "edb0837c892d5c39af94b96692a8651a3a38deeafa8ca02dee547f826320221c"
     },
     {
       "path": ".gitignore",
