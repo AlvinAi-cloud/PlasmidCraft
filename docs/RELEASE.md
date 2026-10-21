@@ -1,6 +1,6 @@
-# PlasmidCraft 0.32 release guide
+# PlasmidCraft 0.34 release guide
 
-Release version: **0.32.0**. Display name: **PlasmidCraft 0.32**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
+Release version: **0.34.0**. Display name: **PlasmidCraft 0.34**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
 
 ## Test installers
 
@@ -10,7 +10,7 @@ For Mac testing, open the matching DMG, drag the app to Applications, then launc
 
 The Mac build declares macOS 12.3 as its minimum; this release was built on macOS 15.7.9 with Xcode 26.3. Older OS compatibility and target-device acceptance need testing. Windows targets x64 MSVC and requires Windows 10/11 with Microsoft Edge WebView2 Runtime. The NSIS installer uses Tauri's WebView2 bootstrapper when needed, which can require an Internet connection.
 
-If an approved Mac test app remains bouncing without a window, force quit that stalled copy and try a restart once. A prior M1/macOS 27.0.1 report cleared after restarting; the cause was not confirmed, and restarting is not a guaranteed remedy. Keep a working previous app until the new copy launches. If it persists, collect a process sample and report the package/version and OS. Mac app ZIPs are supplied alongside DMGs as an alternative packaging route.
+Mac app ZIPs are supplied alongside DMGs as an alternative packaging route. Keep your previous working app until you have verified the new version on your computer.
 
 ## Native builds
 
@@ -26,7 +26,7 @@ The Windows command normally runs on Windows with Visual Studio C++ Build Tools.
 
 Native macOS outputs are under `src-tauri/target/TARGET/release/bundle/macos/`; installers under `bundle/dmg/` or `bundle/nsis/`. A build without `--target` uses `src-tauri/target/release/`. An app ZIP is also usable for Mac testing. The locally supplied DMGs use hdiutil with an Applications shortcut and do not require Finder scripting.
 
-**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.32 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
+**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.34 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
 
 ## Signing a public Mac release
 

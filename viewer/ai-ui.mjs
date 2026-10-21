@@ -85,6 +85,7 @@ export class AiUI {
     this.settingsOpen = false;
     this.remember = true;
     this.savedConnection = false;
+    this.sessionDisconnected = false;
     this.restoring = false;
     this.connectionNotice = "";
     this.messages = [];
@@ -99,6 +100,7 @@ export class AiUI {
     this.includeHistory = false;
     this.connectedHistory = true;
     this.connectedIncludeDna = true;
+    this.accountId = "";
     this.provider = "openai";
     this.endpoint = AI_PROVIDERS[0].endpoint;
     this.model = "";
@@ -108,6 +110,10 @@ export class AiUI {
       );
       if (saved && AI_PROVIDERS.some((p) => p.id === saved.provider)) {
         this.connectedIncludeDna = saved.connectedIncludeDna !== false;
+        this.accountId =
+          typeof saved.accountId === "string"
+            ? saved.accountId.slice(0, 256)
+            : "";
         this.provider = saved.provider;
         this.endpoint = preferenceEndpoint(this.provider, saved.endpoint);
         this.model =
@@ -126,7 +132,6 @@ export class AiUI {
     this.authBusy = false;
     this.authStatus = "";
     this.accounts = [];
-    this.accountId = "";
     this.models = [];
     this.apiModels = [];
     this.modelManual = false;
@@ -195,6 +200,17 @@ export class AiUI {
         this.render();
       }
     });
+    window.addEventListener("online", () => {
+      if (
+        this.provider === "chatgpt" &&
+        !this.connection &&
+        !this.restoring &&
+        !this.sessionDisconnected &&
+        !this.authBusy &&
+        !this.pending
+      )
+        this.restoreSavedConnection();
+    });
     this.restoreSavedConnection();
   }
   read() {
@@ -220,41 +236,103 @@ export class AiUI {
           (el) => el.dataset.aiTemplate,
         ),
       );
+    this.savePreferences();
+    if ($("#ai-summary-detail"))
+      $("#ai-summary-detail").textContent = this.connectionSummary();
+  }
+  savePreferences() {
     try {
       localStorage.setItem(
         "plasmidcraft.ai.preferences",
         JSON.stringify({
           provider: this.provider,
+          accountId: this.accountId,
           endpoint: preferenceEndpoint(this.provider, this.endpoint),
           model: this.model,
           connectedIncludeDna: this.connectedIncludeDna,
         }),
       );
     } catch {}
-    if ($("#ai-summary-detail"))
-      $("#ai-summary-detail").textContent = this.connectionSummary();
   }
   async restoreSavedConnection() {
-    if (!this.api.platform.desktop || !this.api.platform.aiRestoreSaved) return;
+    if (!this.api.platform.desktop || this.restoring) return;
+    const epoch = this.epoch;
+    const useChatGPT = this.provider === "chatgpt";
+    if (
+      useChatGPT
+        ? !this.api.platform.chatGPTRestore
+        : !this.api.platform.aiRestoreSaved
+    )
+      return;
     this.restoring = true;
     try {
-      const saved = await this.api.platform.aiRestoreSaved();
-      this.read();
-      if (saved) {
-        const same =
-          this.provider === saved.provider && this.endpoint === saved.endpoint;
-        this.provider = saved.provider;
-        this.endpoint = saved.endpoint;
-        if (!same || !this.model) this.model = saved.model || "";
-        this.connection = saved;
-        this.savedConnection = !!saved.remembered;
+      if (useChatGPT) {
+        const status = await this.api.platform.chatGPTRestore();
+        if (epoch !== this.epoch) return;
+        this.read();
+        if (status && Array.isArray(status.accounts)) {
+          this.accounts = status.accounts;
+          this.chatNotice = status.notice || "";
+          this.connectionNotice = status.notice || "";
+          const account = status.accounts.find((a) => a.id === status.activeId);
+          if (account?.planEnabled) {
+            this.accountId = status.activeId;
+            this.provider = "chatgpt";
+            this.endpoint = "https://api.openai.com/v1";
+            this.connection = {
+              provider: "chatgpt",
+              endpoint: this.endpoint,
+              accountId: status.activeId,
+              planEnabled: true,
+            };
+            // Preserve the last chosen model even while offline or before a
+            // metadata refresh; restoring never makes an inference request.
+            this.models = this.model
+              ? [{ slug: this.model, display_name: this.model }]
+              : [];
+            this.savePreferences();
+            if (!this.model)
+              this.refreshRestoredChatGPTModels(status.activeId, epoch);
+          }
+        }
+      } else {
+        const saved = await this.api.platform.aiRestoreSaved();
+        if (epoch !== this.epoch) return;
+        this.read();
+        if (saved) {
+          const same =
+            this.provider === saved.provider &&
+            this.endpoint === saved.endpoint;
+          this.provider = saved.provider;
+          this.endpoint = saved.endpoint;
+          if (!same || !this.model) this.model = saved.model || "";
+          this.connection = saved;
+          this.savedConnection = !!saved.remembered;
+          this.savePreferences();
+        }
       }
     } catch (error) {
-      this.savedConnection = true;
+      if (epoch !== this.epoch) return;
+      if (!useChatGPT) this.savedConnection = true;
       this.connectionNotice = String(error.message || error);
     } finally {
       this.restoring = false;
-      if (this.open || this.settingsOpen) this.render();
+      if (epoch === this.epoch && (this.open || this.settingsOpen))
+        this.render();
+    }
+  }
+  async refreshRestoredChatGPTModels(accountId, epoch) {
+    try {
+      const models = await this.api.platform.chatGPTModels(accountId);
+      if (epoch !== this.epoch || this.connection?.accountId !== accountId)
+        return;
+      if (Array.isArray(models) && models.length) {
+        this.read();
+        this.models = models;
+        if (this.open || this.settingsOpen) this.render();
+      }
+    } catch {
+      // Keep the saved model/session on temporary metadata/network failure.
     }
   }
   toggle() {
@@ -277,6 +355,13 @@ export class AiUI {
       return;
     }
     if ($("#ai-settings-dialog")?.open) $("#ai-settings-dialog").close();
+    if (
+      this.provider === "chatgpt" &&
+      !this.connection &&
+      !this.restoring &&
+      !this.sessionDisconnected
+    )
+      this.restoreSavedConnection();
     this.open = true;
     this.view = mode === "external" ? "external" : "conversation";
     if (mode === "workflow") this.task = "";
@@ -327,7 +412,7 @@ export class AiUI {
       disabled =
         this.pending || this.authBusy || this.restoring ? "disabled" : "";
     $("#ai-settings-dialog").innerHTML =
-      `<div class="modal-header"><h2 id="ai-settings-title">AI accounts and models</h2>${button("Done", "settings-close")}</div><div class="modal-body"><details id="ai-connection-details" open><summary>Connection and model</summary><p>Configure this once, then use Internal AI Operations for conversations and direct app operations. Provider, model and endpoint preferences are remembered on this device. Remembered API keys are stored in macOS Keychain and reconnect automatically when the app starts. No prompt or DNA is sent during reconnect.</p><p class="analysis-note">API keys use the provider’s API billing. ChatGPT login uses eligible account access; other website accounts use copy/paste.</p><details id="ai-account-details" ${this.accountOpen || this.provider === "chatgpt" ? "open" : ""}><summary>ChatGPT account login</summary>${this.chatGPTPanel()}</details><div class="ai-controls"><label>Provider<select id="ai-provider" ${locked ? "disabled" : ""}>${AI_PROVIDERS.map((p) => `<option value="${p.id}" ${p.id === this.provider ? "selected" : ""}>${e(p.name)}</option>`).join("")}</select></label><label>API base URL<input id="ai-endpoint" value="${e(this.endpoint)}" ${this.provider !== "compatible" || locked ? "disabled" : ""}></label>${this.provider === "chatgpt" ? this.chatGPTModelControl(disabled) : this.apiModelControl(disabled)}${!this.connection && this.provider !== "chatgpt" ? `<label>API key<input id="ai-key" type="password" autocomplete="off" spellcheck="false" ${!this.api.platform.desktop ? "disabled" : ""}></label>` : ""}</div>${!this.connection && this.provider !== "chatgpt" ? `<label class="check-label"><input id="ai-remember" type="checkbox" ${this.remember ? "checked" : ""} ${disabled}>Remember on this device (macOS Keychain)</label>` : ""}<div class="wf-actions">${button(this.remember ? "Connect and remember" : "Connect for this session", "connect", this.api.platform.desktop && !locked && this.provider !== "chatgpt" ? "" : "disabled")}${button(this.provider === "chatgpt" ? "Disconnect assistant (keep saved session)" : "Disconnect for now", "disconnect", this.connection && !disabled ? "" : "disabled")}${button(this.provider === "chatgpt" ? "Test model (uses plan quota)" : "Test connection (small API request)", "test", this.connection && !disabled && (this.provider !== "chatgpt" || this.connection.planEnabled) ? "" : "disabled")}${this.savedConnection ? button("Forget saved connection", "forget", disabled) : ""}${provider.dashboard ? button("Open provider API-key page", "dashboard") : ""}</div><p id="ai-connection-status">${this.connection ? `${this.provider === "chatgpt" ? `ChatGPT account: ${e(this.accounts.find((a) => a.id === this.connection.accountId)?.label || this.connection.accountId)} · ${this.connection.planEnabled ? "Plan permission granted. Choose a model." : "Plan permission missing; reauthorize before use."}` : `Configured: ${e(this.connection.provider)} at ${e(this.connection.endpoint)}. ${this.connection.remembered ? " Saved in macOS Keychain." : " Session only."} Sending a request verifies credentials/model access.`}` : this.api.platform.desktop ? (this.savedConnection ? "Disconnected for now. The saved API connection will reconnect at next app launch; use Forget saved connection to remove it." : "Disconnected. Enable Remember on this device to save the API connection securely in macOS Keychain.") : "Development UI preview. Open the packaged desktop app to connect a provider."}</p></details><p class="analysis-note">${e(this.connectionNotice)}</p><p role="status">${this.restoring ? "Restoring saved API connection…" : this.pending ? "Waiting for provider…" : ""}</p><p class="modal-error" role="alert">${e(this.error)}</p>${this.authBusy || this.pending ? button("Cancel sign-in / request", "cancel") : ""}</div>`;
+      `<div class="modal-header"><h2 id="ai-settings-title">AI accounts and models</h2>${button("Done", "settings-close")}</div><div class="modal-body"><details id="ai-connection-details" open><summary>Connection and model</summary><p>Configure this once, then use Internal AI Operations for conversations and direct app operations. Enter your API key once. PlasmidCraft saves your provider, key and selected model on this computer and reconnects automatically when the app starts. No prompt or DNA is sent during reconnect.</p><p class="analysis-note">API keys use the provider’s API billing. ChatGPT login uses eligible account access; other website accounts use copy/paste.</p><details id="ai-account-details" ${this.accountOpen || this.provider === "chatgpt" ? "open" : ""}><summary>ChatGPT account login</summary>${this.chatGPTPanel()}</details><div class="ai-controls"><label>Provider<select id="ai-provider" ${locked ? "disabled" : ""}>${AI_PROVIDERS.map((p) => `<option value="${p.id}" ${p.id === this.provider ? "selected" : ""}>${e(p.name)}</option>`).join("")}</select></label><label>API base URL<input id="ai-endpoint" value="${e(this.endpoint)}" ${this.provider !== "compatible" || locked ? "disabled" : ""}></label>${this.provider === "chatgpt" ? this.chatGPTModelControl(disabled) : this.apiModelControl(disabled)}${!this.connection && this.provider !== "chatgpt" ? `<label>API key<input id="ai-key" type="password" autocomplete="off" spellcheck="false" ${!this.api.platform.desktop ? "disabled" : ""}></label>` : ""}</div>${!this.connection && this.provider !== "chatgpt" ? `<label class="check-label"><input id="ai-remember" type="checkbox" ${this.remember ? "checked" : ""} ${disabled}>Remember this connection on this computer</label>` : ""}<div class="wf-actions">${button(this.remember ? "Save and connect" : "Connect for this session", "connect", this.api.platform.desktop && !locked && this.provider !== "chatgpt" ? "" : "disabled")}${button(this.provider === "chatgpt" ? "Disconnect assistant (keep saved session)" : "Disconnect for now", "disconnect", this.connection && !disabled ? "" : "disabled")}${button(this.provider === "chatgpt" ? "Test model (uses plan quota)" : "Test connection (small API request)", "test", this.connection && !disabled && (this.provider !== "chatgpt" || this.connection.planEnabled) ? "" : "disabled")}${this.savedConnection ? button("Forget saved connection", "forget", disabled) : ""}${provider.dashboard ? button("Open provider API-key page", "dashboard") : ""}</div><p id="ai-connection-status">${this.connection ? `${this.provider === "chatgpt" ? `ChatGPT account: ${e(this.accounts.find((a) => a.id === this.connection.accountId)?.label || this.connection.accountId)} · ${this.connection.planEnabled ? "Plan permission granted. Choose a model." : "Plan permission missing; reauthorize before use."}` : `Configured: ${e(this.connection.provider)} at ${e(this.connection.endpoint)}. ${this.connection.remembered ? " Saved on this computer." : " Session only."} Sending a request verifies credentials/model access.`}` : this.api.platform.desktop ? (this.savedConnection ? "Disconnected for now. The saved API connection will reconnect at next app launch; use Forget saved connection to remove it." : "Enter your API key and choose Save and connect. The connection will be restored automatically on later launches.") : "Development UI preview. Open the packaged desktop app to connect a provider."}</p></details><p class="analysis-note">${e(this.connectionNotice)}</p><p role="status">${this.restoring ? "Restoring saved AI connection…" : this.pending ? "Waiting for provider…" : ""}</p><p class="modal-error" role="alert">${e(this.error)}</p>${this.authBusy || this.pending ? button("Cancel sign-in / request", "cancel") : ""}</div>`;
     if ($("#ai-key")) $("#ai-key").value = key;
     prepareFloatingDialogHeader($("#ai-settings-dialog"));
   }
@@ -357,7 +442,7 @@ export class AiUI {
           : "Select DNA or map features while this panel remains open. Context is captured only when you Preview or Send.";
   }
   connectionSummary() {
-    if (this.restoring) return "Restoring saved API connection…";
+    if (this.restoring) return "Restoring saved AI connection…";
     if (!this.connection)
       return (
         this.connectionNotice ||
@@ -434,7 +519,7 @@ export class AiUI {
       !this.api.platform.desktop
         ? "disabled"
         : "";
-    return `<section class="data-card" id="chatgpt-account-panel"><h3>Use your ChatGPT account</h3><p>Sign in on OpenAI’s website and authorize PlasmidCraft. Eligible accounts can use their ChatGPT plan without an API key. Availability, models and plan limits are controlled by OpenAI. No plasmid data is sent during sign-in.</p><div class="wf-actions">${button("Continue with ChatGPT", "chatgpt-new", disabled)}</div><label>Saved ChatGPT registration<select id="ai-chatgpt-account" ${disabled}><option value="">Add an account…</option>${this.accounts.map((a) => `<option value="${e(a.id)}" ${a.id === this.accountId ? "selected" : ""}>${e(a.label)}${a.savedSession ? "" : " · sign-in may be needed"}</option>`).join("")}</select></label><div class="wf-actions">${button("Use saved session", "chatgpt-use", this.accountId && !disabled ? "" : "disabled")}${button("Sign in again / grant plan access", "chatgpt-reauth", this.accountId && !disabled ? "" : "disabled")}${button("Sign out selected account", "chatgpt-out", this.accountId && !disabled ? "" : "disabled")}${button("Reload active account models", "chatgpt-models", this.connection?.provider === "chatgpt" && !disabled ? "" : "disabled")}</div><p id="chatgpt-account-status">${e(this.authStatus || this.chatNotice || "Saved sessions use macOS Keychain. Other platforms currently use session-only credentials.")}</p></section>`;
+    return `<section class="data-card" id="chatgpt-account-panel"><h3>Use your ChatGPT account</h3><p>Sign in on OpenAI’s website and authorize PlasmidCraft. Eligible accounts can use their ChatGPT plan without an API key. Availability, models and plan limits are controlled by OpenAI. No plasmid data is sent during sign-in.</p><div class="wf-actions">${button("Continue with ChatGPT", "chatgpt-new", disabled)}</div><label>Saved ChatGPT registration<select id="ai-chatgpt-account" ${disabled}><option value="">Add an account…</option>${this.accounts.map((a) => `<option value="${e(a.id)}" ${a.id === this.accountId ? "selected" : ""}>${e(a.label)}${a.savedSession ? "" : " · sign-in may be needed"}</option>`).join("")}</select></label><div class="wf-actions">${button("Use saved session", "chatgpt-use", this.accountId && !disabled ? "" : "disabled")}${button("Sign in again / grant plan access", "chatgpt-reauth", this.accountId && !disabled ? "" : "disabled")}${button("Sign out selected account", "chatgpt-out", this.accountId && !disabled ? "" : "disabled")}${button("Reload active account models", "chatgpt-models", this.connection?.provider === "chatgpt" && !disabled ? "" : "disabled")}</div><p id="chatgpt-account-status">${e(this.authStatus || this.chatNotice || "The last-used ChatGPT account reconnects automatically when the app starts. Sessions are saved on this computer and renewed when needed.")}</p></section>`;
   }
   invalidateApiModels() {
     clearTimeout(this.modelTimer);
@@ -501,7 +586,9 @@ export class AiUI {
     }
   }
   chatGPTModelControl(disabled) {
-    return `<label>ChatGPT account model<select id="ai-model" ${disabled}><option value="">Choose an available account model…</option>${this.models.map((m) => `<option value="${e(m.slug)}" ${this.model === m.slug ? "selected" : ""}>${e(m.display_name)}</option>`).join("")}</select></label>`;
+    const current =
+      this.model && !this.models.some((m) => m.slug === this.model);
+    return `<label>ChatGPT account model<select id="ai-model" ${disabled}><option value="">Choose an available account model…</option>${current ? `<option value="${e(this.model)}" selected>Saved model: ${e(this.model)}</option>` : ""}${this.models.map((m) => `<option value="${e(m.slug)}" ${this.model === m.slug ? "selected" : ""}>${e(m.display_name)}</option>`).join("")}</select></label>`;
   }
   async accountAction(action) {
     const epoch = ++this.epoch;
@@ -532,6 +619,8 @@ export class AiUI {
       }
       if (epoch !== this.epoch) return;
       if (status) {
+        this.sessionDisconnected = action === "chatgpt-out";
+        this.connectionNotice = "";
         this.accounts = status.accounts;
         this.chatNotice = status.notice || "";
         if (action === "chatgpt-out") {
@@ -577,6 +666,7 @@ export class AiUI {
         this.authStatus = "";
       }
     }
+    if (epoch === this.epoch) this.savePreferences();
     if (epoch === this.epoch && this.settingsOpen) this.render();
   }
   render() {
@@ -1048,6 +1138,7 @@ export class AiUI {
         this.connectionNotice =
           "Saved API connection removed from this device.";
       } else if (action === "disconnect") {
+        this.sessionDisconnected = true;
         await this.cancel();
         await this.api.platform.aiDisconnect();
         this.connection = null;

@@ -104,13 +104,13 @@ try {
   await page.locator('[data-close-document="document-2"]').click();
   assert.equal(await page.locator("#doc-count").textContent(), "1");
   checks++;
-  await page.locator("#tools-button").click();
-  await page.locator('[data-view="enzymes"]').click();
+  await page.locator("#analyze-button").click();
+  await page.locator('#analyze-menu [data-command="view-enzymes"]').click();
   await page.locator('[data-digest="EcoRI"]').check();
   assert.match(await page.locator(".digest-card").textContent(), /EcoRI/);
   checks++;
-  await page.locator("#tools-button").click();
-  await page.locator('[data-view="translation"]').click();
+  await page.locator("#analyze-button").click();
+  await page.locator('#analyze-menu [data-command="view-translation"]').click();
   assert.equal(await page.locator(".translation-block").count(), 6);
   checks++;
   await page.locator("#file-input").setInputFiles({

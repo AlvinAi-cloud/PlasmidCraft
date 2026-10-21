@@ -218,7 +218,8 @@ body[data-runtime="desktop"] .application-menus {
 .feature-tool svg {
   color: #32865b !important;
 }
-#tools-button svg {
+#analyze-button svg,
+#design-button svg {
   color: #6e6c88;
 }
 .toolbar-button .toolbar-chevron {
@@ -3090,4 +3091,38 @@ button.alignment-base:disabled {
 .help-search-controls,
 #help-search-status {
   flex: 0 0 auto;
+}
+
+/* Fixed row heights preserve scroll coordinates while off-screen contents sleep.
+   Virtualized rows are already bounded and retain their DOM while scrolling. */
+#sequence-editor[data-virtual="false"] .sequence-row {
+  content-visibility: auto;
+}
+.annotation-qualifier {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Shared Analyze / Design menus: full descriptions in the toolbar, compact menus above. */
+.commandbar .tool-launcher-menu {
+  position: fixed;
+  width: 370px;
+  max-width: calc(100vw - 18px);
+  overflow-y: auto;
+}
+.commandbar .tool-launcher-menu button {
+  gap: 12px;
+  align-items: flex-start;
+  white-space: normal;
+}
+.tool-menu-description {
+  min-width: 0;
+}
+.tool-menu-description small {
+  display: block;
+  margin-top: 3px;
+  line-height: 1.35;
+}
+.commandbar .app-menu-trigger.toolbar-button {
+  font-size: 14.8px;
 }

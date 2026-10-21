@@ -330,7 +330,7 @@
           </div>
         </div>
       </nav>
-      <span class="version-label" id="version-label">0.32.0</span>
+      <span class="version-label" id="version-label">0.34.0</span>
       <button
         class="icon-button"
         id="about-button"
@@ -350,7 +350,7 @@
             data-command="ai-toggle"
             title="AI design and workflow assistant"
           >
-            <span data-icon="activity"></span><span>AI Assistant</span>
+            <span data-icon="ai-chat"></span><span>AI Assistant</span>
           </button>
         </div>
         <div class="toolbar-group">
@@ -452,63 +452,47 @@
           </button>
         </div>
         <div class="toolbar-group">
-          <div class="menu-container">
+          <div class="menu-container app-menu">
             <button
-              class="toolbar-button tools-button"
-              id="tools-button"
-              title="Analysis tools"
+              class="toolbar-button app-menu-trigger"
+              id="analyze-button"
+              title="Analyze annotations, sequences and proteins"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="analyze-menu"
             >
-              <span data-icon="tools"></span><span>Analyze</span
+              <span data-icon="activity"></span><span>Analyze</span
               ><span class="toolbar-chevron" data-icon="chevron"></span>
             </button>
-            <div class="dropdown tools-menu" id="tools-menu" hidden>
-              <button data-command="feature-libraries">
-                <span data-icon="tag"></span>
-                <div>
-                  Feature libraries<small>Preview automatic annotations</small>
-                </div>
-              </button>
-              <button data-command="design-primers">
-                <span data-icon="primer"></span>
-                <div>
-                  Primer design &amp; PCR<small
-                    >Design oligos and predict products</small
-                  >
-                </div>
-              </button>
-              <button data-command="align-reads">
-                <span data-icon="activity"></span>
-                <div>
-                  Align Sanger reads<small
-                    >Inspect differences with trace evidence</small
-                  >
-                </div>
-              </button>
-              <button data-command="assembly-workbench">
-                <span data-icon="tools"></span>
-                <div>
-                  Cloning &amp; assembly<small
-                    >Review fragments and junctions</small
-                  >
-                </div>
-              </button>
-              <button data-command="view-enzymes">
-                <span data-icon="scissors"></span>
-                <div>
-                  Restriction sites<small>Predict digest fragments</small>
-                </div>
-              </button>
-              <button data-command="view-translation">
-                <span data-icon="protein"></span>
-                <div>Translate DNA<small>Explore all six frames</small></div>
-              </button>
-              <button data-command="find-orfs">
-                <span data-icon="dna"></span>
-                <div>
-                  Find ORFs<small>Review candidate coding regions</small>
-                </div>
-              </button>
-            </div>
+            <div
+              class="dropdown tools-menu app-menu-popup tool-launcher-menu"
+              id="analyze-menu"
+              role="menu"
+              aria-label="Analyze tools"
+              data-tool-menu="analyze"
+              hidden
+            ></div>
+          </div>
+          <div class="menu-container app-menu">
+            <button
+              class="toolbar-button app-menu-trigger"
+              id="design-button"
+              title="Design primers, cloning workflows and coding DNA"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="design-menu"
+            >
+              <span data-icon="tools"></span><span>Design</span
+              ><span class="toolbar-chevron" data-icon="chevron"></span>
+            </button>
+            <div
+              class="dropdown tools-menu app-menu-popup tool-launcher-menu"
+              id="design-menu"
+              role="menu"
+              aria-label="Design tools"
+              data-tool-menu="design"
+              hidden
+            ></div>
           </div>
         </div>
         <div class="toolbar-spacer"></div>

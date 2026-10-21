@@ -184,14 +184,13 @@ try {
       document.querySelector("#document-name").textContent ===
       "Catalog export test",
   );
-  await command("File", "export-snapgene");
-  await page.getByRole("heading", { name: "SnapGene format" }).waitFor();
-  if (process.env.PLASMIDCRAFT_SCREENSHOTS)
-    await page.screenshot({
-      path: process.env.PLASMIDCRAFT_SCREENSHOTS + "/dna-export.png",
-    });
   const pending = page.waitForEvent("download");
-  await page.locator('[data-action="save-snapgene-export"]').click();
+  await command("File", "export-snapgene");
+  assert.equal(
+    await page.locator("#modal").evaluate((d) => d.open),
+    false,
+    "SnapGene export goes directly to saving without an information page",
+  );
   const download = await pending;
   assert.match(download.suggestedFilename(), /\.dna$/);
   const bytes = await fs.readFile(await download.path()),

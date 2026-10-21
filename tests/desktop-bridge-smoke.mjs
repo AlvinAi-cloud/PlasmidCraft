@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { parseSnapgene } from "../viewer/core.mjs";
 import { parseProject } from "../viewer/project.mjs";
 import { fixturePage, chromium, testOutput } from "./ui-browser.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -214,6 +215,62 @@ try {
   assert.match(
     new TextDecoder().decode(new Uint8Array(exported)),
     /Second desktop annotation/,
+  );
+  assert.equal(await page.locator("#dirty-indicator").isHidden(), false);
+  checks++;
+  // Native export opens the save picker directly; cancel/error cannot mark
+  // an edited source document as saved or replace an earlier export.
+  const beforeExport = await page.evaluate(() => ({
+    dialogs: window.__desktopMock.saveDialogs,
+    writes: window.__desktopMock.writes.length,
+  }));
+  await page.evaluate(() => {
+    window.__desktopMock.savePath = null;
+    window.__desktopMock.menu("export-snapgene");
+  });
+  await page.waitForFunction(
+    (n) => window.__desktopMock.saveDialogs === n + 1,
+    beforeExport.dialogs,
+  );
+  assert.equal(await page.locator("#modal").evaluate((d) => d.open), false);
+  assert.equal(
+    await page.evaluate(() => window.__desktopMock.writes.length),
+    beforeExport.writes,
+  );
+  assert.equal(await page.locator("#dirty-indicator").isHidden(), false);
+  checks++;
+  await page.evaluate(() => {
+    window.__desktopMock.savePath = "/chosen/export.dna";
+    window.__desktopMock.writeError = "Export disk full";
+    window.__desktopMock.menu("export-snapgene");
+  });
+  await page.waitForFunction(() =>
+    document.querySelector("#toast").textContent.includes("Export disk full"),
+  );
+  assert.equal(
+    await page.evaluate(
+      () => !!window.__desktopMock.files["/chosen/export.dna"],
+    ),
+    false,
+  );
+  assert.equal(await page.locator("#dirty-indicator").isHidden(), false);
+  checks++;
+  await page.evaluate(() => {
+    window.__desktopMock.writeError = null;
+    window.__desktopMock.menu("export-snapgene");
+  });
+  await page.waitForFunction(
+    () => !!window.__desktopMock.files["/chosen/export.dna"],
+  );
+  const [dnaExport] = parseSnapgene(
+    new Uint8Array(
+      await page.evaluate(
+        () => window.__desktopMock.files["/chosen/export.dna"],
+      ),
+    ),
+  );
+  assert.ok(
+    dnaExport.features.some((f) => f.name === "Second desktop annotation"),
   );
   assert.equal(await page.locator("#dirty-indicator").isHidden(), false);
   checks++;

@@ -66,7 +66,9 @@ try {
   await page.goto(process.env.PLASMIDCRAFT_URL || "http://127.0.0.1:4317");
   await page.locator("#plasmid-map").waitFor();
   await page.waitForFunction(() => window.__bioMock.menu);
-  const top = await page.locator(".app-menu-trigger").allTextContents();
+  const top = await page
+    .locator(".application-menus .app-menu-trigger")
+    .allTextContents();
   assert.deepEqual(
     top.map((x) => x.trim()),
     ["File", "Edit", "View", "Tools", "AI", "Help"],

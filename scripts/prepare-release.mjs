@@ -53,7 +53,7 @@ const files = [
     "SEQUENCE_VERIFICATION.md",
     "VALIDATION.md",
     "WORKFLOWS.md",
-    "screenshots/0.32",
+    "screenshots/0.34",
   ].map((name) => `docs/${name}`),
 ];
 const excluded = new Set([

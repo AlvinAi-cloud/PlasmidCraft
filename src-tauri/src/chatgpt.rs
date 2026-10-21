@@ -1,5 +1,6 @@
 //! ChatGPT plan OAuth for a public desktop client. No credentials cross the webview bridge.
 //! Contract: https://developers.openai.com/siwc/token-sharing-open-source/sign-in
+use crate::ai_vault::{DeviceVault, Vault as LocalVault};
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD, Engine};
 use fs2::FileExt;
 use jsonwebtoken::{decode, decode_header, jwk::JwkSet, Algorithm, DecodingKey, Validation};
@@ -81,6 +82,13 @@ struct Registry {
     version: u8,
     host_id: String,
     accounts: Vec<Registration>,
+    #[serde(default)]
+    last_account_id: Option<String>,
+    #[serde(default = "default_auto_restore")]
+    auto_restore: bool,
+}
+fn default_auto_restore() -> bool {
+    true
 }
 #[derive(Clone, Serialize, Deserialize)]
 pub(crate) struct Credential {
@@ -107,33 +115,52 @@ trait Vault: Send + Sync {
     fn write(&self, key: &str, value: &[u8]) -> Result<(), String>;
     fn delete(&self, key: &str) -> Result<(), String>;
 }
-struct PlatformVault;
-#[cfg(target_os = "macos")]
-impl Vault for PlatformVault {
-    fn read(&self, key: &str) -> Result<Vec<u8>, String> {
-        security_framework::passwords::get_generic_password(SERVICE, key)
-            .map_err(|_| "Saved ChatGPT session is unavailable in Keychain. Sign in again.".into())
-    }
-    fn write(&self, key: &str, value: &[u8]) -> Result<(), String> {
-        security_framework::passwords::set_generic_password(SERVICE, key, value).map_err(|_| {
-            "Keychain could not save this session; it will last only until app exit.".into()
-        })
-    }
-    fn delete(&self, key: &str) -> Result<(), String> {
-        match security_framework::passwords::delete_generic_password(SERVICE,key){Ok(())=>Ok(()),Err(e) if e.code()==-25300=>Ok(()),Err(_)=>Err("Keychain could not remove a saved session. It is disabled locally; remove it in Keychain Access if needed.".into())}
+struct PlatformVault {
+    directory: PathBuf,
+}
+impl PlatformVault {
+    fn file(&self, key: &str) -> DeviceVault {
+        let name = format!("{:x}.json", Sha256::digest(key.as_bytes()));
+        DeviceVault::with_limit(self.directory.join(name), 250000)
     }
 }
-#[cfg(not(target_os = "macos"))]
 impl Vault for PlatformVault {
-    fn read(&self, _: &str) -> Result<Vec<u8>, String> {
-        Err("Sign in again. This platform currently uses session-only ChatGPT credentials.".into())
+    fn read(&self, key: &str) -> Result<Vec<u8>, String> {
+        self.file(key)
+            .read_with_legacy(|| legacy_session(key))
+            .map_err(|_| "Could not read the saved ChatGPT session on this computer.".to_string())?
+            .ok_or("This ChatGPT account needs sign-in again.".into())
     }
-    fn write(&self, _: &str, _: &[u8]) -> Result<(), String> {
-        Err("This platform currently keeps ChatGPT credentials only until app exit.".into())
+    fn write(&self, key: &str, value: &[u8]) -> Result<(), String> {
+        self.file(key).write(value).map_err(|_| "Could not save the ChatGPT session on this computer; it is available for this session only.".into())
     }
-    fn delete(&self, _: &str) -> Result<(), String> {
-        Ok(())
+    fn delete(&self, key: &str) -> Result<(), String> {
+        self.file(key).delete().map_err(|_| {
+            "The ChatGPT session was disabled, but its saved credentials could not be cleared."
+                .into()
+        })
     }
+}
+#[cfg(target_os = "macos")]
+fn legacy_session(key: &str) -> Option<Vec<u8>> {
+    use security_framework::item::{ItemClass, ItemSearchOptions, SearchResult};
+    ItemSearchOptions::new()
+        .class(ItemClass::generic_password())
+        .service(SERVICE)
+        .account(key)
+        .load_data(true)
+        .skip_authenticated_items(true)
+        .search()
+        .ok()?
+        .into_iter()
+        .find_map(|result| match result {
+            SearchResult::Data(bytes) => Some(bytes),
+            _ => None,
+        })
+}
+#[cfg(not(target_os = "macos"))]
+fn legacy_session(_: &str) -> Option<Vec<u8>> {
+    None
 }
 #[derive(Clone, Deserialize)]
 struct Discovery {
@@ -397,6 +424,9 @@ pub struct ChatGptState {
 }
 impl ChatGptState {
     pub fn new(directory: PathBuf) -> Self {
+        let vault = PlatformVault {
+            directory: directory.join("sessions"),
+        };
         Self {
             directory,
             operation: AsyncMutex::new(()),
@@ -404,7 +434,7 @@ impl ChatGptState {
             active: Mutex::new(None),
             cache: Mutex::new(HashMap::new()),
             retry_client: Mutex::new(None),
-            vault: Box::new(PlatformVault),
+            vault: Box::new(vault),
         }
     }
     fn lock(&self) -> Result<File, String> {
@@ -434,6 +464,8 @@ impl ChatGptState {
                 version: 1,
                 host_id: host_id()?,
                 accounts: vec![],
+                last_account_id: None,
+                auto_restore: true,
             };
             self.save(&r)?;
             return Ok(r);
@@ -557,6 +589,16 @@ impl ChatGptState {
             notice,
         })
     }
+    fn activate(&self, r: &mut Registry, id: &str) -> Result<(), String> {
+        if !r.accounts.iter().any(|a| a.id == id) {
+            return Err("Unknown ChatGPT account.".into());
+        }
+        r.last_account_id = Some(id.into());
+        r.auto_restore = true;
+        self.save(r)?;
+        *self.active.lock().map_err(|_| io_error())? = Some(id.into());
+        Ok(())
+    }
     fn clear(&self, r: &mut Registry, id: &str) -> Result<String, String> {
         let key = Self::key(r, id);
         let a = r
@@ -567,6 +609,10 @@ impl ChatGptState {
         a.generation += 1;
         a.saved_session = false;
         a.plan_enabled = false;
+        if r.last_account_id.as_deref() == Some(id) {
+            r.last_account_id = None;
+            r.auto_restore = false;
+        }
         self.save(r)?;
         self.cache.lock().map_err(|_| io_error())?.remove(id);
         let mut active = self.active.lock().map_err(|_| io_error())?;
@@ -924,7 +970,7 @@ async fn sign_in_inner(
     state.save(&current)?;
     let warning = state.store(&mut current, c)?;
     *state.retry_client.lock().map_err(|_| io_error())? = None;
-    *state.active.lock().map_err(|_| io_error())? = Some(cb.client_id.clone());
+    state.activate(&mut current, &cb.client_id)?;
     let notice = if !enabled {
         "Identity verified, but ChatGPT plan use was not granted. Reauthorize this account and approve plan access before sending requests.".into()
     } else {
@@ -991,6 +1037,16 @@ async fn fresh(state: &ChatGptState, r: &mut Registry, id: &str) -> Result<Crede
         .clone()
         .ok_or("This ChatGPT session cannot renew. Sign in again.")?;
     let d = discovery().await?;
+    renew_with_discovery(state, r, id, old, refresh, &d).await
+}
+async fn renew_with_discovery(
+    state: &ChatGptState,
+    r: &mut Registry,
+    id: &str,
+    old: Credential,
+    refresh: String,
+    d: &Discovery,
+) -> Result<Credential, String> {
     let raw = match exchange(
         &d,
         &[
@@ -1041,7 +1097,7 @@ pub async fn chatgpt_activate(
     let _lock = state.lock()?;
     let mut r = state.registry()?;
     let c = fresh(&state, &mut r, &registration_id).await?;
-    *state.active.lock().map_err(|_| io_error())? = Some(registration_id.clone());
+    state.activate(&mut r, &registration_id)?;
     crate::ai::connect_chatgpt(&ai, &registration_id)?;
     state.view(
         r,
@@ -1051,6 +1107,74 @@ pub async fn chatgpt_activate(
             "This account has not granted ChatGPT plan usage. Reauthorize it first.".into()
         },
     )
+}
+// Restoring never starts OAuth or opens a browser. Renew an expired access token
+// under the same process/file locks used by every normal ChatGPT request.
+async fn restore_last(state: &ChatGptState, ai: &crate::ai::AiState) -> Result<Status, String> {
+    let _op = state
+        .operation
+        .try_lock()
+        .map_err(|_| "Another ChatGPT operation is running.")?;
+    let _lock = state.lock()?;
+    let mut r = state.registry()?;
+    let inactive = |r, notice| {
+        state.view(r, notice).map(|mut status| {
+            status.active_id = None;
+            status
+        })
+    };
+    if !r.auto_restore {
+        return inactive(r, String::new());
+    }
+    let id = r.last_account_id.clone().or_else(|| {
+        // Existing profiles had no last-account field; migrate an unambiguous
+        // single saved registration without choosing among multiple accounts.
+        let candidates: Vec<_> = r
+            .accounts
+            .iter()
+            .filter(|a| a.saved_session && a.plan_enabled && !a.reconsent_required)
+            .collect();
+        if candidates.len() == 1 {
+            Some(candidates[0].id.clone())
+        } else {
+            None
+        }
+    });
+    let Some(id) = id else {
+        return inactive(r, String::new());
+    };
+    if !r
+        .accounts
+        .iter()
+        .any(|a| a.id == id && a.saved_session && a.plan_enabled && !a.reconsent_required)
+    {
+        return inactive(r, "Sign in again to reconnect this ChatGPT account.".into());
+    }
+    let result = tokio::time::timeout(Duration::from_secs(20), fresh(state, &mut r, &id)).await;
+    match result {
+        Ok(Ok(c)) if c.enabled() => {
+            state.activate(&mut r, &id)?;
+            crate::ai::connect_chatgpt(ai, &id)?;
+            state.view(r, String::new())
+        }
+        Ok(Ok(_)) => inactive(
+            r,
+            "This ChatGPT account needs plan authorization before use.".into(),
+        ),
+        Ok(Err(message)) => inactive(r, message),
+        Err(_) => inactive(
+            r,
+            "ChatGPT reconnect timed out. The saved session is retained; retry when connected."
+                .into(),
+        ),
+    }
+}
+#[tauri::command]
+pub async fn chatgpt_restore(
+    state: State<'_, ChatGptState>,
+    ai: State<'_, crate::ai::AiState>,
+) -> Result<Status, String> {
+    restore_last(&state, &ai).await
 }
 #[derive(Serialize)]
 pub struct Model {
@@ -1667,5 +1791,240 @@ mod tests {
         stream.read_to_end(&mut bytes).await.unwrap();
         assert!(!String::from_utf8(bytes).unwrap().contains("synthetic-code"));
         assert_eq!(task.await.unwrap().unwrap().client_id, "oaiapp_test");
+    }
+}
+
+#[cfg(test)]
+mod reconnect_tests {
+    use super::*;
+    fn registration(id: &str) -> Registration {
+        Registration {
+            id: id.into(),
+            subject: format!("subject-{id}"),
+            email: "synthetic@example.invalid".into(),
+            generation: 1,
+            saved_session: false,
+            plan_enabled: false,
+            reconsent_required: false,
+        }
+    }
+    fn saved(state: &ChatGptState, r: &mut Registry, id: &str) -> Credential {
+        r.accounts.push(registration(id));
+        let c = Credential {
+            client_id: id.into(),
+            subject: format!("subject-{id}"),
+            host_id: r.host_id.clone(),
+            generation: 1,
+            access_token: "SYNTHETIC_ACCESS".into(),
+            refresh_token: Some("SYNTHETIC_REFRESH".into()),
+            id_token: "SYNTHETIC_ID".into(),
+            scopes: SCOPES.split_whitespace().map(str::to_string).collect(),
+            expires_at: now() + 3600,
+            earliest_refresh_at: None,
+        };
+        assert_eq!(state.store(r, c.clone()).unwrap(), "");
+        c
+    }
+    #[tokio::test]
+    async fn disk_sessions_restore_the_last_account_after_restart_without_login_or_inference() {
+        let dir = tempfile::tempdir().unwrap();
+        let first = ChatGptState::new(dir.path().into());
+        let host;
+        {
+            let _lock = first.lock().unwrap();
+            let mut r = first.registry().unwrap();
+            host = r.host_id.clone();
+            saved(&first, &mut r, "oaiapp_first");
+            saved(&first, &mut r, "oaiapp_second");
+            first.activate(&mut r, "oaiapp_second").unwrap();
+        }
+        let restarted = ChatGptState::new(dir.path().into());
+        let ai = crate::ai::AiState::default();
+        let status = restore_last(&restarted, &ai).await.unwrap();
+        assert_eq!(status.active_id.as_deref(), Some("oaiapp_second"));
+        let r = restarted.registry().unwrap();
+        assert_eq!(r.host_id, host);
+        assert_eq!(
+            restarted.load(&r, "oaiapp_second").unwrap().access_token,
+            "SYNTHETIC_ACCESS"
+        );
+        let metadata = fs::read_to_string(dir.path().join("accounts.json")).unwrap();
+        let public = serde_json::to_string(&status).unwrap();
+        assert!(!metadata.contains("SYNTHETIC"));
+        assert!(!public.contains("SYNTHETIC"));
+        assert!(!public.contains("refresh_token"));
+    }
+    #[tokio::test]
+    async fn explicit_signout_cannot_restore_a_different_saved_account() {
+        let dir = tempfile::tempdir().unwrap();
+        let state = ChatGptState::new(dir.path().into());
+        {
+            let _lock = state.lock().unwrap();
+            let mut r = state.registry().unwrap();
+            saved(&state, &mut r, "oaiapp_first");
+            saved(&state, &mut r, "oaiapp_second");
+            state.activate(&mut r, "oaiapp_first").unwrap();
+            state.clear(&mut r, "oaiapp_first").unwrap();
+        }
+        let restarted = ChatGptState::new(dir.path().into());
+        let ai = crate::ai::AiState::default();
+        assert!(restore_last(&restarted, &ai)
+            .await
+            .unwrap()
+            .active_id
+            .is_none());
+        let r = restarted.registry().unwrap();
+        assert!(!r.auto_restore);
+        assert!(restarted.load(&r, "oaiapp_first").is_err());
+        assert!(restarted.load(&r, "oaiapp_second").is_ok());
+    }
+    #[tokio::test]
+    async fn older_single_account_profiles_migrate_but_ambiguous_profiles_are_not_guessed() {
+        let dir = tempfile::tempdir().unwrap();
+        let state = ChatGptState::new(dir.path().into());
+        {
+            let _lock = state.lock().unwrap();
+            let mut r = state.registry().unwrap();
+            saved(&state, &mut r, "oaiapp_first");
+            let mut old = serde_json::to_value(&r).unwrap();
+            old.as_object_mut().unwrap().remove("last_account_id");
+            old.as_object_mut().unwrap().remove("auto_restore");
+            fs::write(
+                dir.path().join("accounts.json"),
+                serde_json::to_vec(&old).unwrap(),
+            )
+            .unwrap();
+        }
+        let ai = crate::ai::AiState::default();
+        assert_eq!(
+            restore_last(&state, &ai)
+                .await
+                .unwrap()
+                .active_id
+                .as_deref(),
+            Some("oaiapp_first")
+        );
+        {
+            let _lock = state.lock().unwrap();
+            let mut r = state.registry().unwrap();
+            saved(&state, &mut r, "oaiapp_second");
+            r.last_account_id = None;
+            state.save(&r).unwrap();
+        }
+        let restarted = ChatGptState::new(dir.path().into());
+        assert!(restore_last(&restarted, &ai)
+            .await
+            .unwrap()
+            .active_id
+            .is_none());
+    }
+    #[tokio::test]
+    async fn deferred_renewal_retains_the_session_and_missing_refresh_requests_reauthorization() {
+        let dir = tempfile::tempdir().unwrap();
+        let state = ChatGptState::new(dir.path().into());
+        {
+            let _lock = state.lock().unwrap();
+            let mut r = state.registry().unwrap();
+            let mut c = saved(&state, &mut r, "oaiapp_first");
+            c.expires_at = now() - 1;
+            c.earliest_refresh_at = Some(now() + 600);
+            state.store(&mut r, c).unwrap();
+            state.activate(&mut r, "oaiapp_first").unwrap();
+        }
+        let ai = crate::ai::AiState::default();
+        let status = restore_last(&state, &ai).await.unwrap();
+        assert!(status.active_id.is_none());
+        assert!(status.notice.contains("later token renewal"));
+        {
+            let _lock = state.lock().unwrap();
+            let mut r = state.registry().unwrap();
+            assert!(r.auto_restore);
+            let mut c = state.load(&r, "oaiapp_first").unwrap();
+            assert!(c.refresh_token.is_some());
+            c.earliest_refresh_at = None;
+            c.refresh_token = None;
+            state.store(&mut r, c).unwrap();
+        }
+        let status = restore_last(&state, &ai).await.unwrap();
+        assert!(status.active_id.is_none());
+        assert!(status.notice.contains("Sign in again"));
+    }
+    #[tokio::test]
+    async fn refreshed_tokens_rotate_and_survive_a_new_native_process_state() {
+        let dir = tempfile::tempdir().unwrap();
+        let state = ChatGptState::new(dir.path().into());
+        let _lock = state.lock().unwrap();
+        let mut r = state.registry().unwrap();
+        let mut old = saved(&state, &mut r, "oaiapp_first");
+        old.expires_at = now() - 1;
+        state.store(&mut r, old.clone()).unwrap();
+        let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let address = listener.local_addr().unwrap();
+        let server = tokio::spawn(async move {
+            let (mut socket, _) = listener.accept().await.unwrap();
+            let mut bytes = Vec::new();
+            let mut chunk = [0; 4096];
+            loop {
+                let n = socket.read(&mut chunk).await.unwrap();
+                assert!(n > 0);
+                bytes.extend_from_slice(&chunk[..n]);
+                assert!(bytes.len() < 65536);
+                if let Some(at) = bytes.windows(4).position(|b| b == b"\r\n\r\n") {
+                    let header = String::from_utf8_lossy(&bytes[..at]);
+                    let length: usize = header
+                        .lines()
+                        .find_map(|line| {
+                            line.split_once(':')
+                                .filter(|(k, _)| k.eq_ignore_ascii_case("content-length"))
+                                .map(|(_, v)| v.trim().parse().unwrap())
+                        })
+                        .unwrap();
+                    if bytes.len() >= at + 4 + length {
+                        break;
+                    }
+                }
+            }
+            let request = String::from_utf8(bytes).unwrap();
+            assert!(request.starts_with("POST /token "));
+            assert!(request.contains("grant_type=refresh_token"));
+            assert!(request.contains("refresh_token=SYNTHETIC_REFRESH"));
+            let body = r#"{"access_token":"SYNTHETIC_ROTATED_ACCESS","refresh_token":"SYNTHETIC_ROTATED_REFRESH","token_type":"Bearer","expires_in":3600}"#;
+            socket.write_all(format!("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",body.len(),body).as_bytes()).await.unwrap();
+        });
+        let discovery = Discovery {
+            issuer: ISSUER.into(),
+            authorization_endpoint: format!("{ISSUER}/authorize"),
+            token_endpoint: format!("http://{address}/token"),
+            jwks_uri: format!("{ISSUER}/jwks"),
+            revocation_endpoint: None,
+        };
+        let updated = renew_with_discovery(
+            &state,
+            &mut r,
+            "oaiapp_first",
+            old,
+            "SYNTHETIC_REFRESH".into(),
+            &discovery,
+        )
+        .await
+        .unwrap();
+        server.await.unwrap();
+        assert_eq!(
+            updated.refresh_token.as_deref(),
+            Some("SYNTHETIC_ROTATED_REFRESH")
+        );
+        assert_eq!(updated.id_token, "SYNTHETIC_ID");
+        state.activate(&mut r, "oaiapp_first").unwrap();
+        drop(_lock);
+        let restarted = ChatGptState::new(dir.path().into());
+        let status = restore_last(&restarted, &crate::ai::AiState::default())
+            .await
+            .unwrap();
+        assert!(status.active_id.is_some());
+        let saved = restarted
+            .load(&restarted.registry().unwrap(), "oaiapp_first")
+            .unwrap();
+        assert_eq!(saved.access_token, "SYNTHETIC_ROTATED_ACCESS");
+        assert_eq!(saved.refresh_token, updated.refresh_token);
     }
 }

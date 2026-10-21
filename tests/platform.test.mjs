@@ -315,3 +315,52 @@ test("AI credentials go only to the explicit native connection; request transpor
   assert.equal(calls[5].args.connection.apiKey, "synthetic-list-key");
   assert.equal(calls[6].args.connection, null);
 });
+
+test("API bridge remembers connections by default, with an explicit session-only option", async () => {
+  const calls = [];
+  const platform = createPlatform({
+    __TAURI__: {
+      core: {
+        invoke: async (command, args) => {
+          calls.push({ command, args });
+          return {};
+        },
+      },
+    },
+  });
+  await platform.aiConnect(
+    {
+      provider: "compatible",
+      endpoint: "http://localhost:1234/v1",
+      apiKey: "synthetic-key",
+    },
+    { model: "local-model" },
+  );
+  await platform.aiConnect(
+    {
+      provider: "compatible",
+      endpoint: "http://localhost:1234/v1",
+      apiKey: "synthetic-key",
+    },
+    { remember: false, model: "local-model" },
+  );
+  assert.equal(calls[0].args.remember, true);
+  assert.equal(calls[1].args.remember, false);
+});
+
+test("ChatGPT restore uses the native session without credentials in the renderer", async () => {
+  const calls = [];
+  const platform = createPlatform({
+    __TAURI__: {
+      core: {
+        invoke: async (command, args) => {
+          calls.push({ command, args });
+          return { accounts: [], activeId: null };
+        },
+      },
+    },
+  });
+  await platform.chatGPTRestore();
+  assert.equal(calls[0].command, "chatgpt_restore");
+  assert.deepEqual(calls[0].args, {});
+});

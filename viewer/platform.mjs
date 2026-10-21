@@ -203,7 +203,7 @@ export function createPlatform(host = globalThis) {
     closeWindow,
     blastSubmit: (query) => aiInvoke("blast_submit", { query }),
     blastOpenResults: (rid) => aiInvoke("blast_open_results", { rid }),
-    aiConnect: (connection, { remember = false, model = "" } = {}) =>
+    aiConnect: (connection, { remember = true, model = "" } = {}) =>
       aiInvoke("ai_connect", { connection, remember, model }),
     aiListModels: (connection = null) =>
       aiInvoke("ai_list_models", { connection }),
@@ -213,6 +213,7 @@ export function createPlatform(host = globalThis) {
     aiCancel: () => aiInvoke("ai_cancel"),
     aiRequest: (request) => aiInvoke("ai_request", request),
     chatGPTStatus: () => aiInvoke("chatgpt_status"),
+    chatGPTRestore: () => aiInvoke("chatgpt_restore"),
     chatGPTSignIn: (registrationId) =>
       aiInvoke("chatgpt_sign_in", { registrationId: registrationId || null }),
     chatGPTCancel: () => aiInvoke("chatgpt_cancel"),

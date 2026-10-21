@@ -19,8 +19,8 @@ try {
   await page.locator("#plasmid-map").waitFor();
   assert.equal(await page.locator("#map-selected-enzymes").isChecked(), false);
   assert.ok((await page.locator(".enzyme-map-label").count()) <= 10);
-  await page.locator("#tools-button").click();
-  await page.locator('[data-view="enzymes"]').click();
+  await page.locator("#analyze-button").click();
+  await page.locator('#analyze-menu [data-command="view-enzymes"]').click();
   assert.equal(await page.locator("[data-digest]").count(), 407);
   checks++;
   await page.locator("#enzyme-class").selectOption("common");
@@ -131,8 +131,8 @@ try {
       }),
     ),
   });
-  await page.locator("#tools-button").click();
-  await page.locator('[data-view="enzymes"]').click();
+  await page.locator("#analyze-button").click();
+  await page.locator('#analyze-menu [data-command="view-enzymes"]').click();
   await page.locator("#enzyme-class").selectOption("common");
   await page.locator('[data-action="map-clear-enzymes"]').click();
   await page.locator('[data-map-enzyme="EcoRI"]').check();
@@ -178,8 +178,8 @@ try {
     2,
   );
   checks++;
-  await page.locator("#tools-button").click();
-  await page.locator('[data-view="enzymes"]').click();
+  await page.locator("#analyze-button").click();
+  await page.locator('#analyze-menu [data-command="view-enzymes"]').click();
   await page.locator('[data-map-enzyme="EcoRI"]').uncheck();
   await page.locator('[data-map-enzyme="BamHI"]').check();
   await page.locator('#view-tabs [data-view="map"]').click();
@@ -189,8 +189,8 @@ try {
     /No selected cut sites/,
   );
   checks++;
-  await page.locator("#tools-button").click();
-  await page.locator('[data-view="enzymes"]').click();
+  await page.locator("#analyze-button").click();
+  await page.locator('#analyze-menu [data-command="view-enzymes"]').click();
   await page.locator('[data-action="map-common-enzymes"]').click();
   assert.equal(await page.locator("[data-map-enzyme]:checked").count(), 23);
   assert.equal(await page.locator("[data-digest]:checked").count(), 0);

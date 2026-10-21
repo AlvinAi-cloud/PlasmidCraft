@@ -20,12 +20,12 @@ page.on("pageerror", (error) => errors.push(error.message));
 await page.exposeBinding("nativeDeviceMock", async (_, command, args) => {
   calls.push({ command, args });
   if (command === "ai_restore_saved") {
-    if (failRestore) throw new Error("Synthetic Keychain read failure");
+    if (failRestore) throw new Error("Synthetic local settings read failure");
     return saved;
   }
   if (command === "ai_connect") {
     if (args.remember && failSave)
-      throw new Error("Synthetic Keychain save failure");
+      throw new Error("Synthetic local settings save failure");
     const status = {
       provider: args.connection.provider,
       endpoint: args.connection.endpoint,
@@ -94,7 +94,7 @@ try {
   await action("connect");
   await page
     .locator("#ai-connection-status")
-    .filter({ hasText: "Saved in macOS Keychain" })
+    .filter({ hasText: "Saved on this computer" })
     .waitFor();
   assert.equal(
     calls.find((c) => c.command === "ai_connect").args.remember,
@@ -211,7 +211,7 @@ try {
   checks++;
   assert.deepEqual(errors, []);
   console.log(
-    `${checks} API device credential UI checks passed: secure-save handoff, automatic reconnect, no inference at startup, temporary disconnect, forget, save/read failures and explicit session-only fallback.`,
+    `${checks} API device credential UI checks passed: device-save handoff, automatic reconnect, no inference at startup, temporary disconnect, forget, save/read failures and explicit session-only fallback.`,
   );
 } finally {
   await browser.close();

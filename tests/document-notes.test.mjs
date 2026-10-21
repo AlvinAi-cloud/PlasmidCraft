@@ -51,3 +51,32 @@ test("SnapGene export round trips short description and complete provenance sepa
     1,
   );
 });
+
+test("imported rich notes display as text with paragraphs and entities, preserving source", async () => {
+  const { readableNote } = await import("../viewer/document-notes.mjs");
+  const html =
+    "<html><body><p>gene: <b>bla</b></p><p>Confers resistance &amp; encodes &beta;-lactamase.<br>Value: &#x3b2; &#946; &lt;5</p></body></html>";
+  assert.equal(
+    readableNote(html),
+    "gene: bla\nConfers resistance & encodes β-lactamase.\nValue: β β <5",
+  );
+  assert.equal(
+    readableNote("Literal <marker> and 1 < 5."),
+    "Literal <marker> and 1 < 5.",
+  );
+  assert.equal(
+    readableNote(
+      '<div>&lt;b&gt;literal&lt;/b&gt;<script>bad()</script><style>hidden</style><img src="https://invalid.test/pixel" onerror="bad()"></div>',
+    ),
+    "<b>literal</b>",
+  );
+  assert.equal(readableNote("<p>&#x110000; &#0; &#xD800;</p>"), "� � �");
+  const record = {
+      description: html,
+      comments: ["<p>Retain <i>this</i>.</p>"],
+    },
+    original = structuredClone(record);
+  assert.match(documentNotes(record).description, /gene: bla/);
+  assert.deepEqual(documentNotes(record).provenance, ["Retain this."]);
+  assert.deepEqual(record, original);
+});

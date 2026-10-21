@@ -211,3 +211,63 @@ test("CDS rulers number every fifth biological residue across rows, strands and 
     );
   }
 });
+
+test("cached CDS windows retain numbering, split/reverse codons and refresh after sequence edits", async () => {
+  const { createCodingTrackReader, codingTracks } = await import(
+    "../viewer/sequence-editing.mjs"
+  );
+  const source = {
+    sequence: "ATGGCTGAT".repeat(40),
+    topology: "circular",
+    features: [
+      {
+        id: "forward",
+        name: "Forward",
+        type: "CDS",
+        strand: 1,
+        segments: [{ start: 0, end: 300 }],
+        qualifiers: { codon_start: ["2"], transl_table: ["11"] },
+      },
+      {
+        id: "reverse",
+        name: "Reverse",
+        type: "CDS",
+        strand: -1,
+        segments: [{ start: 25, end: 310 }],
+        qualifiers: { codon_start: ["1"] },
+      },
+      {
+        id: "origin",
+        name: "Origin",
+        type: "CDS",
+        strand: 1,
+        segments: [
+          { start: 330, end: 360 },
+          { start: 0, end: 60 },
+        ],
+        qualifiers: {},
+      },
+    ],
+  };
+  const read = createCodingTrackReader(source);
+  for (const [start, end] of [
+    [0, 62],
+    [58, 122],
+    [298, 360],
+    [12, 28],
+    [0, 62],
+  ])
+    assert.deepEqual(read(start, end), codingTracks(source, start, end));
+  const first = read(0, 62),
+    again = read(0, 62);
+  assert.equal(
+    first.tracks[0].residues[0],
+    again.tracks[0].residues[0],
+    "same translated residue is reused",
+  );
+  const edited = structuredClone(source);
+  edited.sequence = "CCC" + edited.sequence.slice(3);
+  const fresh = createCodingTrackReader(edited);
+  assert.deepEqual(fresh(0, 62), codingTracks(edited, 0, 62));
+  assert.notDeepEqual(fresh(0, 62), read(0, 62));
+});

@@ -113,6 +113,39 @@ export function bulkEditFeatures(
     throw new Error("The selected annotations would not change.");
   return { features, changed };
 }
+// A reader belongs to one sequence render. Edits, undo and display changes create
+// a new reader, so no stale sequence/feature data can survive a document change.
+export function createCodingTrackReader(source) {
+  const cache = new Map();
+  return (start, end) => {
+    const tracks = [],
+      warnings = [];
+    for (const feature of source.features
+      .filter(
+        (f) =>
+          f.type === "CDS" &&
+          f.segments.some((s) => s.start < end && s.end > start),
+      )
+      .slice(0, 30)) {
+      let result = cache.get(feature);
+      if (!result) result = codingTracks({ ...source, features: [feature] });
+      cache.delete(feature);
+      cache.set(feature, result);
+      // Bound memory when scrolling through imports with many coding features.
+      if (cache.size > 32) cache.delete(cache.keys().next().value);
+      warnings.push(...result.warnings);
+      for (const track of result.tracks)
+        tracks.push({
+          ...track,
+          residues: track.residues.filter(
+            (r) => r.position >= start && r.position < end,
+          ),
+        });
+    }
+    return { tracks, warnings };
+  };
+}
+
 export function codingTracks(source, start = 0, end = source.sequence.length) {
   const tracks = [],
     warnings = [];

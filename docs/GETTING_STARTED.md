@@ -15,7 +15,7 @@ Choose **File → Open Sequence…**, use the Open toolbar button, or drag a seq
 - The **sequence overview** below Map and Sequence lets you select annotated regions and navigate the document.
 - **View** controls panels and lists. The Inspector describes the selection; Files shows open documents.
 - **Edit** contains annotation and DNA changes, selection copying and undo/redo. Floating tool windows can be moved by their title bars so the map and sequence stay accessible.
-- **Tools** contains analysis and design workflows. **AI** contains account setup and the internal/external AI workspaces.
+- **Tools** contains the analysis and design workflows, including feature-library management. The toolbar provides two focused dropdowns: **Analyze** for auto annotation, restriction/PCR analysis, alignment and protein analysis, and **Design** for primers, mutagenesis, cloning/assembly, codon optimization and protein-to-DNA. **AI** contains account setup and the internal/external AI workspaces.
 
 ## Make and save an edit
 
@@ -50,6 +50,6 @@ External AI provides prompt preparation and pasted JSON proposal review. It does
 
 Choose **Help → User Guide and Search…** to search all bundled guides, browse topics and jump to sections. The guide window is movable and stays separate from editing dialogs. Links between bundled guides work offline. External reference URLs can be copied for use in a browser.
 
-![Offline Help window](screenshots/0.32/help.png)
+![Offline Help window](screenshots/0.34/help.png)
 
 Review designed sequences, annotations, primer conditions and biological assumptions before laboratory use. See [Verification and limitations](VALIDATION.md).

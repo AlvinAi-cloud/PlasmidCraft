@@ -212,6 +212,7 @@ pub fn run() {
             ai::ai_request,
             ai::ai_open_site,
             chatgpt::chatgpt_status,
+            chatgpt::chatgpt_restore,
             chatgpt::chatgpt_sign_in,
             chatgpt::chatgpt_cancel,
             chatgpt::chatgpt_activate,

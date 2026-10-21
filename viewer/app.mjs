@@ -1,5 +1,6 @@
+import { mountToolMenus } from "./tool-menus.mjs";
 import { HelpUI } from "./help-ui.mjs";
-import { documentNotes } from "./document-notes.mjs";
+import { documentNotes, readableNote } from "./document-notes.mjs";
 import {
   containsBase,
   selectResidues,
@@ -78,6 +79,7 @@ import {
 import {
   bulkEditFeatures,
   codingTracks,
+  createCodingTrackReader,
   aminoAcidLabel,
 } from "./sequence-editing.mjs";
 import { CodonUI } from "./codon-ui.mjs";
@@ -135,6 +137,8 @@ const iconPaths = {
   arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
   minus: '<path d="M5 12h14"/>',
   activity: '<path d="M2 12h4l3-9 6 18 3-9h4"/>',
+  "ai-chat":
+    '<path d="M12 4H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h1v4l5-4h6a3 3 0 0 0 3-3v-3"/><path d="m18 2 1.4 3.6L23 7l-3.6 1.4L18 12l-1.4-3.6L13 7l3.6-1.4Z"/><path d="M7 10h4M7 14h9"/>',
   close: '<path d="m6 6 12 12M6 18 18 6"/>',
   edit: '<path d="m15 3 6 6-12 12H3v-6ZM12 6l6 6"/>',
   save: '<path d="M4 3h13l4 4v14H3V3ZM7 3v6h10V3M7 21v-8h10v8M14 4v3"/>',
@@ -210,7 +214,6 @@ let nextId = 1,
 let proteinDrag = null;
 let sequenceToolContext = null;
 let annotationContext = null;
-let snapgeneExportContext = null;
 const workbench = createWorkbench({
   active,
   documents: () => state.documents,
@@ -461,11 +464,9 @@ function renderHeader() {
         button.dataset.view === state.view ? "page" : "false",
       );
   }
-  $("#tools-button").classList.toggle(
+  $("#analyze-button").classList.toggle(
     "tool-active",
-    ["enzymes", "translation", "library", "alignment", "assembly"].includes(
-      state.view,
-    ),
+    ["enzymes", "translation", "alignment"].includes(state.view),
   );
   syncPanels();
 }
@@ -1086,6 +1087,7 @@ function renderSequence(doc) {
     isSelected,
   };
   const inlineWarnings = new Set();
+  const readCodingTracks = createCodingTrackReader(doc);
   const offsets = sequenceDisplayOffsets(doc.sequence.length, {
     features: tracks,
     primers,
@@ -1097,8 +1099,7 @@ function renderSequence(doc) {
   });
   const renderRows = (start, end) => {
     const inline = state.inlineProteins
-      ? codingTracks(
-          doc,
+      ? readCodingTracks(
           Math.max(0, start - 2),
           Math.min(doc.sequence.length, end + 2),
         )
@@ -1561,11 +1562,11 @@ function renderInspector() {
       )
       .map(
         ([key, values]) =>
-          `<div class="annotation-qualifier"><strong>${e(key)}</strong><br>${values.map(e).join("<br>")}</div>`,
+          `<div class="annotation-qualifier"><strong>${e(key)}</strong><br>${values.map((value) => e(readableNote(value))).join("<br>")}</div>`,
       )
       .join("")}`;
   } else if (primer) {
-    html += `<h3 class="inspector-name">${e(primer.name)}</h3><span class="type-pill">Primer</span><div class="eyebrow">SEQUENCE · 5′ → 3′</div><div class="sequence-snippet">${e(primer.sequence || "Not stored in file")}</div><div class="info-row"><span>Length</span><span>${number(primer.sequence.length)} nt</span></div><div class="info-row"><span>Binding sites</span><span>${primer.sites.length}</span></div>${primer.sites.map((site) => `<div class="info-row"><span>${site.strand === -1 ? "← Reverse" : "→ Forward"}</span><span>${e(displayLocation(site))}</span></div>`).join("")}<button class="button full-width" data-action="copy-selection">${icon("copy")}Copy primer sequence</button><button class="button full-width" data-command="edit-selected-primer">Edit primer…</button><p class="inspector-note">${e(primer.description)}</p>`;
+    html += `<h3 class="inspector-name">${e(primer.name)}</h3><span class="type-pill">Primer</span><div class="eyebrow">SEQUENCE · 5′ → 3′</div><div class="sequence-snippet">${e(primer.sequence || "Not stored in file")}</div><div class="info-row"><span>Length</span><span>${number(primer.sequence.length)} nt</span></div><div class="info-row"><span>Binding sites</span><span>${primer.sites.length}</span></div>${primer.sites.map((site) => `<div class="info-row"><span>${site.strand === -1 ? "← Reverse" : "→ Forward"}</span><span>${e(displayLocation(site))}</span></div>`).join("")}<button class="button full-width" data-action="copy-selection">${icon("copy")}Copy primer sequence</button><button class="button full-width" data-command="edit-selected-primer">Edit primer…</button><p class="inspector-note">${e(readableNote(primer.description))}</p>`;
   } else if (state.selection) {
     html += `<h3 class="inspector-name">Selected bases</h3><div class="info-row"><span>Range</span><span>${number(state.selection.start + 1)}–${number(state.selection.end)}</span></div><div class="info-row"><span>Length</span><span>${number(sequence.length)} bp</span></div><div class="sequence-snippet">${e(sequence)}</div><button class="button full-width" data-action="copy-selection">${icon("copy")}Copy sequence</button><button class="button full-width" data-action="copy-reverse">${icon("primer")}Copy reverse complement</button><button class="button full-width" data-action="annotate">${icon("plus")}Annotate selection</button><button class="button full-width" data-command="create-selection-primer">Create primer from selection…</button><button class="text-button" data-action="clear-selection">Clear selection</button>`;
   } else {
@@ -1771,17 +1772,11 @@ async function showExport(type) {
   try {
     if (type === "dna") {
       const result = snapgeneExport(doc);
-      snapgeneExportContext = {
-        id: doc.id,
-        revision: doc.annotationChanges,
-        sequence: doc.sequence,
-        ...result,
-      };
-      modal(
-        "SnapGene format",
-        `<p>Export ${result.report.featureCount} exact mapped annotations and ${result.report.primerCount} full oligos with DNA and topology.</p><p>${e(result.report.limits)}</p><ul>${result.report.warnings.map((w) => `<li>${e(w)}</li>`).join("")}</ul><p>This independent basic exporter is not a vendor-certified writer. GenBank export is also available for exchange with SnapGene.</p>`,
-        `<button class="button" data-action="close-modal">Cancel</button><button class="button primary" data-action="save-snapgene-export">Export .dna copy</button>`,
-      );
+      const saved = await platform.saveFile(`${name}.dna`, result.bytes, {
+        type: "application/octet-stream",
+        extensions: ["dna"],
+      });
+      if (saved.saved) toast("Exported SnapGene format (.dna).");
       return;
     }
     if (type === "gb") {
@@ -2259,6 +2254,8 @@ function closeAppMenus({ restoreFocus = false } = {}) {
   if (restoreFocus) open?.focus();
 }
 function openAppMenu(trigger, focusFirst = false) {
+  for (const dropdown of document.querySelectorAll(".dropdown"))
+    dropdown.hidden = true;
   closeAppMenus();
   trigger.setAttribute("aria-expanded", "true");
   const menu = document.getElementById(trigger.getAttribute("aria-controls"));
@@ -2267,6 +2264,7 @@ function openAppMenu(trigger, focusFirst = false) {
   menu.style.left = `${Math.max(6, Math.min(anchor.left, window.innerWidth - menu.offsetWidth - 6))}px`;
   menu.style.top = `${anchor.bottom - 1}px`;
   menu.style.right = "auto";
+  menu.style.maxHeight = `${Math.max(120, window.innerHeight - anchor.bottom - 8)}px`;
   if (focusFirst) menu.querySelector("button:not(:disabled)")?.focus();
 }
 function runCommand(action) {
@@ -2569,35 +2567,6 @@ document.addEventListener("click", (event) => {
       menu.hidden = true;
   if (!event.target.closest(".app-menu")) closeAppMenus();
   if (!target) return;
-  if (target.dataset.action === "save-snapgene-export") {
-    const current = active(),
-      ctx = snapgeneExportContext;
-    if (
-      !ctx ||
-      !current ||
-      current.id !== ctx.id ||
-      current.annotationChanges !== ctx.revision ||
-      current.sequence !== ctx.sequence
-    ) {
-      toast("The source changed. Reopen SnapGene format.", true);
-      return;
-    }
-    platform
-      .saveFile(`${current.name.replace(/[^\w.-]/g, "_")}.dna`, ctx.bytes, {
-        type: "application/octet-stream",
-        extensions: ["dna"],
-      })
-      .then((result) => {
-        if (result.saved) {
-          $("#modal").close();
-          toast(
-            "Exported .dna copy. Save .pcraft to preserve the complete PlasmidCraft document.",
-          );
-        }
-      })
-      .catch((error) => toast(error.message, true));
-    return;
-  }
   if (workbench.click(target)) return;
   if (target.matches(".app-menu-trigger")) {
     const wasOpen = target.getAttribute("aria-expanded") === "true";
@@ -3352,7 +3321,10 @@ document.addEventListener("keydown", (event) => {
     if (trigger && ["ArrowDown", "ArrowUp"].includes(event.key))
       openAppMenu(trigger, true);
     else if (["ArrowLeft", "ArrowRight"].includes(event.key)) {
-      const triggers = [...document.querySelectorAll(".app-menu-trigger")];
+      const group =
+        (trigger || openMenu)?.closest(".application-menus, .commandbar") ||
+        document;
+      const triggers = [...group.querySelectorAll(".app-menu-trigger")];
       const index = triggers.indexOf(trigger || openMenu);
       const next =
         triggers[
@@ -3441,11 +3413,7 @@ $("#undo-button").addEventListener("click", () => undo());
 $("#redo-button").addEventListener("click", () => undo(true));
 $("#export-button").addEventListener("click", () => {
   $("#export-menu").hidden = !$("#export-menu").hidden;
-  $("#tools-menu").hidden = true;
-});
-$("#tools-button").addEventListener("click", () => {
-  $("#tools-menu").hidden = !$("#tools-menu").hidden;
-  $("#export-menu").hidden = true;
+  closeAppMenus();
 });
 function loadExample() {
   const existing = state.documents.find((d) => d.isDefaultExample);
@@ -3466,7 +3434,7 @@ $("#help-button").addEventListener("click", help);
 $("#about-button").addEventListener("click", () =>
   modal(
     "PlasmidCraft",
-    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.32.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
+    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.34.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
   ),
 );
 let dragDepth = 0;
@@ -3503,7 +3471,6 @@ window.addEventListener("beforeunload", (event) => {
 });
 $("#modal").addEventListener("close", () => {
   codonUI.cancel();
-  snapgeneExportContext = null;
   sequenceToolContext = null;
   annotationContext = null;
 });
@@ -3546,11 +3513,12 @@ new ResizeObserver(() => {
     if (focused) $("#sequence-editor")?.focus({ preventScroll: true });
   });
 }).observe($("#main-panel"));
+mountToolMenus();
 hydrateIcons();
 loadExample();
 if (platform.desktop) {
   $("#runtime-label").textContent = "Desktop app";
-  $("#version-label").textContent = "Desktop 0.32.0";
+  $("#version-label").textContent = "Desktop 0.34.0";
 }
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
   for (const label of document.querySelectorAll("[data-shortcut]"))

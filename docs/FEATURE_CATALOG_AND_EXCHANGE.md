@@ -31,7 +31,7 @@ Use only feature lists you are authorized to use, and retain their terms and att
 
 ## SnapGene format
 
-Choose **File → Export SnapGene format** or **Export → Export SnapGene format**. Review the summary, then export the `.dna` copy. The writer preserves DNA/IUPAC bases, topology, exact mapped feature segments/strands/colors, text qualifiers, oligos, binding sites and notes. Reverse/joined annotations and circular-origin sites are supported. Unsupported fuzzy/unmapped feature locations and discontiguous primer sites stop export explicitly. Exporting a copy does not mark the native document as saved.
+Choose **File → Export SnapGene format** or **Export → Export SnapGene format**. Choose a destination in the save dialog to export the `.dna` copy. The writer preserves DNA/IUPAC bases, topology, exact mapped feature segments/strands/colors, text qualifiers, oligos, binding sites and notes. Reverse/joined annotations and circular-origin sites are supported. Unsupported fuzzy/unmapped feature locations and discontiguous primer sites stop export explicitly. Exporting a copy does not mark the native document as saved.
 
 Keep `.pcraft` as the complete editable document. The `.dna` copy omits history/undo, alignment reports, chromatogram channels/qualities, physical-end metadata, separate primer-tail declarations and proprietary display metadata. Other readers may normalize unstranded features, qualifiers or translation semantics; verify exchanged data in the destination application. This is an experimental interoperability writer with the documented limits, not a vendor-certified exporter.
 

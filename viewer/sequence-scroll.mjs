@@ -29,6 +29,8 @@ export function mountSequenceScroll(
   let start = -1,
     end = -1;
   const virtual = length > VIRTUAL_SEQUENCE_THRESHOLD;
+  const rows = new Map();
+  let window;
   function rowAt(pixel) {
     let low = 0,
       high = offsets.length - 1;
@@ -58,20 +60,45 @@ export function mountSequenceScroll(
       offsets.length - 1,
       rowAt(element.scrollTop * scale() + element.clientHeight) + 10,
     );
-    if (first === start && last === end) {
-      element.querySelector(".sequence-window").style.top =
-        `${offsets[first] - element.scrollTop * (scale() - 1)}px`;
-      return;
-    }
+    window.style.top = `${offsets[first] - element.scrollTop * (scale() - 1)}px`;
+    if (first === start && last === end) return;
     start = first;
     end = last;
-    const window = element.querySelector(".sequence-window");
-    window.style.top = `${offsets[first] - element.scrollTop * (scale() - 1)}px`;
-    window.innerHTML = renderRows(
-      first * rowBases,
-      Math.min(length, last * rowBases),
-      offsets,
-    );
+    // Render only missing runs; retain the DOM of rows already on screen.
+    for (let row = first; row < last; ) {
+      if (rows.has(row)) {
+        row++;
+        continue;
+      }
+      const from = row;
+      while (row < last && !rows.has(row)) row++;
+      const template = element.ownerDocument.createElement("template");
+      template.innerHTML = renderRows(
+        from * rowBases,
+        Math.min(length, row * rowBases),
+        offsets,
+      );
+      for (const node of template.content.children)
+        rows.set(Number(node.dataset.sequenceRow), node);
+    }
+    for (const node of [...window.children]) {
+      const row = Number(node.dataset.sequenceRow);
+      if (row < first || row >= last) node.remove();
+    }
+    let next = null;
+    for (let row = last - 1; row >= first; row--) {
+      const node = rows.get(row);
+      if (node.parentNode !== window || node.nextSibling !== next)
+        window.insertBefore(node, next);
+      rows.delete(row);
+      rows.set(row, node);
+      next = node;
+    }
+    // Keep a small LRU of detached rows for smooth back-and-forth scrolling.
+    for (const [row, node] of rows) {
+      if (rows.size <= Math.max(80, last - first)) break;
+      if (node.parentNode !== window) rows.delete(row);
+    }
   }
   function scroll() {
     if (frame) return;
@@ -82,6 +109,7 @@ export function mountSequenceScroll(
   }
   if (virtual) {
     element.innerHTML = `<div class="sequence-virtual-space" style="height:${physicalHeight}px"><div class="sequence-window"></div></div>`;
+    window = element.querySelector(".sequence-window");
     element.addEventListener("scroll", scroll, { passive: true });
   }
   const resize = virtual ? new ResizeObserver(draw) : null;
@@ -149,6 +177,7 @@ export function mountSequenceScroll(
       cancelAnimationFrame(frame);
       resize?.disconnect();
       element.removeEventListener("scroll", scroll);
+      rows.clear();
       return element.scrollTop;
     },
   };

@@ -5,7 +5,7 @@ use crate::ai_vault::{DeviceVault, Vault};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::{sync::Mutex, time::Duration};
-use tauri::State;
+use tauri::{Manager, State};
 use tokio::sync::watch;
 
 #[derive(Clone, Deserialize, Serialize)]
@@ -180,18 +180,28 @@ fn restore_connection(vault: &dyn Vault, state: &AiState) -> Result<Option<Conne
     let connection = validate(saved.connection)?;
     install_connection(connection, saved.model, true, state).map(Some)
 }
+fn device_vault(app: &tauri::AppHandle) -> Result<DeviceVault, String> {
+    let directory = app
+        .path()
+        .app_config_dir()
+        .map_err(|_| "The app settings folder is unavailable.")?;
+    Ok(DeviceVault::new(
+        directory.join("api").join("connection.json"),
+    ))
+}
 #[tauri::command]
 pub fn ai_connect(
+    app: tauri::AppHandle,
     connection: Connection,
     remember: Option<bool>,
     model: Option<String>,
     state: State<'_, AiState>,
 ) -> Result<Connected, String> {
     let connection = validate(connection)?;
-    let remember = remember.unwrap_or(false);
+    let remember = remember.unwrap_or(true);
     let model = model.unwrap_or_default();
     if remember {
-        save_connection(&DeviceVault, &connection, &model)?;
+        save_connection(&device_vault(&app)?, &connection, &model)?;
     }
     install_connection(connection, model, remember, &state)
 }
@@ -214,13 +224,16 @@ pub async fn ai_list_models(
         .map_err(|_| "Model discovery timed out. Retry or enter a model ID manually.".to_string())?
 }
 #[tauri::command]
-pub fn ai_restore_saved(state: State<'_, AiState>) -> Result<Option<Connected>, String> {
-    restore_connection(&DeviceVault, &state)
+pub fn ai_restore_saved(
+    app: tauri::AppHandle,
+    state: State<'_, AiState>,
+) -> Result<Option<Connected>, String> {
+    restore_connection(&device_vault(&app)?, &state)
 }
 #[tauri::command]
-pub fn ai_forget_saved(state: State<'_, AiState>) -> Result<(), String> {
+pub fn ai_forget_saved(app: tauri::AppHandle, state: State<'_, AiState>) -> Result<(), String> {
     // Only report success after deletion; keep the active session if the vault refuses.
-    forget_saved_connection(&DeviceVault, &state)
+    forget_saved_connection(&device_vault(&app)?, &state)
 }
 #[tauri::command]
 pub fn ai_disconnect(state: State<'_, AiState>) -> Result<(), String> {

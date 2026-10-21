@@ -1,27 +1,26 @@
-# PlasmidCraft 0.32
+# PlasmidCraft 0.34
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
-Desktop test release. Source and installer packages are versioned **0.32.0**.
+Version **0.34.0** improves sequence scrolling, imported notes, Analyze/Design toolbar menus and remembered AI connections. SnapGene format export opens the save dialog directly.
 
 An independent desktop workspace for plasmid viewing, sequence editing, protein analysis and cloning design. Built with JavaScript, Rust and Tauri 2. The application embeds its interface and works without Node.js, Python or a local web server.
 
-![PlasmidCraft map](docs/screenshots/0.32/map.png)
+![PlasmidCraft map](docs/screenshots/0.34/map.png)
 
 ## Install
 
 Use the package matching your computer from the release assets:
-https://github.com/AlvinAi-cloud/PlasmidCraft/releases/tag/v0.31
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
-| Mac Apple Silicon | `PlasmidCraft-0.32.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
-| Mac Intel | `PlasmidCraft-0.32.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
-| Windows | `PlasmidCraft-0.32.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
+| Mac Apple Silicon | `PlasmidCraft-0.34.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
+| Mac Intel | `PlasmidCraft-0.34.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
+| Windows | `PlasmidCraft-0.34.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
 
-Mac: open the disk image and drag **PlasmidCraft 0.32** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
+Mac: open the disk image and drag **PlasmidCraft 0.34** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
 
-**0.32 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
+**0.34 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
 
 ## Features
 
@@ -35,7 +34,7 @@ Mac: open the disk image and drag **PlasmidCraft 0.32** to Applications. Windows
 - Gibson and Golden Gate design, primer tails, prepared backbones/modules, junction previews, sequence validation and saved design drafts.
 - Single/dual-host codon optimization, protein-to-DNA conversion, and local protein molecular weight, pI, residue composition and A280 estimates.
 - Feature matching can search all libraries at once and merge equivalent hits while retaining source names and aliases.
-- Optional NCBI BLAST submission and a docked AI assistant beside the inspector, with Internal AI Operations and External AI modes. Connected AI accepts direct requests, displays newest conversation messages first, and runs validated local tools on copies and opens new unsaved designs, with operation summaries and locally saved conversation history; External AI retains prompt copying and explicit JSON proposal review. Configure accounts through AI → Accounts and Models…; provider/model preferences are remembered locally, and API-key entry loads a provider model picker automatically. Review outgoing data before sending. The Mac app can remember API keys in Keychain and reconnect on startup; ChatGPT account integration depends on provider eligibility and has not been validated against a live account for this release.
+- Optional NCBI BLAST submission and a docked AI assistant beside the inspector, with Internal AI Operations and External AI modes. Connected AI accepts direct requests, displays newest conversation messages first, and runs validated local tools on copies and opens new unsaved designs, with operation summaries and locally saved conversation history; External AI retains prompt copying and explicit JSON proposal review. Configure accounts through AI → Accounts and Models…; provider/model preferences are remembered locally, and API-key entry loads a provider model picker automatically. Review outgoing data before sending. API connections are saved in the app’s local configuration by default and reconnect automatically after restarting; ChatGPT sessions remember the last-used account/model and reconnect automatically, with renewal when needed. Account access depends on provider eligibility and has not been validated against a live account for this release.
 - `.pcraft` saves preserve full supported document state. GenBank/FASTA/SVG and a basic, independently implemented SnapGene-compatible `.dna` exporter provide exchange formats. The `.dna` exporter has explicit limitations; it is not vendor certified.
 
 Native saves use a temporary file and atomic replacement, restricted to destinations chosen through system dialogs. Unsaved-change warnings protect normal document/window closing. There is no automatic recovery of unsaved work after a crash: save documents and library backups regularly.
@@ -44,11 +43,11 @@ Native saves use a temporary file and atomic replacement, restricted to destinat
 
 The app opens the supplied **pET-21b(+)** plasmid (5,442 bp) by default. Its source file is in `examples/pET-21b(+).dna`.
 
-Open a sequence using **File → Open Sequence**. Use **View** for panels/lists, **Edit** for annotation and DNA changes, and **Tools** for analysis and design. To compare plasmids, open both and choose **Tools → Align Whole Plasmids**. Right-click a CDS for protein analysis, codon optimization or protein BLAST. Load synthetic workflow examples from Help to try PCR, Gibson and Golden Gate.
+Open a sequence using **File → Open Sequence**. Use **View** for panels/lists, **Edit** for annotation and DNA changes, and **Tools** for all analysis and design workflows. The toolbar provides focused **Analyze** and **Design** dropdowns; Analyze starts with Auto Annotation. To compare plasmids, open both and choose **Tools → Align Whole Plasmids**. Right-click a CDS for protein analysis, codon optimization or protein BLAST. Load synthetic workflow examples from Help to try PCR, Gibson and Golden Gate.
 
 The same guides are bundled offline under **Help → User Guide and Search…**, with full-text topic search, section navigation and direct Help menu shortcuts. **Getting Started** explains the example plasmid, layout, file handling and workflow entry points.
 
-![Offline Help and workflow guides](docs/screenshots/0.32/help.png)
+![Offline Help and workflow guides](docs/screenshots/0.34/help.png)
 
 Guides: [mutagenic primers](docs/MUTAGENESIS.md), [editing and alignment](docs/SEQUENCE_VERIFICATION.md), [PCR and assembly](docs/WORKFLOWS.md), [cloning design](docs/CLONING_DESIGN.md), [codon optimization](docs/CODON_OPTIMIZATION.md), [protein analysis and BLAST](docs/PROTEIN_ANALYSIS_AND_BLAST.md), [feature catalogs and exchange](docs/FEATURE_CATALOG_AND_EXCHANGE.md), [AI connections](docs/AI_ASSISTANT.md).
 
