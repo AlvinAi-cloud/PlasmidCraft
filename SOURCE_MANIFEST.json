@@ -11,6 +11,10 @@
       "sha256": "d89bfb909c42699bed4502d874daa19a5b74171f2b0941b715d12438df5d5650"
     },
     {
+      "path": ".github/workflows/linux-appimage.yml",
+      "sha256": "5febd98413b1baed96ca5727ddf33babe3120aeaa5f49f975744f6efff8a9b28"
+    },
+    {
       "path": ".gitignore",
       "sha256": "467cb9e94eb31c7d7dc679a0665c023be48643eb66dc17af6ed9b7c5aaed2233"
     },
@@ -188,7 +192,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "80f4e6e34ddc4707e26d5fd5f3369205a9bd9b0c712542673425e0a3c682c5fd"
+      "sha256": "a6f35b95e65e8b4e0deacee702e215817e68d8c578a5572569c8334c60f24fc8"
     },
     {
       "path": "RELEASE_NOTES.md",
