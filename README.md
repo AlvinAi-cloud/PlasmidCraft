@@ -2,8 +2,6 @@
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
-Version **0.34.0** improves sequence scrolling, imported notes, Analyze/Design toolbar menus and remembered AI connections. SnapGene format export opens the save dialog directly.
-
 An independent desktop workspace for plasmid viewing, sequence editing, protein analysis and cloning design. Built with JavaScript, Rust and Tauri 2. The application embeds its interface and works without Node.js, Python or a local web server.
 
 ![PlasmidCraft map](docs/screenshots/0.34/map.png)
@@ -11,6 +9,7 @@ An independent desktop workspace for plasmid viewing, sequence editing, protein 
 ## Install
 
 Use the package matching your computer from the release assets:
+https://github.com/AlvinAi-cloud/PlasmidCraft/releases/
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
