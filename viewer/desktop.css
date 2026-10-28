@@ -2803,6 +2803,71 @@ button.alignment-base:disabled {
 .floating-dialog .modal-header button {
   cursor: pointer;
 }
+#orf-review-dialog,
+#annotation-review-dialog {
+  width: min(650px, calc(100vw - 16px));
+  padding: 0;
+  overflow: hidden;
+}
+.orf-review-content,
+.annotation-review-content {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(90vh - 2px);
+}
+#orf-review-dialog .modal-body,
+#annotation-review-dialog .modal-body {
+  padding: 16px 20px;
+}
+#orf-review-dialog .data-table small,
+#annotation-review-dialog .data-table small,
+.match-evidence {
+  display: block;
+  color: var(--muted);
+  margin-top: 4px;
+}
+#orf-review-dialog input[data-orf-name] {
+  min-width: 110px;
+  max-width: 220px;
+}
+#orf-review-dialog .data-table td:last-child {
+  white-space: nowrap;
+}
+#annotation-review-dialog section + section {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+}
+.annotation-preview-notice {
+  margin: 8px 12px;
+  padding: 8px 12px;
+  color: #6b5526;
+  background: #fff8e7;
+  border: 1px dashed #c5a567;
+  border-radius: 5px;
+  font-size: 14px;
+}
+[data-annotation-preview="true"].feature-arc,
+[data-annotation-preview="true"] .feature-arc {
+  stroke-dasharray: 4 3;
+  stroke-width: 1.5px;
+  opacity: 0.8;
+}
+#plasmid-map [data-annotation-preview="true"].feature-arc > rect {
+  stroke: #8b6834;
+  stroke-dasharray: 4 3;
+  stroke-width: 1.5px;
+}
+[data-annotation-preview="true"].sequence-annotation,
+[data-annotation-preview="true"].mini-feature {
+  outline: 1px dashed #8b6834;
+  outline-offset: -1px;
+  opacity: 0.8;
+}
+#library-close-results {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
 #modal.floating-dialog:not(.sequence-tool-dialog):not(.codon-dialog):not(
     .selected-primer-dialog
   ):not(.mutagenesis-dialog) {

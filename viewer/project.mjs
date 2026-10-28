@@ -1,4 +1,4 @@
-/** Versioned, lossless-for-our-model document storage. No native paths or UI state. */
+/** Versioned document storage with whitelisted display preferences; no native paths or session state. */
 import { normalizeSequence, MAX_FILE_BYTES } from "./core.mjs";
 import { cleanAlignmentReport } from "./alignment-storage.mjs";
 import { cleanDnaEnds } from "./dna-ends.mjs";
@@ -149,6 +149,18 @@ function cleanRecord(raw, { history = true } = {}) {
       : [],
     originFormat: text(raw.originFormat || raw.sourceFormat, "PlasmidCraft"),
   };
+  if (history && raw.viewSettings !== undefined) {
+    if (
+      !raw.viewSettings ||
+      typeof raw.viewSettings !== "object" ||
+      Array.isArray(raw.viewSettings)
+    )
+      fail("display preferences must be an object.");
+    const layout = raw.viewSettings.mapLayout;
+    if (layout !== undefined && !["circular", "linear"].includes(layout))
+      fail("unknown map display layout.");
+    if (layout !== undefined) result.viewSettings = { mapLayout: layout };
+  }
   if (Array.isArray(raw.comments))
     result.comments = raw.comments.map((v) => text(v));
   if (raw.dnaEnds !== undefined) {

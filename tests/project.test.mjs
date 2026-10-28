@@ -124,3 +124,49 @@ test("malformed trace arrays and nested qualifier objects fail validation", () =
   source.record.features[0].qualifiers.note = [{ nested: true }];
   assert.throws(() => parseProject(JSON.stringify(source)), /qualifier values/);
 });
+
+test("map layout preferences persist independently of DNA topology with backward-compatible defaults", () => {
+  for (const [topology, mapLayout] of [
+    ["linear", "circular"],
+    ["circular", "linear"],
+  ]) {
+    const source = {
+      ...syntheticTestRecord(),
+      topology,
+      viewSettings: { mapLayout },
+    };
+    const result = parseProject(serializeProject(source));
+    assert.equal(result.topology, topology);
+    assert.equal(result.sequence, source.sequence);
+    assert.deepEqual(result.viewSettings, { mapLayout });
+  }
+  const legacy = parseProject(serializeProject(syntheticTestRecord()));
+  assert.equal(legacy.viewSettings, undefined);
+});
+
+test("saved view preferences reject invalid layouts and omit unrelated session fields", () => {
+  const source = {
+    ...syntheticTestRecord(),
+    viewSettings: {
+      mapLayout: "circular",
+      apiKey: "DO-NOT-SAVE",
+      windowPath: "/private/session",
+    },
+  };
+  const stored = serializeProject(source);
+  assert.doesNotMatch(stored, /DO-NOT-SAVE|windowPath|private.session/);
+  assert.deepEqual(parseProject(stored).viewSettings, {
+    mapLayout: "circular",
+  });
+  for (const viewSettings of [
+    null,
+    [],
+    "circular",
+    { mapLayout: "sideways" },
+  ]) {
+    assert.throws(
+      () => serializeProject({ ...source, viewSettings }),
+      /display|layout/,
+    );
+  }
+});

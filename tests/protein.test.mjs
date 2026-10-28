@@ -277,3 +277,77 @@ test("protein FASTA wraps sequences, retains internal stops and sanitizes header
   assert.ok(fasta.endsWith("*X\n"));
   assert.throws(() => proteinFasta("Example", ""), /No valid protein/);
 });
+
+test("ORF review recognizes nested same-frame CDS coverage while preserving other frames and strands", async () => {
+  const { matchingOrfCds, findOrfs, orfFeature } = await import(
+    "../viewer/protein.mjs"
+  );
+  const record = {
+    sequence: "CCCATGATGAAATAACCC",
+    topology: "linear",
+    features: [],
+  };
+  const orfs = findOrfs(record, {
+    minAa: 1,
+    nested: true,
+    strands: "forward",
+  }).orfs;
+  assert.equal(orfs.length, 2);
+  record.features = [orfFeature(orfs[0], { id: "known", name: "Known CDS" })];
+  assert.equal(matchingOrfCds(record, orfs[1]).id, "known");
+  assert.equal(matchingOrfCds(record, { ...orfs[1], strand: -1 }), undefined);
+  record.features[0].qualifiers.codon_start = ["2"];
+  assert.equal(matchingOrfCds(record, orfs[1]), undefined);
+  const circular = {
+    sequence: "TAAATGATGAAA",
+    topology: "circular",
+    features: [],
+  };
+  const result = findOrfs(circular, {
+    minAa: 2,
+    nested: true,
+    strands: "forward",
+  }).orfs;
+  circular.features = [
+    orfFeature(result[0], { id: "wrap", name: "Origin CDS" }),
+  ];
+  assert.equal(matchingOrfCds(circular, result[1]).id, "wrap");
+});
+
+test("ORF coverage handles reverse circular candidates and requires all coding bases", async () => {
+  const { matchingOrfCds, findOrfs, orfFeature } = await import(
+    "../viewer/protein.mjs"
+  );
+  const { reverseComplement } = await import("../viewer/core.mjs");
+  const original = "TAAATGATGAAAC";
+  for (const dna of [original, reverseComplement(original)])
+    for (let at = 0; at < dna.length; at++) {
+      const record = {
+        sequence: dna.slice(at) + dna.slice(0, at),
+        topology: "circular",
+        features: [],
+      };
+      const candidates = findOrfs(record, { minAa: 2, nested: true }).orfs;
+      for (const orf of candidates) {
+        record.features = [orfFeature(orf, { id: "same", name: "Known CDS" })];
+        assert.equal(matchingOrfCds(record, orf).id, "same");
+      }
+    }
+  const orf = { strand: 1, code: 1, segments: [{ start: 0, end: 15 }] };
+  const record = {
+    features: [
+      {
+        type: "CDS",
+        strand: 1,
+        qualifiers: {},
+        segments: [
+          { start: 0, end: 6 },
+          { start: 9, end: 15 },
+        ],
+      },
+    ],
+  };
+  assert.equal(matchingOrfCds(record, orf), undefined);
+  record.features[0].segments = [{ start: 0, end: 12 }];
+  assert.equal(matchingOrfCds(record, orf), record.features[0]);
+});

@@ -28,7 +28,7 @@ copy_document {name}: create a copy even without edits.
 add_feature {name,type,start,end,strand}; add_primer {name,annealing,tail}; replace_dna {start,end,expected,sequence}: validated exact replacement (empty sequence deletes). These use the external proposal validator.
 create_dna {name,sequence,topology}: make explicit provided DNA; linear or circular.
 extract_dna {start,end,name,reverse:false}; reverse_complement {}; set_origin {position}.
-auto_annotate {library:"all" or exact library name}: use local libraries, merge duplicates.
+auto_annotate {library:"all" or exact library name,includeCloseMatches:false}: use local libraries, merge boundary duplicates. Exact matches only by default; set includeCloseMatches:true only when requested to include labeled full-span close variants (≥95% DNA identity, at least 90 bases).
 design_primers {start,end,minLength:18,maxLength:30,targetTm:60,forwardTail:"",reverseTail:""}: save locally designed pair on working copy.
 simulate_pcr {forward:"primer ID or unique name",reverse:"primer ID or unique name",productIndex:0,name}: require an explicit productIndex if more than one amplicon; working copy becomes chosen linear product.
 mutagenesis {mode:"dna"|"amino"|"codon",operation:"substitute"|"insert"|"delete",featureId,edits:[{position:1,replacement:"T"}],circularization:"overlap"|"inverse",overlapMin:20,overlapMax:40,poolIndex:0,codonStrategy:"ask"|"exact"|"expanded"}: same local design tool as the UI. Deletion uses {position,end}. Ask user to choose exact or expanded diversity when needed; never silently choose added amino acids or a mixed-pool subset. Result becomes the circular mutant; designed oligos are reported.
@@ -397,7 +397,9 @@ export class ConnectedWorkspace {
         throw new Error(
           "Select all libraries or one unambiguous library name.",
         );
-      const matches = libraryMatchesAll(record, libs);
+      const matches = libraryMatchesAll(record, libs, {
+        allowCloseMatches: args.includeCloseMatches === true,
+      });
       if (matches.truncated)
         throw new Error(
           "Annotation result limit reached. Choose a narrower library.",

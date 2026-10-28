@@ -10,7 +10,7 @@ Choose **File → Open Sequence…**, use the Open toolbar button, or drag a seq
 
 ## Find your way around
 
-- **Map** shows circular or linear DNA. Click a feature to inspect it. Tight map mode places labels along the circle and hides restriction-enzyme markings.
+- **Map** shows circular or linear DNA. Each document remembers your Circular/Linear display choice when you switch tabs. Saving as **.pcraft** also stores that choice for reopening or restarting the app. Older documents without a saved choice use their DNA topology as the default. Display choices do not change DNA topology. Click a feature to inspect it. Tight map mode places labels along the circle and hides restriction-enzyme markings.
 - **Sequence** is a continuous, width-adaptive DNA display. CDS translations appear below DNA, with residue numbering every five amino acids. DNA and protein selections highlight together. Choose one-letter or three-letter protein notation in the sequence controls.
 - The **sequence overview** below Map and Sequence lets you select annotated regions and navigate the document.
 - **View** controls panels and lists. The Inspector describes the selection; Files shows open documents.
@@ -50,6 +50,6 @@ External AI provides prompt preparation and pasted JSON proposal review. It does
 
 Choose **Help → User Guide and Search…** to search all bundled guides, browse topics and jump to sections. The guide window is movable and stays separate from editing dialogs. Links between bundled guides work offline. External reference URLs can be copied for use in a browser.
 
-![Offline Help window](screenshots/0.34/help.png)
+![Offline Help window](screenshots/0.35/help.png)
 
 Review designed sequences, annotations, primer conditions and biological assumptions before laboratory use. See [Verification and limitations](VALIDATION.md).

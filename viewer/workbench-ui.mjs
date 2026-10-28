@@ -130,6 +130,7 @@ class Workbench {
     };
     this.libraryPreview = null;
     this.librarySearchAll = false;
+    this.libraryAllowCloseMatches = true;
     this.primerMode = "list";
     this.primerPurpose = "pcr";
     this.primerDraft = { name: "", annealing: "", tail: "", description: "" };
@@ -353,7 +354,8 @@ class Workbench {
     }
     this.api.setView(view);
   }
-  async autoAnnotate(libraryId) {
+  async autoAnnotate(libraryId, { allowCloseMatches = true } = {}) {
+    this.libraryAllowCloseMatches = allowCloseMatches;
     if (this.pending)
       throw new Error("Finish or cancel the current analysis first.");
     this.librarySearchAll = libraryId === "all";
@@ -405,6 +407,31 @@ class Workbench {
       )
       .join("");
   }
+  pendingAnnotations(doc) {
+    const preview = this.libraryPreview;
+    if (!preview || preview.token !== recordToken(doc)) return [];
+    return [...preview.selected].flatMap((i) => {
+      const match = preview.result.matches[i];
+      return !match || match.duplicate
+        ? []
+        : [
+            {
+              ...match,
+              id: `pending-library-${preview.id}-${i}`,
+              pendingAnnotation: true,
+            },
+          ];
+    });
+  }
+  annotationMatchTables(matches) {
+    const selected = this.libraryPreview?.selected || new Set();
+    const rows = matches.map((match, i) => ({ match, i }));
+    const table = (items, id) =>
+      `<div class="data-card wf-scroll"><table class="data-table" id="${id}"><thead><tr><th>Use</th><th>Feature</th><th>Location</th><th>Strand</th><th>Status</th></tr></thead><tbody>${items.map(({ match, i }) => `<tr><td><input type="checkbox" data-library-match="${i}" aria-label="Annotate ${escape(match.name)} at ${escape(displayLocation(match))}" ${match.duplicate ? "disabled" : selected.has(i) ? "checked" : ""}></td><td>${escape(match.name)}<small class="match-evidence">${match.mismatches ? `${(100 * match.identity).toFixed(2)}% DNA identity · ${match.mismatches} substitution(s) · full reference span` : "Exact DNA match"}</small>${match.sources ? `<small class="muted" style="display:block">${escape([...new Set(match.sources.map((s) => s.libraryName))].join(" · "))}</small>${match.aliases.length > 1 ? `<small>Also: ${escape(match.aliases.slice(1).join(", "))}</small>` : ""}` : ""}</td><td>${escape(displayLocation(match))}</td><td>${match.strand === 1 ? "Forward" : match.strand === -1 ? "Reverse" : "Unstranded"}</td><td>${match.duplicate ? "Already annotated" : match.mismatches ? "Review close match" : "New"}</td></tr>`).join("")}</tbody></table></div>`;
+    const exact = rows.filter(({ match }) => !match.mismatches);
+    const close = rows.filter(({ match }) => match.mismatches > 0);
+    return `<h4>Exact matches (${exact.length})</h4>${table(exact, "library-matches")}<section id="library-close-results"><h3>Close matches (${close.length})</h3><div class="wf-actions">${button("Select all close matches", "library-select-close")}${button("Clear close matches", "library-clear-close")}</div><p>Possible variants of coding sequences, origins and other long elements. Full reference span, at least 90 bases, ≥95% DNA identity, substitutions only. Review these results and check the ones to add. Short motifs and primers remain exact.</p>${table(close, "library-variant-matches")}</section>`;
+  }
   renderLibrary(doc) {
     const library = this.library(),
       builtin = library.id === COMMON_FEATURE_LIBRARY.id,
@@ -428,7 +455,7 @@ class Workbench {
           `${l.name} (${l.features.length})${l.id === COMMON_FEATURE_LIBRARY.id ? " · bundled" : ""}`,
         ]),
         this.libraryId,
-      )}${field("Library name", "library-name", library.name, { extra: builtin ? "disabled" : "" })}${button("Rename", "library-rename", builtin ? "disabled" : "")}${button("Find annotation matches", "library-match", this.librarySearchAll || library.features.length ? "" : "disabled")}</div><div class="wf-controls"><label class="check-label"><input type="checkbox" id="library-search-all" ${this.librarySearchAll ? "checked" : ""}>Search all libraries</label>${field("Search features / accession", "library-filter", this.libraryFilter)}${select("Category", "library-category", [["", "All categories"], ...[...new Set((this.librarySearchAll ? [COMMON_FEATURE_LIBRARY, ...this.libraries].flatMap((l) => l.features) : library.features).map((f) => f.category).filter(Boolean))].sort().map((c) => [c, c])], this.libraryCategory)}${builtin ? button("Copy bundled library to edit", "library-copy") : ""}</div><p id="library-entry-count">${this.filteredLibraryEntries(library).length} of ${library.features.length} entries shown. Search/category filters also limit matching; exports contain the full active library.</p>${builtin ? '<p class="analysis-note">Bundled reference variants come from public INSDC/GenBank records, with accession/coordinate provenance. Protein-tag patterns are independently derived from published peptide motifs. Full-pattern sequence evidence does not establish function; review variants, short motifs and reading frame. No runtime download is required.</p>' : ""}<p class="analysis-note">Patterns may use IUPAC codes. Only certain full-pattern matches are returned; both strands and circular origins are searched. This library is stored in this app profile. Export .pclib for a portable backup. CSV import accepts Name, Feature, Type and Color columns. Import also accepts local .ftrs/.dna or annotated GenBank files, split only above 2,000 entries or 2,000,000 DNA bases per library; unsupported entries are reported. Local imports are not part of the bundled catalog.</p><details class="analysis-note"><summary>Import features from an existing SnapGene installation</summary><p>Choose Import and select a local .ftrs feature list. On macOS, in Finder open Applications, right-click SnapGene → Show Package Contents → Contents → Resources, then locate standardCommonFeatures.ftrs. In the file picker, ⌘⇧G can open /Applications/SnapGene.app/Contents/Resources/. On Windows, search your SnapGene installation folder for .ftrs files. Locations vary by version. Review the import summary, select each imported library part and choose Find annotation matches. Export .pclib for a personal backup. Use only content you are authorized to use; imported vendor lists are local to your profile and are not included in PlasmidCraft releases.</p></details><details class="wf-editor" ${builtin ? "hidden" : "open"}><summary>${draft.id ? "Edit library entry" : "Add a library entry"}</summary><div class="wf-controls">${field("Feature name", "lib-entry-name", draft.name)}${field("Type", "lib-entry-type", draft.type)}${field("Color", "lib-entry-color", draft.color, { type: "color" })}<label class="check-label"><input id="lib-entry-directional" type="checkbox" ${draft.directional ? "checked" : ""}>Directional feature</label></div><label>DNA pattern (4–10,000 bases)<textarea id="lib-entry-sequence" spellcheck="false">${escape(draft.sequence)}</textarea></label><label>Additional DNA patterns (optional, one per line)<textarea id="lib-entry-alternates" spellcheck="false">${escape((draft.alternateSequences || []).join("\n"))}</textarea></label>${field("Description", "lib-entry-description", draft.description)}<div class="wf-actions">${button("Use selected annotation", "library-selection")}${button(draft.id ? "Update entry" : "Add entry", "library-add")}${button("Clear editor", "library-clear")}</div></details><div class="data-card wf-scroll"><table class="data-table" id="library-entries"><thead><tr><th>Name</th><th>Type</th><th>Pattern</th><th>Actions</th></tr></thead><tbody>${this.libraryRows(library)}</tbody></table></div><div id="wf-result">${preview ? `<h3>Annotation preview</h3><p>${preview.result.matches.length} unique match(es) · ${preview.result.duplicatesRemoved || 0} duplicate identifications merged${preview.result.truncated ? " · Result limit reached; narrow the library before applying." : ""}</p><div class="wf-actions">${button("Select new matches", "library-select-new")}${button("Clear selection", "library-select-none")}${button("Apply selected annotations", "library-apply")}</div><div class="data-card wf-scroll"><table class="data-table" id="library-matches"><thead><tr><th>Use</th><th>Feature</th><th>Location</th><th>Strand</th><th>Status</th></tr></thead><tbody>${preview.result.matches.map((match, i) => `<tr><td><input type="checkbox" data-library-match="${i}" aria-label="Annotate ${escape(match.name)} at ${escape(displayLocation(match))}" ${match.duplicate ? "disabled" : "checked"}></td><td>${escape(match.name)}${match.sources ? `<small class="muted" style="display:block">${escape([...new Set(match.sources.map((s) => s.libraryName))].join(" · "))}</small>${match.aliases.length > 1 ? `<small>Also: ${escape(match.aliases.slice(1).join(", "))}</small>` : ""}` : ""}</td><td>${escape(displayLocation(match))}</td><td>${match.strand === 1 ? "Forward" : match.strand === -1 ? "Reverse" : "Unstranded"}</td><td>${match.duplicate ? "Already annotated" : "New"}</td></tr>`).join("")}</tbody></table></div>` : '<p class="analysis-note">Preview matches before adding annotations. Apply supports one-step document undo/redo.</p>'}</div><input type="file" id="library-file-input" accept=".pclib,.json,.csv,.ftrs,.dna,.gb,.gbk,.genbank" hidden>`
+      )}${field("Library name", "library-name", library.name, { extra: builtin ? "disabled" : "" })}${button("Rename", "library-rename", builtin ? "disabled" : "")}${button("Find annotation matches", "library-match", this.librarySearchAll || library.features.length ? "" : "disabled")}</div><div class="wf-controls"><label class="check-label"><input type="checkbox" id="library-search-all" ${this.librarySearchAll ? "checked" : ""}>Search all libraries</label><label class="check-label"><input type="checkbox" id="library-close-matches" ${this.libraryAllowCloseMatches ? "checked" : ""}>Find close matches for long elements (≥95% DNA identity)</label>${field("Search features / accession", "library-filter", this.libraryFilter)}${select("Category", "library-category", [["", "All categories"], ...[...new Set((this.librarySearchAll ? [COMMON_FEATURE_LIBRARY, ...this.libraries].flatMap((l) => l.features) : library.features).map((f) => f.category).filter(Boolean))].sort().map((c) => [c, c])], this.libraryCategory)}${builtin ? button("Copy bundled library to edit", "library-copy") : ""}</div><p id="library-entry-count">${this.filteredLibraryEntries(library).length} of ${library.features.length} entries shown. Search/category filters also limit matching; exports contain the full active library.</p>${builtin ? '<p class="analysis-note">Bundled reference variants come from public INSDC/GenBank records, with accession/coordinate provenance. Protein-tag patterns are independently derived from published peptide motifs. Full-pattern sequence evidence does not establish function; review variants, short motifs and reading frame. No runtime download is required.</p>' : ""}<p class="analysis-note">Patterns may use IUPAC codes. Exact patterns are searched on both strands and across circular origins. Optional close matching of coding sequences, origins and other long elements covers the full reference span (at least 90 bases, ≥95% DNA identity, substitutions only); uncertain bases and premature internal CDS stops are rejected. Primers remain exact. Short motifs remain exact. Annotation names are compared without capitalization or repeated whitespace. When the same-name hits overlap at least 80% of the shorter span, they are merged, keeping the longest span; separate copies and opposite strands remain separate. This library is stored in this app profile. Export .pclib for a portable backup. CSV import accepts Name, Feature, Type and Color columns. Import also accepts local .ftrs/.dna or annotated GenBank files, split only above 2,000 entries or 2,000,000 DNA bases per library; unsupported entries are reported. Local imports are not part of the bundled catalog.</p><details class="analysis-note"><summary>Import features from an existing SnapGene installation</summary><p>Choose Import and select a local .ftrs feature list. On macOS, in Finder open Applications, right-click SnapGene → Show Package Contents → Contents → Resources, then locate standardCommonFeatures.ftrs. In the file picker, ⌘⇧G can open /Applications/SnapGene.app/Contents/Resources/. On Windows, search your SnapGene installation folder for .ftrs files. Locations vary by version. Review the import summary, select each imported library part and choose Find annotation matches. Export .pclib for a personal backup. Use only content you are authorized to use; imported vendor lists are local to your profile and are not included in PlasmidCraft releases.</p></details><details class="wf-editor" ${builtin ? "hidden" : "open"}><summary>${draft.id ? "Edit library entry" : "Add a library entry"}</summary><div class="wf-controls">${field("Feature name", "lib-entry-name", draft.name)}${field("Type", "lib-entry-type", draft.type)}${field("Color", "lib-entry-color", draft.color, { type: "color" })}<label class="check-label"><input id="lib-entry-directional" type="checkbox" ${draft.directional ? "checked" : ""}>Directional feature</label></div><label>DNA pattern (4–10,000 bases)<textarea id="lib-entry-sequence" spellcheck="false">${escape(draft.sequence)}</textarea></label><label>Additional DNA patterns (optional, one per line)<textarea id="lib-entry-alternates" spellcheck="false">${escape((draft.alternateSequences || []).join("\n"))}</textarea></label>${field("Description", "lib-entry-description", draft.description)}<div class="wf-actions">${button("Use selected annotation", "library-selection")}${button(draft.id ? "Update entry" : "Add entry", "library-add")}${button("Clear editor", "library-clear")}</div></details><div class="data-card wf-scroll"><table class="data-table" id="library-entries"><thead><tr><th>Name</th><th>Type</th><th>Pattern</th><th>Actions</th></tr></thead><tbody>${this.libraryRows(library)}</tbody></table></div><div id="wf-result">${preview ? `<h3>Annotation preview</h3><p>${preview.result.matches.length} unique match(es) · ${preview.result.duplicatesRemoved || 0} duplicate identifications merged${preview.result.truncated ? " · Result limit reached; narrow the library before applying." : ""}</p><div class="wf-actions">${button("Select new matches", "library-select-new")}${button("Clear selection", "library-select-none")}${button("Apply selected annotations", "library-apply")}</div>${this.annotationMatchTables(preview.result.matches)}` : '<p class="analysis-note">Preview matches before adding annotations. Apply supports one-step document undo/redo.</p>'}</div><input type="file" id="library-file-input" accept=".pclib,.json,.csv,.ftrs,.dna,.gb,.gbk,.genbank" hidden>`
     );
   }
   primerConditions() {
@@ -1084,6 +1111,11 @@ class Workbench {
         this.alignment.selected.add(target.dataset.alignmentRead);
       else this.alignment.selected.delete(target.dataset.alignmentRead);
     }
+    if (target.id === "library-close-matches") {
+      this.libraryAllowCloseMatches = target.checked;
+      this.libraryPreview = null;
+      this.refresh();
+    }
     if (target.id === "library-search-all") {
       this.librarySearchAll = target.checked;
       this.libraryPreview = null;
@@ -1110,6 +1142,16 @@ class Workbench {
     return true;
   }
   change(target) {
+    if (target.dataset.libraryMatch !== undefined) {
+      const preview = this.libraryPreview;
+      if (!preview || preview.token !== recordToken(this.api.active()))
+        return true;
+      const index = Number(target.dataset.libraryMatch);
+      if (target.checked) preview.selected.add(index);
+      else preview.selected.delete(index);
+      this.api.previewChanged();
+      return true;
+    }
     // The live filter already updates on input. Replacing its rows on blur
     // would detach a row button between pointer-down and click.
     if (target.id === "library-filter") return true;
@@ -1702,25 +1744,50 @@ class Workbench {
       const result = await this.job("libraries", [
         publicRecord(doc),
         libraries,
+        { allowCloseMatches: this.libraryAllowCloseMatches },
       ]);
       this.checked(token);
-      this.libraryPreview = { token, result, libraryId: library.id };
+      this.libraryPreview = {
+        token,
+        result,
+        libraryId: library.id,
+        id: uid(),
+        selected: new Set(
+          result.matches.flatMap((match, i) =>
+            !match.duplicate && !match.mismatches ? [i] : [],
+          ),
+        ),
+      };
       this.refresh();
     } else if (
-      action === "library-select-new" ||
-      action === "library-select-none"
+      [
+        "library-select-new",
+        "library-select-none",
+        "library-select-close",
+        "library-clear-close",
+      ].includes(action)
     ) {
-      for (const box of document.querySelectorAll(
-        "[data-library-match]:not([disabled])",
-      ))
-        box.checked = action === "library-select-new";
+      const preview = this.libraryPreview;
+      if (!preview) throw new Error("Preview library matches first.");
+      this.checked(preview.token);
+      preview.result.matches.forEach((match, i) => {
+        if (match.duplicate || (action.endsWith("close") && !match.mismatches))
+          return;
+        if (
+          action === "library-select-new" ||
+          action === "library-select-close"
+        )
+          preview.selected.add(i);
+        else preview.selected.delete(i);
+      });
+      for (const box of document.querySelectorAll("[data-library-match]"))
+        box.checked = preview.selected.has(Number(box.dataset.libraryMatch));
+      this.api.previewChanged();
     } else if (action === "library-apply") {
       const preview = this.libraryPreview;
       if (!preview) throw new Error("Preview library matches first.");
       this.checked(preview.token);
-      const selected = [
-          ...document.querySelectorAll("[data-library-match]:checked"),
-        ].map((box) => Number(box.dataset.libraryMatch)),
+      const selected = [...preview.selected],
         result = applyLibraryMatches(doc, preview.result.matches, selected, {
           prefix: `library-${uid()}`,
         });

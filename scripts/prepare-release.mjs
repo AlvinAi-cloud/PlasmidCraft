@@ -50,10 +50,11 @@ const files = [
     "PROTEIN_ANALYSIS_AND_BLAST.md",
     "MUTAGENESIS.md",
     "RELEASE.md",
+    "INSTALLING.md",
     "SEQUENCE_VERIFICATION.md",
     "VALIDATION.md",
     "WORKFLOWS.md",
-    "screenshots/0.34",
+    "screenshots/0.35",
   ].map((name) => `docs/${name}`),
 ];
 const excluded = new Set([

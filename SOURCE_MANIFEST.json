@@ -1,6 +1,6 @@
 {
   "product": "PlasmidCraft",
-  "version": "0.34.0",
+  "version": "0.35.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -11,12 +11,20 @@
       "sha256": "f08039a76341c97277fdb74e8232c83a73fe54d3b433d2c645a2d5f90a5c6e65"
     },
     {
+      "path": ".github/scripts/publish-release.mjs",
+      "sha256": "6b69d09c34cd351d0e9f39860e8b7de7ed267edfe585e9d178e51bc976a21273"
+    },
+    {
       "path": ".github/workflows/desktop.yml",
-      "sha256": "f12dd62122f5aafbb95ef0695a74e149119422c18c3ef45de0ec12f74b45d56a"
+      "sha256": "adad20a8783d225aaf8998de26c5493dd862c73e7d9420ed0755d3852815aa86"
     },
     {
       "path": ".github/workflows/linux-appimage.yml",
       "sha256": "edb0837c892d5c39af94b96692a8651a3a38deeafa8ca02dee547f826320221c"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "sha256": "15a00c4786cc453fb6fb0caffdd6201fde17e5cbeabf287c9bbd869ba48043a5"
     },
     {
       "path": ".gitignore",
@@ -112,7 +120,7 @@
     },
     {
       "path": "docs/AI_ASSISTANT.md",
-      "sha256": "8e324f0e2a0222bfe793491f93c68cdb344336fa6cf3e0f1a41dfcb284b7bbd6"
+      "sha256": "3233bc6cb9311d80f600c58c69d411f251e7c5e8010cebb7d7eb3818db813844"
     },
     {
       "path": "docs/CLONING_DESIGN.md",
@@ -124,15 +132,19 @@
     },
     {
       "path": "docs/DESKTOP.md",
-      "sha256": "0e469b6d033a1af52ec9e925c85e142a7a6bf5dc068695ad147b651504e62e65"
+      "sha256": "0c3b3ae7ba02f8ee3ecc06a07380b706c10d2a0228344b33136bed17b5e1e0a5"
     },
     {
       "path": "docs/FEATURE_CATALOG_AND_EXCHANGE.md",
-      "sha256": "fddd3a29a4e11c2a91c17ef5417aed0ac7af06ead15b249890adcd67fab7ac2f"
+      "sha256": "5abb2f7a519d894ee6e5b3c136be8c4c4ca2c2fd62539b2fd586857bdc123458"
     },
     {
       "path": "docs/GETTING_STARTED.md",
-      "sha256": "72dffd2fb89a8e7ae34e3de39d82098828436811401f170c50d8a15caa2e2db3"
+      "sha256": "d435f79dfec6fdd65e1613f024823408058beb2121448f0826defc027d070426"
+    },
+    {
+      "path": "docs/INSTALLING.md",
+      "sha256": "5120f207799c8b7d6088f768cd3b71f1ab88b1d5d3c96f459ddba43343cf5006"
     },
     {
       "path": "docs/MUTAGENESIS.md",
@@ -140,23 +152,23 @@
     },
     {
       "path": "docs/PROTEIN_ANALYSIS_AND_BLAST.md",
-      "sha256": "cb86de0d6cda3b53691528c55bc1eb08fb8aa8d67baa6459907b91740a9ed6d5"
+      "sha256": "21da7ed579a4e6721b0a1b0ad6cc9c9219244a893a524690e995cd35257a2433"
     },
     {
       "path": "docs/RELEASE.md",
-      "sha256": "ce50822c4c42dfa1104f6b9b848e5afea320df5a57ad3868e5cc50ea6c29efa9"
+      "sha256": "e252bb057d89c0c7b396c3cfdd8d823bac809e96ca3c5981b33e44767faab54a"
     },
     {
-      "path": "docs/screenshots/0.34/help.png",
-      "sha256": "b8a6544b90a9a70309ae25d4fb6a12790165f326134a56ab12859b393399457e"
+      "path": "docs/screenshots/0.35/help.png",
+      "sha256": "4270262892b2eb0efba52b0ca4f49262fae1efb34042eb7b9de87973367056d8"
     },
     {
-      "path": "docs/screenshots/0.34/internal-ai-operations.png",
-      "sha256": "5d5c43208d7866b4396162938d78977b61702a966c68a6bf5c011e121e17aa44"
+      "path": "docs/screenshots/0.35/internal-ai-operations.png",
+      "sha256": "bab318d35a513478b0aa41437ec7d2eec029cf59354adcf3cf4106dc3452c39e"
     },
     {
-      "path": "docs/screenshots/0.34/map.png",
-      "sha256": "3a2d0f6ca0ac14ad29a490f06837feb80733e6a91301aa52e8598ae0cea16804"
+      "path": "docs/screenshots/0.35/map.png",
+      "sha256": "2e9ea6778ae7be9e952785de43e748a1c22ca90c8865dfbe048c2628bdc9b722"
     },
     {
       "path": "docs/SEQUENCE_VERIFICATION.md",
@@ -164,7 +176,7 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "cc42303fd16f93126f8f138984fab21539a946a4135803091fdb7662a9671ba1"
+      "sha256": "1ead7386d7cdbc3b780f7b4075f970b8ffe5d50355690e8f35f72ba7a68afb82"
     },
     {
       "path": "docs/WORKFLOWS.md",
@@ -176,7 +188,7 @@
     },
     {
       "path": "Launch PlasmidCraft.command",
-      "sha256": "1e6056c1e690a63c908f93f46889e8f54940a66f621c394736ab3dcc13e07620"
+      "sha256": "9bea54ef548f4521a17653edd4e1bfc01e4342bd21c4fdd7370b35a44089e2fd"
     },
     {
       "path": "LICENSE",
@@ -184,7 +196,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "f7946536559836a7c30336778bd733ed25dec3400a7d896cce4be524aa76e11a"
+      "sha256": "ef3126b9243e20a9a4334774e00c8135b345cd59fff9d4529402baa652febdc0"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -196,11 +208,11 @@
     },
     {
       "path": "README.md",
-      "sha256": "a6f35b95e65e8b4e0deacee702e215817e68d8c578a5572569c8334c60f24fc8"
+      "sha256": "3e95f6dd32ae3f35a61e27923f27762e660a38155f18966896ff26b4aad62d75"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "sha256": "0ff687fc51d3319a110cf783e08e55287fba5e6644acf85d6a4feefb0c15560f"
+      "sha256": "440cbc3426bd51ab2df62bdbff5e518e80bce50d9f5c1b6975705f5f65213ea7"
     },
     {
       "path": "scripts/build-common-features.mjs",
@@ -216,7 +228,7 @@
     },
     {
       "path": "scripts/check.mjs",
-      "sha256": "c0d4ae72a3b4257b185653a917f9fcded58d06cc9cd68647648fa5351d705c17"
+      "sha256": "f196f1befb97194be0c3862b984785cf852cb378eb1848f819b421310a7ba053"
     },
     {
       "path": "scripts/desktop.mjs",
@@ -232,7 +244,7 @@
     },
     {
       "path": "scripts/prepare-release.mjs",
-      "sha256": "b1abf776435f1fab68c47e38b6a643ec10ff65817c5784b7b85c5f24c7243352"
+      "sha256": "ed47246d139689bf9e034923ae5eaab050486d563529b3c6fa5a3f0e32a816c3"
     },
     {
       "path": "scripts/serve.mjs",
@@ -264,11 +276,11 @@
     },
     {
       "path": "src-tauri/Cargo.lock",
-      "sha256": "d21aedcc28d96ff88153c1ac7d2009d0af4c4fbc800cac8f3aa51948ebd06a3c"
+      "sha256": "eee17a2a4732768ded382e70d63eeadbb1ef2dd7eaab3732d0e8965bdcacda3f"
     },
     {
       "path": "src-tauri/Cargo.toml",
-      "sha256": "08bed5ab65379ebac6e6b406523ceaa40aac14a82c50dcb9ab9480397d4fee85"
+      "sha256": "86a097713a924af71eff4d73a3a4a96aa7476a3bee4617eaaf10ef704111678c"
     },
     {
       "path": "src-tauri/icons/128x128.png",
@@ -372,7 +384,7 @@
     },
     {
       "path": "src-tauri/tauri.conf.json",
-      "sha256": "7bee6337715c97b1ebfb8505083021f3b16e5e93b983f3c05b42eebb23229b5e"
+      "sha256": "0b846ae361635e70d0a4e663c1f557526670c23b91274354a54a658d4ed6a5fe"
     },
     {
       "path": "src-tauri/tests/fixtures/chatgpt-test-only-jwks.json",
@@ -413,6 +425,14 @@
     {
       "path": "tests/ai.test.mjs",
       "sha256": "a40a9b082f900ba1c1c126bc7b6873054dc4afa5545c32b0406e28dfccde85a5"
+    },
+    {
+      "path": "tests/annotation-name-dedup-ui-smoke.mjs",
+      "sha256": "9eea021b89fe9db24192dbf244f67951dc546d3e0600c5696ce6487a7e132298"
+    },
+    {
+      "path": "tests/annotation-orf-035-ui-smoke.mjs",
+      "sha256": "0ebf82bf40c07a39a009ce59b732b043fe628d5bad09b92fd02ffd8a953235d3"
     },
     {
       "path": "tests/assembly-map-primer-ui-smoke.mjs",
@@ -564,11 +584,15 @@
     },
     {
       "path": "tests/library-all.test.mjs",
-      "sha256": "9fe8b4ed67add7122491bed58e62489ac113a16ae23329e014186821241a56cb"
+      "sha256": "b4f5e2cc2379fe175fc83098bb5e3109a2a1c83b7be734f992ab357eb87ab6d7"
     },
     {
       "path": "tests/map-enzymes.test.mjs",
       "sha256": "18c3778541451527616d2b50cb63d6cc8b289af6aa5e6a1a1f726e0a3e0960b4"
+    },
+    {
+      "path": "tests/map-layout-memory-ui-smoke.mjs",
+      "sha256": "18e792611a73639f00943608d2f0115977c7107f536705ac74abd53c79145415"
     },
     {
       "path": "tests/model-overview-ui-smoke.mjs",
@@ -581,6 +605,10 @@
     {
       "path": "tests/mutagenesis.test.mjs",
       "sha256": "a0952b587142e9e7802d1748f1795d1d5e8512e6cc0fed67ec25ea2534665c5a"
+    },
+    {
+      "path": "tests/pending-annotation-ui-smoke.mjs",
+      "sha256": "610f6ce12362cb6cbc87f03e0f77ac3daf665113bea6fa9658e72f31420b08a3"
     },
     {
       "path": "tests/plasmid-reference.mjs",
@@ -596,7 +624,7 @@
     },
     {
       "path": "tests/project.test.mjs",
-      "sha256": "a4ba318942325ca7ebf027edf0d4616fd61175734f0d10b84adb0f0e55ec72af"
+      "sha256": "ee29013868882b61fdd83dbd5773e38762344ab603dc605b78bff761ef3eaf77"
     },
     {
       "path": "tests/protein-analysis.test.mjs",
@@ -616,7 +644,7 @@
     },
     {
       "path": "tests/protein.test.mjs",
-      "sha256": "dc9e8e64907f9310bfef53933a2d15e9b2c626dc222369ddf2998de8392b2e49"
+      "sha256": "ad970f7bd85b132ab6ad2a5970beaa1d1e98d6e17dbda401910d69f34fb35cd2"
     },
     {
       "path": "tests/reference-imports.mjs",
@@ -704,7 +732,7 @@
     },
     {
       "path": "viewer/ai-tools.mjs",
-      "sha256": "090f71dece904104111caac7ffda26caba0bf14d0ffd71fd87f2089ba37e1f1d"
+      "sha256": "b80e217c8b3b806485ad9fb42273cbb12c500fa0e8254a972367ff8c29ca3595"
     },
     {
       "path": "viewer/ai-ui.mjs",
@@ -723,8 +751,16 @@
       "sha256": "da715d52c177b90e0e085d911e3ddc4b29f48e474cba23ebfb1dd94905fed710"
     },
     {
+      "path": "viewer/annotation-matches.mjs",
+      "sha256": "f6268f4a45939be44ca026cf2a1fdd24e59be59bec35f4ea09f549ab6ffb27dc"
+    },
+    {
+      "path": "viewer/annotation-review-ui.mjs",
+      "sha256": "7774d64ad112e7ae4b113a81d6b294f4a906f2a1721a375c6a971f59ad43cef2"
+    },
+    {
       "path": "viewer/app.mjs",
-      "sha256": "41b4a0048fcfd0a54df1250f51544f5f584eff4ffeb226cf99ca38d5b786025c"
+      "sha256": "b8c9dafa54c04802b192eaedea4bd3328e49c9690452107b210edbbfcfa0ded2"
     },
     {
       "path": "viewer/assembly.mjs",
@@ -772,7 +808,7 @@
     },
     {
       "path": "viewer/desktop.css",
-      "sha256": "4d4503f8aef79e7430dfcf8f216297dc27dd74480735781b9bfa99dbfa3b68bd"
+      "sha256": "b8936cb3f96db9c3c773aa0832b064cf335b06c4543706d547523fb0fbd31e67"
     },
     {
       "path": "viewer/dna-ends.mjs",
@@ -808,7 +844,7 @@
     },
     {
       "path": "viewer/help-content.mjs",
-      "sha256": "1e5b9574b37d30d47dd5861196ada26bd1e1ea451d4c501528656017901567e1"
+      "sha256": "7e5ff97fa8bd2796320f5c8f4817d2b60ee0d090f783aa9fcbaec4c21f3a7aa1"
     },
     {
       "path": "viewer/help-markdown.mjs",
@@ -820,11 +856,11 @@
     },
     {
       "path": "viewer/index.html",
-      "sha256": "5706b37a13aa9ca5b3f2bb6e5692d965030f2dfb701af88285ce14bf9240f229"
+      "sha256": "8630f001d7c0b2701c1eb2b3cabfb9238798036c7b6fd1055b6f7491e853e198"
     },
     {
       "path": "viewer/library.mjs",
-      "sha256": "5b777aed24a2ebee725e5c6bb27cba306a33653ed8afc5fd658c69f2cc618034"
+      "sha256": "cb5fff03661b6edb53b9ed651341b4b5279fe870d632bfd107a498ef2426d563"
     },
     {
       "path": "viewer/LICENSE",
@@ -841,6 +877,14 @@
     {
       "path": "viewer/mutagenesis.mjs",
       "sha256": "7371792a152ba69af4f04c966d3e76eed5bb4d58b84b74dfac292fabe3b61253"
+    },
+    {
+      "path": "viewer/orf-review-ui.mjs",
+      "sha256": "cf3914e3a02668cbd04684548c3affab561f0fd8e95ca84d13a9bdd0f12c029e"
+    },
+    {
+      "path": "viewer/pending-annotations.mjs",
+      "sha256": "4ec691fbafeac48f40a5a1c4746aaa4bb5e03e1836571932d8ad24414e2c1ea4"
     },
     {
       "path": "viewer/plasmid-alignment.mjs",
@@ -860,7 +904,7 @@
     },
     {
       "path": "viewer/project.mjs",
-      "sha256": "4caccb57376b379d426c84e7e69f38c9ec6251527ae5d6187db129215d5a4651"
+      "sha256": "35a1e8141ddb23a8d54546d6d203470f04aa80584170937da3f72fe4537b46d4"
     },
     {
       "path": "viewer/protein-analysis.mjs",
@@ -876,7 +920,7 @@
     },
     {
       "path": "viewer/protein.mjs",
-      "sha256": "3e2f7b0507968fa26beb58b4d3fafc9045f40d84e4864b90f9677fccff6c6e51"
+      "sha256": "b8df19baf9b64a01158d62402780403c94f5d7cc5f448c530ebd2f41c958a230"
     },
     {
       "path": "viewer/read-assembly-ui.mjs",
@@ -932,7 +976,7 @@
     },
     {
       "path": "viewer/workbench-ui.mjs",
-      "sha256": "96467169862a8fcb0cf7ecb5d563f38a19744e04b763a81448eb6a364f48d108"
+      "sha256": "74586a786519cac15f78d8a987b06d2add4e67f8a271610d8948bbbb76cca1e4"
     },
     {
       "path": "viewer/workflow-common.mjs",

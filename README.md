@@ -1,27 +1,31 @@
-# PlasmidCraft 0.34
+# PlasmidCraft 0.35
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
 An independent desktop workspace for plasmid viewing, sequence editing, protein analysis and cloning design. Built with JavaScript, Rust and Tauri 2. The application embeds its interface and works without Node.js, Python or a local web server.
 
-![PlasmidCraft map](docs/screenshots/0.34/map.png)
+![PlasmidCraft map](docs/screenshots/0.35/map.png)
 
 ## Install
 
-Use the package matching your computer from the release assets:
-https://github.com/AlvinAi-cloud/PlasmidCraft/releases/
+Download the package matching your computer from the [GitHub release](https://github.com/AlvinAi-cloud/PlasmidCraft/releases/tag/v0.35.0):
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
-| Mac Apple Silicon | `PlasmidCraft-0.34.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
-| Mac Intel | `PlasmidCraft-0.34.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
-| Windows | `PlasmidCraft-0.34.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
+| Mac Apple Silicon | `PlasmidCraft-0.35.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
+| Mac Intel | `PlasmidCraft-0.35.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
+| Linux x86_64 | `PlasmidCraft-0.35.0-Linux-x86_64.AppImage` | Recent x86_64 Linux; FUSE 2 or extraction mode |
+| Windows | `PlasmidCraft-0.35.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
 
-Mac: open the disk image and drag **PlasmidCraft 0.34** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Subsequent local biology tools work offline.
+Mac: open the disk image and drag **PlasmidCraft 0.35** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Linux: make the AppImage executable and run it. See [installation](docs/INSTALLING.md) for commands and extraction mode. Subsequent local biology tools work offline.
 
-**0.34 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
+**0.35 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
 
 ## Features
+
+- Circular/Linear map choices are remembered per document and stored in `.pcraft` files for reopening, independently of DNA topology.
+- Auto annotation merges case-insensitive overlapping names, retaining the longest definition. Long-element close matches appear separately for review; Select all and movable review panels show temporary Map/Sequence annotations until confirmation. The Features page can merge existing duplicates in one undo step.
+- ORF review defaults to 80 aa and supports a compact movable batch-selection panel with temporary Map/Sequence previews.
 
 - Circular/linear maps with an optional tight curved-label publication layout that hides enzyme markings when activated, a Common enzymes group with optional custom Map selections, a width-adaptive continuous scrolling Sequence view with CDS residue numbering every five residues with strand-specific primer letters, mismatch highlights, separate 5′ tails, codon blocks and optional reading frames in one-letter or three-letter notation, a clickable annotation overview pinned below Map and Sequence, centered annotation navigation, packed non-overlapping CDS lanes, linked DNA/protein selection with copy/FASTA choices, feature/primer lists, restriction sites, six-frame translation, ORFs, direct sequence editing and branching undo history.
 - GenBank, DNA FASTA/text, SnapGene `.dna`, Sanger `.ab1`, native `.pcraft` documents and protein FASTA/text/`.pcprotein` import. Protein-only imports are available under File → New from Pasted Protein and Tools → Protein Documents.
@@ -46,7 +50,7 @@ Open a sequence using **File → Open Sequence**. Use **View** for panels/lists,
 
 The same guides are bundled offline under **Help → User Guide and Search…**, with full-text topic search, section navigation and direct Help menu shortcuts. **Getting Started** explains the example plasmid, layout, file handling and workflow entry points.
 
-![Offline Help and workflow guides](docs/screenshots/0.34/help.png)
+![Offline Help and workflow guides](docs/screenshots/0.35/help.png)
 
 Guides: [mutagenic primers](docs/MUTAGENESIS.md), [editing and alignment](docs/SEQUENCE_VERIFICATION.md), [PCR and assembly](docs/WORKFLOWS.md), [cloning design](docs/CLONING_DESIGN.md), [codon optimization](docs/CODON_OPTIMIZATION.md), [protein analysis and BLAST](docs/PROTEIN_ANALYSIS_AND_BLAST.md), [feature catalogs and exchange](docs/FEATURE_CATALOG_AND_EXCHANGE.md), [AI connections](docs/AI_ASSISTANT.md).
 
@@ -70,7 +74,7 @@ cargo test --locked --manifest-path src-tauri/Cargo.toml --lib
 pnpm desktop:dev
 ```
 
-For a directly launchable local Mac preview, run `pnpm desktop:build --debug --bundles app`. Double-click **Launch PlasmidCraft.command**; it opens an existing optimized release first, then a debug app if no release exists. This builds a preview app bundle without installer images.
+For a directly launchable local Mac preview, run `pnpm desktop:build --debug --bundles app`. Double-click **Launch PlasmidCraft.command**; it opens an available local preview or release bundle, then a debug app if none exists. This builds a preview app bundle without installer images.
 
 For renderer checks:
 

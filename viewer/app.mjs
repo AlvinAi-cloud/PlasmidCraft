@@ -1,3 +1,7 @@
+import { deduplicateFeatureAnnotations } from "./annotation-matches.mjs";
+import { AnnotationReviewUI } from "./annotation-review-ui.mjs";
+import { annotationPreviewRecord } from "./pending-annotations.mjs";
+import { OrfReviewUI } from "./orf-review-ui.mjs";
 import { mountToolMenus } from "./tool-menus.mjs";
 import { HelpUI } from "./help-ui.mjs";
 import { documentNotes, readableNote } from "./document-notes.mjs";
@@ -64,6 +68,7 @@ import {
 import {
   GENETIC_CODES,
   findOrfs,
+  matchingOrfCds,
   translateCds,
   orfFeature,
   proteinFasta,
@@ -185,7 +190,7 @@ const state = {
   traceStart: 0,
   translationMode: "frames",
   orfOptions: {
-    minAa: 30,
+    minAa: 80,
     code: 1,
     startMode: "atg",
     strands: "both",
@@ -231,6 +236,7 @@ const workbench = createWorkbench({
   editSelectedPrimer: (primer) => selectedPrimerUI.edit(primer),
   mutagenesis: () => mutagenesisUI,
   refresh: () => render(),
+  previewChanged: () => renderAnnotationPreview(),
   setView,
   addRecords,
   selection: () =>
@@ -352,6 +358,13 @@ function addRecords(records) {
   if (records.length) activate(records[0].id);
   return records;
 }
+function rememberMapLayout(layout) {
+  if (!["circular", "linear"].includes(layout)) return;
+  const doc = active();
+  if (doc)
+    doc.viewSettings = { ...(doc.viewSettings || {}), mapLayout: layout };
+  state.mapLayout = layout;
+}
 function activate(id) {
   state.active = id;
   state.editBases = false;
@@ -369,7 +382,9 @@ function activate(id) {
   state.digest.clear();
   $("#sequence-search").value = "";
   const doc = active();
-  state.mapLayout = doc?.topology === "circular" ? "circular" : "linear";
+  state.mapLayout =
+    doc?.viewSettings?.mapLayout ??
+    (doc?.topology === "circular" ? "circular" : "linear");
   state.view = doc?.trace ? "trace" : "map";
   render();
 }
@@ -404,6 +419,7 @@ function render() {
   renderInspector();
   updateSearchStatus();
   hydrateIcons();
+  orfReview.refresh();
 }
 function renderDocuments() {
   for (const doc of state.documents) commitHistory(doc);
@@ -521,6 +537,30 @@ const selectedPrimerUI = new SelectedPrimerUI({
   selectPrimer,
 });
 const proteinTools = new ProteinToolsUI({ platform, modal, toast });
+const annotationReview = new AnnotationReviewUI({
+  active,
+  preview: () => workbench.libraryPreview,
+  changed: () => renderAnnotationPreview(),
+  confirm: () =>
+    workbench
+      .action("library-apply", { dataset: {} })
+      .catch((error) => toast(error.message, true)),
+  focus(index) {
+    const match = workbench.libraryPreview?.result.matches[index];
+    if (match)
+      selectFeature(`pending-library-${workbench.libraryPreview.id}-${index}`);
+  },
+});
+const orfReview = new OrfReviewUI({
+  active,
+  snapshot,
+  toast,
+  refresh: () => render(),
+  previewChanged: () => renderAnnotationPreview(),
+  show(orf) {
+    selectRange(orf.segments[0].start, orf.segments.at(-1).end);
+  },
+});
 const mutagenesisUI = new MutagenesisUI({
   active,
   snapshot,
@@ -579,6 +619,17 @@ function blastSources() {
     });
   return sources;
 }
+function displayRecord(doc = active()) {
+  if (!doc) return doc;
+  return annotationPreviewRecord(doc, [
+    ...workbench.pendingAnnotations(doc),
+    ...orfReview.pendingAnnotations(doc),
+  ]);
+}
+function renderAnnotationPreview() {
+  renderMain();
+  renderInspector();
+}
 function selectedFeature() {
   return active()?.features.find((f) => f.id === state.selection?.featureId);
 }
@@ -605,7 +656,10 @@ function selectionSequence() {
   }
 }
 function selectFeature(id) {
-  const feature = active().features.find((f) => f.id === id);
+  const doc = active();
+  const feature =
+    doc.features.find((f) => f.id === id) ||
+    displayRecord(doc).features.find((f) => f.id === id && f.pendingAnnotation);
   if (!feature) return;
   if (!feature.segments.length) {
     toast(
@@ -616,7 +670,9 @@ function selectFeature(id) {
   state.selection = {
     start: feature.segments[0].start,
     end: feature.segments.at(-1).end,
-    featureId: id,
+    ...(feature.pendingAnnotation
+      ? { pendingFeatureId: id, segments: feature.segments }
+      : { featureId: id }),
     strand: feature.strand,
   };
   state.sequenceTarget = state.selection.start;
@@ -627,7 +683,13 @@ function selectFeature(id) {
 }
 function selectPrimer(id) {
   const primer = active().primers.find((p) => p.id === id);
-  if (!primer) return;
+  if (!primer) {
+    const pending = displayRecord().primers.find(
+      (p) => p.id === id && p.pendingAnnotation,
+    );
+    if (pending) selectFeature(pending.annotationId);
+    return;
+  }
   const site = primer.sites[0];
   state.selection = {
     start: site?.segments[0].start ?? 0,
@@ -704,15 +766,16 @@ function renderMain() {
     doc = active();
   panel.dataset.view = state.view;
   if (!doc) {
+    annotationReview.sync(state.view);
     panel.innerHTML = `<div class="welcome-card">${icon("dna")}<h2>A clearer view of your sequences</h2><p>Open a GenBank, FASTA, SnapGene DNA, or AB1 file.<br>Or explore the supplied pET-21b(+) example plasmid.</p><button class="button primary" data-action="open">${icon("folder-open")}Open sequence file</button><br><button class="text-button" data-action="example" style="margin:auto">Load example plasmid</button></div>`;
     return;
   }
   switch (state.view) {
     case "map":
-      panel.innerHTML = renderMap(doc);
+      panel.innerHTML = renderMap(displayRecord(doc));
       break;
     case "sequence":
-      panel.innerHTML = renderSequence(doc);
+      panel.innerHTML = renderSequence(displayRecord(doc));
       break;
     case "features":
       panel.innerHTML = renderFeatures(doc);
@@ -762,6 +825,28 @@ function renderMain() {
     state.sequenceTarget = null;
     sequenceReflow = false;
   }
+  if (["map", "sequence"].includes(state.view)) {
+    const pending = displayRecord(doc).features.filter(
+      (f) => f.pendingAnnotation,
+    );
+    if (pending.length)
+      panel.insertAdjacentHTML(
+        "afterbegin",
+        `<p class="annotation-preview-notice" id="annotation-preview-notice" role="status">Temporary preview: ${pending.length} selected annotation(s). Confirm in the review panel to keep them.</p>`,
+      );
+    const pendingIds = new Set([
+      ...pending.map((f) => f.id),
+      ...displayRecord(doc)
+        .primers.filter((p) => p.pendingAnnotation)
+        .map((p) => p.id),
+    ]);
+    for (const element of panel.querySelectorAll(
+      "[data-feature],[data-primer]",
+    ))
+      if (pendingIds.has(element.dataset.feature || element.dataset.primer))
+        element.dataset.annotationPreview = "true";
+  }
+  annotationReview.sync(state.view);
   if (state.view === "primers") mutagenesisUI.mount();
   hydrateIcons(panel);
 }
@@ -1021,7 +1106,9 @@ function sequenceOverview(doc) {
     doc.sequence.length,
   );
   const selected = doc.features.find(
-    (f) => f.id === state.selection?.featureId,
+    (f) =>
+      f.id ===
+      (state.selection?.featureId || state.selection?.pendingFeatureId),
   );
   const ranges =
     state.selection?.segments ||
@@ -1244,6 +1331,32 @@ function renderEditHistory(doc) {
     `<p class="analysis-note">DNA states are stored in .pcraft format 3. Restore any retained state, then edit to create a branch. Up to 100 states / 20 MB are retained; older graph nodes may be trimmed. Trace data and saved alignment evidence remain outside the graph and are kept on the current document; reports become stale when their reference changes. This is edit history, not autosave or crash recovery.</p>${graph.truncated ? '<div class="notice">History was trimmed to its size limit. Oversized individual states cannot be retained.</div>' : ""}<div class="data-card wf-scroll"><svg class="history-graph" width="${width + 600}" height="${height}" role="img" aria-label="DNA edit history graph">${edges}${dots}</svg></div><div class="data-card wf-scroll"><table class="data-table" id="edit-history"><thead><tr><th>State</th><th>Operation</th><th>DNA</th><th>Annotations</th><th>Action</th></tr></thead><tbody>${nodes.map((n) => `<tr><td>${n.id}${n.id === graph.head ? " · current" : ""}</td><td>${e(n.label)}<br><small>${e(new Date(n.time).toLocaleString())}</small></td><td>${n.record.sequence.length} bp</td><td>${n.record.features.length}</td><td><button class="button" data-action="history-restore" data-history-id="${n.id}" ${n.id === graph.head ? "disabled" : ""}>Restore state</button></td></tr>`).join("")}</tbody></table></div>`
   );
 }
+function mergeDuplicateAnnotations() {
+  const doc = active();
+  if (!doc) return;
+  const result = deduplicateFeatureAnnotations(doc);
+  if (!result.removed.length) {
+    toast("No overlapping same-name duplicates found.");
+    return;
+  }
+  snapshot(doc, "Merge duplicate annotations");
+  doc.features = result.features;
+  doc.primers = result.primers;
+  const replacement = result.replacements[state.selection?.featureId];
+  if (replacement) {
+    const kept = doc.features.find((f) => f.id === replacement);
+    state.selection = {
+      featureId: kept.id,
+      start: kept.segments[0].start,
+      end: kept.segments.at(-1).end,
+      strand: kept.strand,
+    };
+  }
+  render();
+  toast(
+    `Merged ${result.removed.length} duplicate annotation(s), keeping the longest same-name regions. Undo restores the originals.`,
+  );
+}
 function renderFeatures(doc) {
   state.bulkSelected = new Set(
     [...state.bulkSelected].filter((id) =>
@@ -1255,11 +1368,12 @@ function renderFeatures(doc) {
       f.type !== "source" &&
       `${f.name} ${f.type}`.toLowerCase().includes(state.filter.toLowerCase()),
   );
+  const duplicates = deduplicateFeatureAnnotations(doc).removed.length;
   return (
     mainTitle(
       "Features",
       `${number(features.length)} annotations on this sequence`,
-      `<button class="button" data-action="annotate">${icon("plus")}Add annotation</button><button class="button" data-command="auto-annotation">Auto annotation…</button>`,
+      `<button class="button" data-action="annotate">${icon("plus")}Add annotation</button><button class="button" data-command="auto-annotation">Auto annotation…</button><button class="button" data-command="deduplicate-features" title="Merge overlapping same-name annotations across this document, keeping the longest. Names ignore capitalization. Undo restores the originals." ${duplicates ? "" : "disabled"}>Merge duplicate annotations (${duplicates})</button>`,
     ) +
     `<div class="wf-actions"><button class="button" data-action="bulk-select-visible">Select listed annotations</button><button class="button" data-action="bulk-clear">Clear selection</button><button class="button" data-action="bulk-open" id="bulk-open-button" ${state.bulkSelected.size ? "" : "disabled"}>Bulk edit selected</button><span id="bulk-selected-count">${state.bulkSelected.size} selected</span></div><div class="table-filter"><input class="inline-input" id="table-filter" placeholder="Filter annotations…" value="${e(state.filter)}" aria-label="Filter annotations"></div><div class="data-card">${features.length ? `<table class="data-table"><thead><tr><th>Select</th><th>Name</th><th>Type</th><th>Location</th><th>Length</th><th>Strand</th></tr></thead><tbody>${features.map((f) => `<tr data-feature="${e(f.id)}" tabindex="0" class="${state.selection?.featureId === f.id ? "selected" : ""}"><td><input type="checkbox" data-bulk-feature="${e(f.id)}" aria-label="Select annotation ${e(f.name)}" ${state.bulkSelected.has(f.id) ? "checked" : ""}></td><td><span class="feature-name"><i style="background:${safeColor(f.color)}"></i>${e(f.name)}</span></td><td><span class="type-pill">${e(f.type)}</span></td><td>${e(displayLocation(f))}</td><td>${number(featureLength(f))} bp</td><td>${f.strand === -1 ? "← Reverse" : f.strand === 0 ? "—" : "→ Forward"}</td></tr>`).join("")}</tbody></table>` : '<div class="empty-message">No matching annotations. Add one or open an annotated GenBank file.</div>'}</div>`
   );
@@ -1362,14 +1476,7 @@ function currentOrfAnalysis() {
     : null;
 }
 function matchingCds(doc, orf) {
-  return doc.features.find(
-    (feature) =>
-      feature.type === "CDS" &&
-      feature.strand === orf.strand &&
-      JSON.stringify(feature.segments) === JSON.stringify(orf.segments) &&
-      Number(feature.qualifiers?.transl_table?.[0] ?? 1) === orf.code &&
-      Number(feature.qualifiers?.codon_start?.[0] ?? 1) === 1,
-  );
+  return matchingOrfCds(doc, orf);
 }
 function renderOrfs(doc) {
   const options = state.orfOptions,
@@ -1402,7 +1509,7 @@ function renderOrfs(doc) {
     '<div class="empty-message">Choose settings and click Find ORFs to scan the whole document.</div>';
   if (analysis) {
     const { orfs, truncated, maxResults } = analysis.result;
-    results = `<p id="orf-result-summary">${number(orfs.length)} complete ORF candidate(s)${truncated ? ` · Result limit ${maxResults} reached; increase the minimum length or restrict strands to narrow the search. The retained subset is not guaranteed to contain the globally longest ORFs.` : ""}</p><div class="data-card orf-table-scroll"><table class="data-table" id="orf-results"><thead><tr><th>Candidate</th><th>Location</th><th>Frame</th><th>Length</th><th>Codons</th><th>Actions</th></tr></thead><tbody>${orfs.map((orf, index) => `<tr><td>ORF ${index + 1}${orf.wraps ? '<small class="orf-origin">Crosses origin</small>' : ""}</td><td class="mono">${e(displayLocation(orf))}</td><td>${orf.frame > 0 ? "+" : ""}${orf.frame}</td><td>${number(orf.aaLength)} aa</td><td class="mono">${orf.startCodon}–${orf.stopCodon}</td><td><div class="orf-row-actions"><button class="button" data-orf-action="show" data-orf-index="${index}">Show DNA</button><button class="button" data-orf-action="annotate" data-orf-index="${index}" ${matchingCds(doc, orf) ? "disabled" : ""}>${matchingCds(doc, orf) ? "CDS exists" : "Add CDS"}</button><button class="button" data-orf-action="copy" data-orf-index="${index}">Copy protein</button><button class="button" data-orf-action="export" data-orf-index="${index}">Export .faa</button></div></td></tr>`).join("")}</tbody></table></div>`;
+    results = `<div class="wf-actions"><button class="button primary" data-orf-action="review">Review / add unannotated ORFs…</button></div><p id="orf-result-summary">${number(orfs.length)} complete ORF candidate(s)${truncated ? ` · Result limit ${maxResults} reached; increase the minimum length or restrict strands to narrow the search. The retained subset is not guaranteed to contain the globally longest ORFs.` : ""}</p><div class="data-card orf-table-scroll"><table class="data-table" id="orf-results"><thead><tr><th>Candidate</th><th>Location</th><th>Frame</th><th>Length</th><th>Codons</th><th>Actions</th></tr></thead><tbody>${orfs.map((orf, index) => `<tr><td>ORF ${index + 1}${orf.wraps ? '<small class="orf-origin">Crosses origin</small>' : ""}</td><td class="mono">${e(displayLocation(orf))}</td><td>${orf.frame > 0 ? "+" : ""}${orf.frame}</td><td>${number(orf.aaLength)} aa</td><td class="mono">${orf.startCodon}–${orf.stopCodon}</td><td><div class="orf-row-actions"><button class="button" data-orf-action="show" data-orf-index="${index}">Show DNA</button><button class="button" data-orf-action="annotate" data-orf-index="${index}" ${matchingCds(doc, orf) ? "disabled" : ""}>${matchingCds(doc, orf) ? "CDS exists" : "Add CDS"}</button><button class="button" data-orf-action="copy" data-orf-index="${index}">Copy protein</button><button class="button" data-orf-action="export" data-orf-index="${index}">Export .faa</button></div></td></tr>`).join("")}</tbody></table></div>`;
   }
   return (
     mainTitle(
@@ -1410,7 +1517,7 @@ function renderOrfs(doc) {
       `${doc.topology === "circular" ? "Circular" : "Linear"} DNA · whole document · ${number(doc.sequence.length)} bp`,
     ) +
     controls +
-    `<p class="analysis-note">Complete start-to-first-stop candidates only, not gene predictions. Minimum length excludes the stop codon. Ambiguous codons break a candidate. Circular candidates may cross the origin but span at most one molecule; frame labels refer to the oriented start position. Without nested starts, the longest eligible start per stop/strand is retained. No DNA or annotation changes occur until Add CDS.</p><div id="orf-output">${state.orfError ? `<p class="notice" role="alert">${e(state.orfError)}</p>` : ""}${results}</div>`
+    `<p class="analysis-note">Complete start-to-first-stop candidates only, not gene predictions. Minimum length excludes the stop codon. Ambiguous codons break a candidate. Circular candidates may cross the origin but span at most one molecule; frame labels refer to the oriented start position. Without nested starts, the longest eligible start per stop/strand is retained. Use Review / add unannotated ORFs to select a batch in a movable window while inspecting Map or Sequence. No DNA or annotation changes occur until you confirm Add CDS.</p><div id="orf-output">${state.orfError ? `<p class="notice" role="alert">${e(state.orfError)}</p>` : ""}${results}</div>`
   );
 }
 function invalidateOrfAnalysis() {
@@ -1470,6 +1577,10 @@ function orfAction(action, index) {
   const doc = active(),
     analysis = currentOrfAnalysis(),
     orf = analysis?.result.orfs[index];
+  if (action === "review") {
+    orfReview.open(analysis);
+    return;
+  }
   if (!orf) {
     toast("The DNA changed. Run Find ORFs again.", true);
     return;
@@ -1568,7 +1679,10 @@ function renderInspector() {
   } else if (primer) {
     html += `<h3 class="inspector-name">${e(primer.name)}</h3><span class="type-pill">Primer</span><div class="eyebrow">SEQUENCE · 5′ → 3′</div><div class="sequence-snippet">${e(primer.sequence || "Not stored in file")}</div><div class="info-row"><span>Length</span><span>${number(primer.sequence.length)} nt</span></div><div class="info-row"><span>Binding sites</span><span>${primer.sites.length}</span></div>${primer.sites.map((site) => `<div class="info-row"><span>${site.strand === -1 ? "← Reverse" : "→ Forward"}</span><span>${e(displayLocation(site))}</span></div>`).join("")}<button class="button full-width" data-action="copy-selection">${icon("copy")}Copy primer sequence</button><button class="button full-width" data-command="edit-selected-primer">Edit primer…</button><p class="inspector-note">${e(readableNote(primer.description))}</p>`;
   } else if (state.selection) {
-    html += `<h3 class="inspector-name">Selected bases</h3><div class="info-row"><span>Range</span><span>${number(state.selection.start + 1)}–${number(state.selection.end)}</span></div><div class="info-row"><span>Length</span><span>${number(sequence.length)} bp</span></div><div class="sequence-snippet">${e(sequence)}</div><button class="button full-width" data-action="copy-selection">${icon("copy")}Copy sequence</button><button class="button full-width" data-action="copy-reverse">${icon("primer")}Copy reverse complement</button><button class="button full-width" data-action="annotate">${icon("plus")}Annotate selection</button><button class="button full-width" data-command="create-selection-primer">Create primer from selection…</button><button class="text-button" data-action="clear-selection">Clear selection</button>`;
+    const pending = displayRecord(doc).features.find(
+      (f) => f.id === state.selection.pendingFeatureId,
+    );
+    html += `${pending ? `<p class="annotation-preview-notice">Temporary annotation: ${e(pending.name)}. Confirm in the review panel to keep it.</p>` : ""}<h3 class="inspector-name">Selected bases</h3><div class="info-row"><span>Range</span><span>${number(state.selection.start + 1)}–${number(state.selection.end)}</span></div><div class="info-row"><span>Length</span><span>${number(sequence.length)} bp</span></div><div class="sequence-snippet">${e(sequence)}</div><button class="button full-width" data-action="copy-selection">${icon("copy")}Copy sequence</button><button class="button full-width" data-action="copy-reverse">${icon("primer")}Copy reverse complement</button><button class="button full-width" data-action="annotate">${icon("plus")}Annotate selection</button><button class="button full-width" data-command="create-selection-primer">Create primer from selection…</button><button class="text-button" data-action="clear-selection">Clear selection</button>`;
   } else {
     html += `<h3 class="inspector-name">${e(doc.name)}</h3><span class="type-pill">${doc.topology === "circular" ? "Circular" : "Linear"} DNA</span><div class="info-row"><span>Length</span><span>${number(summary.length)} bp</span></div><div class="info-row"><span>GC content</span><span>${summary.gc.toFixed(1)}%</span></div><div class="info-row"><span>Features</span><span>${doc.features.filter((f) => f.type !== "source").length}</span></div><div class="info-row"><span>Primers</span><span>${doc.primers.length}</span></div>${summary.ambiguous ? `<div class="info-row"><span>Ambiguous bases</span><span>${number(summary.ambiguous)} · preserved</span></div>` : ""}${doc.dnaEnds ? `<div class="eyebrow">DNA ENDS</div><div class="info-row"><span>Left</span><span>${e(workbench.endLabel(doc.dnaEnds.left))}</span></div><div class="info-row"><span>Right</span><span>${e(workbench.endLabel(doc.dnaEnds.right))}</span></div>` : ""}${doc.alignments?.length ? `<button class="button full-width" data-command="align-reads">View ${doc.alignments.length} saved alignment report(s)</button>` : ""}<p class="inspector-note">${e(documentNotes(doc).description)}</p>${
       documentNotes(doc).provenance.length
@@ -1876,7 +1990,7 @@ function autoAnnotationModal() {
   if (!active()) return;
   modal(
     "Auto annotation",
-    `<p>Find full-pattern matches across the plasmid, on both strands and across a circular origin. Choose a library, preview the results, then apply the selected annotations with one-step Undo.</p><label for="auto-annotation-library">Feature libraries</label><select id="auto-annotation-library"><option value="all">All libraries</option>${[COMMON_FEATURE_LIBRARY, ...workbench.libraries].map((library) => `<option value="${e(library.id)}" ${!workbench.librarySearchAll && library.id === workbench.libraryId ? "selected" : ""}>${e(library.name)} (${library.features.length} entries)</option>`).join("")}</select><p>Matching names are compared without case. Duplicate identifications on the same segment and strand are merged; existing annotations are preserved.</p>`,
+    `<p>Find sequence matches across the plasmid, on both strands and across a circular origin. Choose a library, preview the results, then apply the selected annotations with one-step Undo.</p><label for="auto-annotation-library">Feature libraries</label><select id="auto-annotation-library"><option value="all">All libraries</option>${[COMMON_FEATURE_LIBRARY, ...workbench.libraries].map((library) => `<option value="${e(library.id)}" ${!workbench.librarySearchAll && library.id === workbench.libraryId ? "selected" : ""}>${e(library.name)} (${library.features.length} entries)</option>`).join("")}</select><p>Names are compared without case. Overlapping boundary variants of the same identification are merged, keeping the longest span. Existing annotations and separate copies are preserved.</p><label class="check-label"><input type="checkbox" id="auto-annotation-close-matches" ${workbench.libraryAllowCloseMatches ? "checked" : ""}>Find close matches for long elements (≥95% DNA identity)</label><p>Close matches include coding sequences, origins and other long elements. They must span the full reference, be at least 90 bases and have no gaps or uncertain bases. Premature internal CDS stops are rejected. Short motifs and primers remain exact. A separate bottom section lists close matches for review.</p>`,
     `<button class="button" data-action="close-modal">Cancel</button><button class="button primary" data-command="auto-annotation-preview">Preview annotations</button>`,
   );
 }
@@ -2311,7 +2425,7 @@ function runCommand(action) {
     renderHeader();
     renderMain();
   } else if (action.startsWith("layout-")) {
-    state.mapLayout = action.slice(7);
+    rememberMapLayout(action.slice(7));
     state.zoom = 1;
     setView("map");
   } else if (action === "open") requestOpenFiles();
@@ -2349,6 +2463,7 @@ function runCommand(action) {
       "Opened synthetic workflow examples. These are not experimentally validated constructs or real sequencing data.",
     );
   } else if (action === "about") $("#about-button").click();
+  else if (action === "deduplicate-features") mergeDuplicateAnnotations();
   else if (action === "go-to") goToModal();
   else if (action === "edit-dna") sequenceToolModal("edit");
   else if (action === "extract-dna") sequenceToolModal("extract");
@@ -2424,9 +2539,10 @@ function runCommand(action) {
   else if (action === "auto-annotation") autoAnnotationModal();
   else if (action === "auto-annotation-preview") {
     const libraryId = $("#auto-annotation-library")?.value;
+    const allowCloseMatches = $("#auto-annotation-close-matches").checked;
     $("#modal").close();
     workbench
-      .autoAnnotate(libraryId)
+      .autoAnnotate(libraryId, { allowCloseMatches })
       .catch((error) => toast(error.message, true));
   } else if (action === "add-feature") annotationModal();
   else if (action === "edit-feature") {
@@ -2640,7 +2756,7 @@ document.addEventListener("click", (event) => {
     return;
   }
   if (target.dataset.layout) {
-    state.mapLayout = target.dataset.layout;
+    rememberMapLayout(target.dataset.layout);
     state.zoom = 1;
     renderHeader();
     renderMain();
@@ -2980,7 +3096,7 @@ document.addEventListener("submit", (event) => {
   }
 });
 function proteinTrack(key) {
-  const doc = active();
+  const doc = displayRecord();
   if (key.startsWith("frame:")) {
     const frame = Number(key.slice(6));
     const from = proteinDrag
@@ -3434,7 +3550,7 @@ $("#help-button").addEventListener("click", help);
 $("#about-button").addEventListener("click", () =>
   modal(
     "PlasmidCraft",
-    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.34.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
+    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.35.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
   ),
 );
 let dragDepth = 0;
@@ -3518,7 +3634,7 @@ hydrateIcons();
 loadExample();
 if (platform.desktop) {
   $("#runtime-label").textContent = "Desktop app";
-  $("#version-label").textContent = "Desktop 0.34.0";
+  $("#version-label").textContent = "Desktop 0.35.0";
 }
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
   for (const label of document.querySelectorAll("[data-shortcut]"))

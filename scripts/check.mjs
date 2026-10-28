@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 let count = 0,
   failed = false;
-for (const folder of ["viewer", "scripts"])
+for (const folder of ["viewer", "scripts", ".github/scripts"])
   for (const name of await fs.readdir(path.join(root, folder))) {
     if (!name.endsWith(".mjs")) continue;
     const result = spawnSync(

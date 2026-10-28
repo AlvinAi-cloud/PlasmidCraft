@@ -7,6 +7,7 @@ import {
   featureSequence,
   translate,
 } from "./core.mjs";
+import { annotationOverlap, annotationLength } from "./annotation-matches.mjs";
 
 export const GENETIC_CODES = Object.freeze(
   [
@@ -159,7 +160,7 @@ function segmentsFor(start, length, total, strand) {
 export function findOrfs(
   record,
   {
-    minAa = 30,
+    minAa = 80,
     code = 1,
     startMode = "atg",
     strands = "both",
@@ -255,6 +256,49 @@ export function findOrfs(
         a.orientedStart - b.orientedStart,
     );
   return { orfs, truncated, maxResults };
+}
+
+// An ORF already covered by a CDS in the same biological reading frame does
+// not need a second annotation, including nested starts and omitted stops.
+export function matchingOrfCds(record, orf) {
+  const codingSegments = structuredClone(orf.segments);
+  let stopBases = 3;
+  while (stopBases && codingSegments.length) {
+    const index = orf.strand === 1 ? codingSegments.length - 1 : 0;
+    const segment = codingSegments[index];
+    const removed = Math.min(stopBases, segment.end - segment.start);
+    if (orf.strand === 1) segment.end -= removed;
+    else segment.start += removed;
+    stopBases -= removed;
+    if (segment.start === segment.end) codingSegments.splice(index, 1);
+  }
+  const codingSpan = { segments: codingSegments };
+  const first =
+    orf.strand === 1 ? orf.segments[0].start : orf.segments.at(-1).end - 1;
+  return record.features.find((feature) => {
+    if (
+      feature.type !== "CDS" ||
+      feature.strand !== orf.strand ||
+      Number(feature.qualifiers?.transl_table?.[0] ?? 1) !== orf.code ||
+      annotationOverlap(feature, codingSpan) !== annotationLength(codingSpan)
+    )
+      return false;
+    let offset = 0;
+    for (const segment of feature.segments) {
+      if (first >= segment.start && first < segment.end) {
+        offset += first - segment.start;
+        if (feature.strand === -1)
+          offset = annotationLength(feature) - 1 - offset;
+        return (
+          (offset - Number(feature.qualifiers?.codon_start?.[0] ?? 1) + 1) %
+            3 ===
+          0
+        );
+      }
+      offset += segment.end - segment.start;
+    }
+    return false;
+  });
 }
 
 export function orfFeature(orf, { id, name } = {}) {

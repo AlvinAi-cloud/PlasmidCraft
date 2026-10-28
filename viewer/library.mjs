@@ -1,6 +1,12 @@
+import {
+  sameAnnotation,
+  mergeAnnotationMatches,
+} from "./annotation-matches.mjs";
+import { translateDna } from "./protein.mjs";
 import { normalizeSequence, featureSequence } from "./core.mjs";
 import {
   patternSites,
+  spanSegments,
   reverseComplement,
   csvRows,
   csvCell,
@@ -283,10 +289,93 @@ export function entryFromFeature(record, feature) {
     ],
   }).features[0];
 }
-export function libraryMatches(record, library, { limit = 1000 } = {}) {
+// Full-length, ungapped variants of long reference elements only. Partitioning into k+1 exact seeds
+// finds every candidate with at most k substitutions; no short fuzzy motifs.
+function closeVariantSites(record, pattern, strand, entry, limit) {
+  const total = record.sequence.length;
+  if (
+    entry.type === "primer_bind" ||
+    pattern.length < 90 ||
+    pattern.length > total ||
+    /[^ACGT]/.test(pattern)
+  )
+    return { sites: [], truncated: false };
+  const budget = Math.floor(pattern.length * 0.05),
+    chunks = budget + 1;
+  const text =
+    record.topology === "circular"
+      ? record.sequence + record.sequence.slice(0, pattern.length - 1)
+      : record.sequence;
+  const checked = new Set(),
+    sites = [];
+  for (let chunk = 0; chunk < chunks; chunk++) {
+    const offset = Math.floor((chunk * pattern.length) / chunks);
+    const end = Math.floor(((chunk + 1) * pattern.length) / chunks);
+    const seed = pattern.slice(offset, end);
+    for (
+      let hit = text.indexOf(seed);
+      hit >= 0;
+      hit = text.indexOf(seed, hit + 1)
+    ) {
+      const at = hit - offset;
+      if (
+        at < 0 ||
+        at >= total ||
+        at + pattern.length > text.length ||
+        checked.has(at)
+      )
+        continue;
+      if (checked.size >= 20000) return { sites, truncated: true };
+      checked.add(at);
+      let mismatches = 0,
+        uncertain = false;
+      for (let j = 0; j < pattern.length; j++) {
+        const base = text[at + j];
+        if (!"ACGT".includes(base)) {
+          uncertain = true;
+          break;
+        }
+        if (base !== pattern[j] && ++mismatches > budget) break;
+      }
+      if (uncertain || !mismatches || mismatches > budget) continue;
+      const segments = spanSegments(at, pattern.length, total);
+      // Do not turn a disrupted/prematurely terminated CDS into an intact gene.
+      try {
+        const dna = featureSequence(record, { segments, strand });
+        const protein =
+          entry.type === "CDS"
+            ? translateDna(dna, {
+                code: Number(entry.qualifiers.transl_table?.[0] || 1),
+                phase: Number(entry.qualifiers.codon_start?.[0] || 1),
+              })
+            : "";
+        if (entry.type === "CDS" && protein.slice(0, -1).includes("*"))
+          continue;
+      } catch {
+        continue;
+      }
+      if (sites.length >= limit) return { sites, truncated: true };
+      sites.push({
+        segments,
+        identity: 1 - mismatches / pattern.length,
+        mismatches,
+        matchKind: entry.type === "CDS" ? "CDS variant" : "Close DNA",
+      });
+    }
+  }
+  return { sites, truncated: false };
+}
+export function libraryMatches(
+  record,
+  library,
+  { limit = 1000, allowCloseMatches = true } = {},
+) {
   library = cleanLibrary(library);
-  const matches = [];
-  let truncated = false;
+  let matches = [],
+    truncated = false,
+    duplicatesRemoved = 0;
+  // Keep space for boundary variants before applying the public result limit.
+  const capacity = Math.min(20000, Math.max(2000, limit * 8));
   for (const entry of library.features) {
     const seen = new Set();
     for (const pattern of [
@@ -297,46 +386,62 @@ export function libraryMatches(record, library, { limit = 1000 } = {}) {
       for (const strand of !entry.directional && reverse === pattern
         ? [1]
         : [1, -1]) {
-        const result = patternSites(
-          record.sequence,
-          strand === 1 ? pattern : reverse,
-          {
-            circular: record.topology === "circular",
-            limit: limit - matches.length,
-          },
-        );
-        for (const site of result.sites) {
+        const oriented = strand === 1 ? pattern : reverse;
+        const exact = patternSites(record.sequence, oriented, {
+          circular: record.topology === "circular",
+          limit: capacity,
+        });
+        const variants = allowCloseMatches
+          ? closeVariantSites(record, oriented, strand, entry, capacity)
+          : { sites: [], truncated: false };
+        truncated ||= exact.truncated || variants.truncated;
+        for (const site of [
+          ...exact.sites.map((site) => ({
+            ...site,
+            identity: 1,
+            mismatches: 0,
+            matchKind: "Exact DNA",
+          })),
+          ...variants.sites,
+        ]) {
           const feature = {
             name: entry.name,
             type: entry.type,
             strand: entry.directional ? strand : 0,
             segments: site.segments,
-          };
-          const key = JSON.stringify([feature.strand, feature.segments]);
-          if (seen.has(key)) continue;
-          seen.add(key);
-          const duplicate = record.features.some(
-            (f) => namedLocation(f) === namedLocation(feature),
-          );
-          matches.push({
-            ...feature,
             entryId: entry.id,
             color: entry.color,
             qualifiers: structuredClone(entry.qualifiers),
             description: entry.description,
-            duplicate,
-          });
-        }
-        if (result.truncated || matches.length >= limit) {
-          truncated = true;
-          break;
+            identity: site.identity,
+            mismatches: site.mismatches,
+            matchKind: site.matchKind,
+          };
+          const key = JSON.stringify([feature.strand, feature.segments]);
+          if (seen.has(key)) continue;
+          seen.add(key);
+          matches.push(feature);
         }
       }
-      if (truncated) break;
     }
-    if (truncated) break;
+    if (matches.length > capacity) {
+      const merged = mergeAnnotationMatches(matches, record.features);
+      duplicatesRemoved += merged.duplicatesRemoved;
+      matches = merged.matches;
+      if (matches.length > capacity) {
+        matches.length = capacity;
+        truncated = true;
+      }
+    }
   }
-  return { matches, truncated };
+  const merged = mergeAnnotationMatches(matches, record.features);
+  duplicatesRemoved += merged.duplicatesRemoved;
+  matches = merged.matches;
+  if (matches.length > limit) {
+    matches.length = limit;
+    truncated = true;
+  }
+  return { matches, truncated, duplicatesRemoved };
 }
 export function applyLibraryMatches(
   record,
@@ -350,14 +455,7 @@ export function applyLibraryMatches(
   for (const index of selected) {
     const match = matches[index];
     if (!match) throw new Error("Invalid library match selection.");
-    if (
-      features.some(
-        (f) =>
-          matchIdentity(f) === matchIdentity(match) ||
-          namedLocation(f) === namedLocation(match),
-      )
-    )
-      continue;
+    if (features.some((f) => sameAnnotation(f, match))) continue;
     let suffix = features.length,
       id = `${prefix}-${suffix}`;
     while (features.some((f) => f.id === id)) id = `${prefix}-${++suffix}`;
@@ -374,6 +472,11 @@ export function applyLibraryMatches(
     feature.qualifiers.note = [
       ...(feature.qualifiers.note || []),
       `Matched feature library${match.description ? ": " + match.description : "."}`,
+      ...(match.mismatches > 0
+        ? [
+            `Full-length similarity match: ${(100 * match.identity).toFixed(2)}% DNA identity; ${match.mismatches} substitution(s), no gaps. Review the annotation and any CDS translation; sequence similarity does not confirm function.`,
+          ]
+        : []),
       ...(match.sources
         ? [
             `Library evidence: ${[...new Set(match.sources.map((s) => s.libraryName))].join("; ")}. Names: ${match.aliases.join("; ")}.`,
@@ -466,70 +569,39 @@ export function librariesFromRecords(records, filename = "Imported features") {
   return { libraries, imported: features.length, skipped };
 }
 
-// Merge equivalent evidence while retaining names and library provenance.
-function namedLocation(match) {
-  return JSON.stringify([
-    match.name.trim().toLowerCase(),
-    match.strand,
-    match.segments,
-  ]);
-}
-function matchIdentity(match) {
-  return JSON.stringify([
-    match.type,
-    match.strand,
-    match.segments,
-    match.type === "CDS"
-      ? [
-          match.qualifiers?.codon_start || ["1"],
-          match.qualifiers?.transl_table || ["1"],
-        ]
-      : null,
-  ]);
-}
-export function libraryMatchesAll(record, libraries, { limit = 1000 } = {}) {
-  const merged = new Map(),
-    named = new Map(),
-    identities = new Map();
+// Merge equivalent evidence across libraries before imposing the result limit.
+export function libraryMatchesAll(
+  record,
+  libraries,
+  { limit = 1000, allowCloseMatches = true } = {},
+) {
+  const combined = [];
   let truncated = false,
     duplicatesRemoved = 0;
   for (const library of libraries) {
-    const result = libraryMatches(record, library, { limit: limit + 1 });
+    const result = libraryMatches(record, library, {
+      limit: Math.max(limit + 1, 2000),
+      allowCloseMatches,
+    });
     truncated ||= result.truncated;
-    for (const match of result.matches) {
-      const key = matchIdentity(match),
-        nameKey = namedLocation(match),
-        old = identities.get(key) || named.get(nameKey);
-      const source = {
-        libraryId: library.id,
-        libraryName: library.name,
-        entryId: match.entryId,
-        name: match.name,
-      };
-      if (old) {
-        duplicatesRemoved++;
-        old.sources.push(source);
-        old.aliases = [...new Set([...old.aliases, match.name])];
-        old.duplicate ||= match.duplicate;
-        // A duplicate can connect otherwise different type/name identities.
-        named.set(nameKey, old);
-        identities.set(key, old);
-      } else if (merged.size < limit) {
-        const item = {
-          ...match,
-          sources: [source],
-          aliases: [match.name],
-          duplicate:
-            match.duplicate ||
-            record.features.some(
-              (f) => matchIdentity(f) === key || namedLocation(f) === nameKey,
-            ),
-        };
-        merged.set(key, item);
-        named.set(nameKey, item);
-        identities.set(key, item);
-      } else truncated = true;
-    }
+    duplicatesRemoved += result.duplicatesRemoved;
+    for (const match of result.matches)
+      combined.push({
+        ...match,
+        sources: [
+          {
+            libraryId: library.id,
+            libraryName: library.name,
+            entryId: match.entryId,
+            name: match.name,
+          },
+        ],
+      });
   }
-  return { matches: [...merged.values()], truncated, duplicatesRemoved };
+  const merged = mergeAnnotationMatches(combined, record.features);
+  return {
+    matches: merged.matches.slice(0, limit),
+    truncated: truncated || merged.matches.length > limit,
+    duplicatesRemoved: duplicatesRemoved + merged.duplicatesRemoved,
+  };
 }
