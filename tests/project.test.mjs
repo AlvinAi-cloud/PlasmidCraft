@@ -125,7 +125,7 @@ test("malformed trace arrays and nested qualifier objects fail validation", () =
   assert.throws(() => parseProject(JSON.stringify(source)), /qualifier values/);
 });
 
-test("map layout preferences persist independently of DNA topology with backward-compatible defaults", () => {
+test("legacy separate map preferences remain readable for application topology migration", () => {
   for (const [topology, mapLayout] of [
     ["linear", "circular"],
     ["circular", "linear"],

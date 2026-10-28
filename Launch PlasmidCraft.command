@@ -2,8 +2,8 @@
 set -eu
 unsetopt bgnice
 PLASMIDCRAFT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
-for PLASMIDCRAFT_TARGET in "local-release-035" "local-preview-layout" "local-preview-dedup" "local-preview" "release" "x86_64-apple-darwin/release" "aarch64-apple-darwin/release" "debug"; do
-  PLASMIDCRAFT_APP="$PLASMIDCRAFT_DIR/src-tauri/target/$PLASMIDCRAFT_TARGET/bundle/macos/PlasmidCraft 0.35.app"
+for PLASMIDCRAFT_TARGET in "local-release-036" "release" "x86_64-apple-darwin/release" "aarch64-apple-darwin/release" "debug"; do
+  PLASMIDCRAFT_APP="$PLASMIDCRAFT_DIR/src-tauri/target/$PLASMIDCRAFT_TARGET/bundle/macos/PlasmidCraft 0.36.app"
   PLASMIDCRAFT_EXECUTABLE="$PLASMIDCRAFT_APP/Contents/MacOS/plasmidcraft-desktop"
   if [ -x "$PLASMIDCRAFT_EXECUTABLE" ]; then
     # Run this exact local preview rather than relying on Launch Services to
@@ -16,7 +16,7 @@ for PLASMIDCRAFT_TARGET in "local-release-035" "local-preview-layout" "local-pre
     PLASMIDCRAFT_PID=$!
     sleep 1
     if kill -0 "$PLASMIDCRAFT_PID" 2>/dev/null; then
-      print 'PlasmidCraft 0.35 is starting. You can close this Terminal window.'
+      print 'PlasmidCraft 0.36 is starting. You can close this Terminal window.'
       exit 0
     else
       PLASMIDCRAFT_STATUS=0

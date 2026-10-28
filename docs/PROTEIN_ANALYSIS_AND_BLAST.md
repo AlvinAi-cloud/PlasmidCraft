@@ -40,7 +40,7 @@ Native submission implements the [NCBI Common URL API](https://blast.ncbi.nlm.ni
 
 Tests use independent local protein references and synthetic local HTTP/native-bridge fixtures. No private query or live BLAST job was submitted during development. Real NCBI submission/result acceptance and native-window interaction remain user acceptance checks.
 
-## Review and annotate ORFs (v0.35 preview)
+## Review and annotate ORFs
 
 Choose **Tools → Find ORFs**, set the minimum length (default 80 aa), genetic code, starts and strands, then run the search. Choose **Review / add unannotated ORFs…** to open a movable review window. The default list excludes candidates already covered by a CDS in the same reading frame and genetic code, including nested starts. Toggle **Only unannotated ORFs** to inspect existing candidates too.
 

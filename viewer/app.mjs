@@ -164,7 +164,6 @@ const state = {
   documents: [],
   active: null,
   view: "map",
-  mapLayout: "circular",
   mapStyle: "standard",
   mapSelectedEnzymesOnly: false,
   mapEnzymes: new Set(),
@@ -348,22 +347,42 @@ function addRecords(records) {
     entry.annotationChanges = 0;
     entry.savedRevision = 0;
     entry.revisionCounter = 0;
+    // Older 0.35 files stored the user's choice separately from topology.
+    // Consume it once, then all views and tools use the editable record status.
+    const savedTopology = entry.viewSettings?.mapLayout;
+    delete entry.viewSettings;
     initializeHistory(entry);
     if (["Pasted DNA", "Derived DNA"].includes(entry.sourceFormat)) {
       entry.annotationChanges = 1;
       entry.revisionCounter = 1;
     }
+    if (["circular", "linear"].includes(savedTopology))
+      updateDocumentTopology(entry, savedTopology);
     state.documents.push(entry);
   }
   if (records.length) activate(records[0].id);
   return records;
 }
-function rememberMapLayout(layout) {
-  if (!["circular", "linear"].includes(layout)) return;
+function updateDocumentTopology(doc, topology) {
+  if (!doc || !["circular", "linear"].includes(topology) || doc.topology === topology)
+    return false;
+  snapshot(doc, `Set ${topology} DNA`);
+  doc.topology = topology;
+  // Circular molecules have no free DNA ends. Undo retains the linear ends.
+  if (topology === "circular") delete doc.dnaEnds;
+  return true;
+}
+function setDocumentTopology(topology) {
   const doc = active();
-  if (doc)
-    doc.viewSettings = { ...(doc.viewSettings || {}), mapLayout: layout };
-  state.mapLayout = layout;
+  if (!doc) return;
+  const changed = updateDocumentTopology(doc, topology);
+  state.zoom = 1;
+  state.view = "map";
+  if (changed) {
+    state.selection = null;
+    resetSequenceAnalysis(doc);
+  }
+  render();
 }
 function activate(id) {
   state.active = id;
@@ -382,9 +401,6 @@ function activate(id) {
   state.digest.clear();
   $("#sequence-search").value = "";
   const doc = active();
-  state.mapLayout =
-    doc?.viewSettings?.mapLayout ??
-    (doc?.topology === "circular" ? "circular" : "linear");
   state.view = doc?.trace ? "trace" : "map";
   render();
 }
@@ -428,7 +444,7 @@ function renderDocuments() {
   $("#documents").innerHTML = state.documents
     .map(
       (d) =>
-        `<button class="doc-link ${d.id === state.active ? "active" : ""}" data-document="${d.id}" title="${e(d.sourceFile || d.name)}">${icon(d.trace ? "activity" : "file")}<span class="doc-label">${e(d.name)}</span>${isDirty(d) ? '<span class="example-dot" title="Annotations changed"></span>' : ""}</button>`,
+        `<button class="doc-link ${d.id === state.active ? "active" : ""}" data-document="${d.id}" title="${e(d.sourceFile || d.name)}">${icon(d.trace ? "activity" : "file")}<span class="doc-label">${e(d.name)}</span>${isDirty(d) ? '<span class="example-dot" title="Unsaved changes"></span>' : ""}</button>`,
     )
     .join("");
   $("#document-tabs").innerHTML = state.documents
@@ -505,8 +521,8 @@ function syncPanels() {
     "toggle-primers": state.showPrimers,
     "toggle-enzymes": state.showEnzymes,
     "toggle-complement": state.complement,
-    "layout-circular": state.mapLayout === "circular",
-    "layout-linear": state.mapLayout === "linear",
+    "layout-circular": active()?.topology === "circular",
+    "layout-linear": active()?.topology === "linear",
   };
   for (const [command, checked] of Object.entries(toggles)) {
     for (const button of document.querySelectorAll(
@@ -1086,7 +1102,7 @@ function renderMap(doc) {
           ? `${enzymeMap.total} selected cut site${enzymeMap.total === 1 ? "" : "s"} shown.`
           : "No selected cut sites. Use the Map checkboxes in the Enzymes tab."
       : "";
-  return `<div class="map-card"><div class="map-toolbar"><div class="segmented"><button data-layout="circular" class="${state.mapLayout === "circular" ? "active" : ""}">Circular</button><button data-layout="linear" class="${state.mapLayout === "linear" ? "active" : ""}">Linear</button></div><label class="check-label map-tight-control" title="Curved feature labels on compact concentric tracks; exported SVG uses this layout."><input type="checkbox" id="map-tight" ${state.mapStyle === "tight" ? "checked" : ""} ${state.mapLayout === "circular" ? "" : "disabled"}>Tight map</label><div class="map-visibility">${[
+  return `<div class="map-card"><div class="map-toolbar"><div class="segmented"><button data-layout="circular" class="${doc.topology === "circular" ? "active" : ""}">Circular</button><button data-layout="linear" class="${doc.topology === "linear" ? "active" : ""}">Linear</button></div><label class="check-label map-tight-control" title="Curved feature labels on compact concentric tracks; exported SVG uses this layout."><input type="checkbox" id="map-tight" ${state.mapStyle === "tight" ? "checked" : ""} ${doc.topology === "circular" ? "" : "disabled"}>Tight map</label><div class="map-visibility">${[
     ["showFeatures", "Features"],
     ["showPrimers", "Primers"],
     ["showEnzymes", "Enzymes"],
@@ -1097,7 +1113,7 @@ function renderMap(doc) {
     )
     .join(
       "",
-    )}</div><label class="check-label map-selected-enzyme-control" title="Show only enzymes checked in the Map column of the Enzymes table; enables enzyme visibility."><input type="checkbox" id="map-selected-enzymes" ${state.mapSelectedEnzymesOnly ? "checked" : ""}>Selected enzymes only (${state.mapEnzymes.size})</label></div>${enzymeNotice ? `<p class="map-enzyme-notice" role="status">${e(enzymeNotice)}</p>` : ""}<div class="map-canvas">${state.mapLayout === "circular" ? circularSvg(doc) : linearSvg(doc)}</div><div class="map-bottom"><div class="map-legend">${featureTypes.map((type) => `<span><i style="background:${featureColor(type)}"></i>${e({ CDS: "Coding sequence", rep_origin: "Origin", promoter: "Promoter", terminator: "Terminator" }[type] || type)}</span>`).join("")}${differenceLegend}</div><div class="zoom-controls"><button data-action="zoom-out" aria-label="Zoom out">${icon("minus")}</button><span>${Math.round(state.zoom * 100)}%</span><button data-action="zoom-in" aria-label="Zoom in">${icon("plus")}</button><button data-action="zoom-reset" aria-label="Reset zoom">${icon("target")}</button></div></div></div><div class="canvas-hint">${icon("info")}Select an annotation to inspect its sequence and details.</div>${sequenceOverview(doc)}`;
+    )}</div><label class="check-label map-selected-enzyme-control" title="Show only enzymes checked in the Map column of the Enzymes table; enables enzyme visibility."><input type="checkbox" id="map-selected-enzymes" ${state.mapSelectedEnzymesOnly ? "checked" : ""}>Selected enzymes only (${state.mapEnzymes.size})</label></div>${enzymeNotice ? `<p class="map-enzyme-notice" role="status">${e(enzymeNotice)}</p>` : ""}<div class="map-canvas">${doc.topology === "circular" ? circularSvg(doc) : linearSvg(doc)}</div><div class="map-bottom"><div class="map-legend">${featureTypes.map((type) => `<span><i style="background:${featureColor(type)}"></i>${e({ CDS: "Coding sequence", rep_origin: "Origin", promoter: "Promoter", terminator: "Terminator" }[type] || type)}</span>`).join("")}${differenceLegend}</div><div class="zoom-controls"><button data-action="zoom-out" aria-label="Zoom out">${icon("minus")}</button><span>${Math.round(state.zoom * 100)}%</span><button data-action="zoom-in" aria-label="Zoom in">${icon("plus")}</button><button data-action="zoom-reset" aria-label="Reset zoom">${icon("target")}</button></div></div></div><div class="canvas-hint">${icon("info")}Select an annotation to inspect its sequence and details.</div>${sequenceOverview(doc)}`;
 }
 function sequenceOverview(doc) {
   const lanes = packSequenceLanes(
@@ -1910,7 +1926,7 @@ async function showExport(type) {
       toast("Exported FASTA. Annotations are not included in FASTA.");
     } else {
       const svg =
-        state.mapLayout === "circular"
+        doc.topology === "circular"
           ? circularSvg(doc, { exporting: true })
           : linearSvg(doc);
       if (
@@ -2425,9 +2441,7 @@ function runCommand(action) {
     renderHeader();
     renderMain();
   } else if (action.startsWith("layout-")) {
-    rememberMapLayout(action.slice(7));
-    state.zoom = 1;
-    setView("map");
+    setDocumentTopology(action.slice(7));
   } else if (action === "open") requestOpenFiles();
   else if (action === "save-project") saveProject();
   else if (action === "save-project-as") saveProject(true);
@@ -2756,10 +2770,7 @@ document.addEventListener("click", (event) => {
     return;
   }
   if (target.dataset.layout) {
-    rememberMapLayout(target.dataset.layout);
-    state.zoom = 1;
-    renderHeader();
-    renderMain();
+    setDocumentTopology(target.dataset.layout);
     return;
   }
   if (target.dataset.copyFrame) {
@@ -3550,7 +3561,7 @@ $("#help-button").addEventListener("click", help);
 $("#about-button").addEventListener("click", () =>
   modal(
     "PlasmidCraft",
-    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.35.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
+    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.36.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
   ),
 );
 let dragDepth = 0;
@@ -3634,7 +3645,7 @@ hydrateIcons();
 loadExample();
 if (platform.desktop) {
   $("#runtime-label").textContent = "Desktop app";
-  $("#version-label").textContent = "Desktop 0.35.0";
+  $("#version-label").textContent = "Desktop 0.36.0";
 }
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
   for (const label of document.querySelectorAll("[data-shortcut]"))

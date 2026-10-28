@@ -1,6 +1,6 @@
 {
   "name": "plasmidcraft",
-  "version": "0.35.0",
+  "version": "0.36.0",
   "private": true,
   "type": "module",
   "description": "PlasmidCraft \u2014 local plasmid sequence viewing and analysis",
