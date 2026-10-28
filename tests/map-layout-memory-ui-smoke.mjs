@@ -179,6 +179,11 @@ try {
       mimeType: "application/json",
       buffer: secondBytes,
     });
+  // Loading a file is asynchronous. The previous document is also linear, so
+  // checking the map alone can pass before activation clears the search field.
+  await page.waitForFunction(
+    () => document.querySelector("#document-tabs .file-tab.active .name")?.textContent === "linear-view-reopened.pcraft",
+  );
   await layout("linear");
   await page.locator("#sequence-search").fill("GAATTC");
   await page.waitForFunction(() => document.querySelector("#search-status").textContent === "No matches");

@@ -592,7 +592,7 @@
     },
     {
       "path": "tests/map-layout-memory-ui-smoke.mjs",
-      "sha256": "0241ffa1503454efa09a94ce5a83b2fbd74116bfd85d34ba7cf808d35fb131ae"
+      "sha256": "e01b0b918c380a7c6a301921e5de6a4d71d93e74ac5a715232bb520a5148fba6"
     },
     {
       "path": "tests/model-overview-ui-smoke.mjs",
