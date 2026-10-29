@@ -1,6 +1,6 @@
-# PlasmidCraft 0.37 release guide
+# PlasmidCraft 0.4 release guide
 
-Release version: **0.37.0**. Display name: **PlasmidCraft 0.37**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
+Release version: **0.4.0**. Display name: **PlasmidCraft 0.4**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
 
 ## Test installers
 
@@ -14,7 +14,7 @@ Keep your previous working app until you have verified the new version on your c
 
 ## Linux Debian package
 
-Install `PlasmidCraft-0.37.0-Linux-amd64.deb` with `sudo apt install ./PlasmidCraft-0.37.0-Linux-amd64.deb`. The Linux workflow verifies package version and architecture, installs it with APT and checks native startup under Xvfb. Other distributions require their own compatible packaging.
+Install `PlasmidCraft-0.4.0-Linux-amd64.deb` with `sudo apt install ./PlasmidCraft-0.4.0-Linux-amd64.deb`. The Linux workflow verifies package version and architecture, installs it with APT and checks native startup under Xvfb. Other distributions require their own compatible packaging.
 
 ## Native builds
 
@@ -30,7 +30,7 @@ The Windows command normally runs on Windows with Visual Studio C++ Build Tools.
 
 Native macOS outputs are under `src-tauri/target/TARGET/release/bundle/macos/`; installers under `bundle/dmg/` or `bundle/nsis/`. A build without `--target` uses `src-tauri/target/release/`. An app ZIP is also usable for Mac testing. CI creates DMGs from signed app bundles using hdiutil with bounded retries and an Applications shortcut. Linux Debian packages are built on Ubuntu 22.04 and checked with a headless native startup test.
 
-**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.37 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
+**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.4 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
 
 ## Signing a public Mac release
 

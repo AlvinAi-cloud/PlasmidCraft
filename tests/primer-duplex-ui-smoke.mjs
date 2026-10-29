@@ -16,7 +16,7 @@ try {
   const track=page.locator('.sequence-primer-track[data-primer="f"]');
   assert.equal(await track.locator('.primer-aligned-base').count(),12);
   assert.equal(await track.locator('.mismatch').textContent(),'T');
-  assert.match(await track.textContent(),/comparison beyond saved binding span/);
+  assert.match(await track.getAttribute('title'),/comparison beyond saved binding span/);
   const mismatch=await track.locator('.mismatch').boundingBox();
   const match=await track.locator('.match').first().boundingBox();
   assert.ok(mismatch.y < match.y,'Mismatch is raised above paired bases');

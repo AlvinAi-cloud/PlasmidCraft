@@ -1,4 +1,4 @@
-# PlasmidCraft 0.37
+# PlasmidCraft 0.4
 
 Prepared by **Huiwang Ai at the University of Virginia with ChatGPT Codex**. Contact: [huiwang.ai@virginia.edu](mailto:huiwang.ai@virginia.edu).
 
@@ -8,20 +8,20 @@ An independent desktop workspace for plasmid viewing, sequence editing, protein 
 
 ## Install
 
-Version 0.37 installers are available from successful GitHub Actions builds and, once published, the release page.
+Version 0.4 installers are available from successful GitHub Actions builds and, once published, the release page.
 
-Download the package matching your computer from the [GitHub release](https://github.com/AlvinAi-cloud/PlasmidCraft/releases/tag/v0.37.0):
+Download the package matching your computer from the [GitHub release](https://github.com/AlvinAi-cloud/PlasmidCraft/releases/tag/v0.4.0):
 
 | Platform | Package | Requirement |
 | --- | --- | --- |
-| Mac Apple Silicon | `PlasmidCraft-0.37.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
-| Mac Intel | `PlasmidCraft-0.37.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
-| Debian/Ubuntu x86_64 | `PlasmidCraft-0.37.0-Linux-amd64.deb` | Debian/Ubuntu x86_64 with compatible WebKitGTK 4.1 dependencies |
-| Windows | `PlasmidCraft-0.37.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
+| Mac Apple Silicon | `PlasmidCraft-0.4.0-macOS-arm64.dmg` | M1 or newer; macOS 12.3+ |
+| Mac Intel | `PlasmidCraft-0.4.0-macOS-x64.dmg` | Intel; macOS 12.3+ |
+| Debian/Ubuntu x86_64 | `PlasmidCraft-0.4.0-Linux-amd64.deb` | Debian/Ubuntu x86_64 with compatible WebKitGTK 4.1 dependencies |
+| Windows | `PlasmidCraft-0.4.0-Windows-x64-setup.exe` | Windows 10/11 x64; WebView2 Runtime |
 
-Mac: open the disk image and drag **PlasmidCraft 0.37** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Linux (Debian/Ubuntu): run `sudo apt install ./PlasmidCraft-0.37.0-Linux-amd64.deb`. See [installation](docs/INSTALLING.md) for installation commands. Subsequent local biology tools work offline.
+Mac: open the disk image and drag **PlasmidCraft 0.4** to Applications. Windows: run the per-user installer. WebView2 may need an Internet connection for installation. Linux (Debian/Ubuntu): run `sudo apt install ./PlasmidCraft-0.4.0-Linux-amd64.deb`. See [installation](docs/INSTALLING.md) for installation commands. Subsequent local biology tools work offline.
 
-**0.37 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
+**0.4 packages are test installers:** Mac apps are ad-hoc signed, without Apple notarization; Windows has no publisher signature. Operating-system trust warnings are expected. See [installation and signing](docs/RELEASE.md) and [verification status](docs/VALIDATION.md) before distribution. Architecture/package inspection does not replace acceptance testing on each platform.
 
 ## Features
 

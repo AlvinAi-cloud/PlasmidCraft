@@ -50,9 +50,9 @@ test("primer letters map to genomic columns on both strands, retaining tails and
   assert.equal(b.fivePrime, 7);
   assert.equal(b.threePrime, 4);
   const html = renderSequencePrimers([f, b], 0, 12);
-  assert.match(html, /5′ tail: GG/);
+  assert.match(html, /Unpaired 5′ tail/);
   assert.match(html, /primer-aligned-base mismatch/);
-  assert.match(html, /reverse · 3′ to 5′/);
+  assert.match(html, /←R|← R/);
 });
 test("origin-spanning primers retain biological 5′ order and tails occur only at their binding start", () => {
   const r = {
@@ -81,8 +81,8 @@ test("origin-spanning primers retain biological 5′ order and tails occur only 
     p.bases.map((b) => b.position),
     [6, 7, 0, 1, 2, 3],
   );
-  assert.doesNotMatch(renderSequencePrimers([p], 0, 4), /5′ tail:/);
-  assert.match(renderSequencePrimers([p], 4, 4), /5′ tail:/);
+  assert.doesNotMatch(renderSequencePrimers([p], 0, 4), /primer-tail-duplex/);
+  assert.match(renderSequencePrimers([p], 4, 4), /primer-tail-duplex/);
 });
 test("six frames use whole-document anchors and translate each strand correctly", () => {
   const r = { sequence: "ATGAAATAGCCGATGGAACCTGACTGATAGATAGG" };

@@ -206,6 +206,10 @@ export function packSequenceLanes(tracks, offset, length) {
   }
   return lanes;
 }
+export function primerDisplayHeight(track) {
+  const detailed = track.tail || track.insertions?.length || track.bases?.some(b => b.kind === "mismatch" || b.kind === "deletion");
+  return detailed ? (track.strand === -1 ? 104 : 88) : 54;
+}
 export function sequenceDisplayOffsets(
   length,
   {
@@ -247,7 +251,7 @@ export function sequenceDisplayOffsets(
   }
   for (const p of primers)
     for (const r of rowsFor(p.segments, n, rowBases))
-      heights[r] += p.insertions?.length ? 68 : 54;
+      heights[r] += primerDisplayHeight(p);
   for (let r = 0; r < n; r++)
     for (const negative of [false, true])
       heights[r] +=
@@ -285,13 +289,27 @@ export function renderSequencePrimers(
           start: Math.max(s.start, offset) - offset,
           end: Math.min(s.end, offset + length) - offset,
         }));
-      return `<div class="sequence-primer-track ${t.insertions?.length ? "has-insertions" : ""} ${t.strand === -1 ? "reverse" : "forward"} ${selected === t.id ? "selected-primer-track" : ""}" data-primer="${e(t.id)}" role="button" tabindex="0" aria-label="Primer ${e(t.name)} ${t.strand === -1 ? "reverse" : "forward"}" title="${e(t.name)} · oligo 5′→3′: ${e(t.sequence)}${t.missingAlignment ? " · Stored site length differs from the annealing sequence; alignment unavailable" : ""}" style="--primer-color:${t.color}"><div class="sequence-track-caption"><strong>${e(t.name)}</strong> <span>${t.strand === -1 ? "← reverse · 3′ to 5′ on this line" : "forward → · 5′ to 3′ on this line"}</span>${t.extended ? `<span class="primer-comparison-note">5′ comparison beyond saved binding span</span>` : ""}${tailHere ? `<span class="sequence-primer-tail">5′ tail: ${e(t.tail)}</span>` : ""}</div><div class="sequence-primer-alignment">${bases.map((b) => `<span class="primer-aligned-base ${b.kind}" data-primer-position="${b.position}" data-oligo-index="${b.oligoIndex}" style="${posStyle(b.position - offset, group)}" title="${e(t.name)} · oligo base ${b.oligoIndex === null ? "gap" : b.oligoIndex + 1} · reference base ${b.position + 1} · template ${b.target} · ${b.kind}">${b.base}</span>`).join("")}${(
+      const detailed = primerDisplayHeight(t) > 54;
+      const groups = [];
+      for (const b of [...bases].sort((a,b)=>a.position-b.position)) {
+        if (b.kind !== "mismatch") continue;
+        const prior=groups.at(-1);
+        if (prior && prior.end===b.position) prior.end++;
+        else groups.push({start:b.position,end:b.position+1});
+      }
+      const outlines=groups.map(g=>`<span class="primer-unpaired-outline" style="${posStyle(g.start-offset,group)};--length:${g.end-g.start};--extra-groups:${Math.floor((g.end-1-offset)/group)-Math.floor((g.start-offset)/group)}"><svg viewBox="0 0 100 58" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 L8 50 L8 5 L92 5 L92 50 L100 50"/></svg></span>`).join("");
+      const tail=t.strand===-1 ? [...t.tail].reverse().join("") : t.tail;
+      const tailStart=t.fivePrime-offset;
+      const primerLabel=`<strong class="primer-start-label">${t.strand===-1 ? "← " : ""}${e(t.name)}${t.strand===-1 ? "" : " →"}</strong>`;
+      const labelPosition=Math.max(0,Math.min(length,t.fivePrime-offset+(t.strand===-1 ? 1 : 0)));
+      const tailMarkup=tailHere ? `<span class="primer-tail-duplex" style="${posStyle(Math.min(length-1,tailStart),group)}" title="Unpaired 5′ tail; oligo 5′→3′: ${e(t.tail)}">${primerLabel}<span>${e(t.strand===-1 ? tail+" 5′" : "5′ "+tail)}</span><small>unpaired tail</small></span>` : "";
+      return `<div class="sequence-primer-track ${detailed ? "duplex-detailed" : ""} ${t.tail ? "has-primer-tail" : ""} ${t.insertions?.length ? "has-insertions" : ""} ${t.strand === -1 ? "reverse" : "forward"} ${selected === t.id ? "selected-primer-track" : ""}" data-primer="${e(t.id)}" role="button" tabindex="0" aria-label="Primer ${e(t.name)} ${t.strand === -1 ? "reverse" : "forward"}" title="${e(t.name)} · oligo 5′→3′: ${e(t.sequence)}${t.extended ? " · 5′ comparison beyond saved binding span; display only" : ""}${t.missingAlignment ? " · Stored site length differs from the annealing sequence; alignment unavailable" : ""}" style="--primer-color:${t.color};height:${primerDisplayHeight(t)}px"><div class="sequence-track-caption primer-start-caption">${!tailHere ? `<span class="primer-caption-anchor" style="${posStyle(labelPosition,group)}">${primerLabel}</span>` : ""}</div><div class="sequence-primer-alignment">${outlines}${tailMarkup}${bases.map((b) => `<span class="primer-aligned-base ${b.kind}" data-primer-position="${b.position}" data-oligo-index="${b.oligoIndex}" style="${posStyle(b.position - offset, group)}" title="${e(t.name)} · oligo base ${b.oligoIndex === null ? "gap" : b.oligoIndex + 1} · reference base ${b.position + 1} · template ${b.target} · ${b.kind}">${b.base}</span>`).join("")}${(
         t.insertions || []
       )
         .filter((i) => i.position >= offset && i.position < offset + length)
         .map(
           (i) =>
-            `<span class="primer-insertion-marker" style="${posStyle(i.position - offset, group)}" title="Inserted oligo bases at reference boundary ${i.position + 1}: ${e(i.sequence)}">+${e(i.sequence)}</span>`,
+            `<span class="primer-insertion-marker" style="${posStyle(i.position - offset, group)}" title="Inserted oligo bases at reference boundary ${i.position + 1}: ${e(i.sequence)}">+${e(t.strand === -1 ? [...i.sequence].reverse().join("") : i.sequence)}</span>`,
         )
         .join(
           "",

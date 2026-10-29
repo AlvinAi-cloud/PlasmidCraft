@@ -1,6 +1,6 @@
 {
   "product": "PlasmidCraft",
-  "version": "0.37.0",
+  "version": "0.4.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -136,7 +136,7 @@
     },
     {
       "path": "docs/DESKTOP.md",
-      "sha256": "5ce503fa967862ea17b60467134d5d734c7a48acac5af4c3a8b27229eadacf30"
+      "sha256": "c6d736640c87c9f29b1bf7d31fee8fb66b74766aaa50ee74dd96addaeaa6e5ae"
     },
     {
       "path": "docs/FEATURE_CATALOG_AND_EXCHANGE.md",
@@ -148,11 +148,11 @@
     },
     {
       "path": "docs/INSTALLING.md",
-      "sha256": "85572c76a3207a88f1c9acac11726a779550a7a24ee6683d1a69f3f92010bbf0"
+      "sha256": "a3d48a01e90f194941ba7c7f0dc2c5beaf5d254d17ac266ebadbe1ea260e99f2"
     },
     {
       "path": "docs/MUTAGENESIS.md",
-      "sha256": "74400e914054dc2fb48e91ae2789ff6ce1fe26ed6efb47b71e23ce816d90cec7"
+      "sha256": "a17d7a41856eef19aba878cd35a371f3aee47a8a5c5cdbe9d31487bc3b107ae7"
     },
     {
       "path": "docs/PROTEIN_ANALYSIS_AND_BLAST.md",
@@ -160,7 +160,7 @@
     },
     {
       "path": "docs/RELEASE.md",
-      "sha256": "038561433ab5d276c0b8b94f1c5665f5e42d3cae96b770ced1d28f5d607a2bf1"
+      "sha256": "7a27474eb12201685804d4e936c32e2eddea5d2140054789a7f8dd61caea50fd"
     },
     {
       "path": "docs/screenshots/0.36/help.png",
@@ -180,7 +180,7 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "4e00fe22aa6a9d245f498562e9a441f23694f76bb32d826a01eb3ad7fcc104ab"
+      "sha256": "7b3e5fe0d25ab7d181882cf93ef245c21179d010e769a2151d519c32b4fd3ef7"
     },
     {
       "path": "docs/WORKFLOWS.md",
@@ -192,7 +192,7 @@
     },
     {
       "path": "Launch PlasmidCraft.command",
-      "sha256": "733679f4572c603a52669c73236e19831506175baf0fc2f4a974ba8691713559"
+      "sha256": "22f950a312eb0a22412f40912a5717cc105e8526aa7d14ebcccec8dcc7237d3e"
     },
     {
       "path": "LICENSE",
@@ -200,7 +200,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "a7c40cddcb71d704cde3bc9e0136d4aab1bbbad7fdb2354592020cce684e907e"
+      "sha256": "82106741ad16287d136faa2767bf35b1049aa6b15fa160e46d2e4f0e15cea647"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -208,15 +208,15 @@
     },
     {
       "path": "PRIVACY.md",
-      "sha256": "5900e6cf99aa84e6da6cf61e4da4779f613aaef9a1f784e50a73ac2aaefdec64"
+      "sha256": "ca603d9621b2985c8704c9ebf03423c7cf76674fc310294be92d16145eb6bd2d"
     },
     {
       "path": "README.md",
-      "sha256": "9e81394bccc5a8edc9bf65f3323ad1de48e317ba718c37ec90994dede19d66ae"
+      "sha256": "52f0b33de4b8dfe331298112227c2f943dc4b2ea363a1fba6953a418cd9dd37f"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "sha256": "0a48b0a4b854c9abc9af01010d85c583acc4c5bb2edf6233bcac4a314d8dc296"
+      "sha256": "72c5bc669951f4c94ed677588e7a8a4b98589e653fc17cb0d2876f6b61a895cf"
     },
     {
       "path": "scripts/build-ai-runtime.mjs",
@@ -284,11 +284,11 @@
     },
     {
       "path": "src-tauri/Cargo.lock",
-      "sha256": "856f9ff7bc475f36482e7fef3e7485d84a0e9b1746db8969851075c52a51558a"
+      "sha256": "e9500576be268c62c8ae3f18f731688079fcf90ef102181e322de65a1e60b24b"
     },
     {
       "path": "src-tauri/Cargo.toml",
-      "sha256": "95ff1e4643158ad266e4222e67b0a7b8d29cb553e1d7e7373f638b62a8b87ea8"
+      "sha256": "9c93553650f5c98579351e8a871baaa5277be76938a52c7ed74a1cd2841a8ea8"
     },
     {
       "path": "src-tauri/icons/128x128.png",
@@ -396,7 +396,7 @@
     },
     {
       "path": "src-tauri/tauri.conf.json",
-      "sha256": "09a97434b0a662d8d9df72e5485d119af1e5fcf5939f5afd1a818cc8ef57c2a8"
+      "sha256": "8a44dc734a859f47f8b3a0157adf23a5a056f9e1560a45ea20178eb8930ac65b"
     },
     {
       "path": "src-tauri/tests/fixtures/chatgpt-test-only-jwks.json",
@@ -639,8 +639,12 @@
       "sha256": "e004e687f71a48b88466ab588e4b0078ea809aee6b2e33f79452bab96044fc6f"
     },
     {
+      "path": "tests/primer-duplex-preview-ui-smoke.mjs",
+      "sha256": "319e4285689f467c9fcf42c0799160b6675a3544f177b3a35c6697b108713548"
+    },
+    {
       "path": "tests/primer-duplex-ui-smoke.mjs",
-      "sha256": "baf28886aab72c4b5d7ac2c295b8159dafc149aece7002d823120d9dbe08a602"
+      "sha256": "a15a65c44071d5196a6e498d9a7f9b26f2422b5a03ca4d08784dfef5dc58bcdc"
     },
     {
       "path": "tests/primer-extension.test.mjs",
@@ -700,7 +704,7 @@
     },
     {
       "path": "tests/sequence-display.test.mjs",
-      "sha256": "2c84bc896cf5251bbdc9e18d87f02530fbc96a4e27fc01ac3e327a8e085bb167"
+      "sha256": "f4c3c55ead19524675ff34b34d35f718fe3404138d1c0ceebc4b7c508ae00100"
     },
     {
       "path": "tests/sequence-performance-ui-smoke.mjs",
@@ -720,7 +724,7 @@
     },
     {
       "path": "tests/sequence-tracks-ui-smoke.mjs",
-      "sha256": "282b6ddba864865ca683725f46cf028de6937b73d42705589f403d069523a40d"
+      "sha256": "d928295910783f54945188b0c1c980cce44b639ed203ef81ca915f17621a4228"
     },
     {
       "path": "tests/snapgene-reference.mjs",
@@ -800,7 +804,7 @@
     },
     {
       "path": "viewer/app.mjs",
-      "sha256": "c688326365e80a16e5a82e62e7698b895fc34c84b80f6b6bec5868cc14a85ae0"
+      "sha256": "81aadfb5bff1644aff86e2ca1b68471f6bc0c2f7395ff80f3d27999990f06ca2"
     },
     {
       "path": "viewer/assembly.mjs",
@@ -848,7 +852,7 @@
     },
     {
       "path": "viewer/desktop.css",
-      "sha256": "3cb18df62628078e92a8e526000baa4c0ab830c09e7db278242a779fec566a8e"
+      "sha256": "b37461eb8529069d5bce5c67a24a0635c58bd3de5b695dc50d18e73a4ca393d4"
     },
     {
       "path": "viewer/dna-ends.mjs",
@@ -888,7 +892,7 @@
     },
     {
       "path": "viewer/help-content.mjs",
-      "sha256": "febfd9b0a41f7c24b11d1f2ca5fddda2819507a7c2ac718cbf22454a4fa158ae"
+      "sha256": "6f86843bc022dc1573a09090fe357fc795dc26a4a4c5776d01e4f222774d6bf6"
     },
     {
       "path": "viewer/help-markdown.mjs",
@@ -900,7 +904,7 @@
     },
     {
       "path": "viewer/index.html",
-      "sha256": "96111bbc94bac92dc7a98ea20cbbbc6166f13b438d1a00e18bc3ade906218c68"
+      "sha256": "ac1b15f83c7bf305ac224012f78e2d0cabe35acdea2c26c4bc665df88e567b7a"
     },
     {
       "path": "viewer/library.mjs",
@@ -984,7 +988,7 @@
     },
     {
       "path": "viewer/sequence-display.mjs",
-      "sha256": "d6c2793d0a9871a115bf2dfa171a76d37d6d25e1f3237219d7d0d85eebfd1960"
+      "sha256": "d119bb70e33333735d1adeba6ddd51fdf204160308c2e924cbc765fc8230e8b3"
     },
     {
       "path": "viewer/sequence-editing.mjs",

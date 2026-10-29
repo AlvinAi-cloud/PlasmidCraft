@@ -3196,3 +3196,56 @@ button.alignment-base:disabled {
 .primer-aligned-base.mismatch { transform: translateY(-4px); border-bottom: 2px solid #b22935; }
 .primer-aligned-base.deletion { border-bottom: 2px dashed #a1422b; }
 .primer-comparison-note { color: #805c28; font-size: 11px; }
+
+/* Draft primer duplex display for visual review. */
+.duplex-detailed .sequence-primer-alignment { height: 86px; }
+.duplex-detailed .primer-aligned-base { top:26px; border-bottom:1.5px solid var(--primer-color); }
+.duplex-detailed .primer-aligned-base.mismatch { top:8px; transform:none; border:0; background:#fff0f0; color:#b22935; }
+.duplex-detailed .primer-aligned-base.deletion { border-bottom:2px dashed #b22935; }
+.duplex-detailed .primer-site-arrow { top:61px; }
+.primer-unpaired-outline { position:absolute; left:calc(var(--pos)*var(--base-width) + var(--groups)*var(--base-gap) - 4px); width:calc(var(--length)*var(--base-width) + var(--extra-groups)*var(--base-gap) + 8px); height:58px; top:0; pointer-events:none; }
+.primer-unpaired-outline svg { width:100%;height:100%;overflow:visible; }
+.primer-unpaired-outline path { fill:none;stroke:var(--primer-color);stroke-width:1.5;vector-effect:non-scaling-stroke; }
+.primer-tail-duplex { position:absolute;left:calc(var(--pos)*var(--base-width) + var(--groups)*var(--base-gap));top:0;z-index:2; }
+.primer-tail-duplex > span { display:block;background:#fff8e9;color:#86561d;border:1.5px solid var(--primer-color);padding:0 4px;font:16px/23px var(--mono);white-space:nowrap; }
+.primer-tail-duplex::after { content:"";position:absolute;right:0;top:24px;height:26px;border-right:1.5px solid var(--primer-color); }
+.reverse .primer-tail-duplex::after { right:auto;left:0; }
+.primer-tail-duplex small { display:block;font:11px/14px var(--sans);color:#86561d; }
+.duplex-detailed .primer-insertion-marker { top:0;max-width:none;overflow:visible;font:16px/23px var(--mono);border:1.5px solid #327ca0;padding:0 4px;z-index:3; }
+.primer-insertion-marker small { display:block;font:11px/14px var(--sans); }
+.duplex-detailed .primer-insertion-marker::after { content:"";position:absolute;top:24px;left:0;height:26px;border-left:1.5px solid #327ca0; }
+
+/* Keep names at the primer's 5′ start; arrows carry the direction. */
+.primer-start-caption { position:relative;overflow:visible; }
+.primer-start-caption > .primer-caption-anchor { position:absolute;margin:0;left:calc(var(--pos)*var(--base-width) + var(--groups)*var(--base-gap));color:var(--primer-color);white-space:nowrap; }
+.reverse .primer-caption-anchor { transform:translateX(-100%); }
+.primer-start-label { color:var(--primer-color);font:650 12.3px/16px var(--sans);white-space:nowrap; }
+.primer-tail-duplex > .primer-start-label { position:absolute;top:-16px;left:0; }
+.reverse .primer-tail-duplex > .primer-start-label { left:auto;right:0; }
+
+/* Attach tails to the exact edge of the first annealed base. */
+.forward .primer-tail-duplex { transform:translateX(-100%); }
+.reverse .primer-tail-duplex { left:calc(var(--pos)*var(--base-width) + var(--groups)*var(--base-gap) + var(--base-width)); top:52px; }
+.reverse .primer-tail-duplex::after { top:-2px;height:2px; }
+
+/* Bring the reverse duplex directly below the complementary DNA strand. */
+.reverse.has-primer-tail .sequence-track-caption { height:0; }
+.reverse.has-primer-tail .primer-aligned-base { top:0; }
+.reverse.has-primer-tail .primer-tail-duplex { top:26px; }
+.reverse.has-primer-tail .primer-site-arrow { top:35px; }
+
+/* Mirror the individual duplex elements across the template strands. */
+.reverse.duplex-detailed .sequence-track-caption { height:0;position:absolute;top:84px;width:100%;z-index:2; }
+.reverse.duplex-detailed .sequence-primer-alignment { height:104px; }
+.reverse.duplex-detailed .primer-aligned-base { top:22px;border-bottom:0;border-top:1.5px solid var(--primer-color); }
+.reverse.duplex-detailed .primer-aligned-base.mismatch { top:40px;border:0; }
+.reverse.duplex-detailed .primer-aligned-base.deletion { border-top:2px dashed #b22935; }
+.reverse.duplex-detailed .primer-site-arrow { top:5px; }
+.reverse.duplex-detailed .primer-unpaired-outline { top:14px;transform:scaleY(-1); }
+.reverse.duplex-detailed .primer-insertion-marker { top:48px; }
+.reverse.duplex-detailed .primer-insertion-marker::after { top:-26px;height:26px; }
+.reverse.duplex-detailed .primer-tail-duplex { top:48px; }
+.reverse.duplex-detailed .primer-tail-duplex::after { top:-26px;height:26px; }
+.reverse.duplex-detailed .primer-tail-duplex > .primer-start-label { top:36px; }
+.reverse.duplex-detailed .primer-tail-duplex small { position:absolute;top:-14px;left:0;white-space:nowrap; }
+.primer-start-label { font:650 12.3px/16px var(--sans,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif); }

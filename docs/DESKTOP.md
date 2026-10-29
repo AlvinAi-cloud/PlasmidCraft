@@ -6,7 +6,7 @@ README.md contains the current prerequisite, test and build commands. Use the No
 
 `pnpm desktop:dev` opens a native development window. `pnpm desktop:build --ci` packages the embedded interface. The app needs neither Node nor an HTTP server at runtime. `scripts/serve.mjs` is a localhost-only internal renderer test harness.
 
-Use the `.command` helper only in a macOS source checkout; installed users open PlasmidCraft 0.37 directly. Export library backups before changing an installed build.
+Use the `.command` helper only in a macOS source checkout; installed users open PlasmidCraft 0.4 directly. Export library backups before changing an installed build.
 
 See [release and signing](RELEASE.md) for architectures, packaging, GitHub CI and trust warnings; see [validation](VALIDATION.md) for automated results and outstanding device acceptance.
 

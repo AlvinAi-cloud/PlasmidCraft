@@ -104,7 +104,7 @@ try {
   );
   await page.locator('#view-tabs [data-view="sequence"]').click();
   assert.equal(await page.locator(".primer-aligned-base.mismatch").count(), 1);
-  assert.equal(await page.locator(".sequence-primer-tail").count(), 2);
+  assert.equal(await page.locator(".primer-tail-duplex").count(), 2);
   await aligned();
   checks++;
   const reference = await page
