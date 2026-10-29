@@ -19,7 +19,7 @@ Choose **File → Open Sequence…**, use the Open toolbar button, or drag a seq
 
 ## Make and save an edit
 
-Select DNA and choose **Edit → Insert, Replace or Delete DNA…**. Preview the result before applying it. Use Undo to return to an earlier state. Select a feature to edit its annotation; use Add Feature to annotate selected DNA or start auto annotation.
+Select DNA and choose **Edit → Insert, Replace or Delete DNA…**. Preview the result before applying it. Use Undo to return to an earlier state. In Features, check annotations and choose **Remove selected features** to remove them together; one Undo restores them. Full primer oligos are retained. Select a feature to edit its annotation; use Add Feature to annotate selected DNA or start auto annotation.
 
 Use **Save PlasmidCraft Document** to save `.pcraft`, which retains the supported document state, annotations, primers and saved analyses. Export GenBank, FASTA, SVG or **Export SnapGene format** for exchange. Exchange formats retain different subsets of information; keep a `.pcraft` master copy. There is no autosave or crash recovery.
 

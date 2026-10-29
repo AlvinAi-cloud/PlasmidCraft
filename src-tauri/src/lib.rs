@@ -210,6 +210,7 @@ pub fn run() {
             ai::ai_forget_saved,
             ai::ai_cancel,
             ai::ai_request,
+            ai::compute::ai_compute,
             ai::ai_open_site,
             chatgpt::chatgpt_status,
             chatgpt::chatgpt_restore,

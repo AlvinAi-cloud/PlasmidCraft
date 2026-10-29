@@ -61,6 +61,9 @@ if standard.exists():
                 parts.append("\n")
     parts.append("\nRust 1.99.1 standard-library distribution notices\n")
     TextNotice(convert_charrefs=True).feed(standard.read_text())
+quickjs = root / "data/notices/QUICKJS-LICENSES.txt"
+if quickjs.exists():
+    parts.append("\nQuickJS computation runtime (MIT)\n" + quickjs.read_text())
 if missing:
     raise SystemExit("Run cargo fetch --locked first; missing crates: " + ", ".join(missing))
 (root / "THIRD_PARTY_NOTICES.txt").write_text("".join(parts))

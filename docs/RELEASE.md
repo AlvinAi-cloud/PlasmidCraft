@@ -1,6 +1,6 @@
-# PlasmidCraft 0.36 release guide
+# PlasmidCraft 0.37 release guide
 
-Release version: **0.36.0**. Display name: **PlasmidCraft 0.36**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
+Release version: **0.37.0**. Display name: **PlasmidCraft 0.37**. Application identifier: `org.plasmidcraft.desktop`. Native DNA documents use format version 3; protein documents use format version 1. Keep `.pcraft` as the full editable document.
 
 ## Test installers
 
@@ -12,16 +12,9 @@ The Mac build declares macOS 12.3 as its minimum; native packages are built and 
 
 Keep your previous working app until you have verified the new version on your computer.
 
-## Linux AppImage
+## Linux Debian package
 
-Download `PlasmidCraft-0.36.0-Linux-x86_64.AppImage`, then make it executable and run it:
-
-```sh
-chmod +x PlasmidCraft-0.36.0-Linux-x86_64.AppImage
-./PlasmidCraft-0.36.0-Linux-x86_64.AppImage
-```
-
-If FUSE 2 is unavailable, run `APPIMAGE_EXTRACT_AND_RUN=1 ./PlasmidCraft-0.36.0-Linux-x86_64.AppImage`. Local tools work offline. CI tests startup on Ubuntu 22.04; other distributions need acceptance testing.
+Install `PlasmidCraft-0.37.0-Linux-amd64.deb` with `sudo apt install ./PlasmidCraft-0.37.0-Linux-amd64.deb`. The Linux workflow verifies package version and architecture, installs it with APT and checks native startup under Xvfb. Other distributions require their own compatible packaging.
 
 ## Native builds
 
@@ -35,9 +28,9 @@ pnpm desktop:build --ci --target x86_64-pc-windows-msvc --bundles nsis
 
 The Windows command normally runs on Windows with Visual Studio C++ Build Tools. macOS can cross-compile the Windows NSIS package using cargo-xwin, LLVM/LLD, llvm-rc, CMake, Ninja and NSIS; use `--runner cargo-xwin`. Using cargo-xwin requires accepting Microsoft's SDK/CRT license. Build-only SDK/compiler caches are not part of the GitHub source folder or application. See [Tauri's Windows installer guide](https://v2.tauri.app/distribute/windows-installer/) and [cargo-xwin](https://github.com/rust-cross/cargo-xwin).
 
-Native macOS outputs are under `src-tauri/target/TARGET/release/bundle/macos/`; installers under `bundle/dmg/` or `bundle/nsis/`. A build without `--target` uses `src-tauri/target/release/`. An app ZIP is also usable for Mac testing. CI creates DMGs from signed app bundles using hdiutil with bounded retries and an Applications shortcut. Linux AppImages are built on Ubuntu 22.04 and checked with a headless native startup test.
+Native macOS outputs are under `src-tauri/target/TARGET/release/bundle/macos/`; installers under `bundle/dmg/` or `bundle/nsis/`. A build without `--target` uses `src-tauri/target/release/`. An app ZIP is also usable for Mac testing. CI creates DMGs from signed app bundles using hdiutil with bounded retries and an Applications shortcut. Linux Debian packages are built on Ubuntu 22.04 and checked with a headless native startup test.
 
-**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.36 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
+**Launch PlasmidCraft.command** is a macOS source-checkout helper: it opens an existing 0.37 app build or starts development when Node and the prerequisites are available. Installed users open the application directly.
 
 ## Signing a public Mac release
 
@@ -51,4 +44,4 @@ Obtain a trusted code-signing certificate/service and configure Tauri's Windows 
 
 ## Verified release workflow
 
-Pushing a `vX.Y.Z` tag matching `package.json` starts **Publish verified release**. It waits for successful Desktop builds and Linux AppImage workflows for that exact commit on main, verifies the source inventory and expected installer artifacts, and uploads installers, source ZIP, checksums and a build report to a draft. Only a complete upload is published as a pre-release. Failed checks leave the release unpublished. Version tags and published assets should remain immutable; corrections use a new version.
+Pushing a `vX.Y.Z` tag matching `package.json` starts **Publish verified release**. It waits for successful Desktop builds and Linux Debian package workflows for that exact commit on main, verifies the source inventory and expected installer artifacts, and uploads installers, source ZIP, checksums and a build report to a draft. Only a complete upload is published as a pre-release. Failed checks leave the release unpublished. Version tags and published assets should remain immutable; corrections use a new version.

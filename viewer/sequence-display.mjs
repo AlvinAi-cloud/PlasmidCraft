@@ -30,21 +30,27 @@ export function sequencePrimerTracks(record) {
         Array.from({ length: s.end - s.start }, (_, i) => s.start + i),
       );
       if (site.strand === -1) positions.reverse();
-      const annealing =
-        primer.annealingSequence ?? primer.sequence.slice(-positions.length);
-      const tail =
-        primer.tailSequence ??
-        primer.sequence.slice(
-          0,
-          Math.max(0, primer.sequence.length - positions.length),
-        );
+      // Imported binding spans may describe only the exact 3′ anchor. Compare
+      // upstream oligo bases too, without changing the stored binding site.
+      const inferred = primer.annealingSequence === undefined && primer.tailSequence === undefined;
+      let extended = 0;
+      if (inferred && positions.length && primer.sequence.length <= 200) {
+        while (positions.length < primer.sequence.length && positions.length < record.sequence.length) {
+          const next = positions[0] + (site.strand === -1 ? 1 : -1);
+          if (record.topology !== "circular" && (next < 0 || next >= record.sequence.length)) break;
+          positions.unshift((next + record.sequence.length) % record.sequence.length);
+          extended++;
+        }
+      }
+      const annealing = primer.annealingSequence ?? primer.sequence.slice(-positions.length);
+      const tail = primer.tailSequence ?? primer.sequence.slice(0, Math.max(0, primer.sequence.length - positions.length));
       let insertions = [];
       let bases = [];
       if (
-        primer.description?.includes("Manual selection binding:") &&
+        (primer.description?.includes("Manual selection binding:") || annealing.length !== positions.length) &&
         positions.length <= 200 &&
         annealing.length <= 200 &&
-        /^[ACGT]+$/.test(annealing)
+        /^[ACGTRYSWKMBDHVN]+$/.test(annealing)
       ) {
         const target = positions
           .map((p) =>
@@ -88,6 +94,12 @@ export function sequencePrimerTracks(record) {
         });
       return {
         ...site,
+        segments: extended ? [...new Set(positions)].sort((a,b)=>a-b).reduce((out, pos) => {
+          if (out.at(-1)?.end === pos) out.at(-1).end++;
+          else out.push({start:pos,end:pos+1});
+          return out;
+        }, []) : site.segments,
+        extended,
         id: primer.id,
         key: `${primer.id}:${index}`,
         name: primer.name,
@@ -273,7 +285,7 @@ export function renderSequencePrimers(
           start: Math.max(s.start, offset) - offset,
           end: Math.min(s.end, offset + length) - offset,
         }));
-      return `<div class="sequence-primer-track ${t.insertions?.length ? "has-insertions" : ""} ${t.strand === -1 ? "reverse" : "forward"} ${selected === t.id ? "selected-primer-track" : ""}" data-primer="${e(t.id)}" role="button" tabindex="0" aria-label="Primer ${e(t.name)} ${t.strand === -1 ? "reverse" : "forward"}" title="${e(t.name)} · oligo 5′→3′: ${e(t.sequence)}${t.missingAlignment ? " · Stored site length differs from the annealing sequence; alignment unavailable" : ""}" style="--primer-color:${t.color}"><div class="sequence-track-caption"><strong>${e(t.name)}</strong> <span>${t.strand === -1 ? "← reverse · 3′ to 5′ on this line" : "forward → · 5′ to 3′ on this line"}</span>${tailHere ? `<span class="sequence-primer-tail">5′ tail: ${e(t.tail)}</span>` : ""}</div><div class="sequence-primer-alignment">${bases.map((b) => `<span class="primer-aligned-base ${b.kind}" data-primer-position="${b.position}" data-oligo-index="${b.oligoIndex}" style="${posStyle(b.position - offset, group)}" title="${e(t.name)} · oligo base ${b.oligoIndex + 1} · reference base ${b.position + 1} · ${b.kind}">${b.base}</span>`).join("")}${(
+      return `<div class="sequence-primer-track ${t.insertions?.length ? "has-insertions" : ""} ${t.strand === -1 ? "reverse" : "forward"} ${selected === t.id ? "selected-primer-track" : ""}" data-primer="${e(t.id)}" role="button" tabindex="0" aria-label="Primer ${e(t.name)} ${t.strand === -1 ? "reverse" : "forward"}" title="${e(t.name)} · oligo 5′→3′: ${e(t.sequence)}${t.missingAlignment ? " · Stored site length differs from the annealing sequence; alignment unavailable" : ""}" style="--primer-color:${t.color}"><div class="sequence-track-caption"><strong>${e(t.name)}</strong> <span>${t.strand === -1 ? "← reverse · 3′ to 5′ on this line" : "forward → · 5′ to 3′ on this line"}</span>${t.extended ? `<span class="primer-comparison-note">5′ comparison beyond saved binding span</span>` : ""}${tailHere ? `<span class="sequence-primer-tail">5′ tail: ${e(t.tail)}</span>` : ""}</div><div class="sequence-primer-alignment">${bases.map((b) => `<span class="primer-aligned-base ${b.kind}" data-primer-position="${b.position}" data-oligo-index="${b.oligoIndex}" style="${posStyle(b.position - offset, group)}" title="${e(t.name)} · oligo base ${b.oligoIndex === null ? "gap" : b.oligoIndex + 1} · reference base ${b.position + 1} · template ${b.target} · ${b.kind}">${b.base}</span>`).join("")}${(
         t.insertions || []
       )
         .filter((i) => i.position >= offset && i.position < offset + length)

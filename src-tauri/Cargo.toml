@@ -1,6 +1,6 @@
 [package]
 name = "plasmidcraft-desktop"
-version = "0.36.0"
+version = "0.37.0"
 description = "PlasmidCraft desktop sequence workspace"
 authors = ["PlasmidCraft contributors"]
 edition = "2021"

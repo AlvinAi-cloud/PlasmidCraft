@@ -1,4 +1,6 @@
 //! Opt-in AI HTTP transport. Credentials stay native, optionally persisted in the device vault.
+#[path = "ai_compute.rs"]
+pub mod compute;
 #[path = "ai_models.rs"]
 mod models;
 use crate::ai_vault::{DeviceVault, Vault};

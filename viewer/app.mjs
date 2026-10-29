@@ -1391,7 +1391,7 @@ function renderFeatures(doc) {
       `${number(features.length)} annotations on this sequence`,
       `<button class="button" data-action="annotate">${icon("plus")}Add annotation</button><button class="button" data-command="auto-annotation">Auto annotation…</button><button class="button" data-command="deduplicate-features" title="Merge overlapping same-name annotations across this document, keeping the longest. Names ignore capitalization. Undo restores the originals." ${duplicates ? "" : "disabled"}>Merge duplicate annotations (${duplicates})</button>`,
     ) +
-    `<div class="wf-actions"><button class="button" data-action="bulk-select-visible">Select listed annotations</button><button class="button" data-action="bulk-clear">Clear selection</button><button class="button" data-action="bulk-open" id="bulk-open-button" ${state.bulkSelected.size ? "" : "disabled"}>Bulk edit selected</button><span id="bulk-selected-count">${state.bulkSelected.size} selected</span></div><div class="table-filter"><input class="inline-input" id="table-filter" placeholder="Filter annotations…" value="${e(state.filter)}" aria-label="Filter annotations"></div><div class="data-card">${features.length ? `<table class="data-table"><thead><tr><th>Select</th><th>Name</th><th>Type</th><th>Location</th><th>Length</th><th>Strand</th></tr></thead><tbody>${features.map((f) => `<tr data-feature="${e(f.id)}" tabindex="0" class="${state.selection?.featureId === f.id ? "selected" : ""}"><td><input type="checkbox" data-bulk-feature="${e(f.id)}" aria-label="Select annotation ${e(f.name)}" ${state.bulkSelected.has(f.id) ? "checked" : ""}></td><td><span class="feature-name"><i style="background:${safeColor(f.color)}"></i>${e(f.name)}</span></td><td><span class="type-pill">${e(f.type)}</span></td><td>${e(displayLocation(f))}</td><td>${number(featureLength(f))} bp</td><td>${f.strand === -1 ? "← Reverse" : f.strand === 0 ? "—" : "→ Forward"}</td></tr>`).join("")}</tbody></table>` : '<div class="empty-message">No matching annotations. Add one or open an annotated GenBank file.</div>'}</div>`
+    `<div class="wf-actions"><button class="button" data-action="bulk-select-visible">Select listed annotations</button><button class="button" data-action="bulk-clear">Clear selection</button><button class="button" data-action="bulk-remove" id="bulk-remove-button" ${state.bulkSelected.size ? "" : "disabled"}>Remove selected features</button><button class="button" data-action="bulk-open" id="bulk-open-button" ${state.bulkSelected.size ? "" : "disabled"}>Bulk edit selected</button><span id="bulk-selected-count">${state.bulkSelected.size} selected</span></div><div class="table-filter"><input class="inline-input" id="table-filter" placeholder="Filter annotations…" value="${e(state.filter)}" aria-label="Filter annotations"></div><div class="data-card">${features.length ? `<table class="data-table"><thead><tr><th>Select</th><th>Name</th><th>Type</th><th>Location</th><th>Length</th><th>Strand</th></tr></thead><tbody>${features.map((f) => `<tr data-feature="${e(f.id)}" tabindex="0" class="${state.selection?.featureId === f.id ? "selected" : ""}"><td><input type="checkbox" data-bulk-feature="${e(f.id)}" aria-label="Select annotation ${e(f.name)}" ${state.bulkSelected.has(f.id) ? "checked" : ""}></td><td><span class="feature-name"><i style="background:${safeColor(f.color)}"></i>${e(f.name)}</span></td><td><span class="type-pill">${e(f.type)}</span></td><td>${e(displayLocation(f))}</td><td>${number(featureLength(f))} bp</td><td>${f.strand === -1 ? "← Reverse" : f.strand === 0 ? "—" : "→ Forward"}</td></tr>`).join("")}</tbody></table>` : '<div class="empty-message">No matching annotations. Add one or open an annotated GenBank file.</div>'}</div>`
   );
 }
 function renderEnzymes(doc) {
@@ -2010,6 +2010,22 @@ function autoAnnotationModal() {
     `<button class="button" data-action="close-modal">Cancel</button><button class="button primary" data-command="auto-annotation-preview">Preview annotations</button>`,
   );
 }
+function removeSelectedFeatures() {
+  const doc = active();
+  if (!doc) return;
+  const ids = new Set(doc.features.filter((f) => state.bulkSelected.has(f.id) && f.type !== "source").map((f) => f.id));
+  if (!ids.size) return;
+  snapshot(doc, `Remove ${ids.size} selected features`);
+  doc.features = doc.features.filter((f) => !ids.has(f.id));
+  // A full primer remains available even when its annotation is removed.
+  for (const primer of doc.primers)
+    if (ids.has(primer.annotationId)) delete primer.annotationId;
+  state.selection = null;
+  state.bulkSelected.clear();
+  state.bulkPreview = null;
+  render();
+  toast(`Removed ${ids.size} selected feature(s). Undo restores them.`);
+}
 function openBulkEditor() {
   const doc = active();
   if (!state.bulkSelected.size) return;
@@ -2043,6 +2059,8 @@ function updateBulkSelection() {
     button = $("#bulk-open-button");
   if (count) count.textContent = `${state.bulkSelected.size} selected`;
   if (button) button.disabled = !state.bulkSelected.size;
+  const remove = $("#bulk-remove-button");
+  if (remove) remove.disabled = !state.bulkSelected.size;
 }
 function editAtCursor(insert = "", remove = null) {
   const doc = active();
@@ -2850,7 +2868,8 @@ document.addEventListener("click", (event) => {
       .querySelectorAll("[data-bulk-feature]")
       .forEach((box) => (box.checked = false));
     updateBulkSelection();
-  } else if (action === "bulk-open") openBulkEditor();
+  } else if (action === "bulk-remove") removeSelectedFeatures();
+  else if (action === "bulk-open") openBulkEditor();
   else if (action === "bulk-preview") {
     try {
       const doc = checkedBulk();
@@ -3561,7 +3580,7 @@ $("#help-button").addEventListener("click", help);
 $("#about-button").addEventListener("click", () =>
   modal(
     "PlasmidCraft",
-    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.36.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
+    `<p>PlasmidCraft is a desktop workspace for DNA and protein sequence analysis, annotation, and molecular cloning design.</p><p>Prepared by Huiwang Ai at the University of Virginia with ChatGPT Codex. Contact: <a href="mailto:huiwang.ai@virginia.edu">huiwang.ai@virginia.edu</a>.</p><p>Version 0.37.0 · Desktop app. Biology tools process files locally. Optional AI requests and NCBI BLAST submissions send only the context you review and choose to share.</p><p>Current features include maps, annotation libraries, primer design/PCR, Sanger alignment with trace evidence, restriction/overlap/Golden Gate assembly, and protein/ORF analysis. The default example is the supplied pET-21b(+) plasmid.</p>`,
   ),
 );
 let dragDepth = 0;
@@ -3645,7 +3664,7 @@ hydrateIcons();
 loadExample();
 if (platform.desktop) {
   $("#runtime-label").textContent = "Desktop app";
-  $("#version-label").textContent = "Desktop 0.36.0";
+  $("#version-label").textContent = "Desktop 0.37.0";
 }
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) {
   for (const label of document.querySelectorAll("[data-shortcut]"))

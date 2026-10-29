@@ -271,3 +271,28 @@ test("cached CDS windows retain numbering, split/reverse codons and refresh afte
   assert.deepEqual(fresh(0, 62), codingTracks(edited, 0, 62));
   assert.notDeepEqual(fresh(0, 62), read(0, 62));
 });
+
+test("imported short binding anchors show upstream mismatches on both strands without altering stored sites", () => {
+  for (const strand of [1,-1]) {
+    const coding = "AACCGGTTACGT";
+    const r = {topology:"linear",sequence:strand===1?coding:reverseComplement(coding),primers:[{
+      id:"imported",name:"Imported",sequence:"AATCGGTTACGT",sites:[{strand,segments:[strand===1?{start:6,end:12}:{start:0,end:6}]}]
+    }]};
+    const before=JSON.stringify(r);
+    const t=sequencePrimerTracks(r)[0];
+    assert.equal(t.extended,6);
+    assert.equal(t.tail,"");
+    assert.equal(t.bases.length,12);
+    assert.equal(t.bases.find(b=>b.kind==="mismatch").oligoIndex,2);
+    assert.equal(t.bases.find(b=>b.kind==="mismatch").base,"T");
+    assert.match(renderSequencePrimers([t],0,12),/comparison beyond saved binding span/);
+    assert.equal(JSON.stringify(r),before);
+  }
+});
+test("imported explicit indels are aligned without relying on an editor-specific description", () => {
+  const r={sequence:"ACGTTGCAACGT",topology:"linear",primers:[{id:"g",name:"Gap",sequence:"ACGTATGCAACGT",annealingSequence:"ACGTATGCAACGT",tailSequence:"",sites:[{strand:1,segments:[{start:0,end:12}]}]}]};
+  const t=sequencePrimerTracks(r)[0];
+  assert.equal(t.missingAlignment,false);
+  assert.equal(t.insertions.length,1);
+  assert.match(renderSequencePrimers([t],0,12),/primer-insertion-marker/);
+});

@@ -3191,3 +3191,8 @@ button.alignment-base:disabled {
 .commandbar .app-menu-trigger.toolbar-button {
   font-size: 14.8px;
 }
+
+/* Lift substitutions off the pairing baseline; retain their genomic columns. */
+.primer-aligned-base.mismatch { transform: translateY(-4px); border-bottom: 2px solid #b22935; }
+.primer-aligned-base.deletion { border-bottom: 2px dashed #a1422b; }
+.primer-comparison-note { color: #805c28; font-size: 11px; }

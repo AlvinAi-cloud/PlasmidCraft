@@ -212,6 +212,7 @@ export function createPlatform(host = globalThis) {
     aiDisconnect: () => aiInvoke("ai_disconnect"),
     aiCancel: () => aiInvoke("ai_cancel"),
     aiRequest: (request) => aiInvoke("ai_request", request),
+    aiCompute: (request) => aiInvoke("ai_compute", request),
     chatGPTStatus: () => aiInvoke("chatgpt_status"),
     chatGPTRestore: () => aiInvoke("chatgpt_restore"),
     chatGPTSignIn: (registrationId) =>

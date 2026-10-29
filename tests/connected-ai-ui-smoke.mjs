@@ -127,6 +127,7 @@ try {
       }),
       op("design_primers", { start: 25, end: 214 }),
     ]),
+    reply("Created the requested design and verified the local tool results"),
   ]);
   await send("Annotate this region and design primers");
   await idle();
@@ -141,7 +142,7 @@ try {
   );
   assert.equal(await page.locator(".ai-operation.completed").count(), 4);
   assert.equal(await page.locator(".ai-result-link").count(), 1);
-  assert.equal(await page.locator(".ai-message").count(), 3);
+  assert.equal(await page.locator(".ai-message").count(), 4);
   assert.match(
     await page.locator(".ai-message").first().textContent(),
     /Created the requested design/,
@@ -165,7 +166,6 @@ try {
       .evaluate((el) => el.scrollTop),
     0,
   );
-  await page.locator(".ai-context-details > summary").click();
   await page.locator(".ai-template-picker summary").click();
   await page.locator("[data-ai-template]").check();
   await page
@@ -184,7 +184,7 @@ try {
   assert.equal(typeof JSON.parse(preview).templates[0].sequence, "string");
   checks++;
   const requests = await page.evaluate(() => window.mock.requests);
-  assert.equal(requests.length, 3);
+  assert.equal(requests.length, 5);
   assert.match(requests[1].prompt, /Latest local tool results/);
   assert.equal(
     typeof JSON.parse(
@@ -206,7 +206,7 @@ try {
   await page.reload();
   await page.locator("#ai-assistant-button").click();
   await page.waitForFunction(
-    () => document.querySelectorAll(".ai-message").length === 3,
+    () => document.querySelectorAll(".ai-message").length === 4,
   );
   checks++;
   await page.getByText("History and sharing settings", { exact: true }).click();
@@ -429,6 +429,7 @@ try {
     reply("Recovered and executed", [
       op("copy_document", { name: "Protocol retry result" }),
     ]),
+    reply("Recovered and executed; verified the completed copy"),
   ]);
   await send("Create another copy");
   await idle();

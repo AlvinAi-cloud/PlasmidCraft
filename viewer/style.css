@@ -1499,3 +1499,7 @@ dialog::backdrop {
   text-align: center;
   color: #8aa294;
 }
+
+.ai-report-table { overflow: auto; max-height: 280px; }
+.ai-compute-code pre { white-space: pre-wrap; overflow: auto; max-height: 260px; font-size: 12px; }
+.ai-report-text { white-space: pre-wrap; overflow-wrap: anywhere; }

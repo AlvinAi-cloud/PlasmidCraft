@@ -20,8 +20,8 @@ const targets = [
   ],
   [
     "Linux-x86_64",
-    ".AppImage",
-    `PlasmidCraft-${version}-Linux-x86_64.AppImage`,
+    ".deb",
+    `PlasmidCraft-${version}-Linux-amd64.deb`,
   ],
 ];
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -65,7 +65,7 @@ const runs = new Map();
 const deadline = Date.now() + 60 * 60 * 1000;
 let previous = "";
 while (Date.now() < deadline) {
-  for (const workflow of ["desktop.yml", "linux-appimage.yml"]) {
+  for (const workflow of ["desktop.yml", "linux-deb.yml"]) {
     if (runs.has(workflow)) continue;
     const result = await json(
       `actions/workflows/${workflow}/runs?head_sha=${sha}&event=push&branch=main&per_page=10`,
@@ -122,7 +122,7 @@ function walk(dir) {
 }
 for (const [target, extension, filename] of targets) {
   const workflow =
-    target === "Linux-x86_64" ? "linux-appimage.yml" : "desktop.yml";
+    target === "Linux-x86_64" ? "linux-deb.yml" : "desktop.yml";
   const run = runs.get(workflow);
   const data = await json(`actions/runs/${run.id}/artifacts?per_page=100`);
   const artifact = data.artifacts.find(
@@ -156,10 +156,10 @@ for (const [target, extension, filename] of targets) {
   if (extension === ".dmg")
     assert.equal(bytes.subarray(-512, -508).toString(), "koly");
   if (extension === ".exe") assert.equal(bytes.subarray(0, 2).toString(), "MZ");
-  if (extension === ".AppImage") {
-    assert.equal(bytes.subarray(0, 4).toString(), "\x7fELF");
-    assert.equal(bytes.readUInt16LE(18), 62);
-    assert.equal(bytes.subarray(8, 11).toString("hex"), "414902");
+  if (extension === ".deb") {
+    assert.equal(bytes.subarray(0,8).toString(), "!<arch>\n");
+    assert.equal(execFileSync("dpkg-deb", ["-f",installers[0],"Version"], {encoding:"utf8"}).trim(),version);
+    assert.equal(execFileSync("dpkg-deb", ["-f",installers[0],"Architecture"], {encoding:"utf8"}).trim(),"amd64");
   }
   fs.copyFileSync(installers[0], path.join(out, filename));
   evidence.push(`${filename}: ${run.html_url} (artifact ${artifact.id})`);

@@ -59,7 +59,7 @@ try {
               output: [
                 {
                   type: "message",
-                  content: [{ type: "output_text", text: state.response }],
+                  content: [{ type: "output_text", text: args.prompt.includes("Latest local tool results") ? JSON.stringify({message:"Verified the tool results.",operations:[],continue:false}) : state.response }],
                 },
               ],
             };

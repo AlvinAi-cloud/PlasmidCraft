@@ -12,6 +12,7 @@ import {
   aiProposal,
 } from "./ai.mjs";
 import { recordToken } from "./workflow-common.mjs";
+import { parseFile, exportGenbank, MAX_FILE_BYTES } from "./core.mjs";
 import { parseProject, serializeProject } from "./project.mjs";
 import {
   CONNECTED_SYSTEM,
@@ -34,6 +35,13 @@ const $ = (s) => document.querySelector(s),
     );
 const button = (label, action, extra = "") =>
   `<button class="button" data-ai="${action}" ${extra}>${label}</button>`;
+function toolOutput(output, index) {
+  if (output.kind === "code")
+    return `<details class="ai-compute-code"><summary>${e(output.name)} · algorithm</summary><pre><code>${e(output.code)}</code></pre>${button("Save code…", "save-output-" + index)}</details>`;
+  if (output.kind === "report")
+    return `<details class="ai-compute-report" open><summary>${e(output.name)}</summary><p class="ai-report-text">${e(output.text)}</p>${output.columns.length ? `<div class="ai-report-table"><table class="data-table"><thead><tr>${output.columns.map((c) => `<th>${e(c)}</th>`).join("")}</tr></thead><tbody>${output.rows.slice(0, 100).map((r) => `<tr>${r.map((v) => `<td>${e(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="analysis-note">${output.rows.length > 100 ? `Showing 100 of ${output.rows.length} rows. Export includes all rows.` : `${output.rows.length} rows.`}</p>${button("Export table CSV…", "save-table-" + index)}` : ""}${button("Save report JSON…", "save-output-" + index)}</details>`;
+  return `<details><summary>${e(output.name)}</summary>${(output.primers || []).map((p) => `<p>${e(p.name)}<br><code class="table-sequence">${e(p.sequence)}</code></p>`).join("")}</details>`;
+}
 function preferenceEndpoint(provider, value) {
   const fallback =
     AI_PROVIDERS.find((p) => p.id === provider)?.endpoint ||
@@ -100,6 +108,7 @@ export class AiUI {
     this.includeHistory = false;
     this.connectedHistory = true;
     this.connectedIncludeDna = true;
+    this.cloudFallback = true;
     this.accountId = "";
     this.provider = "openai";
     this.endpoint = AI_PROVIDERS[0].endpoint;
@@ -165,6 +174,10 @@ export class AiUI {
       }
     });
     document.addEventListener("change", (event) => {
+      if (event.target.id === "ai-result-file") {
+        this.importAiFiles(event.target.files).catch((error) => { this.error = error.message; this.render(); });
+        return;
+      }
       if (event.target.id === "ai-model-manual") {
         this.read();
         this.modelManual = event.target.checked;
@@ -250,6 +263,7 @@ export class AiUI {
           endpoint: preferenceEndpoint(this.provider, this.endpoint),
           model: this.model,
           connectedIncludeDna: this.connectedIncludeDna,
+          cloudFallback: this.cloudFallback,
         }),
       );
     } catch {}
@@ -429,8 +443,8 @@ export class AiUI {
     const live = $("#ai-live-context");
     if (live)
       live.textContent = source
-        ? `${source.name} · ${source.sequence.length.toLocaleString()} bp${selection ? ` · selected bases ${selection.start + 1}–${selection.end}` : " · no selected region"}`
-        : "No active DNA";
+        ? `Working on: ${source.name}${selection ? ` · selected bases ${selection.start + 1}–${selection.end}` : ""}`
+        : "Working on: no plasmid open";
     const note = $("#ai-context-note");
     if (note)
       note.textContent =
@@ -688,7 +702,7 @@ export class AiUI {
       )
       .join(
         "",
-      )}</select></label><label class="check-label"><input id="ai-dna" type="checkbox" ${this.includeDna ? "checked" : ""} ${disabled}>Include active DNA and selected bases (up to 40,000 bp)</label></div><div class="ai-live-context"><strong>Current editor context</strong><p id="ai-live-context"></p><p class="analysis-note" id="ai-context-note"></p></div><p class="analysis-note">Prompt metadata includes names, topology, length and up to 250 feature locations. DNA is included only when checked. Other open documents, traces, edit history, libraries, paths and credentials are excluded.</p><label>Prompt<textarea id="ai-goal" rows="4" ${disabled}>${e(this.goal)}</textarea></label><label class="check-label"><input type="checkbox" id="ai-history" ${this.includeHistory ? "checked" : ""} ${disabled}>Include recent conversation history in the outgoing prompt</label><p class="analysis-note">History may contain DNA from earlier messages. Preview the outgoing prompt before sharing it.</p><div class="wf-actions">${button("Preview outgoing prompt", "prepare", disabled)}${button("Cancel sign-in / request", "cancel", this.pending || this.authBusy ? "" : "disabled")}${button("Copy prompt for external AI", "copy", disabled)}</div><details ${this.prompt ? "open" : ""}><summary>Exact outgoing prompt</summary><textarea id="ai-outgoing" rows="7" readonly>${e(this.prompt)}</textarea></details></section><details id="ai-external-details"><summary>Use an AI website with copy / paste</summary><p>Copy the prepared prompt, open your service, sign in there and paste it. Paste its JSON response below to review in PlasmidCraft. These buttons open websites; they do not sign PlasmidCraft into your subscription.</p><div class="wf-actions">${["chatgpt", "codex", "claude", "gemini"].map((s) => button("Open " + { chatgpt: "ChatGPT", codex: "Codex", claude: "Claude", gemini: "Gemini" }[s], "site-" + s)).join("")}</div></details><section id="ai-response-section"><h3>Paste external AI JSON proposal</h3><label>JSON proposal<textarea id="ai-response" rows="8" spellcheck="false" ${disabled}>${e(this.response)}</textarea></label><div class="wf-actions">${button("Review proposed actions", "review", disabled)}${button("Export response", "export", this.response && !this.pending ? "" : "disabled")}${button("Clear session text", "clear", disabled)}</div><p role="status" id="ai-status">${this.pending ? "Waiting for provider…" : ""}</p><p class="modal-error" role="alert" id="ai-error">${e(this.error)}</p>${this.proposal ? `<div class="data-card"><h3>Review proposal</h3><p>${e(this.proposal.summary)}</p><ol>${this.proposal.steps.map((s) => `<li>${e(s)}</li>`).join("")}</ol><p>${this.proposal.created.length} new DNA document(s). Source documents are preserved. All coordinates and primer binding are checked locally; biological identity and experimental performance still require review.</p>${this.proposal.created.map((r) => `<details><summary>${e(r.name)} · ${r.sequence.length} bp · ${r.features.length} annotations · ${r.primers.length} primers</summary><pre class="table-sequence">${e(r.sequence)}</pre></details>`).join("")}<div class="wf-actions">${button("Create reviewed DNA copies", "apply", this.proposal.created.length ? "" : "disabled")}${this.proposal.workflows.map((t) => button("Open " + t, "workflow-" + t)).join("")}</div></div>` : ""}</section></div>`;
+      )}</select></label><label class="check-label"><input id="ai-dna" type="checkbox" ${this.includeDna ? "checked" : ""} ${disabled}>Include active DNA and selected bases (up to 40,000 bp)</label></div><div class="ai-live-context"><p id="ai-live-context"></p><p class="analysis-note" id="ai-context-note"></p></div><p class="analysis-note">Prompt metadata includes names, topology, length and up to 250 feature locations. DNA is included only when checked. Other open documents, traces, edit history, libraries, paths and credentials are excluded.</p><label>Prompt<textarea id="ai-goal" rows="4" ${disabled}>${e(this.goal)}</textarea></label><label class="check-label"><input type="checkbox" id="ai-history" ${this.includeHistory ? "checked" : ""} ${disabled}>Include recent conversation history in the outgoing prompt</label><p class="analysis-note">History may contain DNA from earlier messages. Preview the outgoing prompt before sharing it.</p><div class="wf-actions">${button("Preview outgoing prompt", "prepare", disabled)}${button("Cancel sign-in / request", "cancel", this.pending || this.authBusy ? "" : "disabled")}${button("Copy prompt for external AI", "copy", disabled)}</div><details ${this.prompt ? "open" : ""}><summary>Exact outgoing prompt</summary><textarea id="ai-outgoing" rows="7" readonly>${e(this.prompt)}</textarea></details></section><details id="ai-external-details"><summary>Use an AI website with copy / paste</summary><p>Copy the prepared prompt, open your service, sign in there and paste it. Paste its JSON response below to review in PlasmidCraft. These buttons open websites; they do not sign PlasmidCraft into your subscription.</p><div class="wf-actions">${["chatgpt", "codex", "claude", "gemini"].map((s) => button("Open " + { chatgpt: "ChatGPT", codex: "Codex", claude: "Claude", gemini: "Gemini" }[s], "site-" + s)).join("")}</div></details><section class="ai-file-exchange"><h3>Use an AI account with plasmid files</h3><p>Use ChatGPT or another AI website/app to edit the complete plasmid and return a downloadable file. Export the plasmid, copy the editing prompt, attach both in your AI chat, then import its returned file as a new document.</p><div class="wf-actions">${button("Export plasmid for AI…", "export-ai-file", this.api.active() ? "" : "disabled")}${button("Copy file-editing prompt", "copy-file-prompt")}${button("Import AI-edited plasmid…", "import-ai-file")}</div><input id="ai-result-file" type="file" accept=".pcraft,.gb,.gbk,.genbank,.dna,.fasta,.fa" hidden></section><section id="ai-response-section"><h3>Paste external AI JSON proposal</h3><label>JSON proposal<textarea id="ai-response" rows="8" spellcheck="false" ${disabled}>${e(this.response)}</textarea></label><div class="wf-actions">${button("Review proposed actions", "review", disabled)}${button("Export response", "export", this.response && !this.pending ? "" : "disabled")}${button("Clear session text", "clear", disabled)}</div><p role="status" id="ai-status">${this.pending ? "Waiting for provider…" : ""}</p><p class="modal-error" role="alert" id="ai-error">${e(this.error)}</p>${this.proposal ? `<div class="data-card"><h3>Review proposal</h3><p>${e(this.proposal.summary)}</p><ol>${this.proposal.steps.map((s) => `<li>${e(s)}</li>`).join("")}</ol><p>${this.proposal.created.length} new DNA document(s). Source documents are preserved. All coordinates and primer binding are checked locally; biological identity and experimental performance still require review.</p>${this.proposal.created.map((r) => `<details><summary>${e(r.name)} · ${r.sequence.length} bp · ${r.features.length} annotations · ${r.primers.length} primers</summary><pre class="table-sequence">${e(r.sequence)}</pre></details>`).join("")}<div class="wf-actions">${button("Create reviewed DNA copies", "apply", this.proposal.created.length ? "" : "disabled")}${this.proposal.workflows.map((t) => button("Open " + t, "workflow-" + t)).join("")}</div></div>` : ""}</section></div>`;
     $("#ai-panel").hidden = false;
     document.body.classList.add("ai-panel-open");
     $("#ai-assistant-button")?.setAttribute("aria-expanded", "true");
@@ -816,7 +830,7 @@ export class AiUI {
       openDetails = [
         ...panel.querySelectorAll(".ai-connected-composer details[open]"),
       ].map((el) => el.id || el.className);
-    panel.innerHTML = `<div id="ai-workspace" data-connected="true" data-ai-view="conversation"><div class="ai-connection-banner"><span class="ai-connection-badge ${this.connection ? "configured" : ""}">${this.connection ? "Connected" : "Not connected"}</span><span id="ai-summary-detail">${e(this.connectionSummary())}</span></div><nav class="ai-section-nav" aria-label="AI assistant sections">${button("Internal AI Operations", "navigate-design")}${button("External AI", "navigate-external")}</nav><section class="ai-connected-composer" aria-labelledby="ai-input-heading"><h3 id="ai-input-heading">Message input</h3><div class="ai-composer-fields"><textarea id="ai-goal" aria-labelledby="ai-input-heading" placeholder="Describe your design or ask a question…" rows="4" ${disabled}>${e(this.goal)}</textarea><label class="check-label"><input id="ai-dna" type="checkbox" ${this.connectedIncludeDna ? "checked" : ""} ${disabled}>Share active document DNA with connected AI</label><p class="analysis-note">Send lets AI inspect the attached sequence and run local tools on a new copy. Your original stays unchanged. No file is saved automatically.</p><details class="ai-context-details"><summary>Document context and templates</summary><div class="ai-live-context"><strong>Current editor context</strong><p id="ai-live-context"></p><p id="ai-context-note" class="analysis-note"></p></div>${templates ? `<details class="ai-template-picker"><summary>Additional DNA templates</summary><p class="analysis-note">Select up to two open templates for cloning. Only checked templates are included in the request; the DNA attachment checkbox also applies to them.</p>${templates}</details>` : ""}</details></div><div class="wf-actions">${button("Send", "send", canSend ? "" : "disabled")}${button("Stop", "cancel", this.pending ? "" : "disabled")}</div></section><section id="ai-operations" class="ai-internal-section" tabindex="-1" aria-labelledby="ai-operations-heading"><h3 id="ai-operations-heading">Operations and results</h3><div class="ai-connected-scroll" id="ai-operations-scroll"><p role="status">${this.pending ? "Working on a separate copy…" : e(this.operationStatus || "No operations yet.")}</p><ol>${this.operations.map((o) => `<li class="ai-operation ${e(o.status)}"><strong>${e(String(o.tool || "Operation").replaceAll("_", " "))}</strong> · ${e(o.status)}<p>${e(o.detail)}</p></li>`).join("")}</ol>${this.resultDocuments.map((d, i) => `<div class="ai-result-link"><strong>${e(d.name)}</strong> · ${d.sequence.length.toLocaleString()} bp ${button("Open document", "result-" + i)}${button("Save .pcraft…", "save-result-" + i)}</div>`).join("")}${this.toolOutputs.map((o) => `<details><summary>${e(o.name)}</summary>${o.primers.map((p) => `<p>${e(p.name)}<br><code class="table-sequence">${e(p.sequence)}</code></p>`).join("")}</details>`).join("")}<p id="ai-error" class="modal-error" role="alert">${e(this.error)}</p></div></section><section id="ai-history-section" class="ai-internal-section" aria-labelledby="ai-history-heading"><h3 id="ai-history-heading">Conversation history</h3><div class="ai-connected-scroll" id="ai-conversation-scroll"><section class="ai-conversation-log" aria-label="Conversation history">${
+    panel.innerHTML = `<div id="ai-workspace" data-connected="true" data-ai-view="conversation"><div class="ai-connection-banner"><span class="ai-connection-badge ${this.connection ? "configured" : ""}">${this.connection ? "Connected" : "Not connected"}</span><span id="ai-summary-detail">${e(this.connectionSummary())}</span></div><nav class="ai-section-nav" aria-label="AI assistant sections">${button("Internal AI Operations", "navigate-design")}${button("External AI", "navigate-external")}</nav><section class="ai-connected-composer" aria-labelledby="ai-input-heading"><h3 id="ai-input-heading">Message input</h3><div class="ai-composer-fields"><textarea id="ai-goal" aria-labelledby="ai-input-heading" placeholder="Describe your design or ask a question…" rows="4" ${disabled}>${e(this.goal)}</textarea><label class="check-label"><input id="ai-dna" type="checkbox" ${this.connectedIncludeDna ? "checked" : ""} ${disabled}>Share active document DNA with connected AI</label><div class="ai-context-details"><div class="ai-live-context"><p id="ai-live-context"></p><p id="ai-context-note" class="analysis-note"></p></div>${templates ? `<details class="ai-template-picker"><summary>Attach another plasmid</summary><p class="analysis-note">Select up to two open templates for cloning. Only checked templates are included in the request; the DNA attachment checkbox also applies to them.</p>${templates}</details>` : `<details class="ai-template-picker"><summary>Attach another plasmid</summary><p>Open another plasmid with File → Open Sequence to attach it here.</p></details>`}</div></div><div class="wf-actions">${button("Send", "send", canSend ? "" : "disabled")}${button("Stop", "cancel", this.pending ? "" : "disabled")}</div></section><section id="ai-operations" class="ai-internal-section" tabindex="-1" aria-labelledby="ai-operations-heading"><h3 id="ai-operations-heading">Operations and results</h3><div class="ai-connected-scroll" id="ai-operations-scroll"><p role="status">${this.pending ? "Working on a separate copy…" : e(this.operationStatus || "No operations yet.")}</p><ol>${this.operations.map((o) => `<li class="ai-operation ${e(o.status)}"><strong>${e(String(o.tool || "Operation").replaceAll("_", " "))}</strong> · ${e(o.status)}<p>${e(o.detail)}</p></li>`).join("")}</ol>${this.resultDocuments.map((d, i) => `<div class="ai-result-link"><strong>${e(d.name)}</strong> · ${d.sequence.length.toLocaleString()} bp ${button("Open document", "result-" + i)}${button("Save .pcraft…", "save-result-" + i)}</div>`).join("")}${this.toolOutputs.map(toolOutput).join("")}<p id="ai-error" class="modal-error" role="alert">${e(this.error)}</p></div></section><section id="ai-history-section" class="ai-internal-section" aria-labelledby="ai-history-heading"><h3 id="ai-history-heading">Conversation history</h3><div class="ai-connected-scroll" id="ai-conversation-scroll"><section class="ai-conversation-log" aria-label="Conversation history">${
       [...this.messages]
         .reverse()
         .map(
@@ -824,7 +838,7 @@ export class AiUI {
             `<article class="ai-message ${m.role}"><strong>${m.role === "user" ? "You" : "AI"}</strong><p>${e(m.text)}</p></article>`,
         )
         .join("") ||
-      "<p>Describe your design goal. The assistant can use local tools and open the result as a new plasmid document.</p>"
+      "<p>Your conversation will appear here.</p>"
     }</section><details><summary>History and sharing settings</summary><label class="check-label"><input type="checkbox" id="ai-history" ${this.connectedHistory ? "checked" : ""} ${disabled}>Include recent conversation in the next request</label><p class="analysis-note">History can contain earlier DNA. Local tools can use the active document and explicitly checked additional templates. Document DNA and tool-generated oligos are attached only when enabled above; names, feature locations and tool summaries are included. Messages and selected history are sent as written and can contain pasted DNA. Send authorizes relevant local operations on a copy. Results open as unsaved documents.</p><p class="analysis-note">${e(this.historyNotice || "Conversation history is stored locally per document.")}</p>${button("New conversation", "new-chat", disabled)}${button("Export conversation", "export-conversation", disabled)}</details></div></section></div>`;
     $("#ai-panel").hidden = false;
     document.body.classList.add("ai-panel-open");
@@ -851,8 +865,12 @@ export class AiUI {
     const goal = this.goal,
       source = this.context.source,
       key = this.historyKey;
+    const computationAbort = new AbortController();
+    this.computationAbort = computationAbort;
     const workspace = new ConnectedWorkspace(source, {
       libraries: this.api.libraries?.() || [],
+      cloudCompute: this.cloudFallback && this.connectedIncludeDna && this.connection.provider === "openai" && this.api.platform.aiCompute
+        ? (request) => this.api.platform.aiCompute({ model: this.model.trim(), ...request }) : null,
       includeDna: this.connectedIncludeDna,
       hosts: CODON_USAGE.map(({ id, label }) => ({ id, label })),
       selection: this.context.selection,
@@ -872,6 +890,7 @@ export class AiUI {
     const epoch = ++this.epoch,
       provider = this.connection.provider,
       model = this.model.trim();
+    const executed = new Map();
     let formatRetries = 0;
     let transcript =
       aiPrompt(goal, workspace.context()) +
@@ -905,17 +924,35 @@ export class AiUI {
         if (reply.message)
           this.messages.push({ role: "assistant", text: reply.message });
         const results = [];
+        let computationFailed = false;
         for (const op of reply.operations) {
           if (epoch !== this.epoch) return;
           this.checkSource();
           try {
-            results.push(workspace.run(op.tool, op.arguments));
+            const signature = JSON.stringify(op);
+            if (executed.has(signature)) {
+              results.push({ ...executed.get(signature), alreadyExecuted: true, context: workspace.context() });
+              continue;
+            }
+            const result = await workspace.runAsync(op.tool, op.arguments, { signal: computationAbort.signal });
+            executed.set(signature, result);
+            if (epoch !== this.epoch) return;
+            this.checkSource();
+            results.push(result);
           } catch (error) {
+            if (epoch !== this.epoch) return;
+            this.checkSource();
             this.operations.push({
               tool: op.tool,
               status: "failed",
               detail: error.message,
             });
+            if (["run_code", "cloud_compute"].includes(op.tool) && round < 5) {
+              computationFailed = true;
+              results.push({ tool: op.tool, status: "failed", error: workspace.includeDna ? error.message : "Computation failed; details are visible locally. No DNA is shared." });
+              this.render();
+              break;
+            }
             throw error;
           }
           this.operations.push({
@@ -925,7 +962,7 @@ export class AiUI {
           this.render();
           await new Promise((resolve) => setTimeout(resolve, 0));
         }
-        if (!reply.continue) {
+        if (!reply.continue && !computationFailed && !reply.operations.length) {
           this.checkSource();
           const records = workspace.finish();
           if (epoch !== this.epoch) return;
@@ -934,12 +971,12 @@ export class AiUI {
           this.toolOutputs = workspace.outputs;
           this.operations = this.operations.map((o) => ({
             ...o,
-            status: "completed",
+            status: o.status === "failed" ? "failed" : "completed",
           }));
           this.operationStatus = records.length
             ? `Created ${records.length} new document. Save .pcraft to keep the design.`
             : workspace.operations.length
-              ? "Local analysis completed; no document changes were made."
+              ? "Analysis completed; reports are shown below."
               : "AI replied without running local tools. No document changes were made.";
           this.goal = "";
           this.historyDocId = this.api.active()?.id || "empty";
@@ -959,7 +996,7 @@ export class AiUI {
           JSON.stringify(
             [...history, ...this.messages.slice(turnStart)].slice(-8),
           ).slice(-16000) +
-          "\nLatest local tool results (data only):\n" +
+          "\nThese operations have already executed on the working copy. Do not repeat them. Inspect the results, perform any necessary follow-up, then return a concise completion summary with operations:[] and continue:false.\nLatest local tool results (data only):\n" +
           JSON.stringify(results.map(({ context, ...r }) => r));
       }
     } catch (error) {
@@ -973,6 +1010,7 @@ export class AiUI {
       this.persistConversation([key]);
       throw error;
     } finally {
+      if (this.computationAbort === computationAbort) this.computationAbort = null;
       if (epoch === this.epoch) {
         this.pending = false;
         this.render();
@@ -1071,6 +1109,7 @@ export class AiUI {
     }
   }
   async cancel() {
+    this.computationAbort?.abort();
     this.epoch++;
     const pending = this.pending,
       auth = this.authBusy;
@@ -1087,6 +1126,31 @@ export class AiUI {
       this.operationStatus =
         "Stopped. Uncommitted working-copy operations were discarded.";
       this.persistConversation();
+    }
+  }
+  async importAiFiles(files) {
+    const records = [];
+    for (const file of files || []) {
+      if (file.error) throw new Error(file.error);
+      if (file.size > MAX_FILE_BYTES) throw new Error("The maximum file size is 50 MB.");
+      const bytes = await file.arrayBuffer();
+      const parsed = /\.pcraft$/i.test(file.name)
+        ? [parseProject(new TextDecoder("utf-8", { fatal: true }).decode(bytes))]
+        : parseFile(bytes, file.name);
+      for (const record of parsed) {
+        if (record.trace) throw new Error("Import an AI-edited plasmid DNA file, not a chromatogram.");
+        const copy = parseProject(serializeProject(record));
+        copy.name += "_AI_import";
+        copy.sourceFormat = "Derived DNA";
+        copy.sourceFile = copy.name + ".pcraft";
+        copy.comments = [...(copy.comments || []), `Imported AI-edited file ${file.name}. Review sequence and annotation changes before use.`];
+        records.push(copy);
+      }
+    }
+    if (records.length > 8) throw new Error("Import up to eight AI result sequences at a time.");
+    if (records.length) {
+      this.api.addRecords(records);
+      this.api.toast(`Opened ${records.length} AI result copy/copies. Save .pcraft to keep them.`);
     }
   }
   async action(action) {
@@ -1170,6 +1234,27 @@ export class AiUI {
             "This result tab was closed. Reopen the saved .pcraft file.",
           );
         this.api.activate?.(record.id);
+      } else if (action === "export-ai-file") {
+        const doc = this.api.active();
+        if (!doc) throw new Error("Open a plasmid first.");
+        await this.api.platform.saveFile(doc.name.replace(/[^a-zA-Z0-9_-]/g, "_") + "_for_AI.gb", exportGenbank(doc));
+      } else if (action === "copy-file-prompt") {
+        const text = `Edit the attached GenBank plasmid file using code and return a downloadable GenBank (.gb) file with the complete edited sequence and updated annotations.\nTask: ${this.goal || "Ask me which gene or region to edit and request any missing replacement sequence."}\nKeep vector DNA outside the requested edit unchanged. For a gene swap, use the provided replacement DNA in its coding orientation, retain the target orientation unless requested otherwise, remove obsolete annotations inside the replaced gene, remap retained annotations and primer bindings, and verify the replacement and vector flanks. Do not invent gene sequences or annotations. Summarize changes, coordinate shifts and checks. Return the edited file and mention any unverified assumptions.`;
+        await this.api.platform.copyText(text);
+        this.api.toast("Copied the file-editing prompt. Attach the exported plasmid in your AI website/app.");
+      } else if (action === "import-ai-file") {
+        if (this.api.platform.desktop) await this.importAiFiles(await this.api.platform.pickFiles({ multiple: false, filters: [{ name: "AI-edited DNA", extensions: ["pcraft", "gb", "gbk", "genbank", "dna", "fasta", "fa"] }] }));
+        else $("#ai-result-file").click();
+      } else if (action.startsWith("save-output-") || action.startsWith("save-table-")) {
+        const table = action.startsWith("save-table-");
+        const index = Number(action.slice(table ? 11 : 12));
+        const output = this.toolOutputs[index];
+        if (!output) throw new Error("That computation result is no longer available.");
+        const name = output.name.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 100) || "AI_result";
+        if (table) {
+          const cell = (value) => '"' + String(value).replace(/^[=+@\-]/, "'$&").replaceAll('"', '""') + '"';
+          await this.api.platform.saveFile(name + ".csv", [output.columns, ...output.rows].map((row) => row.map(cell).join(",")).join("\r\n"));
+        } else await this.api.platform.saveFile(name + (output.kind === "code" ? (output.name.startsWith("Cloud") ? ".py" : ".js") : ".json"), output.kind === "code" ? output.code : JSON.stringify(output, null, 2));
       } else if (action === "export-conversation") {
         await this.api.platform.saveFile(
           "PlasmidCraft_conversation.txt",
