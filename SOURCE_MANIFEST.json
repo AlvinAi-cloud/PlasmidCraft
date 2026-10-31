@@ -232,7 +232,7 @@
     },
     {
       "path": "scripts/build-file-associations.mjs",
-      "sha256": "0c2e7384e2042c20411b6b64c0a78788b32e3b76adfbb242076ff2046084246b"
+      "sha256": "8e22d0cbed4085108c6a7c236d291b4e6d6b36e10614a1fee3664838333c2f3d"
     },
     {
       "path": "scripts/build-help.mjs",
@@ -296,7 +296,7 @@
     },
     {
       "path": "src-tauri/file-associations/Info.plist",
-      "sha256": "11258c468d5aae4d37a43e13d4fbd7b9a29d1b66476b78ed0c809f4ae51ddb8a"
+      "sha256": "f630e83eb221e5ec1219759aed81bdab21c0e7af8e5e148fda291c0ae9ea4312"
     },
     {
       "path": "src-tauri/file-associations/mime.xml",
@@ -684,7 +684,7 @@
     },
     {
       "path": "tests/platform.test.mjs",
-      "sha256": "ff3d11f8f063765247bc78845026bdad8dde274fe49f2ce3fadb0f2c7c548458"
+      "sha256": "30fd0bff2d6d1d16b3bf00f0b7289f9ff014d6cfeeb50039169612edc45a1579"
     },
     {
       "path": "tests/primer-duplex-preview-ui-smoke.mjs",

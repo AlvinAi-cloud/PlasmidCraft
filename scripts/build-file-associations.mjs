@@ -49,12 +49,13 @@ export async function generate() {
   const info = dict({
     CFBundleDocumentTypes: `<array>${types.map((t) => dict({
       CFBundleTypeName: str(t.name), CFBundleTypeExtensions: arr(t.ext),
-      LSItemContentTypes: arr([`org.plasmidcraft.${t.id}`]),
+      // Shared extensions may already have a UTI owned by another installed app.
+      // Keep extension-based matching for them, rather than inventing a conflicting UTI.
+      ...(t.own ? { LSItemContentTypes: arr([`org.plasmidcraft.${t.id}`]) } : {}),
       CFBundleTypeRole: str(t.role || "Editor"), LSHandlerRank: str(t.own ? "Owner" : "Alternate"),
       CFBundleTypeIconFile: str("document.icns"),
     })).join("\n")}</array>`,
     UTExportedTypeDeclarations: `<array>${declarations.filter((_,i) => types[i].own).join("\n")}</array>`,
-    UTImportedTypeDeclarations: `<array>${declarations.filter((_,i) => !types[i].own).join("\n")}</array>`,
   });
   await fs.writeFile(new URL("file-associations/Info.plist", root), `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">${info}</plist>\n`);
   await fs.writeFile(new URL("file-associations/mime.xml", root), `<?xml version="1.0" encoding="UTF-8"?>\n<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">\n${types.map((t) => `  <mime-type type="${t.mime}"><comment>${xml(t.name)}</comment>${t.ext.map((e) => `<glob pattern="*.${e}"/>`).join("")}<icon name="${t.mime.replaceAll("/", "-")}"/></mime-type>`).join("\n")}\n</mime-info>\n`);

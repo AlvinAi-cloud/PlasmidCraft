@@ -450,6 +450,8 @@ test("native document registrations cover sequence types without taking text-fil
     }
   }
   assert.equal((plist.match(/<key>CFBundleTypeIconFile<\/key>/g) || []).length, types.length);
+  assert.equal((plist.match(/<key>LSItemContentTypes<\/key>/g) || []).length, 2);
+  assert.ok(!plist.includes("UTImportedTypeDeclarations"));
   assert.ok(!nsis.includes("UserChoice"));
   assert.ok(!nsis.includes('WriteRegStr SHCTX "Software\\Classes\\.pcraft" ""'));
 });

@@ -14,31 +14,26 @@
 <key>CFBundleTypeIconFile</key><string>document.icns</string></dict>
 <dict><key>CFBundleTypeName</key><string>GenBank Sequence</string>
 <key>CFBundleTypeExtensions</key><array><string>gb</string><string>gbk</string><string>genbank</string></array>
-<key>LSItemContentTypes</key><array><string>org.plasmidcraft.genbank</string></array>
 <key>CFBundleTypeRole</key><string>Editor</string>
 <key>LSHandlerRank</key><string>Alternate</string>
 <key>CFBundleTypeIconFile</key><string>document.icns</string></dict>
 <dict><key>CFBundleTypeName</key><string>FASTA Sequence</string>
 <key>CFBundleTypeExtensions</key><array><string>fa</string><string>fasta</string><string>fna</string></array>
-<key>LSItemContentTypes</key><array><string>org.plasmidcraft.fasta</string></array>
 <key>CFBundleTypeRole</key><string>Editor</string>
 <key>LSHandlerRank</key><string>Alternate</string>
 <key>CFBundleTypeIconFile</key><string>document.icns</string></dict>
 <dict><key>CFBundleTypeName</key><string>Protein Sequence</string>
 <key>CFBundleTypeExtensions</key><array><string>faa</string><string>pep</string></array>
-<key>LSItemContentTypes</key><array><string>org.plasmidcraft.protein-fasta</string></array>
 <key>CFBundleTypeRole</key><string>Editor</string>
 <key>LSHandlerRank</key><string>Alternate</string>
 <key>CFBundleTypeIconFile</key><string>document.icns</string></dict>
 <dict><key>CFBundleTypeName</key><string>SnapGene DNA Sequence</string>
 <key>CFBundleTypeExtensions</key><array><string>dna</string></array>
-<key>LSItemContentTypes</key><array><string>org.plasmidcraft.dna</string></array>
 <key>CFBundleTypeRole</key><string>Editor</string>
 <key>LSHandlerRank</key><string>Alternate</string>
 <key>CFBundleTypeIconFile</key><string>document.icns</string></dict>
 <dict><key>CFBundleTypeName</key><string>Sanger Trace</string>
 <key>CFBundleTypeExtensions</key><array><string>ab1</string></array>
-<key>LSItemContentTypes</key><array><string>org.plasmidcraft.trace</string></array>
 <key>CFBundleTypeRole</key><string>Viewer</string>
 <key>LSHandlerRank</key><string>Alternate</string>
 <key>CFBundleTypeIconFile</key><string>document.icns</string></dict></array>
@@ -53,34 +48,4 @@
 <key>UTTypeConformsTo</key><array><string>public.data</string></array>
 <key>UTTypeIconFile</key><string>document.icns</string>
 <key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>pcprotein</string></array>
-<key>public.mime-type</key><string>application/x-plasmidcraft-protein</string></dict></dict></array>
-<key>UTImportedTypeDeclarations</key><array><dict><key>UTTypeIdentifier</key><string>org.plasmidcraft.genbank</string>
-<key>UTTypeDescription</key><string>GenBank Sequence</string>
-<key>UTTypeConformsTo</key><array><string>public.text</string></array>
-<key>UTTypeIconFile</key><string>document.icns</string>
-<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>gb</string><string>gbk</string><string>genbank</string></array>
-<key>public.mime-type</key><string>chemical/seq-na-genbank</string></dict></dict>
-<dict><key>UTTypeIdentifier</key><string>org.plasmidcraft.fasta</string>
-<key>UTTypeDescription</key><string>FASTA Sequence</string>
-<key>UTTypeConformsTo</key><array><string>public.text</string></array>
-<key>UTTypeIconFile</key><string>document.icns</string>
-<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>fa</string><string>fasta</string><string>fna</string></array>
-<key>public.mime-type</key><string>chemical/seq-na-fasta</string></dict></dict>
-<dict><key>UTTypeIdentifier</key><string>org.plasmidcraft.protein-fasta</string>
-<key>UTTypeDescription</key><string>Protein Sequence</string>
-<key>UTTypeConformsTo</key><array><string>public.text</string></array>
-<key>UTTypeIconFile</key><string>document.icns</string>
-<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>faa</string><string>pep</string></array>
-<key>public.mime-type</key><string>application/x-plasmidcraft-protein-fasta</string></dict></dict>
-<dict><key>UTTypeIdentifier</key><string>org.plasmidcraft.dna</string>
-<key>UTTypeDescription</key><string>SnapGene DNA Sequence</string>
-<key>UTTypeConformsTo</key><array><string>public.data</string></array>
-<key>UTTypeIconFile</key><string>document.icns</string>
-<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>dna</string></array>
-<key>public.mime-type</key><string>application/x-snapgene-dna</string></dict></dict>
-<dict><key>UTTypeIdentifier</key><string>org.plasmidcraft.trace</string>
-<key>UTTypeDescription</key><string>Sanger Trace</string>
-<key>UTTypeConformsTo</key><array><string>public.data</string></array>
-<key>UTTypeIconFile</key><string>document.icns</string>
-<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>ab1</string></array>
-<key>public.mime-type</key><string>application/x-abi-trace</string></dict></dict></array></dict></plist>
+<key>public.mime-type</key><string>application/x-plasmidcraft-protein</string></dict></dict></array></dict></plist>
