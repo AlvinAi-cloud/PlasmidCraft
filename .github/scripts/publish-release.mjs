@@ -10,6 +10,7 @@ assert.match(pkg.version, /^\d+\.\d+\.\d+$/);
 assert.equal(config.version, pkg.version);
 const version = pkg.version;
 const tag = `v${version}`;
+const replaceAssets = process.argv.includes("--replace-assets");
 const targets = [
   ["aarch64-apple-darwin", ".dmg", `PlasmidCraft-${version}-macOS-arm64.dmg`],
   ["x86_64-apple-darwin", ".dmg", `PlasmidCraft-${version}-macOS-x64.dmg`],
@@ -37,9 +38,9 @@ if (process.argv.includes("--check")) {
   process.exit(0);
 }
 assert.equal(
-  process.env.GITHUB_REF_NAME,
+  replaceAssets ? process.env.PLASMIDCRAFT_RELEASE_TAG : process.env.GITHUB_REF_NAME,
   tag,
-  "Tag must match the application version",
+  "Release tag must match the application version",
 );
 const repo = process.env.GITHUB_REPOSITORY;
 assert.match(repo || "", /^[\w.-]+\/[\w.-]+$/);
@@ -47,6 +48,10 @@ assert.ok(process.env.GH_TOKEN, "GitHub release token is required");
 const sha = execFileSync("git", ["rev-parse", "HEAD"], {
   encoding: "utf8",
 }).trim();
+if (replaceAssets) {
+  assert.match(process.env.PLASMIDCRAFT_BUILD_SHA || "", /^[a-f0-9]{40}$/);
+  assert.equal(sha, process.env.PLASMIDCRAFT_BUILD_SHA, "Checkout must match the requested verified build commit");
+}
 const api = process.env.GITHUB_API_URL || "https://api.github.com";
 async function json(route) {
   const response = await fetch(`${api}/repos/${repo}/${route}`, {
@@ -187,6 +192,28 @@ fs.writeFileSync(
     .join("\n") + "\n",
 );
 const existing = await json(`releases/tags/${tag}`);
+if (replaceAssets) {
+  assert.ok(existing && !existing.draft, "An existing published release is required for asset refresh");
+  // Keep a recoverable copy before replacing any downloadable asset.
+  fs.mkdirSync("previous-release-assets", { recursive: true });
+  execFileSync("gh", ["release", "download", tag, "-R", repo, "-D", "previous-release-assets"], { stdio: "inherit" });
+  fs.appendFileSync(path.join(out, "BUILD_REPORT.txt"), "\nRelease assets refreshed in place. The existing version tag is preserved; these installers and the attached source ZIP correspond to the commit above.\n");
+  // BUILD_REPORT changed; regenerate the complete checksum list before upload.
+  fs.writeFileSync(path.join(out, "SHA256SUMS.txt"), files.map((name) => `${hash(fs.readFileSync(path.join(out, name)))}  ${name}`).join("\n") + "\n");
+  execFileSync("gh", ["release", "upload", tag, "-R", repo, "--clobber", ...fs.readdirSync(out).sort().map((name) => path.join(out, name))], { stdio: "inherit" });
+  const notesPath = path.join(downloads, "updated-release-notes.md");
+  fs.writeFileSync(notesPath, fs.readFileSync("RELEASE_NOTES.md", "utf8") + `\nUpdated downloads include the file-icon and OS file-opening update built from commit ${sha}. The original version tag is preserved; use the attached source ZIP for the exact updated installer source.\n`);
+  execFileSync("gh", ["release", "edit", tag, "-R", repo, "--notes-file", notesPath], { stdio: "inherit" });
+  const published = await json(`releases/tags/${tag}`);
+  for (const name of [...files, "SHA256SUMS.txt"]) {
+    const asset = published.assets.find((a) => a.name === name);
+    assert.ok(asset, `Missing published asset: ${name}`);
+    assert.equal(asset.size, fs.statSync(path.join(out, name)).size);
+    assert.equal(asset.digest, `sha256:${hash(fs.readFileSync(path.join(out, name)))}`, `Published digest mismatch: ${name}`);
+  }
+  console.log(`Refreshed verified release assets: https://github.com/${repo}/releases/tag/${tag}`);
+  process.exit(0);
+}
 if (existing)
   throw new Error(
     `Release ${tag} already exists; preserve it and review before replacing assets`,

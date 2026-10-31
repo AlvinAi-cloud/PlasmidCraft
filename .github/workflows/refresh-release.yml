@@ -1,0 +1,56 @@
+name: Refresh verified release downloads
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Full commit SHA of the successfully tested installer builds
+        required: true
+        default: 31e93ee5e20e955e9652d9985f795da9eee7bcf7
+        type: string
+      release_tag:
+        description: Existing release tag (preserved)
+        required: true
+        default: v0.4.0
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: release-download-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: publisher
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.source_commit }}
+          path: source
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Verify exact successful builds and replace release downloads
+        working-directory: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLASMIDCRAFT_BUILD_SHA: ${{ inputs.source_commit }}
+          PLASMIDCRAFT_RELEASE_TAG: ${{ inputs.release_tag }}
+        run: node ../publisher/.github/scripts/publish-release.mjs --replace-assets
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: Previous-release-downloads
+          path: source/previous-release-assets/
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v7
+        if: success()
+        with:
+          name: Refreshed-release-downloads
+          path: source/release-assets/
+          if-no-files-found: error

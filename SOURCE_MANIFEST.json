@@ -12,7 +12,7 @@
     },
     {
       "path": ".github/scripts/publish-release.mjs",
-      "sha256": "2bcb388fc705a26e88a22297c3b59a1b2bf3041157e81fa648397da4b97278c9"
+      "sha256": "0977596351648229c161ea0194db516defaece6c7847f0cfb9c0066370d16bb1"
     },
     {
       "path": ".github/workflows/desktop.yml",
@@ -21,6 +21,10 @@
     {
       "path": ".github/workflows/linux-deb.yml",
       "sha256": "afaad0c1b3d594181d673589e8895de13b8187dc248ca391df21d1532a1c0c8a"
+    },
+    {
+      "path": ".github/workflows/refresh-release.yml",
+      "sha256": "e65c5f478633f2425f5c3475c8e9dbbf580adf2a0b3481619bd6381e07a64421"
     },
     {
       "path": ".github/workflows/release.yml",
