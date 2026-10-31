@@ -21,6 +21,7 @@ await page.addInitScript(() => {
   window.__TAURI__ = {
     core: {
       invoke: async (cmd, args) => {
+        if (cmd === "take_open_documents") return [];
         if (cmd === "ai_restore_saved")
           return {
             provider: "openai",
@@ -69,7 +70,8 @@ await page.addInitScript(() => {
       }),
     },
     event: {
-      listen: async (_, fn) => {
+      listen: async (name, fn) => {
+        if (name !== "plasmidcraft-menu") return () => {};
         window.menu = (a) => fn({ payload: a });
         return () => {};
       },

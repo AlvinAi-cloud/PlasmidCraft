@@ -51,7 +51,7 @@ try {
     window.mock={replies:[],requests:[],cloud:[],saved:[],openText:null};
     window.__TAURI_INTERNALS__={};
     window.__TAURI__={
-      core:{invoke:async(cmd,args)=>{
+      core:{invoke:async(cmd,args)=>{if(cmd==="take_open_documents")return[];
         if(cmd==='chatgpt_status')return {accounts:[]};
         if(cmd==='ai_restore_saved')return {provider:'openai',endpoint:'https://api.openai.com/v1',model:'mock-model',remembered:true};
         if(cmd==='ai_request') { window.mock.requests.push(args); return {status:'completed',output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(window.mock.replies.shift()||{message:'Done',operations:[],continue:false})}]}]}; }
@@ -61,7 +61,7 @@ try {
       dialog:{open:async()=>window.mock.openText?'/selected/result.gb':null,save:async()=>'/selected/export',confirm:async()=>false},
       fs:{stat:async()=>({size:100}),readFile:async()=>new TextEncoder().encode(window.mock.openText||'')},
       window:{getCurrentWindow:()=>({setTitle:async()=>{},onCloseRequested:async()=>()=>{}})},
-      event:{listen:async(_,fn)=>{window.menu=action=>fn({payload:action});return()=>{};}},
+      event:{listen:async(name,fn)=>{if(name!=="plasmidcraft-menu")return()=>{};window.menu=action=>fn({payload:action});return()=>{};}},
       clipboardManager:{writeText:async text=>{window.mock.clipboard=text;}},
     };
   });

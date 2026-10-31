@@ -4,6 +4,7 @@ mod ai_vault;
 mod blast;
 mod chatgpt;
 mod files;
+mod open_documents;
 
 use tauri::{
     menu::{AboutMetadata, Menu, MenuBuilder, MenuItem, PredefinedMenuItem, SubmenuBuilder},
@@ -197,10 +198,12 @@ fn application_menu(app: &App) -> tauri::Result<Menu<tauri::Wry>> {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let app = tauri::Builder::default()
+        .manage(open_documents::OpenDocuments::default())
         .manage(ai::AiState::default())
         .manage(blast::BlastState::default())
         .invoke_handler(tauri::generate_handler![
             files::save_file_atomic,
+            open_documents::take_open_documents,
             blast::blast_submit,
             blast::blast_open_results,
             ai::ai_connect,
@@ -228,6 +231,7 @@ pub fn run() {
                 app.path().app_config_dir()?.join("chatgpt"),
             ));
             app.set_menu(application_menu(app)?)?;
+            open_documents::startup(app.handle());
             Ok(())
         })
         .on_menu_event(|app, event| {
@@ -261,6 +265,13 @@ pub fn run() {
         .build(tauri::generate_context!())
         .expect("PlasmidCraft could not start");
     app.run(|handle, event| {
+        #[cfg(target_os = "macos")]
+        if let RunEvent::Opened { ref urls } = event {
+            open_documents::enqueue(
+                handle,
+                urls.iter().filter_map(|url| url.to_file_path().ok()),
+            );
+        }
         // Dock/system Quit must use the same unsaved-change check as the window.
         // Once the main window has been destroyed, allow the process to exit.
         if let RunEvent::ExitRequested { api, .. } = event {

@@ -44,7 +44,7 @@ await page.exposeBinding("nativeDeviceMock", async (_, command, args) => {
 await page.addInitScript(() => {
   window.__TAURI_INTERNALS__ = {};
   window.__TAURI__ = {
-    core: { invoke: (command, args) => window.nativeDeviceMock(command, args) },
+    core: { invoke: (command, args) => command === "take_open_documents" ? [] : window.nativeDeviceMock(command, args) },
     dialog: {
       open: async () => null,
       save: async () => null,
@@ -63,7 +63,8 @@ await page.addInitScript(() => {
       }),
     },
     event: {
-      listen: async (_, handler) => {
+      listen: async (name, handler) => {
+          if (name !== "plasmidcraft-menu") return () => {};
         window.deviceMenu = (action) => handler({ payload: action });
         return () => {};
       },

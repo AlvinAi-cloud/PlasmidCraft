@@ -1,5 +1,7 @@
 # PlasmidCraft 0.4
 
+File handling update: installed packages register supported sequence documents with a PlasmidCraft document icon. Files opened from Finder or a file manager are imported directly, with queued startup handling and support for subsequent macOS open events. Default app choices remain user controlled.
+
 - Mirrored forward/reverse primer displays around their DNA strands, with equal template spacing.
 - Mismatches and insertions appear as connected unpaired regions; 5′ tails join the binding region without horizontal gaps.
 - Primer names and direction arrows sit at the 5′ start, with repeated orientation captions removed.

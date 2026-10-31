@@ -3678,5 +3678,6 @@ platform
       codonUI.unsaved,
     onError: (error) => toast(error.message || String(error), true),
     onMenu: runCommand,
+    onFiles: openFiles,
   })
   .catch((error) => toast(error.message || String(error), true));

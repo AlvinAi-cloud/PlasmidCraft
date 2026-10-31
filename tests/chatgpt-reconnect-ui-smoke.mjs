@@ -79,7 +79,7 @@ await page.addInitScript(() => {
     );
   window.__TAURI_INTERNALS__ = {};
   window.__TAURI__ = {
-    core: { invoke: (c, a) => window.reconnectMock(c, a) },
+    core: { invoke: (c, a) => c === "take_open_documents" ? [] : window.reconnectMock(c, a) },
     dialog: {
       open: async () => null,
       save: async () => null,
@@ -98,7 +98,8 @@ await page.addInitScript(() => {
       }),
     },
     event: {
-      listen: async (_, handler) => {
+      listen: async (name, handler) => {
+          if (name !== "plasmidcraft-menu") return () => {};
         window.reconnectMenu = (command) => handler({ payload: command });
         return () => {};
       },

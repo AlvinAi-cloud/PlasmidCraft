@@ -33,7 +33,7 @@
     "category": "Education",
     "shortDescription": "Local plasmid sequence workspace",
     "longDescription": "View, annotate, and edit plasmid DNA, analyze proteins, align sequences, and design PCR and cloning workflows locally. Optional AI requests and NCBI BLAST submissions share only the context explicitly chosen for submission.",
-    "copyright": "Copyright \u00a9 2026 PlasmidCraft contributors",
+    "copyright": "Copyright © 2026 PlasmidCraft contributors",
     "licenseFile": "../LICENSE",
     "icon": [
       "icons/32x32.png",
@@ -43,16 +43,113 @@
       "icons/icon.ico"
     ],
     "macOS": {
-      "minimumSystemVersion": "12.3"
+      "minimumSystemVersion": "12.3",
+      "infoPlist": "file-associations/Info.plist"
     },
     "windows": {
       "nsis": {
-        "displayLanguageSelector": false
+        "displayLanguageSelector": false,
+        "installerHooks": "file-associations/windows.nsh"
       }
     },
     "resources": {
       "../THIRD_PARTY_NOTICES.txt": "THIRD_PARTY_NOTICES.txt",
-      "../LICENSE": "LICENSE"
+      "../LICENSE": "LICENSE",
+      "icons/document.icns": "document.icns",
+      "icons/document.ico": "document.ico"
+    },
+    "fileAssociations": [
+      {
+        "ext": [
+          "pcraft"
+        ],
+        "name": "PlasmidCraft.project",
+        "description": "PlasmidCraft Document",
+        "role": "Editor",
+        "rank": "Alternate",
+        "mimeType": "application/x-plasmidcraft"
+      },
+      {
+        "ext": [
+          "pcprotein"
+        ],
+        "name": "PlasmidCraft.protein",
+        "description": "PlasmidCraft Protein",
+        "role": "Editor",
+        "rank": "Alternate",
+        "mimeType": "application/x-plasmidcraft-protein"
+      },
+      {
+        "ext": [
+          "gb",
+          "gbk",
+          "genbank"
+        ],
+        "name": "PlasmidCraft.genbank",
+        "description": "GenBank Sequence",
+        "role": "Editor",
+        "rank": "Alternate",
+        "mimeType": "chemical/seq-na-genbank"
+      },
+      {
+        "ext": [
+          "fa",
+          "fasta",
+          "fna"
+        ],
+        "name": "PlasmidCraft.fasta",
+        "description": "FASTA Sequence",
+        "role": "Editor",
+        "rank": "Alternate",
+        "mimeType": "chemical/seq-na-fasta"
+      },
+      {
+        "ext": [
+          "faa",
+          "pep"
+        ],
+        "name": "PlasmidCraft.protein-fasta",
+        "description": "Protein Sequence",
+        "role": "Editor",
+        "rank": "Alternate",
+        "mimeType": "application/x-plasmidcraft-protein-fasta"
+      },
+      {
+        "ext": [
+          "dna"
+        ],
+        "name": "PlasmidCraft.dna",
+        "description": "SnapGene DNA Sequence",
+        "role": "Editor",
+        "rank": "Alternate",
+        "mimeType": "application/x-snapgene-dna"
+      },
+      {
+        "ext": [
+          "ab1"
+        ],
+        "name": "PlasmidCraft.trace",
+        "description": "Sanger Trace",
+        "role": "Viewer",
+        "rank": "Alternate",
+        "mimeType": "application/x-abi-trace"
+      }
+    ],
+    "linux": {
+      "deb": {
+        "files": {
+          "/usr/share/mime/packages/org.plasmidcraft.desktop.xml": "file-associations/mime.xml",
+          "/usr/share/icons/hicolor/512x512/mimetypes/application-x-plasmidcraft.png": "icons/document.png",
+          "/usr/share/icons/hicolor/512x512/mimetypes/application-x-plasmidcraft-protein.png": "icons/document.png",
+          "/usr/share/icons/hicolor/512x512/mimetypes/chemical-seq-na-genbank.png": "icons/document.png",
+          "/usr/share/icons/hicolor/512x512/mimetypes/chemical-seq-na-fasta.png": "icons/document.png",
+          "/usr/share/icons/hicolor/512x512/mimetypes/application-x-plasmidcraft-protein-fasta.png": "icons/document.png",
+          "/usr/share/icons/hicolor/512x512/mimetypes/application-x-snapgene-dna.png": "icons/document.png",
+          "/usr/share/icons/hicolor/512x512/mimetypes/application-x-abi-trace.png": "icons/document.png"
+        },
+        "postInstallScript": "file-associations/post-install.sh",
+        "postRemoveScript": "file-associations/post-remove.sh"
+      }
     }
   }
 }

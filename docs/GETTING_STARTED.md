@@ -6,7 +6,7 @@ PlasmidCraft is a local desktop workspace for plasmid viewing, editing, protein 
 
 The app opens the supplied **pET-21b(+)** plasmid (5,442 bp) by default. Its original file is `examples/pET-21b(+).dna` in the source distribution. Choose **Help → Open pET-21b(+) Example** to reopen it. This example has annotations but no saved primers.
 
-Choose **File → Open Sequence…**, use the Open toolbar button, or drag a sequence file into the window. Supported inputs include GenBank, DNA FASTA/plain text, SnapGene `.dna`, Sanger `.ab1` and native `.pcraft` documents. Use **File → New from Pasted Protein…** for protein input. Multi-record sequence files can open several documents.
+Choose **File → Open Sequence…**, use the Open toolbar button, or drag a sequence file into the window. Supported inputs include GenBank, DNA FASTA/plain text, SnapGene `.dna`, Sanger `.ab1` and native `.pcraft` documents. Use **File → New from Pasted Protein…** for protein input. Multi-record sequence files can open several documents. After installing the app, you can also set PlasmidCraft as the default application for supported sequence files and open them by double-clicking. In Finder, use Get Info → Open with → PlasmidCraft → Change All for a format; on Windows use Open with → Choose another app → Always. Installed packages include a PlasmidCraft document icon. Linux file managers use MIME icons and the selected icon theme.
 
 ## Find your way around
 

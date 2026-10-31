@@ -23,3 +23,12 @@ Mac bundles carry ad-hoc signatures without Developer ID/notarization. Windows p
 5. Verify normal unsaved-change prompts, profile/library backups and optional network-service behavior. Test scaling, keyboard controls and the minimum window size.
 
 Known limits include no autosave/crash recovery or collaborative cloud synchronization; finite feature-catalog coverage; close matching limited to ungapped full-reference substitutions; biological models that do not predict experimental success; and exchange formats that retain only their supported data subsets. Detailed limits are in the individual guides. All 13 guides are bundled for offline Help.
+
+## v0.4 file-association update (October 30, 2026)
+
+- 305 JavaScript unit tests and 77 module syntax checks passed. New checks cover supported registrations, optional Windows defaults, queued OS file imports, later open events, missing files and file-size limits.
+- 39 native Rust tests passed; one existing test remains ignored. Supported OS-open extensions are checked independently of the renderer.
+- All 10 affected UI suites passed in Chromium and WebKit, including native-bridge file opening, menus, AI connections, Help and BLAST. Providers are mocked; no live-provider acceptance is implied.
+- The generated macOS plist passed `plutil` validation; the native app bundle contains seven document types and its document icon. Windows install/uninstall registration hooks compiled with NSIS. Linux MIME definitions, icon destinations and database-refresh hooks are included for native CI packaging.
+
+Default-app selection and icon cache behavior depend on the operating system and desktop environment. End-to-end default-app/icon acceptance on Windows and Linux still requires checking the installed packages on those systems.

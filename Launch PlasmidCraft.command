@@ -2,7 +2,7 @@
 set -eu
 unsetopt bgnice
 PLASMIDCRAFT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
-for PLASMIDCRAFT_TARGET in "local-preview-040" "release" "debug"; do
+for PLASMIDCRAFT_TARGET in "local-preview-040-file-icons" "local-preview-040" "release" "debug"; do
   PLASMIDCRAFT_APP="$PLASMIDCRAFT_DIR/src-tauri/target/$PLASMIDCRAFT_TARGET/bundle/macos/PlasmidCraft 0.4.app"
   PLASMIDCRAFT_EXECUTABLE="$PLASMIDCRAFT_APP/Contents/MacOS/plasmidcraft-desktop"
   if [ -x "$PLASMIDCRAFT_EXECUTABLE" ]; then

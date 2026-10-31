@@ -46,6 +46,7 @@ try {
     window.__TAURI__ = {
       core: {
         invoke: async (command, args) => {
+          if (command === "take_open_documents") return [];
           state.calls.push({ command, args });
           if (command === "chatgpt_status")
             return {
@@ -163,7 +164,8 @@ try {
         }),
       },
       event: {
-        listen: async (_, handler) => {
+        listen: async (name, handler) => {
+          if (name !== "plasmidcraft-menu") return () => {};
           state.menu = (action) => handler({ payload: action });
           return () => {};
         },

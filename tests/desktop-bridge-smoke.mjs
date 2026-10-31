@@ -65,6 +65,7 @@ try {
     window.__TAURI__ = {
       core: {
         invoke: async (command, data, options) => {
+          if (command === "take_open_documents") return state.pendingOpen?.splice(0) || [];
           if (command !== "save_file_atomic")
             throw new Error("Unexpected command: " + command);
           state.atomicSaves = (state.atomicSaves || 0) + 1;
@@ -113,7 +114,11 @@ try {
       },
       window: { getCurrentWindow: () => nativeWindow },
       event: {
-        listen: async (_name, callback) => {
+        listen: async (name, callback) => {
+          if (name === "plasmidcraft-open-documents") {
+            state.openDocuments = callback;
+            return () => {};
+          }
           state.menu = (action) => callback({ payload: action });
           return () => {};
         },
@@ -342,6 +347,19 @@ try {
   await page.locator("#help-dialog").waitFor({ state: "visible" });
   assert.match(await page.locator("#help-article").textContent(), /\.pcraft/);
   await page.locator("#help-dialog [data-help-close]").click();
+  checks++;
+  // Opening from the OS adds a document through the same parsers, without a dialog.
+  const beforeOSOpen = await page.locator("#doc-count").textContent();
+  const dialogsBeforeOSOpen = await page.evaluate(() => window.__desktopMock.openDialogs);
+  await page.evaluate(() => {
+    const s = window.__desktopMock;
+    s.files["/chosen/from Finder.fa"] = [...new TextEncoder().encode(">Finder sequence\nATGCGTACGTAGCTAGCTAGCATCGATCGATCGATCGATCG\n")];
+    s.pendingOpen = ["/chosen/from Finder.fa"];
+    s.openDocuments({});
+  });
+  await page.waitForFunction((count) => Number(document.querySelector("#doc-count").textContent) === Number(count) + 1, beforeOSOpen);
+  assert.match(await page.locator("#document-tabs .active").textContent(), /from Finder\.fa/);
+  assert.equal(await page.evaluate(() => window.__desktopMock.openDialogs), dialogsBeforeOSOpen);
   checks++;
   // An inactive document still has unsaved changes, even though the active one is saved.
   await page.evaluate(() => window.__desktopMock.menu("quit"));

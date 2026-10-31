@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-plasmidcraft"><comment>PlasmidCraft Document</comment><glob pattern="*.pcraft"/><icon name="application-x-plasmidcraft"/></mime-type>
+  <mime-type type="application/x-plasmidcraft-protein"><comment>PlasmidCraft Protein</comment><glob pattern="*.pcprotein"/><icon name="application-x-plasmidcraft-protein"/></mime-type>
+  <mime-type type="chemical/seq-na-genbank"><comment>GenBank Sequence</comment><glob pattern="*.gb"/><glob pattern="*.gbk"/><glob pattern="*.genbank"/><icon name="chemical-seq-na-genbank"/></mime-type>
+  <mime-type type="chemical/seq-na-fasta"><comment>FASTA Sequence</comment><glob pattern="*.fa"/><glob pattern="*.fasta"/><glob pattern="*.fna"/><icon name="chemical-seq-na-fasta"/></mime-type>
+  <mime-type type="application/x-plasmidcraft-protein-fasta"><comment>Protein Sequence</comment><glob pattern="*.faa"/><glob pattern="*.pep"/><icon name="application-x-plasmidcraft-protein-fasta"/></mime-type>
+  <mime-type type="application/x-snapgene-dna"><comment>SnapGene DNA Sequence</comment><glob pattern="*.dna"/><icon name="application-x-snapgene-dna"/></mime-type>
+  <mime-type type="application/x-abi-trace"><comment>Sanger Trace</comment><glob pattern="*.ab1"/><icon name="application-x-abi-trace"/></mime-type>
+</mime-info>

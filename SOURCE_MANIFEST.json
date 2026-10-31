@@ -136,7 +136,7 @@
     },
     {
       "path": "docs/DESKTOP.md",
-      "sha256": "c6d736640c87c9f29b1bf7d31fee8fb66b74766aaa50ee74dd96addaeaa6e5ae"
+      "sha256": "dd5a33ce2252cd0c7f2de28e7956e2c2b32e9f418cc50096afacc410bc16611d"
     },
     {
       "path": "docs/FEATURE_CATALOG_AND_EXCHANGE.md",
@@ -144,11 +144,11 @@
     },
     {
       "path": "docs/GETTING_STARTED.md",
-      "sha256": "d8d8049c34c2d54a7ea54515c5c295bcf61e077d5e89f3b0baabe3fcf92c0ee7"
+      "sha256": "e3aad78f13c70a6100fe8cde37e1c250ca12f53b33d8628b62bcbe9e864cb1af"
     },
     {
       "path": "docs/INSTALLING.md",
-      "sha256": "a3d48a01e90f194941ba7c7f0dc2c5beaf5d254d17ac266ebadbe1ea260e99f2"
+      "sha256": "6af819c4addc657404080b18bd387885558f618c9b4fff5e4f502c70a64e2831"
     },
     {
       "path": "docs/MUTAGENESIS.md",
@@ -180,7 +180,7 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "7b3e5fe0d25ab7d181882cf93ef245c21179d010e769a2151d519c32b4fd3ef7"
+      "sha256": "42c15a6bbfc84d3aa9088491cdf20a864db44d6a98751f3596586af11bc8b392"
     },
     {
       "path": "docs/WORKFLOWS.md",
@@ -192,7 +192,7 @@
     },
     {
       "path": "Launch PlasmidCraft.command",
-      "sha256": "22f950a312eb0a22412f40912a5717cc105e8526aa7d14ebcccec8dcc7237d3e"
+      "sha256": "8e212c475949b28732c7f84e701a7d4a44c85f040a1ada01a578408bb208af17"
     },
     {
       "path": "LICENSE",
@@ -216,7 +216,7 @@
     },
     {
       "path": "RELEASE_NOTES.md",
-      "sha256": "72c5bc669951f4c94ed677588e7a8a4b98589e653fc17cb0d2876f6b61a895cf"
+      "sha256": "d7e0a0697acddf22c01edf79d3581d56ff4e5b05a1ca2a4942509a8c9c307158"
     },
     {
       "path": "scripts/build-ai-runtime.mjs",
@@ -229,6 +229,10 @@
     {
       "path": "scripts/build-enzyme-catalog.py",
       "sha256": "6cd878847eca285fd5c7d17743cc2e0bcb458aa7cdb43d08d6b51edeb6bdfed8"
+    },
+    {
+      "path": "scripts/build-file-associations.mjs",
+      "sha256": "0c2e7384e2042c20411b6b64c0a78788b32e3b76adfbb242076ff2046084246b"
     },
     {
       "path": "scripts/build-help.mjs",
@@ -280,7 +284,7 @@
     },
     {
       "path": "src-tauri/capabilities/main.json",
-      "sha256": "160bf1f93554bf76d2687da340dc169824b1ac560b855c5a2f99f25f3aced203"
+      "sha256": "f4fba4807e50d1f1156bd453f2762dad827ccf1521a52ac4ca35137eed2e195a"
     },
     {
       "path": "src-tauri/Cargo.lock",
@@ -289,6 +293,26 @@
     {
       "path": "src-tauri/Cargo.toml",
       "sha256": "9c93553650f5c98579351e8a871baaa5277be76938a52c7ed74a1cd2841a8ea8"
+    },
+    {
+      "path": "src-tauri/file-associations/Info.plist",
+      "sha256": "11258c468d5aae4d37a43e13d4fbd7b9a29d1b66476b78ed0c809f4ae51ddb8a"
+    },
+    {
+      "path": "src-tauri/file-associations/mime.xml",
+      "sha256": "36d4434168e224950e75e39dcf18dd13c6a3136d7f55851ad75dde9b1e529f9d"
+    },
+    {
+      "path": "src-tauri/file-associations/post-install.sh",
+      "sha256": "017781e45106fab8c79f273b1db24b83e0657f53ec3112e007797090b65e5900"
+    },
+    {
+      "path": "src-tauri/file-associations/post-remove.sh",
+      "sha256": "017781e45106fab8c79f273b1db24b83e0657f53ec3112e007797090b65e5900"
+    },
+    {
+      "path": "src-tauri/file-associations/windows.nsh",
+      "sha256": "f8b533b918952da31d4a61b3283850efea182206e7f14a0a793eb7bf415ba2f0"
     },
     {
       "path": "src-tauri/icons/128x128.png",
@@ -305,6 +329,22 @@
     {
       "path": "src-tauri/icons/64x64.png",
       "sha256": "9a4a4291c631fab457fdebae7a131fec63c7916c08645310a62b123a723065ae"
+    },
+    {
+      "path": "src-tauri/icons/document.icns",
+      "sha256": "0e80b8da74d9e939e7355b1cc1ba6a2332f5319a1df79f81eee2db6af63d91fc"
+    },
+    {
+      "path": "src-tauri/icons/document.ico",
+      "sha256": "4d3a3712c49e73ceda34556bef67246cf8cd1ee363740d21d94d6c0191ebe053"
+    },
+    {
+      "path": "src-tauri/icons/document.png",
+      "sha256": "189c82d5a040f1318dbf1f95924de5d80b826e10bba7e2164031a1c0ab0ae6b4"
+    },
+    {
+      "path": "src-tauri/icons/document.svg",
+      "sha256": "6507ebcdba7d7d08023d29fa2b22649449fff9671b416fb99ab34d1bb81284c5"
     },
     {
       "path": "src-tauri/icons/icon.icns",
@@ -388,15 +428,23 @@
     },
     {
       "path": "src-tauri/src/lib.rs",
-      "sha256": "aa9d4c9119d16c4663fe4e58855f7b427e61e839b513346b7ae6adfb04133588"
+      "sha256": "2be81635e4b35ff7d5079fc90d5d162d5f2b20fbc664225a0ec5d09c70857eb9"
     },
     {
       "path": "src-tauri/src/main.rs",
       "sha256": "2335c85b07086eadaaa6b83403fb781489089f946775305c6e4aa4a9fabff482"
     },
     {
+      "path": "src-tauri/src/open_documents.rs",
+      "sha256": "26e8608a2838bfe886255396dd7524f44bef156f852364c5193d2096d092960d"
+    },
+    {
       "path": "src-tauri/tauri.conf.json",
-      "sha256": "8a44dc734a859f47f8b3a0157adf23a5a056f9e1560a45ea20178eb8930ac65b"
+      "sha256": "c5e32584dae32ce75fd6be614ef69d1810d0311962d17d60fde7c0bd08192df2"
+    },
+    {
+      "path": "src-tauri/tauri.windows.conf.json",
+      "sha256": "a044784798deac48d1f53d9c27951c1ad40cc631db982f99e7882ef721acf4ed"
     },
     {
       "path": "src-tauri/tests/fixtures/chatgpt-test-only-jwks.json",
@@ -428,11 +476,11 @@
     },
     {
       "path": "tests/ai-device-ui-smoke.mjs",
-      "sha256": "39ef0c84dd01f36125cc8162d19bef2f7fc88b18c3dff443c1113d4bfe1c892c"
+      "sha256": "35ee7435fbeb5cae277041a3e41fdf29fe1065ac881a9e7e8822e1847d75ea16"
     },
     {
       "path": "tests/ai-expanded-ui-smoke.mjs",
-      "sha256": "71abd0d4070164f8dae2b2d8232deb1dc214d9132e5f91c8952f3b7ecb7f7918"
+      "sha256": "e4951d9b0f4f37961e56b75689da1a8c63730afbc2997cba2d7560ebd6b61cdb"
     },
     {
       "path": "tests/ai-tools.test.mjs",
@@ -440,7 +488,7 @@
     },
     {
       "path": "tests/ai-ui-smoke.mjs",
-      "sha256": "bcda79935abc20956b641f4f6b709fb3bd043d818946427ce27040a7955e6b29"
+      "sha256": "7c84edd0a81fcaf617fbbc91d5f3ffe4b4b7a539b13b2becaf2c590f595d5b5c"
     },
     {
       "path": "tests/ai.test.mjs",
@@ -500,11 +548,11 @@
     },
     {
       "path": "tests/chatgpt-reconnect-ui-smoke.mjs",
-      "sha256": "999705b7fd5fb548a26eed061dc7b461e19e3df7ad316f24fe1eb791a0f505e7"
+      "sha256": "002f279378d266690c19763f935af53a2daafa81109b19bffcb59c71b1130578"
     },
     {
       "path": "tests/chatgpt-ui-smoke.mjs",
-      "sha256": "f9821d6d8d6824d316bea471bc3585cda0b1a3e9a6a941d000f77838a302db1c"
+      "sha256": "cbfaafd8258efe3309df616dec4d558d99b9aed112b4eac8c85eade98bc51e4e"
     },
     {
       "path": "tests/cloning-design-ui-smoke.mjs",
@@ -532,7 +580,7 @@
     },
     {
       "path": "tests/connected-ai-ui-smoke.mjs",
-      "sha256": "0e650dceba5b6285c5510f3aff444cebaf6008f7928b7138350a2b44cb5d81a1"
+      "sha256": "7b489958cb7d04fbac45327ab6c734fd9a243f894cba57286578dd86f5b599ee"
     },
     {
       "path": "tests/continuous-sequence-ui-smoke.mjs",
@@ -552,7 +600,7 @@
     },
     {
       "path": "tests/desktop-bridge-smoke.mjs",
-      "sha256": "e2f853e06c777c7cdb74d32ba590b66111aaec86acea6ab49eefa4793a2ca172"
+      "sha256": "4425f9c130e14d5da7639ffd6ec4c38928bb72452364f176f67d7e710697750d"
     },
     {
       "path": "tests/desktop-launcher.test.mjs",
@@ -616,7 +664,7 @@
     },
     {
       "path": "tests/model-overview-ui-smoke.mjs",
-      "sha256": "b9966a3e08dafd8b27b536a13b95ccb62ac641f0cbfb6e115bcc4f6b7a754294"
+      "sha256": "e901e342fb4d6f42dfed56e937d5e783bb6ae03ef14d02a6114a603c38f2d309"
     },
     {
       "path": "tests/mutagenesis-ui-smoke.mjs",
@@ -636,7 +684,7 @@
     },
     {
       "path": "tests/platform.test.mjs",
-      "sha256": "e004e687f71a48b88466ab588e4b0078ea809aee6b2e33f79452bab96044fc6f"
+      "sha256": "ff3d11f8f063765247bc78845026bdad8dde274fe49f2ce3fadb0f2c7c548458"
     },
     {
       "path": "tests/primer-duplex-preview-ui-smoke.mjs",
@@ -660,7 +708,7 @@
     },
     {
       "path": "tests/protein-blast-ui-smoke.mjs",
-      "sha256": "eeab81a442712088e9e57ddd22fd11963cf8ebd2c1ed4b1b5fe65bf20894509d"
+      "sha256": "ddd896bdb2f54b9e910abd8f4da8240673aac8a9f4f556586315573b3ca220c1"
     },
     {
       "path": "tests/protein-reference.mjs",
@@ -804,7 +852,7 @@
     },
     {
       "path": "viewer/app.mjs",
-      "sha256": "81aadfb5bff1644aff86e2ca1b68471f6bc0c2f7395ff80f3d27999990f06ca2"
+      "sha256": "eff46de2a6aef648137a5a6a457eee805f26fe945a89241e47f62f5af94e19ab"
     },
     {
       "path": "viewer/assembly.mjs",
@@ -892,7 +940,7 @@
     },
     {
       "path": "viewer/help-content.mjs",
-      "sha256": "6f86843bc022dc1573a09090fe357fc795dc26a4a4c5776d01e4f222774d6bf6"
+      "sha256": "90d9fa5c69aae72aa84215167a1823aecd960c5aac006750c0eae958fab1219f"
     },
     {
       "path": "viewer/help-markdown.mjs",
@@ -940,7 +988,7 @@
     },
     {
       "path": "viewer/platform.mjs",
-      "sha256": "d0c6bff9446ecac64427903fb3310fc336b066bfb335a0917e390e761b01e4de"
+      "sha256": "656491c27c44ac918fe74dea5fc11676ef5ba194e3b70504026f14b9a254d360"
     },
     {
       "path": "viewer/primer-alignment.mjs",

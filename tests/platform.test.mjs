@@ -364,3 +364,92 @@ test("ChatGPT restore uses the native session without credentials in the rendere
   assert.equal(calls[0].command, "chatgpt_restore");
   assert.deepEqual(calls[0].args, {});
 });
+
+test("OS-opened documents drain after listening, then import subsequent events", async () => {
+  const { host, calls } = nativeHost();
+  const handlers = {}, queue = [["/chosen/from Finder.pcraft"], ["/chosen/another.GB"], []];
+  const order = [], imports = [];
+  host.__TAURI__.event.listen = async (name, handler) => {
+    order.push(name);
+    handlers[name] = handler;
+    return () => { delete handlers[name]; };
+  };
+  host.__TAURI__.core.invoke = async (command) => {
+    assert.equal(command, "take_open_documents");
+    order.push("drain");
+    return queue.shift();
+  };
+  const cleanup = await createPlatform(host).install({
+    hasUnsavedChanges: () => false, onMenu: () => {},
+    onFiles: async (files) => imports.push(...files),
+  });
+  assert.ok(order.indexOf("plasmidcraft-open-documents") < order.indexOf("drain"));
+  assert.equal(imports[0].name, "from Finder.pcraft");
+  assert.equal(imports[0].sourcePath, "/chosen/from Finder.pcraft");
+  assert.equal(new TextDecoder().decode(await imports[0].arrayBuffer()), "ACGT");
+  await Promise.all([handlers["plasmidcraft-open-documents"](), handlers["plasmidcraft-open-documents"]()]);
+  assert.equal(imports.length, 2);
+  assert.equal(imports[1].name, "another.GB");
+  assert.deepEqual(calls.reads, ["/chosen/from Finder.pcraft", "/chosen/another.GB"]);
+  cleanup();
+  assert.equal(handlers["plasmidcraft-open-documents"], undefined);
+});
+
+test("an unreadable OS-opened file reports its name and does not block later opens", async () => {
+  const { host } = nativeHost();
+  const handlers = {}, received = [], errors = [];
+  const queue = [["/missing/file.gb"], ["/chosen/large.dna"], ["/chosen/ok.fa"]];
+  let size = 4;
+  host.__TAURI__.fs.stat = async () => ({ size });
+  host.__TAURI__.fs.readFile = async (path) => {
+    if (path.startsWith("/missing")) throw Error("File not found");
+    return new Uint8Array([65, 67]);
+  };
+  host.__TAURI__.core.invoke = async () => queue.shift();
+  host.__TAURI__.event.listen = async (name, handler) => {
+    handlers[name] = handler;
+    return () => {};
+  };
+  await createPlatform(host).install({
+    hasUnsavedChanges: () => true, onMenu: () => {},
+    onFiles: async (files) => received.push(...files), onError: (e) => errors.push(e),
+  });
+  assert.match(received[0].error, /File not found/);
+  size = FILE_LIMIT + 1;
+  await handlers["plasmidcraft-open-documents"]();
+  assert.match(received[1].error, /50 MB/);
+  size = 4;
+  await handlers["plasmidcraft-open-documents"]();
+  assert.equal(received[2].name, "ok.fa");
+  assert.equal(received[2].error, undefined);
+  assert.deepEqual(errors, []);
+});
+
+test("native document registrations cover sequence types without taking text-file defaults", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { types } = await import("../scripts/build-file-associations.mjs");
+  const config = JSON.parse(await readFile(new URL("../src-tauri/tauri.conf.json", import.meta.url)));
+  const windows = JSON.parse(await readFile(new URL("../src-tauri/tauri.windows.conf.json", import.meta.url)));
+  const plist = await readFile(new URL("../src-tauri/file-associations/Info.plist", import.meta.url), "utf8");
+  const nsis = await readFile(new URL("../src-tauri/file-associations/windows.nsh", import.meta.url), "utf8");
+  const mime = await readFile(new URL("../src-tauri/file-associations/mime.xml", import.meta.url), "utf8");
+  assert.deepEqual(windows.bundle.fileAssociations, []);
+  assert.equal(config.version, "0.4.0");
+  assert.equal(config.bundle.macOS.infoPlist, "file-associations/Info.plist");
+  assert.equal(config.bundle.resources["icons/document.icns"], "document.icns");
+  assert.equal(config.bundle.resources["icons/document.ico"], "document.ico");
+  for (const t of types) {
+    assert.ok(plist.includes(`<string>${t.name}</string>`));
+    assert.ok(nsis.includes(`PlasmidCraft.${t.id}\\DefaultIcon`));
+    assert.ok(config.bundle.linux.deb.files[`/usr/share/icons/hicolor/512x512/mimetypes/${t.mime.replaceAll("/", "-")}.png`]);
+    for (const ext of t.ext) {
+      assert.ok(plist.includes(`<string>${ext}</string>`));
+      assert.ok(mime.includes(`pattern="*.${ext}"`));
+      assert.ok(nsis.includes(`.${ext}\\OpenWithProgids`));
+      assert.notEqual(ext, "txt");
+    }
+  }
+  assert.equal((plist.match(/<key>CFBundleTypeIconFile<\/key>/g) || []).length, types.length);
+  assert.ok(!nsis.includes("UserChoice"));
+  assert.ok(!nsis.includes('WriteRegStr SHCTX "Software\\Classes\\.pcraft" ""'));
+});

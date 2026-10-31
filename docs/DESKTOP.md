@@ -11,3 +11,11 @@ Use the `.command` helper only in a macOS source checkout; installed users open 
 See [release and signing](RELEASE.md) for architectures, packaging, GitHub CI and trust warnings; see [validation](VALIDATION.md) for automated results and outstanding device acceptance.
 
 The desktop launcher regenerates the bundled offline Help from the canonical public guides before development and package builds. After editing a guide, run `pnpm help:build` before tests; guide tests reject stale bundled text. Help content is embedded in the app, including local screenshots, and uses a separate movable window.
+
+## Document types and icons
+
+Native packages include a separate folded-page document icon derived from the PlasmidCraft app mark. Supported sequence extensions are registered as optional handlers; installation does not choose the user's default app. See `docs/INSTALLING.md` for default-app setup and platform-specific icon behavior.
+
+`node scripts/build-file-associations.mjs` regenerates the committed macOS document-type plist, Windows Open With/Default Apps hooks and Linux MIME definitions from one type list. Windows uses a platform config override to avoid legacy default-association replacement. Native startup arguments and macOS open-document events queue user-selected paths until the renderer is ready; access is granted to those individual files, followed by the existing 50 MB validation and parsers.
+
+The editable document artwork is `src-tauri/icons/document.svg`. To regenerate its platform assets, run `pnpm tauri icon src-tauri/icons/document.svg --output /tmp/plasmidcraft-document-icons`, then copy `icon.icns`, `icon.ico` and `icon.png` to `src-tauri/icons/document.icns`, `document.ico` and `document.png` respectively. This does not replace the app icon.

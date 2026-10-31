@@ -42,8 +42,13 @@ export function createPlatform(host = globalThis) {
       filters,
     });
     if (!picked) return [];
+    return readPaths(Array.isArray(picked) ? picked : [picked]);
+  }
+
+  async function readPaths(paths) {
+    const tauri = api();
     const files = [];
-    for (const sourcePath of Array.isArray(picked) ? picked : [picked]) {
+    for (const sourcePath of paths) {
       const name = sourcePath.split(/[\\/]/).at(-1);
       try {
         const metadata = await tauri.fs.stat(sourcePath);
@@ -143,7 +148,7 @@ export function createPlatform(host = globalThis) {
     if (desktop) await api().window.getCurrentWindow().setTitle(title);
   }
 
-  async function install({ hasUnsavedChanges, onMenu, onError = () => {} }) {
+  async function install({ hasUnsavedChanges, onMenu, onFiles, onError = () => {} }) {
     if (!desktop) return () => {};
     const tauri = api(),
       window = tauri.window.getCurrentWindow();
@@ -171,9 +176,25 @@ export function createPlatform(host = globalThis) {
       "plasmidcraft-menu",
       (event) => onMenu(event.payload),
     );
+    let unlistenFiles = () => {};
+    if (onFiles) {
+      // Listen before draining: cold-start events stay queued until the UI is ready.
+      // Serialize drains so repeated OS events cannot race document imports.
+      let opening = Promise.resolve();
+      const drain = () => {
+        opening = opening.then(async () => {
+          const paths = await tauri.core.invoke("take_open_documents");
+          if (paths?.length) await onFiles(await readPaths(paths));
+        }).catch(onError);
+        return opening;
+      };
+      unlistenFiles = await tauri.event.listen("plasmidcraft-open-documents", drain);
+      await drain();
+    }
     return () => {
       unlistenClose();
       unlistenMenu();
+      unlistenFiles();
     };
   }
 
