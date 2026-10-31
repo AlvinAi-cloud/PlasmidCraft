@@ -940,7 +940,7 @@
     },
     {
       "path": "viewer/help-content.mjs",
-      "sha256": "90d9fa5c69aae72aa84215167a1823aecd960c5aac006750c0eae958fab1219f"
+      "sha256": "c6b0c592bee8eeb3f7e8a6038e84d967fb1c2cb5a4ac1295f1927b923901d03c"
     },
     {
       "path": "viewer/help-markdown.mjs",
