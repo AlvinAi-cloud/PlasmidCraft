@@ -24,7 +24,7 @@
     },
     {
       "path": ".github/workflows/refresh-release.yml",
-      "sha256": "e65c5f478633f2425f5c3475c8e9dbbf580adf2a0b3481619bd6381e07a64421"
+      "sha256": "d81634f9007ecbab56e667ee1ba1f4e66224b39b86913456c05b8fd84d2cfc7c"
     },
     {
       "path": ".github/workflows/release.yml",

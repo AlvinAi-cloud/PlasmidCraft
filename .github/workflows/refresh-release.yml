@@ -1,5 +1,7 @@
 name: Refresh verified release downloads
 on:
+  push:
+    tags: ["refresh-downloads-v0.4.0-file-icons"]
   workflow_dispatch:
     inputs:
       source_commit:
@@ -30,7 +32,7 @@ jobs:
           path: publisher
       - uses: actions/checkout@v6
         with:
-          ref: ${{ inputs.source_commit }}
+          ref: ${{ inputs.source_commit || '31e93ee5e20e955e9652d9985f795da9eee7bcf7' }}
           path: source
       - uses: actions/setup-node@v6
         with:
@@ -39,8 +41,8 @@ jobs:
         working-directory: source
         env:
           GH_TOKEN: ${{ github.token }}
-          PLASMIDCRAFT_BUILD_SHA: ${{ inputs.source_commit }}
-          PLASMIDCRAFT_RELEASE_TAG: ${{ inputs.release_tag }}
+          PLASMIDCRAFT_BUILD_SHA: ${{ inputs.source_commit || '31e93ee5e20e955e9652d9985f795da9eee7bcf7' }}
+          PLASMIDCRAFT_RELEASE_TAG: ${{ inputs.release_tag || 'v0.4.0' }}
         run: node ../publisher/.github/scripts/publish-release.mjs --replace-assets
       - uses: actions/upload-artifact@v7
         if: always()
